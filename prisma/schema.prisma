@@ -1,0 +1,211 @@
+// Prisma Schema cho Website Trường THPT Edison
+// Database: MySQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// ==================== USERS & AUTH ====================
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  password     String        // bcrypt hashed
+  name         String
+  role         String        @default("editor") // admin | editor | reviewer
+  avatar       String?
+  isActive     Boolean       @default(true)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  posts        Post[]
+  activityLogs ActivityLog[]
+
+  @@map("users")
+}
+
+// ==================== CATEGORIES ====================
+
+model Category {
+  id          String     @id @default(cuid())
+  name        String
+  slug        String     @unique
+  description String?    @db.Text
+  order       Int        @default(0)
+  createdAt   DateTime   @default(now())
+  posts       Post[]
+  documents   Document[]
+
+  @@map("categories")
+}
+
+// ==================== POSTS ====================
+
+model Post {
+  id              String         @id @default(cuid())
+  title           String
+  slug            String         @unique
+  content         String         @db.LongText // Rich text HTML
+  excerpt         String?        @db.Text
+  thumbnail       String?
+  status          String         @default("draft") // draft | pending | published | rejected
+  metaTitle       String?
+  metaDescription String?        @db.Text
+  isFeatured      Boolean        @default(false)
+  isPinned        Boolean        @default(false)
+  viewCount       Int            @default(0)
+  rejectionNote   String?        @db.Text
+  publishedAt     DateTime?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  author          User           @relation(fields: [authorId], references: [id])
+  authorId        String
+  category        Category?      @relation(fields: [categoryId], references: [id])
+  categoryId      String?
+  tags            Tag[]
+  attachments     Attachment[]
+  revisions       PostRevision[]
+
+  @@index([status])
+  @@index([categoryId])
+  @@index([authorId])
+  @@index([publishedAt])
+  @@map("posts")
+}
+
+model PostRevision {
+  id        String   @id @default(cuid())
+  title     String
+  content   String   @db.LongText
+  note      String?  @db.Text // Ghi chú khi duyệt/từ chối
+  editedBy  String   // Tên người chỉnh sửa
+  createdAt DateTime @default(now())
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+
+  @@index([postId])
+  @@map("post_revisions")
+}
+
+// ==================== TAGS ====================
+
+model Tag {
+  id    String @id @default(cuid())
+  name  String @unique
+  slug  String @unique
+  posts Post[]
+
+  @@map("tags")
+}
+
+// ==================== DOCUMENTS ====================
+
+model Document {
+  id            String    @id @default(cuid())
+  title         String
+  description   String?   @db.Text
+  filePath      String
+  fileName      String
+  fileSize      Int
+  fileType      String    // pdf, doc, docx, xls, xlsx
+  isVisible     Boolean   @default(true)
+  downloadCount Int       @default(0)
+  createdAt     DateTime  @default(now())
+  category      Category? @relation(fields: [categoryId], references: [id])
+  categoryId    String?
+
+  @@index([categoryId])
+  @@map("documents")
+}
+
+// ==================== GALLERY ====================
+
+model Album {
+  id          String   @id @default(cuid())
+  title       String
+  description String?  @db.Text
+  coverImage  String?
+  createdAt   DateTime @default(now())
+  photos      Photo[]
+
+  @@map("albums")
+}
+
+model Photo {
+  id        String   @id @default(cuid())
+  filePath  String
+  caption   String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  album     Album    @relation(fields: [albumId], references: [id], onDelete: Cascade)
+  albumId   String
+
+  @@index([albumId])
+  @@map("photos")
+}
+
+// ==================== ATTACHMENTS ====================
+
+model Attachment {
+  id       String @id @default(cuid())
+  filePath String
+  fileName String
+  fileSize Int
+  fileType String
+  post     Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId   String
+
+  @@index([postId])
+  @@map("attachments")
+}
+
+// ==================== CONTACTS ====================
+
+model Contact {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String   @db.Text
+  isRead    Boolean  @default(false)
+  isHandled Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@map("contacts")
+}
+
+// ==================== EVENTS ====================
+
+model Event {
+  id          String    @id @default(cuid())
+  title       String
+  description String?   @db.Text
+  startDate   DateTime
+  endDate     DateTime?
+  location    String?
+  createdAt   DateTime  @default(now())
+
+  @@map("events")
+}
+
+// ==================== ACTIVITY LOG ====================
+
+model ActivityLog {
+  id        String   @id @default(cuid())
+  action    String   // create, update, delete, login, logout, publish, reject
+  entity    String   // post, document, user, album, category, etc.
+  entityId  String?
+  details   String?  @db.Text
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+
+  @@index([userId])
+  @@index([createdAt])
+  @@map("activity_logs")
+}
