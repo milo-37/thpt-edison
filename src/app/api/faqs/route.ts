@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import prisma from '@/lib/prisma'
-import { verifyAuth } from '@/lib/auth'
+import { verifyAuth, requireRole } from '@/lib/auth'
 
 export async function GET(request: NextRequest) {
   try {
@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const user = await verifyAuth(request)
-    if (!user || user.role !== 'admin') return NextResponse.json({ error: 'Không có quyền' }, { status: 403 })
+    if (!user || !requireRole(user, ['admin', 'editor'])) return NextResponse.json({ error: 'Không có quyền' }, { status: 403 })
     const { question, answer, category, order, isActive } = await request.json()
     if (!question || !answer) return NextResponse.json({ error: 'Câu hỏi và câu trả lời là bắt buộc' }, { status: 400 })
     const faq = await prisma.faq.create({

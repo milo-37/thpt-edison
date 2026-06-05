@@ -1,14 +1,14 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import prisma from '@/lib/prisma'
-import { verifyAuth } from '@/lib/auth'
+import { verifyAuth, requireRole } from '@/lib/auth'
 
 // PUT: Cập nhật slide
 export async function PUT(request: NextRequest, props: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await props.params
     const user = await verifyAuth(request)
-    if (!user || user.role !== 'admin') {
+    if (!user || !requireRole(user, ['admin', 'editor'])) {
       return NextResponse.json({ error: 'Không có quyền' }, { status: 403 })
     }
 
@@ -30,7 +30,7 @@ export async function DELETE(request: NextRequest, props: { params: Promise<{ id
   try {
     const { id } = await props.params
     const user = await verifyAuth(request)
-    if (!user || user.role !== 'admin') {
+    if (!user || !requireRole(user, ['admin', 'editor'])) {
       return NextResponse.json({ error: 'Không có quyền' }, { status: 403 })
     }
 

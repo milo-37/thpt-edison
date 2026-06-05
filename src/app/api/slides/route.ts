@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import prisma from '@/lib/prisma'
-import { verifyAuth } from '@/lib/auth'
+import { verifyAuth, requireRole } from '@/lib/auth'
 
 // GET: Lấy danh sách slides
 export async function GET(request: NextRequest) {
@@ -25,8 +25,8 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const user = await verifyAuth(request)
-    if (!user || user.role !== 'admin') {
-      return NextResponse.json({ error: 'Chỉ Admin mới có quyền thêm slide' }, { status: 403 })
+    if (!user || !requireRole(user, ['admin', 'editor'])) {
+      return NextResponse.json({ error: 'Không có quyền thực hiện thao tác này' }, { status: 403 })
     }
 
     const { title, subtitle, imageUrl, linkUrl, order, isActive } = await request.json()
