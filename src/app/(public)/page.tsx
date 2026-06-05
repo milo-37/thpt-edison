@@ -55,6 +55,17 @@ export default async function HomePage() {
     },
   })
 
+  // 5. Lấy cấu hình hệ thống
+  const settingsList = await prisma.setting.findMany()
+  const settings: Record<string, string> = {
+    missionImageUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop&q=80',
+    schoolName: 'EDISON SCHOOL MINH DUC',
+    logoUrl: '/school-logo.jpg',
+  }
+  settingsList.forEach((s) => {
+    settings[s.key] = s.value
+  })
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       
@@ -124,7 +135,7 @@ export default async function HomePage() {
                 }}
               >
                 <img
-                  src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop&q=80"
+                  src={settings.missionImageUrl}
                   alt="Edison School học tập"
                   style={{ width: '100%', height: '400px', objectFit: 'cover' }}
                 />
