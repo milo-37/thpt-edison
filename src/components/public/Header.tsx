@@ -106,7 +106,11 @@ export default function Header() {
             <ThemeToggle />
           </div>
 
-          <Link href="/tuyen-sinh" className="btn btn-gold" style={{ marginLeft: '10px', padding: '10px 20px', borderRadius: '12px' }}>
+          <Link href="/admin/login" className="btn btn-outline" style={{ marginLeft: '8px', border: '1.5px solid var(--color-primary)', color: 'var(--color-primary)', padding: '8px 16px', borderRadius: '12px' }}>
+            CMS Portal
+          </Link>
+
+          <Link href="/tuyen-sinh" className="btn btn-gold" style={{ marginLeft: '8px', padding: '8px 16px', borderRadius: '12px' }}>
             Tuyển Sinh Ngay
           </Link>
         </nav>
@@ -158,9 +162,14 @@ export default function Header() {
           <ThemeToggle />
         </div>
 
-        <Link href="/tuyen-sinh" className="btn btn-gold" style={{ marginTop: '15px' }}>
-          Tuyển Sinh Ngay
-        </Link>
+        <div style={{ display: 'flex', gap: '10px', marginTop: '15px', width: '100%' }}>
+          <Link href="/admin/login" className="btn btn-outline" style={{ flex: 1, border: '1.5px solid var(--color-primary)', color: 'var(--color-primary)', padding: '10px 0', borderRadius: '12px', textAlign: 'center' }}>
+            CMS Portal
+          </Link>
+          <Link href="/tuyen-sinh" className="btn btn-gold" style={{ flex: 1, padding: '10px 0', borderRadius: '12px', textAlign: 'center' }}>
+            Tuyển Sinh Ngay
+          </Link>
+        </div>
       </div>
 
       {/* Global Search Modal overlay */}
