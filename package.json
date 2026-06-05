@@ -8,14 +8,39 @@
     "start": "next start"
   },
   "dependencies": {
+    "@prisma/adapter-mariadb": "^7.8.0",
+    "@prisma/client": "^7.8.0",
+    "@tiptap/extension-image": "^3.25.0",
+    "@tiptap/extension-link": "^3.25.0",
+    "@tiptap/extension-placeholder": "^3.25.0",
+    "@tiptap/extension-table": "^3.25.0",
+    "@tiptap/extension-table-cell": "^3.25.0",
+    "@tiptap/extension-table-header": "^3.25.0",
+    "@tiptap/extension-table-row": "^3.25.0",
+    "@tiptap/extension-text-align": "^3.25.0",
+    "@tiptap/extension-underline": "^3.25.0",
+    "@tiptap/extension-youtube": "^3.25.0",
+    "@tiptap/pm": "^3.25.0",
+    "@tiptap/react": "^3.25.0",
+    "@tiptap/starter-kit": "^3.25.0",
+    "bcryptjs": "^3.0.3",
+    "jose": "^6.2.3",
+    "lucide-react": "^1.17.0",
+    "mariadb": "^3.5.2",
     "next": "16.2.7",
+    "prisma": "^7.8.0",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"commonjs\"} prisma/seed.ts"
   }
 }

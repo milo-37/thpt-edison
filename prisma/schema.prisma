@@ -7,8 +7,8 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
 }
+
 
 // ==================== USERS & AUTH ====================
 
@@ -208,4 +208,93 @@ model ActivityLog {
   @@index([userId])
   @@index([createdAt])
   @@map("activity_logs")
+}
+
+// ==================== SLIDES (Hero Banner) ====================
+
+model Slide {
+  id        String   @id @default(cuid())
+  title     String
+  subtitle  String?  @db.Text
+  imageUrl  String
+  linkUrl   String?
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@map("slides")
+}
+
+// ==================== LEADERS (Ban Giám Hiệu) ====================
+
+model Leader {
+  id          String   @id @default(cuid())
+  name        String
+  role        String
+  description String?  @db.Text
+  avatar      String?
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  @@map("leaders")
+}
+
+// ==================== ACHIEVEMENTS (Thành Tích) ====================
+
+model Achievement {
+  id          String   @id @default(cuid())
+  title       String
+  description String?  @db.Text
+  imageUrl    String?
+  year        String?
+  studentName String?
+  category    String   @default("academic")
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  @@map("achievements")
+}
+
+// ==================== TEACHERS (Giáo Viên) ====================
+
+model Teacher {
+  id          String   @id @default(cuid())
+  name        String
+  subject     String
+  degree      String?
+  description String?  @db.Text
+  avatar      String?
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  @@map("teachers")
+}
+
+// ==================== FAQ (Hỏi Đáp) ====================
+
+model Faq {
+  id        String   @id @default(cuid())
+  question  String   @db.Text
+  answer    String   @db.LongText
+  category  String   @default("general")
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@map("faqs")
+}
+
+// ==================== SUBSCRIBERS (Đăng Ký Nhận Tin) ====================
+
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@map("subscribers")
 }

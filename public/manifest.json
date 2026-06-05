@@ -1,0 +1,24 @@
+{
+  "name": "Trường THPT Edison",
+  "short_name": "THPT Edison",
+  "description": "Website chính thức của Trường THPT Edison. Môi trường giáo dục khai phóng, hiện đại và toàn diện.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#09162e",
+  "theme_color": "#09162e",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/school-logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/school-logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpg",
+      "purpose": "any maskable"
+    }
+  ]
+}
