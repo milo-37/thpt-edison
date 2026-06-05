@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, Suspense } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { Image as ImageIcon, Calendar as CalendarIcon, ArrowRight } from 'lucide-react'
 import CalendarView from './CalendarView'
 import Link from 'next/link'
@@ -30,8 +31,16 @@ interface ActivityTabsProps {
   events: Event[]
 }
 
-export default function ActivityTabs({ albums, events }: ActivityTabsProps) {
+function ActivityTabsContent({ albums, events }: ActivityTabsProps) {
+  const searchParams = useSearchParams()
+  const tabParam = searchParams.get('tab')
   const [activeTab, setActiveTab] = useState<'gallery' | 'calendar'>('gallery')
+
+  useEffect(() => {
+    if (tabParam === 'calendar' || tabParam === 'gallery') {
+      setActiveTab(tabParam)
+    }
+  }, [tabParam])
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-8)' }}>
@@ -173,3 +182,22 @@ export default function ActivityTabs({ albums, events }: ActivityTabsProps) {
     </div>
   )
 }
+
+export default function ActivityTabs(props: ActivityTabsProps) {
+  return (
+    <Suspense fallback={
+      <div 
+        className="skeleton" 
+        style={{ 
+          height: '400px', 
+          borderRadius: 'var(--radius-xl)', 
+          background: 'var(--color-gray-100)', 
+          animation: 'pulse 1.5s infinite ease-in-out' 
+        }} 
+      />
+    }>
+      <ActivityTabsContent {...props} />
+    </Suspense>
+  )
+}
+

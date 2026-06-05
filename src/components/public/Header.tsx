@@ -11,11 +11,12 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const [currentTab, setCurrentTab] = useState<string | null>(null)
   const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (window.scrollY > 30) {
         setIsScrolled(true)
       } else {
         setIsScrolled(false)
@@ -26,6 +27,14 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Đọc tab parameter từ client side để tránh lỗi static render suspense
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search)
+      setCurrentTab(params.get('tab'))
+    }
+  }, [pathname])
+
   // Đóng mobile menu khi chuyển route
   useEffect(() => {
     setIsMobileMenuOpen(false)
@@ -34,32 +43,42 @@ export default function Header() {
   const menuItems = [
     { label: 'Trang chủ', href: '/' },
     { label: 'Giới thiệu', href: '/gioi-thieu' },
-    { label: 'Thành tích', href: '/thanh-tich' },
     { label: 'Tin tức', href: '/tin-tuc' },
+    { label: 'Hoạt động', href: '/hoat-dong?tab=calendar' },
+    { label: 'Thư viện', href: '/hoat-dong?tab=gallery' },
     { label: 'Tuyển sinh', href: '/tuyen-sinh' },
-    { label: 'Hoạt động', href: '/hoat-dong' },
-    { label: 'Hỏi đáp', href: '/hoi-dap' },
-    { label: 'Tài liệu', href: '/tai-lieu' },
     { label: 'Liên hệ', href: '/lien-he' },
   ]
 
   return (
-    <header className={`public-header ${isScrolled ? 'scrolled' : ''}`}>
+    <header className={`public-header glass-header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="header-container">
         <Link href="/" className="header-logo">
           <div className="header-logo-icon" style={{ background: 'transparent' }}>
-            <img src="/school-logo.jpg" alt="Logo" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
+            <img src="/school-logo.jpg" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
           <div className="header-logo-text">
-            <h1>THPT EDISON</h1>
-            <span>Khát vọng & Sáng tạo</span>
+            <h1>EDISON SCHOOL</h1>
+            <span>Minh Đức</span>
           </div>
         </Link>
 
         {/* Desktop Menu */}
         <nav className="header-nav">
           {menuItems.map((item) => {
-            const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+            const baseHref = item.href.split('?')[0]
+            const queryTab = item.href.includes('?tab=') ? item.href.split('?tab=')[1] : null
+            
+            let isActive = false
+            if (item.href === '/') {
+              isActive = pathname === '/'
+            } else if (baseHref === '/hoat-dong') {
+              // So sánh chính xác tab hoạt động
+              isActive = pathname === '/hoat-dong' && (currentTab === queryTab || (!currentTab && queryTab === 'calendar'))
+            } else {
+              isActive = pathname === baseHref || pathname.startsWith(baseHref + '/')
+            }
+
             return (
               <Link
                 key={item.href}
@@ -71,13 +90,13 @@ export default function Header() {
             )
           })}
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '12px', paddingLeft: '12px', borderLeft: '1px solid rgba(255,255,255,0.15)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '12px', paddingLeft: '12px', borderLeft: '1px solid rgba(148, 163, 184, 0.2)' }}>
             {/* Search Icon Trigger */}
             <button
               onClick={() => setIsSearchOpen(true)}
               style={{ background: 'transparent', border: 'none', color: 'inherit', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: '8px', borderRadius: '50%' }}
               title="Tìm kiếm toàn trang"
-              onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255,255,255,0.08)' }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(148, 163, 184, 0.15)' }}
               onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent' }}
             >
               <Search size={20} />
@@ -87,8 +106,8 @@ export default function Header() {
             <ThemeToggle />
           </div>
 
-          <Link href="/admin/login" className="btn btn-primary btn-sm" style={{ marginLeft: '10px' }}>
-            CMS Portal
+          <Link href="/tuyen-sinh" className="btn btn-gold" style={{ marginLeft: '10px', padding: '10px 20px', borderRadius: '12px' }}>
+            Tuyển Sinh Ngay
           </Link>
         </nav>
 
@@ -105,7 +124,18 @@ export default function Header() {
       {/* Mobile Menu Dropdown */}
       <div className={`mobile-nav ${isMobileMenuOpen ? 'open' : ''}`}>
         {menuItems.map((item) => {
-          const isActive = pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+          const baseHref = item.href.split('?')[0]
+          const queryTab = item.href.includes('?tab=') ? item.href.split('?tab=')[1] : null
+          
+          let isActive = false
+          if (item.href === '/') {
+            isActive = pathname === '/'
+          } else if (baseHref === '/hoat-dong') {
+            isActive = pathname === '/hoat-dong' && (currentTab === queryTab || (!currentTab && queryTab === 'calendar'))
+          } else {
+            isActive = pathname === baseHref || pathname.startsWith(baseHref + '/')
+          }
+
           return (
             <Link
               key={item.href}
@@ -128,8 +158,8 @@ export default function Header() {
           <ThemeToggle />
         </div>
 
-        <Link href="/admin/login" className="btn btn-primary" style={{ marginTop: '15px' }}>
-          CMS Portal
+        <Link href="/tuyen-sinh" className="btn btn-gold" style={{ marginTop: '15px' }}>
+          Tuyển Sinh Ngay
         </Link>
       </div>
 

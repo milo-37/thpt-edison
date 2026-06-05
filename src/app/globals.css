@@ -7,37 +7,37 @@
 /* ==================== CSS VARIABLES ==================== */
 
 :root {
-  /* Colors - Primary */
-  --color-navy: #09162e;          /* Deep Royal Navy based on logo */
-  --color-navy-dark: #040a17;
-  --color-navy-light: #172a4d;
-  --color-gold: #ff6d00;          /* Vibrant Orange from logo */
-  --color-gold-dark: #e05300;
-  --color-gold-light: #ff914d;
+  /* Colors - Primary (Edison School Minh Duc 2026) */
+  --color-navy: #0A4BAF;          /* Academic Navy Blue */
+  --color-navy-dark: #083A88;     /* Primary Hover */
+  --color-navy-light: #1e40af;    
+  --color-gold: #FF6B00;          /* Knowledge Orange */
+  --color-gold-dark: #E85F00;     /* Secondary Hover */
+  --color-gold-light: #ff8533;
 
   /* Colors - UI */
-  --color-primary: #0f5cb7;       /* Royal Blue from logo */
-  --color-primary-dark: #0b4a94;
-  --color-primary-light: #468ee6;
-  --color-success: #10b981;
+  --color-primary: #0A4BAF;
+  --color-primary-dark: #083A88;
+  --color-primary-light: #3B82F6;  /* Accent */
+  --color-success: #10B981;
   --color-success-dark: #059669;
-  --color-danger: #ef4444;
-  --color-danger-dark: #dc2626;
-  --color-warning: #f59e0b;
-  --color-warning-dark: #d97706;
-  --color-info: #06b6d4;
+  --color-danger: #EF4444;
+  --color-danger-dark: #DC2626;
+  --color-warning: #F59E0B;
+  --color-warning-dark: #D97706;
+  --color-info: #3B82F6;
 
   /* Colors - Neutral */
   --color-white: #ffffff;
-  --color-gray-50: #f8fafc;
-  --color-gray-100: #f1f5f9;
-  --color-gray-200: #e2e8f0;
-  --color-gray-300: #cbd5e1;
-  --color-gray-400: #94a3b8;
-  --color-gray-500: #64748b;
-  --color-gray-600: #475569;
+  --color-gray-50: #F8FAFC;       /* Section Background */
+  --color-gray-100: #F1F5F9;
+  --color-gray-200: #E2E8F0;       /* Border Color */
+  --color-gray-300: #CBD5E1;
+  --color-gray-400: #94A3B8;       /* Text Light */
+  --color-gray-500: #64748B;
+  --color-gray-600: #475569;       /* Text Secondary */
   --color-gray-700: #334155;
-  --color-gray-800: #1e293b;
+  --color-gray-800: #0F172A;       /* Text Primary */
   --color-gray-900: #0f172a;
 
   /* Typography */
@@ -67,21 +67,36 @@
   --space-20: 5rem;
   --space-24: 6rem;
 
-  /* Borders */
+  /* Borders (2026 Redesign Tokens) */
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
-  --radius-lg: 0.875rem;
-  --radius-xl: 1.25rem;
-  --radius-2xl: 1.75rem;
+  --radius-lg: 12px;
+  --radius-xl: 24px;              /* Card Radius */
+  --radius-2xl: 32px;             /* Large Container Radius */
   --radius-full: 9999px;
+  
+  --radius-card: 24px;
+  --radius-button: 16px;
+  --radius-input: 16px;
+  --radius-container: 32px;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 8px 16px -2px rgba(11, 19, 41, 0.05), 0 4px 8px -2px rgba(11, 19, 41, 0.05);
-  --shadow-lg: 0 16px 24px -4px rgba(9, 22, 46, 0.08), 0 8px 12px -4px rgba(9, 22, 46, 0.04);
-  --shadow-xl: 0 24px 36px -6px rgba(9, 22, 46, 0.12), 0 12px 18px -6px rgba(9, 22, 46, 0.06);
+  /* Shadows (2026 Redesign Tokens) */
+  --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 10px 30px rgba(15, 23, 42, 0.08); /* Card default shadow */
+  --shadow-lg: 0 20px 40px rgba(15, 23, 42, 0.12); /* Card hover shadow */
+  --shadow-xl: 0 24px 36px -6px rgba(9, 22, 46, 0.12);
   --shadow-2xl: 0 32px 64px -12px rgba(9, 22, 46, 0.18);
-  --shadow-glow: 0 8px 30px rgba(15, 92, 183, 0.15);
+  --shadow-glow: 0 8px 30px rgba(10, 75, 175, 0.15);
+  
+  --shadow-card: 0 10px 30px rgba(15, 23, 42, 0.08);
+  --shadow-hover: 0 20px 40px rgba(15, 23, 42, 0.12);
+
+  /* Glassmorphism Tokens */
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-bg-dark: rgba(15, 23, 42, 0.75);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.25);
+  --glass-border-dark: 1px solid rgba(255, 255, 255, 0.08);
+  --glass-blur: blur(20px);
 
   /* Transitions */
   --transition-fast: 150ms ease;
@@ -139,17 +154,18 @@ html {
 body {
   font-family: var(--font-family);
   font-size: var(--font-size-base);
-  line-height: 1.7;
+  line-height: 1.6;
   color: var(--color-gray-800);
   background-color: var(--color-white);
   overflow-x: hidden;
   transition: background-color var(--transition-base), color var(--transition-fast);
+  letter-spacing: -0.015em;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-title);
-  letter-spacing: -0.02em;
-  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-weight: 800;
 }
 
 a {
@@ -268,15 +284,27 @@ ul, ol {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  transition: all var(--transition-base);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all var(--transition-spring);
+}
+
+[data-theme="dark"] .public-header {
+  background: rgba(9, 22, 46, 0.75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .public-header.scrolled {
-  background: rgba(255, 255, 255, 0.98);
+  background: rgba(255, 255, 255, 0.85);
   box-shadow: var(--shadow-md);
+  --header-height: 64px;
+}
+
+[data-theme="dark"] .public-header.scrolled {
+  background: rgba(4, 10, 23, 0.85);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .header-container {
@@ -287,6 +315,7 @@ ul, ol {
   align-items: center;
   justify-content: space-between;
   height: var(--header-height);
+  transition: height var(--transition-spring);
 }
 
 .header-logo {
@@ -310,14 +339,16 @@ ul, ol {
   font-size: var(--font-size-xl);
   box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3);
   flex-shrink: 0;
+  transition: all var(--transition-spring);
 }
 
 .header-logo-text h1 {
   font-size: var(--font-size-lg);
-  font-weight: 700;
+  font-weight: 800;
   color: var(--color-navy);
   line-height: 1.2;
   white-space: nowrap;
+  transition: all var(--transition-spring);
 }
 
 .header-logo-text span {
@@ -326,6 +357,22 @@ ul, ol {
   text-transform: uppercase;
   letter-spacing: 1px;
   white-space: nowrap;
+  transition: all var(--transition-spring);
+}
+
+/* Scrolled Header Logo Scaling */
+.public-header.scrolled .header-logo-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.public-header.scrolled .header-logo-text h1 {
+  font-size: var(--font-size-base);
+}
+
+.public-header.scrolled .header-logo-text span {
+  font-size: 10px;
+  letter-spacing: 0.5px;
 }
 
 .header-nav {
@@ -3012,3 +3059,157 @@ ul, ol {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* Glassmorphism Styles (Edison 2026 Redesign) */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-base), box-shadow var(--transition-base), background var(--transition-base);
+}
+
+[data-theme="dark"] .glass-card {
+  background: var(--glass-bg-dark);
+  border: var(--glass-border-dark);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.glass-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+.glass-header {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all var(--transition-base);
+}
+
+[data-theme="dark"] .glass-header {
+  background: rgba(9, 22, 46, 0.75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-input);
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-gray-800);
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+[data-theme="dark"] .glass-input {
+  background: rgba(15, 23, 42, 0.5);
+  border-color: var(--color-gray-700);
+  color: var(--color-white);
+}
+
+.glass-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(10, 75, 175, 0.15);
+  background: var(--color-white);
+}
+
+/* Redesign Premium Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 12px 24px;
+  border-radius: var(--radius-button);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-spring);
+  will-change: transform;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-white) !important;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-gold {
+  background: var(--color-gold);
+  color: var(--color-white) !important;
+}
+
+.btn-gold:hover {
+  background: var(--color-gold-dark);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 25px rgba(255, 109, 0, 0.35);
+}
+
+.btn-outline {
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+/* Animations and Floating Shapes */
+.animate-float-slow {
+  animation: floatSlow 8s ease-in-out infinite;
+}
+
+.animate-float-fast {
+  animation: floatFast 6s ease-in-out infinite;
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(3deg); }
+}
+
+@keyframes floatFast {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(-3deg); }
+}
+
+.gradient-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+[data-theme="dark"] .gradient-blob {
+  opacity: 0.25;
+}
+
+/* Reveal on scroll base classes */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+

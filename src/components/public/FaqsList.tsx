@@ -41,43 +41,53 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
   })
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-      {/* Search Input */}
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-8)' }}>
+      {/* Search Input (Glass style) */}
       <div 
         style={{ 
           position: 'relative', 
           width: '100%', 
-          maxWidth: '500px', 
-          margin: '0 auto var(--space-4) auto' 
+          maxWidth: '540px', 
+          margin: '0 auto' 
         }}
       >
         <Search 
           size={18} 
           style={{ 
             position: 'absolute', 
-            left: '16px', 
+            left: '18px', 
             top: '50%', 
             transform: 'translateY(-50%)', 
-            color: 'var(--color-gray-400)' 
+            color: 'var(--color-primary)',
+            zIndex: 2
           }} 
         />
         <input
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Tìm kiếm câu hỏi hoặc câu trả lời..."
+          placeholder="Tìm kiếm câu hỏi hoặc nội dung..."
+          className="form-input"
           style={{
-            width: '100%',
-            padding: 'var(--space-3) var(--space-4) var(--space-3) 44px',
-            borderRadius: 'var(--radius-xl)',
-            border: '1px solid var(--color-gray-200)',
+            padding: '14px 18px 14px 48px',
+            borderRadius: '16px',
+            border: '1px solid rgba(10, 75, 175, 0.15)',
             outline: 'none',
             fontSize: 'var(--font-size-sm)',
             boxShadow: 'var(--shadow-sm)',
-            transition: 'border-color var(--transition-fast)'
+            background: 'rgba(255, 255, 255, 0.8)',
+            backdropFilter: 'blur(10px)',
+            width: '100%',
+            transition: 'all var(--transition-base)'
           }}
-          onFocus={(e) => e.target.style.borderColor = 'var(--color-primary)'}
-          onBlur={(e) => e.target.style.borderColor = 'var(--color-gray-200)'}
+          onFocus={(e) => {
+            e.target.style.borderColor = 'var(--color-primary)'
+            e.target.style.boxShadow = '0 0 0 4px rgba(10, 75, 175, 0.1), var(--shadow-md)'
+          }}
+          onBlur={(e) => {
+            e.target.style.borderColor = 'rgba(10, 75, 175, 0.15)'
+            e.target.style.boxShadow = 'var(--shadow-sm)'
+          }}
         />
       </div>
 
@@ -86,20 +96,21 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
         style={{ 
           display: 'flex', 
           justifyContent: 'center', 
-          gap: 'var(--space-2)', 
+          gap: '8px', 
           flexWrap: 'wrap',
-          background: 'var(--color-gray-100)',
-          padding: '4px',
-          borderRadius: 'var(--radius-lg)',
+          background: 'rgba(148, 163, 184, 0.08)',
+          padding: '6px',
+          borderRadius: '16px',
           width: 'fit-content',
-          margin: '0 auto var(--space-4) auto'
+          margin: '0 auto',
+          border: '1px solid rgba(148, 163, 184, 0.1)'
         }}
       >
         <button
           onClick={() => { setActiveTab('all'); setExpandedId(null); }}
           style={{
-            padding: 'var(--space-2) var(--space-4)',
-            borderRadius: 'var(--radius-md)',
+            padding: '8px 20px',
+            borderRadius: '12px',
             fontSize: 'var(--font-size-sm)',
             fontWeight: 600,
             cursor: 'pointer',
@@ -116,8 +127,8 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
             key={k}
             onClick={() => { setActiveTab(k); setExpandedId(null); }}
             style={{
-              padding: 'var(--space-2) var(--space-4)',
-              borderRadius: 'var(--radius-md)',
+              padding: '8px 20px',
+              borderRadius: '12px',
               fontSize: 'var(--font-size-sm)',
               fontWeight: 600,
               cursor: 'pointer',
@@ -134,32 +145,34 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
 
       {/* Accordion List */}
       {filtered.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)' }}>
-          <MessageSquare size={48} style={{ margin: '0 auto var(--space-4) auto', opacity: 0.5 }} />
-          <p>Không tìm thấy câu hỏi nào phù hợp với từ khóa của bạn.</p>
+        <div style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)', background: 'var(--color-white)', borderRadius: '24px', border: '1px solid var(--color-gray-200)' }}>
+          <MessageSquare size={48} style={{ margin: '0 auto var(--space-4) auto', opacity: 0.5, color: 'var(--color-primary)' }} />
+          <p style={{ margin: 0, fontWeight: 500 }}>Không tìm thấy câu hỏi nào phù hợp với từ khóa của bạn.</p>
         </div>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {filtered.map((item) => {
             const isExpanded = expandedId === item.id
             return (
               <div
                 key={item.id}
+                className="glass-card"
                 style={{
-                  background: 'var(--color-white)',
-                  borderRadius: 'var(--radius-xl)',
-                  border: '1px solid var(--color-gray-200)',
-                  boxShadow: 'var(--shadow-sm)',
+                  background: isExpanded ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.7)',
+                  borderRadius: '24px',
+                  border: isExpanded ? '1px solid rgba(10, 75, 175, 0.25)' : '1px solid rgba(15, 23, 42, 0.06)',
+                  boxShadow: isExpanded ? 'var(--shadow-md), var(--shadow-glow)' : 'var(--shadow-sm)',
                   overflow: 'hidden',
-                  transition: 'all var(--transition-base)'
+                  transition: 'all var(--transition-spring)',
+                  backdropFilter: 'blur(20px)'
                 }}
               >
-                {/* Header */}
+                {/* Header Button */}
                 <button
                   onClick={() => toggleExpand(item.id)}
                   style={{
                     width: '100%',
-                    padding: 'var(--space-4) var(--space-6)',
+                    padding: '20px 24px',
                     background: 'transparent',
                     border: 'none',
                     textAlign: 'left',
@@ -167,12 +180,12 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     cursor: 'pointer',
-                    gap: '12px'
+                    gap: '16px'
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                     <HelpCircle 
-                      size={20} 
+                      size={22} 
                       style={{ 
                         color: isExpanded ? 'var(--color-gold)' : 'var(--color-primary)', 
                         flexShrink: 0,
@@ -183,41 +196,55 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
                       style={{ 
                         fontSize: 'var(--font-size-base)', 
                         fontWeight: 700, 
-                        color: isExpanded ? 'var(--color-navy-light)' : 'var(--color-navy)',
-                        transition: 'color 0.3s ease'
+                        color: isExpanded ? 'var(--color-navy-dark)' : 'var(--color-navy)',
+                        transition: 'color 0.3s ease',
+                        fontFamily: 'var(--font-title)'
                       }}
                     >
                       {item.question}
                     </span>
                   </div>
-                  <ChevronDown 
-                    size={18} 
-                    style={{ 
-                      color: 'var(--color-gray-400)',
-                      transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
-                      transition: 'transform 0.3s ease',
-                      flexShrink: 0
-                    }} 
-                  />
+                  <div
+                    style={{
+                      width: '28px',
+                      height: '28px',
+                      borderRadius: '50%',
+                      background: isExpanded ? 'rgba(10, 75, 175, 0.08)' : 'rgba(15, 23, 42, 0.03)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      transition: 'all 0.3s'
+                    }}
+                  >
+                    <ChevronDown 
+                      size={16} 
+                      style={{ 
+                        color: isExpanded ? 'var(--color-primary)' : 'var(--color-gray-500)',
+                        transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                        flexShrink: 0
+                      }} 
+                    />
+                  </div>
                 </button>
 
-                {/* Content */}
+                {/* Answer Content Panel */}
                 <div
                   style={{
                     maxHeight: isExpanded ? '1000px' : '0',
                     overflow: 'hidden',
-                    transition: 'max-height 0.4s cubic-bezier(0, 1, 0, 1)',
+                    transition: 'max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                   }}
                 >
                   <div 
                     style={{ 
-                      padding: '0 var(--space-6) var(--space-5) 44px',
+                      padding: '0 24px 24px 60px',
                       fontSize: 'var(--font-size-sm)',
                       color: 'var(--color-gray-600)',
-                      lineHeight: 1.6,
-                      borderTop: '1px solid var(--color-gray-100)',
-                      paddingTop: 'var(--space-4)',
-                      whiteSpace: 'pre-line' // Preserve line breaks in answers
+                      lineHeight: 1.7,
+                      borderTop: '1px solid rgba(15, 23, 42, 0.05)',
+                      paddingTop: '16px',
+                      whiteSpace: 'pre-line'
                     }}
                   >
                     {item.answer}
@@ -231,3 +258,4 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
     </div>
   )
 }
+

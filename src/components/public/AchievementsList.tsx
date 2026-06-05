@@ -120,16 +120,10 @@ export default function AchievementsList({ initialAchievements }: AchievementsLi
           {filtered.map((item) => (
             <div
               key={item.id}
-              className="achievement-card animate-fadeIn"
+              className="card achievement-card animate-fadeIn"
               style={{
-                background: 'var(--color-white)',
-                borderRadius: 'var(--radius-xl)',
-                border: '1px solid var(--color-gray-200)',
-                overflow: 'hidden',
-                boxShadow: 'var(--shadow-sm)',
                 display: 'flex',
-                flexDirection: 'column',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+                flexDirection: 'column'
               }}
             >
               {/* Card Image */}

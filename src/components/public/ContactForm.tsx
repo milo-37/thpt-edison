@@ -64,8 +64,22 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="contact-form" style={{ background: 'var(--color-white)', padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-gray-100)', boxShadow: 'var(--shadow-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-      <h3 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 700, color: 'var(--color-navy)', borderBottom: '2px solid var(--color-gold)', paddingBottom: 'var(--space-2)', margin: '0 0 var(--space-2) 0' }}>
+    <form 
+      onSubmit={handleSubmit} 
+      className="glass-card" 
+      style={{ 
+        background: 'rgba(255, 255, 255, 0.85)', 
+        backdropFilter: 'blur(20px)',
+        padding: 'var(--space-8)', 
+        borderRadius: 'var(--radius-xl)', 
+        border: '1px solid rgba(15, 23, 42, 0.06)', 
+        boxShadow: 'var(--shadow-lg)', 
+        display: 'flex', 
+        flexDirection: 'column', 
+        gap: 'var(--space-5)' 
+      }}
+    >
+      <h3 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--color-navy)', borderBottom: '2px solid var(--color-gold)', paddingBottom: 'var(--space-2)', margin: '0 0 var(--space-1) 0', fontFamily: 'var(--font-title)' }}>
         Gửi Tin Nhắn Liên Hệ
       </h3>
 
@@ -75,12 +89,13 @@ export default function ContactForm() {
             display: 'flex',
             alignItems: 'center',
             gap: 'var(--space-2)',
-            padding: 'var(--space-3)',
-            borderRadius: 'var(--radius-md)',
+            padding: 'var(--space-4)',
+            borderRadius: '16px',
             fontSize: 'var(--font-size-sm)',
             background: status.type === 'success' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
             color: status.type === 'success' ? 'var(--color-success-dark)' : 'var(--color-danger-dark)',
-            border: `1px solid ${status.type === 'success' ? 'rgba(16, 185, 129, 0.2)' : 'rgba(239, 68, 68, 0.2)'}`
+            border: `1px solid ${status.type === 'success' ? 'rgba(16, 185, 129, 0.2)' : 'rgba(239, 68, 68, 0.2)'}`,
+            fontWeight: 500
           }}
         >
           {status.type === 'success' ? <CheckCircle size={18} /> : <AlertCircle size={18} />}
@@ -88,9 +103,9 @@ export default function ContactForm() {
         </div>
       )}
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4)' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-4)' }}>
         <div>
-          <label htmlFor="name" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 600, color: 'var(--color-gray-600)', marginBottom: 'var(--space-1)' }}>
+          <label htmlFor="name" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-600)', marginBottom: '6px' }}>
             Họ và tên *
           </label>
           <input
@@ -100,13 +115,30 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             required
-            style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-200)', outline: 'none' }}
+            className="form-input"
+            style={{ 
+              width: '100%', 
+              padding: '12px 16px', 
+              borderRadius: 'var(--radius-input)', 
+              border: '1.5px solid var(--color-gray-200)', 
+              outline: 'none',
+              background: 'var(--color-white)',
+              transition: 'all var(--transition-fast)'
+            }}
+            onFocus={(e) => {
+              e.target.style.borderColor = 'var(--color-primary)'
+              e.target.style.boxShadow = '0 0 0 3px rgba(10, 75, 175, 0.1)'
+            }}
+            onBlur={(e) => {
+              e.target.style.borderColor = 'var(--color-gray-200)'
+              e.target.style.boxShadow = 'none'
+            }}
             placeholder="Nguyễn Văn A"
           />
         </div>
 
         <div>
-          <label htmlFor="phone" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 600, color: 'var(--color-gray-600)', marginBottom: 'var(--space-1)' }}>
+          <label htmlFor="phone" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-600)', marginBottom: '6px' }}>
             Số điện thoại
           </label>
           <input
@@ -115,14 +147,31 @@ export default function ContactForm() {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-200)', outline: 'none' }}
+            className="form-input"
+            style={{ 
+              width: '100%', 
+              padding: '12px 16px', 
+              borderRadius: 'var(--radius-input)', 
+              border: '1.5px solid var(--color-gray-200)', 
+              outline: 'none',
+              background: 'var(--color-white)',
+              transition: 'all var(--transition-fast)'
+            }}
+            onFocus={(e) => {
+              e.target.style.borderColor = 'var(--color-primary)'
+              e.target.style.boxShadow = '0 0 0 3px rgba(10, 75, 175, 0.1)'
+            }}
+            onBlur={(e) => {
+              e.target.style.borderColor = 'var(--color-gray-200)'
+              e.target.style.boxShadow = 'none'
+            }}
             placeholder="0912345678"
           />
         </div>
       </div>
 
       <div>
-        <label htmlFor="email" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 600, color: 'var(--color-gray-600)', marginBottom: 'var(--space-1)' }}>
+        <label htmlFor="email" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-600)', marginBottom: '6px' }}>
           Địa chỉ Email *
         </label>
         <input
@@ -132,13 +181,30 @@ export default function ContactForm() {
           value={formData.email}
           onChange={handleChange}
           required
-          style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-200)', outline: 'none' }}
+          className="form-input"
+          style={{ 
+            width: '100%', 
+            padding: '12px 16px', 
+            borderRadius: 'var(--radius-input)', 
+            border: '1.5px solid var(--color-gray-200)', 
+            outline: 'none',
+            background: 'var(--color-white)',
+            transition: 'all var(--transition-fast)'
+          }}
+          onFocus={(e) => {
+            e.target.style.borderColor = 'var(--color-primary)'
+            e.target.style.boxShadow = '0 0 0 3px rgba(10, 75, 175, 0.1)'
+          }}
+          onBlur={(e) => {
+            e.target.style.borderColor = 'var(--color-gray-200)'
+            e.target.style.boxShadow = 'none'
+          }}
           placeholder="example@gmail.com"
         />
       </div>
 
       <div>
-        <label htmlFor="subject" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 600, color: 'var(--color-gray-600)', marginBottom: 'var(--space-1)' }}>
+        <label htmlFor="subject" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-600)', marginBottom: '6px' }}>
           Tiêu đề *
         </label>
         <input
@@ -148,13 +214,30 @@ export default function ContactForm() {
           value={formData.subject}
           onChange={handleChange}
           required
-          style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-200)', outline: 'none' }}
-          placeholder="Hỏi về học phí, tuyển sinh..."
+          className="form-input"
+          style={{ 
+            width: '100%', 
+            padding: '12px 16px', 
+            borderRadius: 'var(--radius-input)', 
+            border: '1.5px solid var(--color-gray-200)', 
+            outline: 'none',
+            background: 'var(--color-white)',
+            transition: 'all var(--transition-fast)'
+          }}
+          onFocus={(e) => {
+            e.target.style.borderColor = 'var(--color-primary)'
+            e.target.style.boxShadow = '0 0 0 3px rgba(10, 75, 175, 0.1)'
+          }}
+          onBlur={(e) => {
+            e.target.style.borderColor = 'var(--color-gray-200)'
+            e.target.style.boxShadow = 'none'
+          }}
+          placeholder="Hỏi về học phí, tuyển sinh lớp 10..."
         />
       </div>
 
       <div>
-        <label htmlFor="message" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 600, color: 'var(--color-gray-600)', marginBottom: 'var(--space-1)' }}>
+        <label htmlFor="message" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-600)', marginBottom: '6px' }}>
           Nội dung liên hệ *
         </label>
         <textarea
@@ -164,7 +247,25 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           rows={5}
-          style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-200)', outline: 'none', resize: 'vertical' }}
+          className="form-textarea"
+          style={{ 
+            width: '100%', 
+            padding: '12px 16px', 
+            borderRadius: 'var(--radius-input)', 
+            border: '1.5px solid var(--color-gray-200)', 
+            outline: 'none', 
+            resize: 'vertical',
+            background: 'var(--color-white)',
+            transition: 'all var(--transition-fast)'
+          }}
+          onFocus={(e) => {
+            e.target.style.borderColor = 'var(--color-primary)'
+            e.target.style.boxShadow = '0 0 0 3px rgba(10, 75, 175, 0.1)'
+          }}
+          onBlur={(e) => {
+            e.target.style.borderColor = 'var(--color-gray-200)'
+            e.target.style.boxShadow = 'none'
+          }}
           placeholder="Nhập nội dung tin nhắn của bạn ở đây..."
         />
       </div>
@@ -172,8 +273,14 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={loading}
-        className="btn btn-primary"
-        style={{ width: '100%', gap: 'var(--space-2)', marginTop: 'var(--space-2)' }}
+        className="btn btn-primary btn-lg"
+        style={{ 
+          width: '100%', 
+          gap: 'var(--space-2)', 
+          marginTop: 'var(--space-2)', 
+          borderRadius: 'var(--radius-button)',
+          padding: '14px 28px'
+        }}
       >
         <Send size={16} />
         {loading ? 'Đang gửi...' : 'Gửi liên hệ'}
