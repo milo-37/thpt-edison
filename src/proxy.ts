@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { verifyToken } from './lib/auth'
+import prisma from './lib/prisma'
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -20,7 +21,20 @@ export async function proxy(request: NextRequest) {
   // Kiểm tra tính hợp lệ của token
   let user = null
   if (token) {
-    user = await verifyToken(token)
+    const payload = await verifyToken(token)
+    if (payload) {
+      try {
+        const dbUser = await prisma.user.findUnique({
+          where: { id: payload.id },
+          select: { id: true, isActive: true }
+        })
+        if (dbUser && dbUser.isActive) {
+          user = payload
+        }
+      } catch (error) {
+        console.error('Proxy auth check error:', error)
+      }
+    }
   }
 
   // 2. Bảo vệ các tuyến đường Admin
@@ -29,7 +43,16 @@ export async function proxy(request: NextRequest) {
     if (!user && pathname !== '/admin/login') {
       const loginUrl = new URL('/admin/login', request.url)
       loginUrl.searchParams.set('callbackUrl', pathname)
-      return NextResponse.redirect(loginUrl)
+      const response = NextResponse.redirect(loginUrl)
+      // Xóa cookie hết hạn/hỏng để tránh loop
+      response.cookies.set({
+        name: 'auth-token',
+        value: '',
+        httpOnly: true,
+        path: '/',
+        maxAge: 0,
+      })
+      return response
     }
 
     // Nếu đã đăng nhập và truy cập trang login -> chuyển hướng về dashboard
