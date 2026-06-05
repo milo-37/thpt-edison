@@ -327,9 +327,9 @@ ul, ol {
 }
 
 .header-logo-icon {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, var(--color-navy), var(--color-navy-light));
+  width: 52px;
+  height: 52px;
+  background: #ffffff;
   border-radius: var(--radius-lg);
   display: flex;
   align-items: center;
@@ -337,9 +337,10 @@ ul, ol {
   color: var(--color-gold);
   font-weight: 800;
   font-size: var(--font-size-xl);
-  box-shadow: 0 4px 12px rgba(26, 54, 93, 0.3);
+  box-shadow: 0 4px 12px rgba(26, 54, 93, 0.12);
   flex-shrink: 0;
   transition: all var(--transition-spring);
+  overflow: hidden;
 }
 
 .header-logo-text h1 {
@@ -362,8 +363,8 @@ ul, ol {
 
 /* Scrolled Header Logo Scaling */
 .public-header.scrolled .header-logo-icon {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
 }
 
 .public-header.scrolled .header-logo-text h1 {
