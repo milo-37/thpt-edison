@@ -3169,6 +3169,24 @@ ul, ol {
   transform: translateY(-2px);
 }
 
+/* Redesign Premium Button Sizes */
+.btn-sm {
+  padding: var(--space-2) var(--space-4) !important;
+  font-size: var(--font-size-xs) !important;
+}
+
+.btn-lg {
+  padding: var(--space-4) var(--space-8) !important;
+  font-size: var(--font-size-base) !important;
+}
+
+.btn-icon {
+  width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  border-radius: var(--radius-md) !important;
+}
+
 /* Animations and Floating Shapes */
 .animate-float-slow {
   animation: floatSlow 8s ease-in-out infinite;

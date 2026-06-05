@@ -3,16 +3,43 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Search } from 'lucide-react'
+import { Menu, X, Search, User } from 'lucide-react'
 import ThemeToggle from '@/components/public/ThemeToggle'
 import SearchModal from '@/components/public/SearchModal'
+
+interface UserSession {
+  name: string
+  email: string
+  role: string
+  avatar?: string | null
+}
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [currentTab, setCurrentTab] = useState<string | null>(null)
+  const [user, setUser] = useState<UserSession | null>(null)
   const pathname = usePathname()
+
+  // Fetch logged in user info
+  useEffect(() => {
+    fetch('/api/auth/me')
+      .then((res) => {
+        if (res.ok) return res.json()
+        throw new Error('Not logged in')
+      })
+      .then((data) => {
+        if (data.user) {
+          setUser(data.user)
+        } else {
+          setUser(null)
+        }
+      })
+      .catch(() => {
+        setUser(null)
+      })
+  }, [pathname])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -106,9 +133,51 @@ export default function Header() {
             <ThemeToggle />
           </div>
 
-          <Link href="/admin/login" className="btn btn-outline" style={{ marginLeft: '8px', border: '1.5px solid var(--color-primary)', color: 'var(--color-primary)', padding: '8px 16px', borderRadius: '12px' }}>
-            CMS Portal
-          </Link>
+          {user ? (
+            <Link
+              href="/admin/dashboard"
+              className="btn btn-outline"
+              style={{
+                marginLeft: '8px',
+                border: '1.5px solid var(--color-primary)',
+                color: 'var(--color-primary)',
+                padding: '8px 16px',
+                borderRadius: '12px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                background: 'rgba(10, 75, 175, 0.05)'
+              }}
+              title="Đến trang quản lý"
+            >
+              <div
+                style={{
+                  width: '20px',
+                  height: '20px',
+                  borderRadius: '50%',
+                  background: 'var(--color-primary)',
+                  color: 'var(--color-white)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '9px',
+                  fontWeight: 800,
+                  overflow: 'hidden'
+                }}
+              >
+                {user.avatar ? (
+                  <img src={user.avatar} alt={user.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                ) : (
+                  user.name.charAt(0).toUpperCase()
+                )}
+              </div>
+              <span style={{ fontSize: 'var(--font-size-xs)', fontWeight: 600 }}>{user.name.split(' ').pop()}</span>
+            </Link>
+          ) : (
+            <Link href="/admin/login" className="btn btn-outline" style={{ marginLeft: '8px', border: '1.5px solid var(--color-primary)', color: 'var(--color-primary)', padding: '8px 16px', borderRadius: '12px' }}>
+              CMS Portal
+            </Link>
+          )}
 
           <Link href="/tuyen-sinh" className="btn btn-gold" style={{ marginLeft: '8px', padding: '8px 16px', borderRadius: '12px' }}>
             Tuyển Sinh Ngay
@@ -163,9 +232,32 @@ export default function Header() {
         </div>
 
         <div style={{ display: 'flex', gap: '10px', marginTop: '15px', width: '100%' }}>
-          <Link href="/admin/login" className="btn btn-outline" style={{ flex: 1, border: '1.5px solid var(--color-primary)', color: 'var(--color-primary)', padding: '10px 0', borderRadius: '12px', textAlign: 'center' }}>
-            CMS Portal
-          </Link>
+          {user ? (
+            <Link
+              href="/admin/dashboard"
+              className="btn btn-outline"
+              style={{
+                flex: 1,
+                border: '1.5px solid var(--color-primary)',
+                color: 'var(--color-primary)',
+                padding: '10px 0',
+                borderRadius: '12px',
+                textAlign: 'center',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                background: 'rgba(10, 75, 175, 0.05)'
+              }}
+            >
+              <User size={16} />
+              <span>Quản trị ({user.name.split(' ').pop()})</span>
+            </Link>
+          ) : (
+            <Link href="/admin/login" className="btn btn-outline" style={{ flex: 1, border: '1.5px solid var(--color-primary)', color: 'var(--color-primary)', padding: '10px 0', borderRadius: '12px', textAlign: 'center' }}>
+              CMS Portal
+            </Link>
+          )}
           <Link href="/tuyen-sinh" className="btn btn-gold" style={{ flex: 1, padding: '10px 0', borderRadius: '12px', textAlign: 'center' }}>
             Tuyển Sinh Ngay
           </Link>
