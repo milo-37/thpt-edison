@@ -56,13 +56,13 @@ export default async function HomePage() {
   })
 
   // 5. Lấy cấu hình hệ thống
-  const settingsList = await prisma.setting.findMany()
+  const settingsList = await (prisma as any).setting.findMany()
   const settings: Record<string, string> = {
     missionImageUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop&q=80',
     schoolName: 'EDISON SCHOOL MINH DUC',
     logoUrl: '/school-logo.jpg',
   }
-  settingsList.forEach((s) => {
+  settingsList.forEach((s: any) => {
     settings[s.key] = s.value
   })
 

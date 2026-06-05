@@ -15,10 +15,10 @@ const DEFAULT_SETTINGS = {
 // GET: Lấy cấu hình hệ thống (Công khai)
 export async function GET() {
   try {
-    const settingsList = await prisma.setting.findMany()
+    const settingsList = await (prisma as any).setting.findMany()
     const settings: Record<string, string> = { ...DEFAULT_SETTINGS }
     
-    settingsList.forEach((s) => {
+    settingsList.forEach((s: any) => {
       settings[s.key] = s.value
     })
 
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
     // Thực hiện lưu từng setting trong transaction
     await prisma.$transaction(
       Object.entries(settings).map(([key, value]) =>
-        prisma.setting.upsert({
+        (prisma as any).setting.upsert({
           where: { key },
           update: { value: String(value) },
           create: { key, value: String(value) },
