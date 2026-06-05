@@ -371,14 +371,14 @@ export default function ChatWidget() {
                 <span style={{ fontSize: '9px', fontWeight: 700, color: 'var(--color-gray-400)', textTransform: 'uppercase', marginBottom: '2px', display: 'flex', alignItems: 'center', gap: '2px' }}>
                   <HelpCircle size={10} /> Câu hỏi thường gặp:
                 </span>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', maxHeight: '100px', overflowY: 'auto' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '120px', overflowY: 'auto', paddingRight: '4px', scrollbarWidth: 'thin' }}>
                   {faqs.map((faq) => (
                     <button
                       key={faq.id}
                       onClick={() => handleSelectFaq(faq)}
                       style={{
                         textAlign: 'left',
-                        padding: '6px 10px',
+                        padding: '8px 12px',
                         background: 'var(--color-gray-50)',
                         border: '1px solid var(--color-gray-200)',
                         borderRadius: 'var(--radius-md)',
@@ -386,10 +386,11 @@ export default function ChatWidget() {
                         color: 'var(--color-navy-light)',
                         cursor: 'pointer',
                         fontWeight: 600,
-                        transition: 'background 0.2s',
+                        transition: 'all 0.2s',
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap'
+                        whiteSpace: 'nowrap',
+                        flexShrink: 0
                       }}
                       onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255, 109, 0, 0.08)' }}
                       onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--color-gray-50)' }}
