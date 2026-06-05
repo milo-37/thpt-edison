@@ -14,13 +14,62 @@ interface UserSession {
   avatar?: string | null
 }
 
-export default function Header() {
+interface HeaderProps {
+  settings?: {
+    schoolName?: string
+    logoUrl?: string
+    phone?: string
+    email?: string
+    address?: string
+  }
+}
+
+function splitSchoolName(name: string): { title: string; subtitle: string } {
+  const delimiters = ['-', '|', '/', ',']
+  for (const delimiter of delimiters) {
+    if (name.includes(delimiter)) {
+      const parts = name.split(delimiter)
+      return {
+        title: parts[0].trim(),
+        subtitle: parts.slice(1).join(delimiter).trim()
+      }
+    }
+  }
+  
+  const lowercaseName = name.toLowerCase()
+  const suffixIndex = lowercaseName.indexOf('minh đức') !== -1 ? lowercaseName.indexOf('minh đức') : lowercaseName.indexOf('minh duc')
+  if (suffixIndex > 0) {
+    return {
+      title: name.substring(0, suffixIndex).trim(),
+      subtitle: name.substring(suffixIndex).trim()
+    }
+  }
+
+  const schoolIndex = lowercaseName.lastIndexOf('school')
+  if (schoolIndex > 0 && schoolIndex + 6 < name.length) {
+    return {
+      title: name.substring(0, schoolIndex + 6).trim(),
+      subtitle: name.substring(schoolIndex + 6).trim()
+    }
+  }
+
+  return {
+    title: name,
+    subtitle: ''
+  }
+}
+
+export default function Header({ settings }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [currentTab, setCurrentTab] = useState<string | null>(null)
   const [user, setUser] = useState<UserSession | null>(null)
   const pathname = usePathname()
+
+  const schoolName = settings?.schoolName || 'EDISON SCHOOL MINH DUC'
+  const logoUrl = settings?.logoUrl || '/school-logo.jpg'
+  const { title, subtitle } = splitSchoolName(schoolName)
 
   // Fetch logged in user info
   useEffect(() => {
@@ -82,13 +131,14 @@ export default function Header() {
       <div className="header-container">
         <Link href="/" className="header-logo">
           <div className="header-logo-icon" style={{ background: 'transparent' }}>
-            <img src="/school-logo.jpg" alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+            <img src={logoUrl} alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </div>
           <div className="header-logo-text">
-            <h1>EDISON SCHOOL</h1>
-            <span>Minh Đức</span>
+            <h1>{title}</h1>
+            {subtitle && <span>{subtitle}</span>}
           </div>
         </Link>
+
 
         {/* Desktop Menu */}
         <nav className="header-nav">
