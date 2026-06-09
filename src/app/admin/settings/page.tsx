@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import { Save, Settings, Info, Phone, Mail, MapPin, Image as ImageIcon } from 'lucide-react'
 import FileUpload from '@/components/admin/FileUpload'
 import Toast, { ToastMessage } from '@/components/admin/Toast'
+import PostEditor from '@/components/admin/PostEditor'
+
 
 export default function AdminSettingsPage() {
   const [loading, setLoading] = useState(true)
@@ -275,49 +277,40 @@ export default function AdminSettingsPage() {
         {/* Cấu hình Nội dung Trang Tuyển sinh */}
         <div style={{ background: 'var(--color-white)', padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-gray-200)', boxShadow: 'var(--shadow-md)' }}>
           <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'var(--color-navy)', marginBottom: 'var(--space-4)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Settings size={18} /> Cấu hình Nội dung Trang Tuyển sinh (Cột trái)
+            <Settings size={18} /> Biên soạn nội dung Trang Tuyển sinh (Cột trái)
           </h3>
-          <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-gray-500)', marginBottom: 'var(--space-4)', lineHeight: 1.5 }}>
-            Quản trị viên có thể nhập mã HTML hoặc văn bản thường để tùy chỉnh các nội dung chỉ tiêu, phương thức tuyển sinh và lịch trình của trang <a href="/tuyen-sinh" target="_blank" style={{ color: 'var(--color-primary)', textDecoration: 'underline', fontWeight: 600 }}>Tuyển sinh</a>.
+          <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-gray-500)', marginBottom: 'var(--space-5)', lineHeight: 1.5 }}>
+            Sử dụng trình soạn thảo trực quan bên dưới để dễ dàng thay đổi văn bản, định dạng (in đậm, in nghiêng, danh sách gạch đầu dòng, bảng biểu...) của trang <a href="/tuyen-sinh" target="_blank" style={{ color: 'var(--color-primary)', textDecoration: 'underline', fontWeight: 600 }}>Tuyển sinh</a> mà không cần phải viết mã HTML.
           </p>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-            <div>
-              <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-700)', marginBottom: 'var(--space-1)' }}>
-                1. Chỉ tiêu & đối tượng tuyển sinh (Mã HTML)
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+              <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-navy)' }}>
+                1. Chỉ tiêu & đối tượng tuyển sinh
               </label>
-              <textarea
+              <PostEditor
                 value={admissionQuotaHtml}
-                onChange={(e) => setAdmissionQuotaHtml(e.target.value)}
-                rows={6}
-                style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-300)', outline: 'none', fontSize: 'var(--font-size-sm)', fontFamily: 'monospace' }}
-                placeholder="Nhập mã HTML hiển thị..."
+                onChange={(html) => setAdmissionQuotaHtml(html)}
               />
             </div>
 
-            <div>
-              <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-700)', marginBottom: 'var(--space-1)' }}>
-                2. Phương thức tuyển sinh (Mã HTML)
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+              <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-navy)' }}>
+                2. Phương thức tuyển sinh
               </label>
-              <textarea
+              <PostEditor
                 value={admissionMethodsHtml}
-                onChange={(e) => setAdmissionMethodsHtml(e.target.value)}
-                rows={6}
-                style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-300)', outline: 'none', fontSize: 'var(--font-size-sm)', fontFamily: 'monospace' }}
-                placeholder="Nhập mã HTML hiển thị..."
+                onChange={(html) => setAdmissionMethodsHtml(html)}
               />
             </div>
 
-            <div>
-              <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-700)', marginBottom: 'var(--space-1)' }}>
-                3. Mốc lịch trình quan trọng (Mã HTML)
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+              <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-navy)' }}>
+                3. Mốc lịch trình quan trọng
               </label>
-              <textarea
+              <PostEditor
                 value={admissionTimelineHtml}
-                onChange={(e) => setAdmissionTimelineHtml(e.target.value)}
-                rows={6}
-                style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-300)', outline: 'none', fontSize: 'var(--font-size-sm)', fontFamily: 'monospace' }}
-                placeholder="Nhập mã HTML hiển thị..."
+                onChange={(html) => setAdmissionTimelineHtml(html)}
               />
             </div>
           </div>
