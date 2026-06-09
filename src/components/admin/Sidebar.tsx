@@ -73,6 +73,7 @@ export default function Sidebar() {
     { label: 'Tài liệu', href: '/admin/documents', icon: FolderDown, roles: ['admin', 'editor'] },
     { label: 'Thư viện ảnh', href: '/admin/gallery', icon: ImageIcon, roles: ['admin', 'editor'] },
     { label: 'Lịch sự kiện', href: '/admin/events', icon: Calendar, roles: ['admin', 'editor'] },
+    { label: 'Quản lý tuyển sinh', href: '/admin/admission', icon: GraduationCap, roles: ['admin', 'editor'] },
     { label: 'Liên hệ / Ý kiến', href: '/admin/contacts', icon: MessageSquare, roles: ['admin'] },
     { label: 'Tài khoản CB-GV', href: '/admin/users', icon: Users, roles: ['admin'] },
     { label: 'Cài đặt hệ thống', href: '/admin/settings', icon: Settings, roles: ['admin'] },

@@ -40,7 +40,7 @@ export default function AdminContactsPage() {
 
   const fetchContacts = async () => {
     setLoading(true)
-    let url = `/api/contacts?page=${page}&limit=8`
+    let url = `/api/contacts?page=${page}&limit=8&type=contact`
     if (isHandledFilter) {
       url += `&isHandled=${isHandledFilter}`
     }

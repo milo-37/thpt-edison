@@ -20,6 +20,19 @@ export async function GET(request: NextRequest) {
 
     const where: any = {}
 
+    const typeParam = searchParams.get('type')
+    if (typeParam === 'admission') {
+      where.subject = {
+        contains: 'Tuyển sinh'
+      }
+    } else if (typeParam === 'contact') {
+      where.subject = {
+        not: {
+          contains: 'Tuyển sinh'
+        }
+      }
+    }
+
     if (isHandledParam === 'true') {
       where.isHandled = true
     } else if (isHandledParam === 'false') {
