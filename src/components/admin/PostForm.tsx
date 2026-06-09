@@ -262,7 +262,23 @@ export default function PostForm({ postId }: PostFormProps) {
             </label>
             {/* Vì TipTap load content không đổi sau khi mounting, ta chỉ render khi content đã sẵn sàng (chế độ edit) */}
             {(!postId || content) && (
-              <PostEditor value={content} onChange={(html) => setContent(html)} />
+              <PostEditor
+                value={content}
+                onChange={(html) => setContent(html)}
+                currentTitle={title}
+                currentExcerpt={excerpt}
+                onNormalize={(data) => {
+                  if (data.title && (!title || title.trim() === '')) {
+                    setTitle(data.title)
+                  }
+                  if (data.excerpt && (!excerpt || excerpt.trim() === '')) {
+                    setExcerpt(data.excerpt)
+                  }
+                  if (data.contentHtml !== undefined) {
+                    setContent(data.contentHtml)
+                  }
+                }}
+              />
             )}
           </div>
         </div>

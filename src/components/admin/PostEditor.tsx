@@ -53,6 +53,8 @@ import {
   Highlighter,
   Subscript as SubscriptIcon,
   Superscript as SuperscriptIcon,
+  Sparkles,
+  Loader2,
 } from 'lucide-react'
 
 // Custom YoutubeIcon since brand icons are not in this version of lucide-react
@@ -615,9 +617,12 @@ const SPECIAL_CHARS = [
 interface PostEditorProps {
   value: string
   onChange: (html: string) => void
+  onNormalize?: (data: { title?: string; excerpt?: string; slug?: string; contentHtml: string }) => void
+  currentTitle?: string
+  currentExcerpt?: string
 }
 
-export default function PostEditor({ value, onChange }: PostEditorProps) {
+export default function PostEditor({ value, onChange, onNormalize, currentTitle, currentExcerpt }: PostEditorProps) {
   // Modal state
   const [activeModal, setActiveModal] = useState<ModalType>(null)
 
@@ -627,6 +632,12 @@ export default function PostEditor({ value, onChange }: PostEditorProps) {
   
   // Fullscreen State
   const [isFullScreen, setIsFullScreen] = useState(false)
+
+  // Normalization and Undo States
+  const [isNormalizing, setIsNormalizing] = useState(false)
+  const [prevContent, setPrevContent] = useState<string | null>(null)
+  const [prevTitle, setPrevTitle] = useState<string | null>(null)
+  const [prevExcerpt, setPrevExcerpt] = useState<string | null>(null)
 
   // Link modal state
   const [linkUrl, setLinkUrl] = useState('')
@@ -835,6 +846,72 @@ export default function PostEditor({ value, onChange }: PostEditorProps) {
     if (!editor) return
     editor.chain().focus().insertContent(text).run()
     closeModal()
+  }
+
+  // ========= Content Normalization & Undo =========
+  const handleNormalize = async () => {
+    if (!editor) return
+
+    setIsNormalizing(true)
+    const currentHtml = editor.getHTML()
+
+    try {
+      const res = await fetch('/api/posts/normalize', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          contentHtml: currentHtml,
+          title: currentTitle || '',
+          excerpt: currentExcerpt || '',
+        }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Lỗi chuẩn hóa nội dung')
+      }
+
+      // Save previous state for Undo
+      setPrevContent(currentHtml)
+      setPrevTitle(currentTitle || '')
+      setPrevExcerpt(currentExcerpt || '')
+
+      // Update editor
+      editor.commands.setContent(data.contentHtml)
+
+      // Notify parent
+      if (onNormalize) {
+        onNormalize(data)
+      }
+    } catch (err: any) {
+      alert(err.message || 'Lỗi hệ thống khi chuẩn hóa')
+    } finally {
+      setIsNormalizing(false)
+    }
+  }
+
+  const handleUndoNormalize = () => {
+    if (!editor || !prevContent) return
+
+    // Restore content
+    editor.commands.setContent(prevContent)
+
+    // Restore parent
+    if (onNormalize) {
+      onNormalize({
+        contentHtml: prevContent,
+        title: prevTitle || undefined,
+        excerpt: prevExcerpt || undefined,
+      })
+    }
+
+    // Clear state
+    setPrevContent(null)
+    setPrevTitle(null)
+    setPrevExcerpt(null)
   }
 
   // ========= YouTube helpers =========
@@ -1216,6 +1293,68 @@ export default function PostEditor({ value, onChange }: PostEditorProps) {
           title={isFullScreen ? 'Thu nhỏ cửa sổ' : 'Phóng to toàn màn hình'}
         >
           {isFullScreen ? <Minimize2 size={15} /> : <Maximize2 size={15} />}
+        </button>
+
+        {prevContent && (
+          <>
+            <div className="toolbar-separator" />
+            <button
+              type="button"
+              onClick={handleUndoNormalize}
+              className="btn-toolbar"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: 'var(--color-navy)',
+                gap: '4px',
+                width: 'auto',
+                padding: '0 8px',
+                fontSize: '11px',
+                fontWeight: 600,
+              }}
+              title="Hoàn tác nội dung trước khi chuẩn hóa"
+            >
+              <Undo size={13} />
+              Hoàn tác chuẩn hóa
+            </button>
+          </>
+        )}
+
+        <div className="toolbar-separator" style={{ marginLeft: prevContent ? 'var(--space-1)' : 'auto' }} />
+
+        <button
+          type="button"
+          onClick={handleNormalize}
+          disabled={isNormalizing}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            padding: '5px 12px',
+            fontSize: '11px',
+            fontWeight: 700,
+            borderRadius: '8px',
+            background: 'linear-gradient(135deg, var(--color-primary-dark), var(--color-primary))',
+            color: 'var(--color-white)',
+            border: 'none',
+            cursor: isNormalizing ? 'not-allowed' : 'pointer',
+            transition: 'all 0.15s ease',
+            boxShadow: 'var(--shadow-sm)',
+          }}
+          title="Tự động làm sạch định dạng rác và chuẩn hóa bài viết"
+        >
+          {isNormalizing ? (
+            <>
+              <Loader2 size={12} className="animate-spin" />
+              Đang chuẩn hóa...
+            </>
+          ) : (
+            <>
+              <Sparkles size={12} />
+              Chuẩn hóa
+            </>
+          )}
         </button>
       </div>
 
@@ -1752,6 +1891,13 @@ export default function PostEditor({ value, onChange }: PostEditorProps) {
 
       {/* ======== Inline styling helper ======== */}
       <style jsx global>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .animate-spin {
+          animation: spin 1s linear infinite;
+        }
         .ProseMirror {
           outline: none;
           min-height: 350px;
