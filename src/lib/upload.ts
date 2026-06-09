@@ -1,7 +1,7 @@
 import { writeFile, mkdir } from 'fs/promises'
 import { existsSync } from 'fs'
 import path from 'path'
-import { v4 as uuidv4 } from 'uuid'
+import { createHash } from 'crypto'
 
 // Các loại file được phép upload
 const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
@@ -89,15 +89,20 @@ export async function saveFile(
     await mkdir(uploadDir, { recursive: true })
   }
 
-  // Tạo tên file mã hóa (UUID) để tránh trùng lặp
-  const ext = path.extname(file.name).toLowerCase()
-  const uniqueName = `${uuidv4()}${ext}`
-  const filePath = path.join(uploadDir, uniqueName)
-
-  // Đọc file buffer và lưu
+  // Đọc file buffer
   const bytes = await file.arrayBuffer()
   const buffer = Buffer.from(bytes)
-  await writeFile(filePath, buffer)
+
+  // Tính mã hash SHA-256 từ nội dung file để phát hiện tệp trùng lặp
+  const hash = createHash('sha256').update(buffer).digest('hex')
+  const ext = path.extname(file.name).toLowerCase()
+  const uniqueName = `${hash}${ext}`
+  const filePath = path.join(uploadDir, uniqueName)
+
+  // Chỉ ghi file lên ổ đĩa nếu file chưa tồn tại
+  if (!existsSync(filePath)) {
+    await writeFile(filePath, buffer)
+  }
 
   return {
     filePath: `/uploads/${subDir}/${uniqueName}`,

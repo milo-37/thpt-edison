@@ -43,6 +43,13 @@ export default async function PublicLayout({
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      {/* Dynamic Futuristic Glow Background Blobs */}
+      <div className="futuristic-glow-container">
+        <div className="glow-blob glow-blob-1"></div>
+        <div className="glow-blob glow-blob-2"></div>
+        <div className="glow-blob glow-blob-3"></div>
+      </div>
+
       <Header settings={settings} />
       <main style={{ flex: 1, marginTop: 'var(--header-height)' }}>
         <Breadcrumb />

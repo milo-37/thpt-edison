@@ -30,7 +30,7 @@ export default async function AchievementsPage() {
       >
         <div className="container">
           <h1 style={{ fontSize: 'var(--font-size-4xl)', fontWeight: 800, margin: 0, color: 'var(--color-gold)' }}>
-            Thành Tích Học Sinh
+            Thành tích học sinh
           </h1>
           <p style={{ opacity: 0.8, fontSize: 'var(--font-size-base)', marginTop: 'var(--space-2)', maxWidth: '600px', margin: 'var(--space-2) auto 0 auto' }}>
             Nơi vinh danh những nỗ lực vượt bậc và bảng vàng thành tích xuất sắc của học sinh Edison.

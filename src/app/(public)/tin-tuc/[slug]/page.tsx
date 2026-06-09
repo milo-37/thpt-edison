@@ -51,7 +51,17 @@ export default async function PostDetailPage(props: Props) {
   })
 
   // Làm sạch HTML của bài viết phòng chống XSS
-  const cleanContent = sanitizeHtml(post.content)
+  let cleanContent = sanitizeHtml(post.content)
+
+  // Loại bỏ ảnh thumbnail trùng lặp khỏi nội dung bài viết
+  // (Thumbnail đã được hiển thị riêng phía trên nội dung)
+  if (post.thumbnail) {
+    // Escape special regex chars in the thumbnail URL
+    const escapedThumb = post.thumbnail.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const thumbImgRegex = new RegExp(`<img[^>]*src=["']${escapedThumb}["'][^>]*/?>`, 'gi')
+    cleanContent = cleanContent.replace(thumbImgRegex, '')
+  }
+
   const defaultThumbnail = '/uploads/thumbnails/news-default.jpg'
 
   return (
@@ -115,12 +125,7 @@ export default async function PostDetailPage(props: Props) {
             </div>
           </div>
 
-          {/* Thumbnail bài viết */}
-          {post.thumbnail && (
-            <div style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden', marginBottom: 'var(--space-8)', maxHeight: '400px' }}>
-              <img src={post.thumbnail} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-            </div>
-          )}
+
 
           {/* Khối Nội Dung Rich Text */}
           <div

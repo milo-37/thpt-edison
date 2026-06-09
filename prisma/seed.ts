@@ -30,6 +30,7 @@ async function main() {
   await prisma.teacher.deleteMany({})
   await prisma.faq.deleteMany({})
   await prisma.subscriber.deleteMany({})
+  await prisma.testimonial.deleteMany({})
 
 
   console.log('Cleared existing data.')
@@ -448,6 +449,40 @@ async function main() {
     ],
   })
   console.log('Created FAQs.')
+
+  // 14. Create Testimonials
+  await prisma.testimonial.createMany({
+    data: [
+      {
+        name: 'Nguyễn Minh Thu',
+        role: 'Phụ huynh học sinh Lớp 10A2',
+        avatar: '/uploads/images/0589d8f2-cea4-4ec0-b33d-db34faf111af.jpg',
+        content: 'Chúng tôi rất yên tâm khi gửi gắm con tại Edison School. Không chỉ cơ sở vật chất khang trang, hiện đại mà phương pháp dạy học đổi mới của các thầy cô giúp con học tập vô cùng hứng khởi và tự lập.',
+        rating: 5,
+        order: 1,
+        isActive: true,
+      },
+      {
+        name: 'Trần Hoàng Long',
+        role: 'Học sinh Cựu học khóa 2023 - Đạt học bổng NUS',
+        avatar: '/uploads/images/2719cbb3-3fc4-40ef-8134-be77b5b9f35d.jpg',
+        content: 'Những năm tháng học tập dưới mái trường Edison đã giúp em khai phá tối đa tư duy học thuật và năng lực công nghệ. Sự dìu dắt tận tình của thầy cô là bệ phóng lớn giúp em chinh phục học bổng quốc tế.',
+        rating: 5,
+        order: 2,
+        isActive: true,
+      },
+      {
+        name: 'Phạm Minh Đức',
+        role: 'Phụ huynh học sinh Lớp 11 chuyên Anh',
+        avatar: '/uploads/images/31aaeadd-50b6-4821-b138-f841c019f772.jpg',
+        content: 'Trường hướng tới giáo dục toàn diện thực chất. Con tôi được tham gia rất nhiều câu lạc bộ ngoại khóa bổ ích, phát triển kỹ năng mềm vượt trội bên cạnh việc tích lũy kiến thức văn hóa.',
+        rating: 5,
+        order: 3,
+        isActive: true,
+      }
+    ]
+  })
+  console.log('Created Testimonials.')
 
   console.log('Database seeding successfully completed!')
 

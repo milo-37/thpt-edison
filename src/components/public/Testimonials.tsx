@@ -7,7 +7,7 @@ interface Testimonial {
   id: string
   name: string
   role: string
-  avatar: string
+  avatar: string | null
   content: string
   rating: number
 }
@@ -17,7 +17,7 @@ const testimonialsData: Testimonial[] = [
     id: '1',
     name: 'Nguyễn Minh Thu',
     role: 'Phụ huynh học sinh Lớp 10A2',
-    avatar: '/uploads/images/0589d8f2-cea4-4ec0-b33d-db34faf111af.jpg', // Reusing existing sample images in the project
+    avatar: '/uploads/images/0589d8f2-cea4-4ec0-b33d-db34faf111af.jpg',
     content: 'Chúng tôi rất yên tâm khi gửi gắm con tại Edison School. Không chỉ cơ sở vật chất khang trang, hiện đại mà phương pháp dạy học đổi mới của các thầy cô giúp con học tập vô cùng hứng khởi và tự lập.',
     rating: 5
   },
@@ -40,17 +40,32 @@ const testimonialsData: Testimonial[] = [
 ]
 
 export default function Testimonials() {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(testimonialsData)
   const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % testimonialsData.length)
-    }, 6000)
-    return () => clearInterval(timer)
+    fetch('/api/testimonials')
+      .then(res => res.json())
+      .then(data => {
+        if (data.testimonials && data.testimonials.length > 0) {
+          setTestimonials(data.testimonials)
+        }
+      })
+      .catch(err => console.error('Failed to fetch testimonials:', err))
   }, [])
 
+  useEffect(() => {
+    if (testimonials.length === 0) return
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % testimonials.length)
+    }, 6000)
+    return () => clearInterval(timer)
+  }, [testimonials])
+
+  if (testimonials.length === 0) return null
+
   return (
-    <section className="section section-alt" style={{ overflow: 'hidden', position: 'relative', background: 'linear-gradient(180deg, #FFFFFF 0%, rgba(10, 75, 175, 0.03) 100%)' }}>
+    <section className="section section-alt" style={{ overflow: 'hidden', position: 'relative', background: 'linear-gradient(180deg, var(--color-white) 0%, var(--color-gray-50) 100%)' }}>
       
       {/* Background shapes */}
       <div style={{ position: 'absolute', top: '20%', left: '-10%', width: '300px', height: '300px', background: 'rgba(59, 130, 246, 0.06)', borderRadius: '50%', filter: 'blur(60px)' }} />
@@ -58,7 +73,7 @@ export default function Testimonials() {
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: 'var(--space-12)' }}>
           <span className="section-label">Đánh giá từ cộng đồng</span>
-          <h2 className="section-title">Phụ Huynh & Học Sinh Nói Về Edison</h2>
+          <h2 className="section-title">Phụ huynh & học sinh nói về Edison</h2>
           <p className="section-desc">Những chia sẻ chân thực về hành trình nuôi dưỡng tri thức và trưởng thành tại Edison School Minh Đức.</p>
         </div>
 
@@ -66,7 +81,7 @@ export default function Testimonials() {
           
           {/* Testimonial Cards Wrapper */}
           <div style={{ position: 'relative', minHeight: '260px' }}>
-            {testimonialsData.map((t, idx) => {
+            {testimonials.map((t, idx) => {
               const isActive = idx === activeIndex
               return (
                 <div
@@ -75,15 +90,16 @@ export default function Testimonials() {
                     position: isActive ? 'relative' : 'absolute',
                     inset: 0,
                     opacity: isActive ? 1 : 0,
+                    visibility: isActive ? 'visible' : 'hidden',
                     transform: isActive ? 'scale(1) translateY(0)' : 'scale(0.95) translateY(10px)',
                     transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
                     pointerEvents: isActive ? 'auto' : 'none',
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    background: 'rgba(255, 255, 255, 0.8)',
+                    background: 'var(--glass-bg)',
                     backdropFilter: 'blur(20px)',
-                    border: '1px solid rgba(255, 255, 255, 0.5)',
+                    border: 'var(--glass-border)',
                     borderRadius: '24px',
                     padding: 'var(--space-8) var(--space-10)',
                     boxShadow: 'var(--shadow-card)',
@@ -111,7 +127,7 @@ export default function Testimonials() {
                   {/* User info */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '8px' }}>
                     <div style={{ width: '48px', height: '48px', borderRadius: '50%', overflow: 'hidden', border: '2px solid var(--color-gold)', background: 'var(--color-gray-100)' }}>
-                      <img src={t.avatar} alt={t.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                      <img src={t.avatar || '/uploads/images/31aaeadd-50b6-4821-b138-f841c019f772.jpg'} alt={t.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                     <div style={{ textAlign: 'left' }}>
                       <h4 style={{ margin: 0, fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'var(--color-navy)' }}>{t.name}</h4>
@@ -125,7 +141,7 @@ export default function Testimonials() {
 
           {/* Nav Controls */}
           <button
-            onClick={() => setActiveIndex((prev) => (prev - 1 + testimonialsData.length) % testimonialsData.length)}
+            onClick={() => setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
             style={{ position: 'absolute', left: '-10px', top: '50%', transform: 'translateY(-50%)', width: '40px', height: '40px', borderRadius: '50%', background: 'var(--color-white)', border: '1px solid var(--color-gray-200)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-gray-600)', transition: 'all 0.3s', cursor: 'pointer', boxShadow: 'var(--shadow-sm)', zIndex: 10 }}
             onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--color-primary)'}
             onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--color-gray-200)'}
@@ -134,7 +150,7 @@ export default function Testimonials() {
             <ChevronLeft size={18} />
           </button>
           <button
-            onClick={() => setActiveIndex((prev) => (prev + 1) % testimonialsData.length)}
+            onClick={() => setActiveIndex((prev) => (prev + 1) % testimonials.length)}
             style={{ position: 'absolute', right: '-10px', top: '50%', transform: 'translateY(-50%)', width: '40px', height: '40px', borderRadius: '50%', background: 'var(--color-white)', border: '1px solid var(--color-gray-200)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-gray-600)', transition: 'all 0.3s', cursor: 'pointer', boxShadow: 'var(--shadow-sm)', zIndex: 10 }}
             onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--color-primary)'}
             onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--color-gray-200)'}
@@ -145,7 +161,7 @@ export default function Testimonials() {
 
           {/* Dots Indicator */}
           <div style={{ display: 'flex', gap: '6px', justifyContent: 'center', marginTop: '24px' }}>
-            {testimonialsData.map((_, idx) => (
+            {testimonials.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setActiveIndex(idx)}

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Plus, Trash2, FolderDown, Download, Eye, EyeOff, Save, X } from 'lucide-react'
+import { Plus, Trash2, FolderDown, Download, Eye, EyeOff, Save, X, Pencil } from 'lucide-react'
 import DataTable from '@/components/admin/DataTable'
 import FileUpload from '@/components/admin/FileUpload'
 import ConfirmModal from '@/components/admin/ConfirmModal'
@@ -50,6 +50,7 @@ export default function AdminDocumentsPage() {
   // Actions states
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [deleteId, setDeleteId] = useState<string | null>(null)
+  const [editId, setEditId] = useState<string | null>(null)
 
   const showToast = (type: 'success' | 'error' | 'warning', message: string) => {
     setToast({ id: Date.now().toString(), type, message })
@@ -85,14 +86,14 @@ export default function AdminDocumentsPage() {
     fetchDocuments()
   }, [page])
 
-  // Xử lý nộp form thêm mới tài liệu
+  // Xử lý nộp form thêm mới/sửa tài liệu
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!title) {
       showToast('warning', 'Vui lòng nhập tiêu đề tài liệu')
       return
     }
-    if (!uploadedFile) {
+    if (!uploadedFile || !uploadedFile.filePath) {
       showToast('warning', 'Vui lòng upload tệp tài liệu trước')
       return
     }
@@ -101,7 +102,7 @@ export default function AdminDocumentsPage() {
     const docData = {
       title,
       description,
-      categoryId,
+      categoryId: categoryId || null,
       isVisible,
       filePath: uploadedFile.filePath,
       fileName: uploadedFile.fileName,
@@ -109,9 +110,12 @@ export default function AdminDocumentsPage() {
       fileType: uploadedFile.fileType,
     }
 
+    const url = editId ? `/api/documents/${editId}` : '/api/documents'
+    const method = editId ? 'PUT' : 'POST'
+
     try {
-      const res = await fetch('/api/documents', {
-        method: 'POST',
+      const res = await fetch(url, {
+        method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(docData),
       })
@@ -119,10 +123,10 @@ export default function AdminDocumentsPage() {
       const data = await res.json()
 
       if (!res.ok) {
-        throw new Error(data.error || 'Thêm tài liệu thất bại')
+        throw new Error(data.error || (editId ? 'Cập nhật tài liệu thất bại' : 'Thêm tài liệu thất bại'))
       }
 
-      showToast('success', 'Đăng tải tài liệu thành công!')
+      showToast('success', editId ? 'Cập nhật tài liệu thành công!' : 'Đăng tải tài liệu thành công!')
       resetForm()
       fetchDocuments()
     } catch (err: any) {
@@ -181,7 +185,23 @@ export default function AdminDocumentsPage() {
     setCategoryId('')
     setIsVisible(true)
     setUploadedFile(null)
+    setEditId(null)
     setIsFormOpen(false)
+  }
+
+  const handleEdit = (doc: DocumentFile) => {
+    setEditId(doc.id)
+    setTitle(doc.title)
+    setDescription(doc.description || '')
+    setCategoryId(doc.category?.id || '')
+    setIsVisible(doc.isVisible)
+    setUploadedFile({
+      filePath: doc.filePath,
+      fileName: doc.fileName,
+      fileSize: doc.fileSize,
+      fileType: doc.fileType,
+    })
+    setIsFormOpen(true)
   }
 
   // Định nghĩa cột hiển thị trong bảng
@@ -232,6 +252,13 @@ export default function AdminDocumentsPage() {
             <Download size={14} />
           </a>
           <button
+            onClick={() => handleEdit(row)}
+            className="btn btn-ghost btn-icon btn-sm"
+            title="Sửa tài liệu"
+          >
+            <Pencil size={14} />
+          </button>
+          <button
             onClick={() => setDeleteId(row.id)}
             className="btn btn-ghost btn-icon btn-sm"
             style={{ color: 'var(--color-danger)' }}
@@ -258,7 +285,13 @@ export default function AdminDocumentsPage() {
           </p>
         </div>
         <button
-          onClick={() => setIsFormOpen(!isFormOpen)}
+          onClick={() => {
+            if (isFormOpen) {
+              resetForm()
+            } else {
+              setIsFormOpen(true)
+            }
+          }}
           className="btn btn-primary"
           style={{ gap: 'var(--space-2)' }}
         >
@@ -347,6 +380,8 @@ export default function AdminDocumentsPage() {
             <FileUpload
               type="document"
               subDir="documents"
+              value={uploadedFile?.filePath || ''}
+              fileName={uploadedFile?.fileName || ''}
               onUploadSuccess={(file) => setUploadedFile(file)}
               label="Kéo thả file PDF, Word, Excel hoặc click để chọn"
             />
@@ -357,7 +392,7 @@ export default function AdminDocumentsPage() {
               </button>
               <button type="submit" disabled={loading} className="btn btn-primary" style={{ gap: 'var(--space-2)' }}>
                 <Save size={16} />
-                Lưu tài liệu
+                {editId ? 'Cập nhật tài liệu' : 'Lưu tài liệu'}
               </button>
             </div>
           </div>

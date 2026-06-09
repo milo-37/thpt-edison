@@ -10,7 +10,7 @@ export default function ContactPage() {
   const contacts = [
     {
       title: 'Địa chỉ nhà trường',
-      value: 'Phân khu Aquabay, khu đô thị Ecopark, Văn Giang, Hưng Yên',
+      value: 'Số 937 Dương Tự Minh, Phan Đình Phùng, Thái Nguyên',
       icon: MapPin,
     },
     {
@@ -32,12 +32,12 @@ export default function ContactPage() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      
+
       {/* Banner đầu trang */}
       <section style={{ background: 'linear-gradient(135deg, var(--color-navy-dark), var(--color-navy))', color: 'var(--color-white)', padding: 'var(--space-12) 0', textAlign: 'center' }}>
         <div className="container">
           <h1 style={{ fontSize: 'var(--font-size-4xl)', fontWeight: 800, margin: 0, color: 'var(--color-gold)' }}>
-            Liên Hệ Với Chúng Tôi
+            Liên hệ với chúng tôi
           </h1>
           <p style={{ opacity: 0.8, fontSize: 'var(--font-size-base)', marginTop: 'var(--space-2)' }}>
             Giải đáp mọi câu hỏi, ý kiến đóng góp của phụ huynh và học sinh nhanh chóng nhất
@@ -48,13 +48,13 @@ export default function ContactPage() {
       {/* Thông tin và Form liên hệ */}
       <section className="section">
         <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-12)' }}>
-          
+
           {/* Cột trái: Các thẻ liên hệ */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
             <div>
               <span className="section-label">Liên kết nhanh</span>
               <h2 style={{ fontSize: 'var(--font-size-3xl)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: 'var(--space-2)' }}>
-                Thông Tin Chi Tiết
+                Thông tin chi tiết
               </h2>
               <p style={{ color: 'var(--color-gray-500)', fontSize: 'var(--font-size-sm)', margin: 0 }}>
                 Bạn có thể liên hệ trực tiếp với chúng tôi qua các kênh bên dưới hoặc điền vào biểu mẫu bên phải để chúng tôi liên hệ lại.

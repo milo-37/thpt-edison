@@ -30,7 +30,7 @@ export default async function FaqsPage() {
       >
         <div className="container">
           <h1 style={{ fontSize: 'var(--font-size-4xl)', fontWeight: 800, margin: 0, color: 'var(--color-gold)' }}>
-            Hỏi Đáp Thường Gặp (FAQ)
+            Hỏi đáp thường gặp (FAQ)
           </h1>
           <p style={{ opacity: 0.8, fontSize: 'var(--font-size-base)', marginTop: 'var(--space-2)', maxWidth: '600px', margin: 'var(--space-2) auto 0 auto' }}>
             Giải đáp nhanh các thắc mắc phổ biến về tuyển sinh, đào tạo, học phí và đời sống học sinh.

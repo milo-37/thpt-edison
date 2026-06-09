@@ -69,7 +69,7 @@ export default async function NewsPage(props: PageProps) {
         {/* Header trang */}
         <div style={{ textAlign: 'center', marginBottom: 'var(--space-8)' }}>
           <span className="section-label">Tin mới cập nhật</span>
-          <h1 className="section-title">Tin Tức & Sự Kiện</h1>
+          <h1 className="section-title">Tin tức & sự kiện</h1>
         </div>
 
         {/* Thanh lọc & tìm kiếm */}

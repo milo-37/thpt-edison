@@ -40,7 +40,7 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
   const currentSlide = activeSlides[currentIndex]
 
   return (
-    <section className="hero-section-2026" style={{ minHeight: '100vh', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', paddingTop: '80px', background: 'linear-gradient(135deg, rgba(10, 75, 175, 0.08) 0%, rgba(59, 130, 246, 0.05) 50%, #FFFFFF 100%)' }}>
+    <section className="hero-section-2026" style={{ minHeight: '100vh', position: 'relative', overflow: 'hidden', display: 'flex', alignItems: 'center', paddingTop: '80px', background: 'linear-gradient(135deg, rgba(10, 75, 175, 0.08) 0%, rgba(59, 130, 246, 0.05) 50%, var(--color-white) 100%)' }}>
       
       {/* Dynamic styles for floating animations and 3D effects */}
       <style jsx global>{`
@@ -138,14 +138,63 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
                 animationFillMode: 'backwards'
               }}
             >
-              <Link href="/tuyen-sinh" className="btn btn-gold btn-lg" style={{ padding: '14px 28px' }}>
-                Khám Phá Ngay
-                <ArrowRight size={18} />
-              </Link>
-              <Link href={currentSlide.linkUrl || "/tin-tuc"} className="btn btn-outline btn-lg" style={{ padding: '14px 28px', border: '2px solid var(--color-primary)', color: 'var(--color-primary)' }}>
-                <Calendar size={18} />
-                Lịch Tuyển Sinh
-              </Link>
+              {(() => {
+                const linkUrl = currentSlide.linkUrl || '/gioi-thieu';
+                
+                // Case 1: Slide about Admission (Tuyển sinh)
+                if (linkUrl.includes('/tuyen-sinh')) {
+                  return (
+                    <>
+                      <Link href="/tuyen-sinh" className="btn btn-gold btn-lg" style={{ padding: '14px 28px' }}>
+                        Khám Phá Ngay
+                        <ArrowRight size={18} />
+                      </Link>
+                      <Link href="/tuyen-sinh" className="btn btn-outline btn-lg" style={{ padding: '14px 28px', border: '2px solid var(--color-primary)', color: 'var(--color-primary)' }}>
+                        <Calendar size={18} />
+                        Lịch Tuyển Sinh
+                      </Link>
+                    </>
+                  );
+                }
+                
+                // Case 2: Slide about Achievements (Thành tích)
+                if (linkUrl.includes('/thanh-tich')) {
+                  return (
+                    <>
+                      <Link href="/thanh-tich" className="btn btn-gold btn-lg" style={{ padding: '14px 28px' }}>
+                        Xem Thành Tích
+                        <ArrowRight size={18} />
+                      </Link>
+                    </>
+                  );
+                }
+                
+                // Case 3: Slide about Introduction (Giới thiệu)
+                if (linkUrl.includes('/gioi-thieu')) {
+                  return (
+                    <>
+                      <Link href="/gioi-thieu" className="btn btn-gold btn-lg" style={{ padding: '14px 28px' }}>
+                        Khám Phá Ngay
+                        <ArrowRight size={18} />
+                      </Link>
+                      <Link href="/tuyen-sinh" className="btn btn-outline btn-lg" style={{ padding: '14px 28px', border: '2px solid var(--color-primary)', color: 'var(--color-primary)' }}>
+                        <Calendar size={18} />
+                        Tuyển Sinh
+                      </Link>
+                    </>
+                  );
+                }
+                
+                // Default Case for any other slide (e.g. custom link)
+                return (
+                  <>
+                    <Link href={linkUrl} className="btn btn-gold btn-lg" style={{ padding: '14px 28px' }}>
+                      Khám Phá Ngay
+                      <ArrowRight size={18} />
+                    </Link>
+                  </>
+                );
+              })()}
             </div>
 
             {/* Carousel Controls */}
@@ -207,8 +256,8 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
                 aspectRatio: '4/3',
                 borderRadius: '32px',
                 padding: '12px',
-                background: 'rgba(255, 255, 255, 0.45)',
-                border: '1px solid rgba(255, 255, 255, 0.6)',
+                background: 'var(--glass-bg)',
+                border: 'var(--glass-border)',
                 backdropFilter: 'blur(10px)',
                 boxShadow: '0 30px 60px rgba(15, 23, 42, 0.15)',
                 zIndex: 1,

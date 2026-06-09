@@ -50,6 +50,62 @@ export async function PATCH(
   }
 }
 
+// PUT: Cập nhật toàn bộ thông tin tài liệu
+export async function PUT(
+  request: NextRequest,
+  props: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await props.params
+    const user = await verifyAuth(request)
+    if (!user || !requireRole(user, ['admin', 'editor'])) {
+      return NextResponse.json({ error: 'Không có quyền thực hiện' }, { status: 403 })
+    }
+
+    const body = await request.json()
+    const { title, description, categoryId, isVisible, filePath, fileName, fileSize, fileType } = body
+
+    if (!title) {
+      return NextResponse.json({ error: 'Tiêu đề tài liệu không được để trống' }, { status: 400 })
+    }
+
+    const updateData: any = {
+      title,
+      description,
+      categoryId: categoryId || null,
+      isVisible: isVisible !== undefined ? !!isVisible : undefined,
+    }
+
+    if (filePath) {
+      updateData.filePath = filePath
+      updateData.fileName = fileName
+      updateData.fileSize = fileSize
+      updateData.fileType = fileType
+    }
+
+    const document = await prisma.document.update({
+      where: { id },
+      data: updateData,
+    })
+
+    // Log hoạt động
+    await prisma.activityLog.create({
+      data: {
+        action: 'update',
+        entity: 'document',
+        entityId: id,
+        details: `Người dùng ${user.name} cập nhật tài liệu "${document.title}"`,
+        userId: user.id,
+      },
+    })
+
+    return NextResponse.json({ success: true, document })
+  } catch (error) {
+    console.error('Put document error:', error)
+    return NextResponse.json({ error: 'Lỗi hệ thống' }, { status: 500 })
+  }
+}
+
 // DELETE: Xóa tài liệu
 export async function DELETE(
   request: NextRequest,

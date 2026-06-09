@@ -65,6 +65,7 @@ export default function Sidebar() {
     { label: 'Bài viết', href: '/admin/posts', icon: FileText, roles: ['admin', 'editor', 'reviewer'] },
     { label: 'Danh mục', href: '/admin/categories', icon: FolderOpen, roles: ['admin', 'editor'] },
     { label: 'Slideshow', href: '/admin/slides', icon: SlidersHorizontal, roles: ['admin', 'editor'] },
+    { label: 'Ý kiến phụ huynh', href: '/admin/testimonials', icon: MessageSquare, roles: ['admin', 'editor'] },
     { label: 'Giới thiệu & GV', href: '/admin/about', icon: Info, roles: ['admin', 'editor'] },
     { label: 'Thành tích', href: '/admin/achievements', icon: Award, roles: ['admin', 'editor'] },
     { label: 'Hỏi đáp FAQ', href: '/admin/faqs', icon: HelpCircle, roles: ['admin', 'editor'] },

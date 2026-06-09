@@ -121,7 +121,7 @@ export default function Header({ settings }: HeaderProps) {
     { label: 'Giới thiệu', href: '/gioi-thieu' },
     { label: 'Tin tức', href: '/tin-tuc' },
     { label: 'Hoạt động', href: '/hoat-dong?tab=calendar' },
-    { label: 'Thư viện', href: '/hoat-dong?tab=gallery' },
+    { label: 'Thư viện', href: '/tai-lieu' },
     { label: 'Tuyển sinh', href: '/tuyen-sinh' },
     { label: 'Liên hệ', href: '/lien-he' },
   ]
@@ -160,8 +160,7 @@ export default function Header({ settings }: HeaderProps) {
             if (item.href === '/') {
               isActive = pathname === '/'
             } else if (baseHref === '/hoat-dong') {
-              // So sánh chính xác tab hoạt động
-              isActive = pathname === '/hoat-dong' && (currentTab === queryTab || (!currentTab && queryTab === 'calendar'))
+              isActive = pathname === '/hoat-dong'
             } else {
               isActive = pathname === baseHref || pathname.startsWith(baseHref + '/')
             }
@@ -264,7 +263,7 @@ export default function Header({ settings }: HeaderProps) {
           if (item.href === '/') {
             isActive = pathname === '/'
           } else if (baseHref === '/hoat-dong') {
-            isActive = pathname === '/hoat-dong' && (currentTab === queryTab || (!currentTab && queryTab === 'calendar'))
+            isActive = pathname === '/hoat-dong'
           } else {
             isActive = pathname === baseHref || pathname.startsWith(baseHref + '/')
           }

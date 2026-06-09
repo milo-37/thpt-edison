@@ -90,7 +90,7 @@ export default function AdmissionPage() {
       <section style={{ background: 'linear-gradient(135deg, var(--color-navy-dark), var(--color-navy))', color: 'var(--color-white)', padding: 'var(--space-12) 0', textAlign: 'center' }}>
         <div className="container">
           <h1 style={{ fontSize: 'var(--font-size-4xl)', fontWeight: 800, margin: 0, color: 'var(--color-gold)' }}>
-            Thông Tin Tuyển Sinh
+            Thông tin tuyển sinh
           </h1>
           <p style={{ opacity: 0.8, fontSize: 'var(--font-size-base)', marginTop: 'var(--space-2)' }}>
             Thông báo tuyển sinh lớp 10 Trường THPT Edison năm học 2026 - 2027
@@ -109,7 +109,7 @@ export default function AdmissionPage() {
             <div style={{ background: 'var(--color-white)', padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-gray-200)', boxShadow: 'var(--shadow-sm)' }}>
               <h2 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-4)' }}>
                 <Award style={{ color: 'var(--color-gold)' }} />
-                Chỉ Tiêu & Đối Tượng Tuyển Sinh
+                Chỉ tiêu & đối tượng tuyển sinh
               </h2>
               <ul style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', color: 'var(--color-gray-600)', fontSize: 'var(--font-size-sm)' }}>
                 <li style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'flex-start' }}>
@@ -131,7 +131,7 @@ export default function AdmissionPage() {
             <div style={{ background: 'var(--color-white)', padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-gray-200)', boxShadow: 'var(--shadow-sm)' }}>
               <h2 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-4)' }}>
                 <FileText style={{ color: 'var(--color-gold)' }} />
-                Phương Thức Tuyển Sinh
+                Phương thức tuyển sinh
               </h2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
                 <div style={{ paddingLeft: 'var(--space-2)', borderLeft: '4px solid var(--color-primary)' }}>
@@ -153,7 +153,7 @@ export default function AdmissionPage() {
             <div style={{ background: 'var(--color-white)', padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-gray-200)', boxShadow: 'var(--shadow-sm)' }}>
               <h2 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-4)' }}>
                 <Calendar style={{ color: 'var(--color-gold)' }} />
-                Mốc Lịch Trình Quan Trọng
+                Mốc lịch trình quan trọng
               </h2>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
                 <div style={{ display: 'flex', gap: 'var(--space-4)', alignItems: 'center' }}>
@@ -189,7 +189,7 @@ export default function AdmissionPage() {
           <div>
             <form onSubmit={handleSubmit} style={{ background: 'var(--color-white)', padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-gray-200)', boxShadow: 'var(--shadow-md)', display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', position: 'sticky', top: '90px' }}>
               <h3 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 700, color: 'var(--color-navy)', borderBottom: '2px solid var(--color-gold)', paddingBottom: 'var(--space-2)', margin: 0 }}>
-                Đăng Ký Tư Vấn Học
+                Đăng ký tư vấn học
               </h3>
               <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-gray-400)', margin: 0 }}>
                 Vui lòng điền thông tin dưới đây. Ban tư vấn tuyển sinh THPT Edison sẽ gọi lại tư vấn chi tiết cho phụ huynh.
@@ -204,36 +204,36 @@ export default function AdmissionPage() {
 
               <div>
                 <label style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 600, color: 'var(--color-gray-600)', marginBottom: 'var(--space-1)' }}>Họ và tên Phụ huynh *</label>
-                <input type="text" name="name" value={formData.name} onChange={handleChange} required style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-200)', outline: 'none' }} placeholder="Nguyễn Văn A" />
+                <input type="text" name="name" value={formData.name} onChange={handleChange} required style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-200)', outline: 'none', background: 'var(--color-white)', color: 'var(--color-gray-900)' }} placeholder="Nguyễn Văn A" />
               </div>
 
               <div>
                 <label style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 600, color: 'var(--color-gray-600)', marginBottom: 'var(--space-1)' }}>Số điện thoại liên hệ *</label>
-                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-200)', outline: 'none' }} placeholder="0912345678" />
+                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-200)', outline: 'none', background: 'var(--color-white)', color: 'var(--color-gray-900)' }} placeholder="0912345678" />
               </div>
 
               <div>
                 <label style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 600, color: 'var(--color-gray-600)', marginBottom: 'var(--space-1)' }}>Địa chỉ Email *</label>
-                <input type="email" name="email" value={formData.email} onChange={handleChange} required style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-200)', outline: 'none' }} placeholder="example@gmail.com" />
+                <input type="email" name="email" value={formData.email} onChange={handleChange} required style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-200)', outline: 'none', background: 'var(--color-white)', color: 'var(--color-gray-900)' }} placeholder="example@gmail.com" />
               </div>
 
               <div>
                 <label style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 600, color: 'var(--color-gray-600)', marginBottom: 'var(--space-1)' }}>Khối lớp dự tuyển *</label>
-                <select name="studentClass" value={formData.studentClass} onChange={handleChange} style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-200)', outline: 'none', background: 'var(--color-white)' }}>
-                  <option value="lop10">Dự tuyển vào lớp 10</option>
-                  <option value="lop11">Dự tuyển chuyển trường lớp 11</option>
-                  <option value="lop12">Dự tuyển chuyển trường lớp 12</option>
+                <select name="studentClass" value={formData.studentClass} onChange={handleChange} style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-200)', outline: 'none', background: 'var(--color-white)', color: 'var(--color-gray-900)' }}>
+                  <option value="lop10" style={{ background: 'var(--color-white)', color: 'var(--color-gray-900)' }}>Dự tuyển vào lớp 10</option>
+                  <option value="lop11" style={{ background: 'var(--color-white)', color: 'var(--color-gray-900)' }}>Dự tuyển chuyển trường lớp 11</option>
+                  <option value="lop12" style={{ background: 'var(--color-white)', color: 'var(--color-gray-900)' }}>Dự tuyển chuyển trường lớp 12</option>
                 </select>
               </div>
 
               <div>
                 <label style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 600, color: 'var(--color-gray-600)', marginBottom: 'var(--space-1)' }}>Câu hỏi của phụ huynh (nếu có)</label>
-                <textarea name="message" value={formData.message} onChange={handleChange} rows={3} style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-200)', outline: 'none', resize: 'vertical' }} placeholder="Nhập câu hỏi của bạn tại đây..." />
+                <textarea name="message" value={formData.message} onChange={handleChange} rows={3} style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-200)', outline: 'none', resize: 'vertical', background: 'var(--color-white)', color: 'var(--color-gray-900)' }} placeholder="Nhập câu hỏi của bạn tại đây..." />
               </div>
 
               <button type="submit" disabled={loading} className="btn btn-primary" style={{ width: '100%', gap: 'var(--space-2)', marginTop: 'var(--space-2)' }}>
                 <Send size={16} />
-                {loading ? 'Đang gửi đăng ký...' : 'Gửi Đăng Ký Tư Vấn'}
+                {loading ? 'Đang gửi đăng ký...' : 'Gửi đăng ký tư vấn'}
               </button>
             </form>
           </div>

@@ -155,7 +155,7 @@ export default async function ActivityPage(props: PageProps) {
         
         <div style={{ textAlign: 'center', marginBottom: 'var(--space-10)' }}>
           <span className="section-label">Kho lưu giữ khoảnh khắc & Lịch trình</span>
-          <h1 className="section-title">Hoạt Động & Sự Kiện Học Sinh</h1>
+          <h1 className="section-title">Hoạt động & sự kiện học sinh</h1>
           <p className="section-desc">
             Hình ảnh các hoạt động thú vị và lịch trình chi tiết các hoạt động học tập, sự kiện ngoại khóa của Trường THPT Edison.
           </p>

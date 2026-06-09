@@ -71,21 +71,22 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
           style={{
             padding: '14px 18px 14px 48px',
             borderRadius: '16px',
-            border: '1px solid rgba(10, 75, 175, 0.15)',
+            border: '1px solid var(--color-gray-200)',
             outline: 'none',
             fontSize: 'var(--font-size-sm)',
             boxShadow: 'var(--shadow-sm)',
-            background: 'rgba(255, 255, 255, 0.8)',
+            background: 'var(--glass-bg)',
+            color: 'var(--color-gray-900)',
             backdropFilter: 'blur(10px)',
             width: '100%',
             transition: 'all var(--transition-base)'
           }}
           onFocus={(e) => {
             e.target.style.borderColor = 'var(--color-primary)'
-            e.target.style.boxShadow = '0 0 0 4px rgba(10, 75, 175, 0.1), var(--shadow-md)'
+            e.target.style.boxShadow = '0 0 0 4px rgba(56, 189, 248, 0.15), var(--shadow-md)'
           }}
           onBlur={(e) => {
-            e.target.style.borderColor = 'rgba(10, 75, 175, 0.15)'
+            e.target.style.borderColor = 'var(--color-gray-200)'
             e.target.style.boxShadow = 'var(--shadow-sm)'
           }}
         />
@@ -158,9 +159,9 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
                 key={item.id}
                 className="glass-card"
                 style={{
-                  background: isExpanded ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.7)',
+                  background: 'var(--glass-bg)',
                   borderRadius: '24px',
-                  border: isExpanded ? '1px solid rgba(10, 75, 175, 0.25)' : '1px solid rgba(15, 23, 42, 0.06)',
+                  border: isExpanded ? '1px solid var(--color-primary)' : 'var(--glass-border)',
                   boxShadow: isExpanded ? 'var(--shadow-md), var(--shadow-glow)' : 'var(--shadow-sm)',
                   overflow: 'hidden',
                   transition: 'all var(--transition-spring)',
@@ -196,7 +197,7 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
                       style={{ 
                         fontSize: 'var(--font-size-base)', 
                         fontWeight: 700, 
-                        color: isExpanded ? 'var(--color-navy-dark)' : 'var(--color-navy)',
+                        color: isExpanded ? 'var(--color-primary)' : 'var(--color-navy)',
                         transition: 'color 0.3s ease',
                         fontFamily: 'var(--font-title)'
                       }}
@@ -240,9 +241,9 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
                     style={{ 
                       padding: '0 24px 24px 60px',
                       fontSize: 'var(--font-size-sm)',
-                      color: 'var(--color-gray-600)',
+                      color: 'var(--color-gray-700)',
                       lineHeight: 1.7,
-                      borderTop: '1px solid rgba(15, 23, 42, 0.05)',
+                      borderTop: 'var(--glass-border)',
                       paddingTop: '16px',
                       whiteSpace: 'pre-line'
                     }}

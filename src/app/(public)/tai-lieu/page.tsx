@@ -57,6 +57,13 @@ export default async function DocumentsPage(props: PageProps) {
     }),
     prisma.document.count({ where }),
     prisma.category.findMany({
+      where: {
+        documents: {
+          some: {
+            isVisible: true,
+          },
+        },
+      },
       orderBy: { order: 'asc' },
     }),
   ])
@@ -70,7 +77,7 @@ export default async function DocumentsPage(props: PageProps) {
         {/* Header trang */}
         <div style={{ textAlign: 'center', marginBottom: 'var(--space-10)' }}>
           <span className="section-label">Kho tài liệu số</span>
-          <h1 className="section-title">Tài Liệu Học Tập & Biểu Mẫu</h1>
+          <h1 className="section-title">Tài liệu học tập & biểu mẫu</h1>
           <p className="section-desc">
             Nơi chia sẻ đề cương ôn tập, tài liệu học tập, công văn hướng dẫn và các biểu mẫu học chính thức cho học sinh và giáo viên.
           </p>

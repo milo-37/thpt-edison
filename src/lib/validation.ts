@@ -3,18 +3,91 @@
  */
 
 // Sanitize HTML để chống XSS
+// Cho phép iframe từ các nguồn đáng tin cậy (YouTube, Google Drive, nội bộ)
 export function sanitizeHtml(html: string): string {
-  // Loại bỏ các thẻ script, iframe, object, embed, form
-  const dangerousTags = /<\s*(script|iframe|object|embed|form|meta|link|style|base)[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi
-  const selfClosingDangerous = /<\s*(script|iframe|object|embed|form|meta|link|base)[^>]*\/?>/gi
+  // Danh sách domain được phép sử dụng iframe
+  const trustedIframeDomains = [
+    'youtube.com',
+    'youtube-nocookie.com',
+    'www.youtube.com',
+    'www.youtube-nocookie.com',
+    'drive.google.com',
+    'docs.google.com',
+  ]
+
+  // Bước 1: Tạm thời bảo vệ các iframe đáng tin cậy bằng placeholder
+  const iframePlaceholders: string[] = []
+  let protectedHtml = html.replace(
+    /<iframe\b[^>]*>[\s\S]*?<\/iframe>/gi,
+    (match) => {
+      // Trích xuất src từ thẻ iframe
+      const srcMatch = match.match(/src\s*=\s*["']([^"']+)["']/i)
+      if (srcMatch) {
+        const src = srcMatch[1]
+        // Kiểm tra URL nội bộ (/uploads/...)
+        const isInternalUpload = src.startsWith('/uploads/')
+        // Kiểm tra domain tin cậy
+        const isTrustedDomain = trustedIframeDomains.some((domain) => {
+          try {
+            const url = new URL(src)
+            return url.hostname === domain || url.hostname.endsWith('.' + domain)
+          } catch {
+            return false
+          }
+        })
+
+        if (isInternalUpload || isTrustedDomain) {
+          const placeholderIndex = iframePlaceholders.length
+          iframePlaceholders.push(match)
+          return `__SAFE_IFRAME_${placeholderIndex}__`
+        }
+      }
+      return '' // Loại bỏ iframe không đáng tin cậy
+    }
+  )
+
+  // Bước 2: Cũng bảo vệ các iframe tự đóng (self-closing) đáng tin cậy
+  protectedHtml = protectedHtml.replace(
+    /<iframe\b[^>]*\/?\s*>/gi,
+    (match) => {
+      const srcMatch = match.match(/src\s*=\s*["']([^"']+)["']/i)
+      if (srcMatch) {
+        const src = srcMatch[1]
+        const isInternalUpload = src.startsWith('/uploads/')
+        const isTrustedDomain = trustedIframeDomains.some((domain) => {
+          try {
+            const url = new URL(src)
+            return url.hostname === domain || url.hostname.endsWith('.' + domain)
+          } catch {
+            return false
+          }
+        })
+        if (isInternalUpload || isTrustedDomain) {
+          const placeholderIndex = iframePlaceholders.length
+          iframePlaceholders.push(match)
+          return `__SAFE_IFRAME_${placeholderIndex}__`
+        }
+      }
+      return '' // Loại bỏ iframe không đáng tin cậy
+    }
+  )
+
+  // Bước 3: Loại bỏ các thẻ nguy hiểm còn lại (script, object, embed, form, v.v.)
+  const dangerousTags = /<\s*(script|object|embed|form|meta|link|style|base)[^>]*>[\s\S]*?<\s*\/\s*\1\s*>/gi
+  const selfClosingDangerous = /<\s*(script|object|embed|form|meta|link|base)[^>]*\/?>/gi
   const eventHandlers = /\s*on\w+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/gi
   const jsUrls = /javascript\s*:/gi
 
-  let clean = html
+  let clean = protectedHtml
     .replace(dangerousTags, '')
     .replace(selfClosingDangerous, '')
     .replace(eventHandlers, '')
     .replace(jsUrls, '')
+
+  // Bước 4: Khôi phục các iframe đáng tin cậy từ placeholder
+  iframePlaceholders.forEach((iframe, index) => {
+    clean = clean.replace(`__SAFE_IFRAME_${index}__`, iframe)
+  })
 
   return clean
 }

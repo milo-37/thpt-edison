@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Upload, X, FileText, CheckCircle2, AlertCircle } from 'lucide-react'
 import { formatFileSize, getFileIcon } from '@/lib/validation'
 
@@ -9,6 +9,7 @@ interface FileUploadProps {
   type: 'image' | 'document'
   subDir: 'images' | 'documents' | 'thumbnails'
   value?: string // URL file hiện tại nếu có
+  fileName?: string // Tên file gốc hiện tại nếu có
   label?: string
 }
 
@@ -17,13 +18,26 @@ export default function FileUpload({
   type,
   subDir,
   value = '',
+  fileName = '',
   label = 'Kéo thả tệp tin hoặc click để chọn tệp',
 }: FileUploadProps) {
   const [dragActive, setDragActive] = useState(false)
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState('')
   const [currentFileUrl, setCurrentFileUrl] = useState(value)
+  const [currentFileName, setCurrentFileName] = useState(fileName)
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    setCurrentFileUrl(value)
+    if (!value) {
+      setCurrentFileName('')
+    }
+  }, [value])
+
+  useEffect(() => {
+    setCurrentFileName(fileName)
+  }, [fileName])
 
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault()
@@ -58,6 +72,7 @@ export default function FileUpload({
 
       const uploaded = data.file
       setCurrentFileUrl(uploaded.filePath)
+      setCurrentFileName(uploaded.fileName)
       onUploadSuccess(uploaded)
     } catch (err: any) {
       console.error(err)
@@ -90,6 +105,7 @@ export default function FileUpload({
 
   const handleRemoveFile = () => {
     setCurrentFileUrl('')
+    setCurrentFileName('')
     onUploadSuccess({ filePath: '', fileName: '', fileSize: 0, fileType: '' })
   }
 
@@ -164,7 +180,7 @@ export default function FileUpload({
             )}
             <div style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
               <span style={{ fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-800)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                {currentFileUrl.substring(currentFileUrl.lastIndexOf('/') + 1)}
+                {currentFileName || currentFileUrl.substring(currentFileUrl.lastIndexOf('/') + 1)}
               </span>
               <span style={{ fontSize: '11px', color: 'var(--color-success-dark)', display: 'flex', alignItems: 'center', gap: '4px' }}>
                 <CheckCircle2 size={12} />

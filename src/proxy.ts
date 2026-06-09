@@ -71,7 +71,16 @@ export async function proxy(request: NextRequest) {
       (pathname.startsWith('/api/posts/') && request.method === 'GET') || // Đọc chi tiết tin tức
       (pathname === '/api/documents' && request.method === 'GET') || // Xem tài liệu công khai
       (pathname === '/api/gallery' && request.method === 'GET') || // Xem album công khai
-      (pathname === '/api/events' && request.method === 'GET') // Xem lịch sự kiện công khai
+      (pathname === '/api/events' && request.method === 'GET') || // Xem lịch sự kiện công khai
+      (pathname === '/api/testimonials' && request.method === 'GET') || // Đánh giá phụ huynh công khai
+      (pathname === '/api/slides' && request.method === 'GET') || // Slideshow trang chủ
+      (pathname === '/api/achievements' && request.method === 'GET') || // Thành tích công khai
+      (pathname === '/api/faqs' && request.method === 'GET') || // Hỏi đáp công khai
+      (pathname === '/api/settings' && request.method === 'GET') || // Cài đặt hệ thống (tên trường, logo...)
+      (pathname === '/api/leaders' && request.method === 'GET') || // Ban giám hiệu công khai
+      (pathname === '/api/teachers' && request.method === 'GET') || // Giáo viên công khai
+      (pathname === '/api/search' && request.method === 'GET') || // Tìm kiếm công khai
+      (pathname === '/api/subscribers' && request.method === 'POST') // Đăng ký nhận tin
 
     if (!isPublicApi && !user) {
       return NextResponse.json(

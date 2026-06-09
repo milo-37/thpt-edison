@@ -68,11 +68,11 @@ export default function ContactForm() {
       onSubmit={handleSubmit} 
       className="glass-card" 
       style={{ 
-        background: 'rgba(255, 255, 255, 0.85)', 
+        background: 'var(--glass-bg)', 
         backdropFilter: 'blur(20px)',
         padding: 'var(--space-8)', 
         borderRadius: 'var(--radius-xl)', 
-        border: '1px solid rgba(15, 23, 42, 0.06)', 
+        border: 'var(--glass-border)', 
         boxShadow: 'var(--shadow-lg)', 
         display: 'flex', 
         flexDirection: 'column', 
@@ -105,7 +105,7 @@ export default function ContactForm() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-4)' }}>
         <div>
-          <label htmlFor="name" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-600)', marginBottom: '6px' }}>
+          <label htmlFor="name" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-700)', marginBottom: '6px' }}>
             Họ và tên *
           </label>
           <input
@@ -138,7 +138,7 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="phone" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-600)', marginBottom: '6px' }}>
+          <label htmlFor="phone" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-700)', marginBottom: '6px' }}>
             Số điện thoại
           </label>
           <input
@@ -171,7 +171,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="email" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-600)', marginBottom: '6px' }}>
+        <label htmlFor="email" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-700)', marginBottom: '6px' }}>
           Địa chỉ Email *
         </label>
         <input
@@ -204,7 +204,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="subject" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-600)', marginBottom: '6px' }}>
+        <label htmlFor="subject" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-700)', marginBottom: '6px' }}>
           Tiêu đề *
         </label>
         <input
@@ -237,7 +237,7 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label htmlFor="message" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-600)', marginBottom: '6px' }}>
+        <label htmlFor="message" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-700)', marginBottom: '6px' }}>
           Nội dung liên hệ *
         </label>
         <textarea

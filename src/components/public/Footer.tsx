@@ -94,7 +94,7 @@ export default function Footer({ settings }: FooterProps) {
         {/* Cột 2: Liên kết nhanh */}
         <div>
           <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 800, color: 'var(--color-white)', marginBottom: 'var(--space-6)', position: 'relative', paddingBottom: 'var(--space-2)', fontFamily: 'var(--font-title)' }}>
-            Liên Kết Nhanh
+            Liên kết nhanh
             <span style={{ position: 'absolute', bottom: 0, left: 0, width: '40px', height: '3px', background: 'var(--color-gold)', borderRadius: 'var(--radius-full)' }} />
           </h3>
           <ul className="footer-links" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
@@ -122,7 +122,7 @@ export default function Footer({ settings }: FooterProps) {
         {/* Cột 3: Tuyển sinh */}
         <div>
           <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 800, color: 'var(--color-white)', marginBottom: 'var(--space-6)', position: 'relative', paddingBottom: 'var(--space-2)', fontFamily: 'var(--font-title)' }}>
-            Tuyển Sinh & Học Vụ
+            Tuyển sinh & học vụ
             <span style={{ position: 'absolute', bottom: 0, left: 0, width: '40px', height: '3px', background: 'var(--color-gold)', borderRadius: 'var(--radius-full)' }} />
           </h3>
           <ul className="footer-links" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
@@ -152,7 +152,7 @@ export default function Footer({ settings }: FooterProps) {
         {/* Cột 4: Liên hệ & Đăng ký nhận tin */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
           <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 800, color: 'var(--color-white)', position: 'relative', paddingBottom: 'var(--space-2)', fontFamily: 'var(--font-title)', margin: 0 }}>
-            Liên Hệ Với Chúng Tôi
+            Liên hệ với chúng tôi
             <span style={{ position: 'absolute', bottom: 0, left: 0, width: '40px', height: '3px', background: 'var(--color-gold)', borderRadius: 'var(--radius-full)' }} />
           </h3>
           <ul style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', color: 'var(--color-gray-400)', fontSize: 'var(--font-size-sm)', padding: 0 }}>

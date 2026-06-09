@@ -222,7 +222,9 @@ export default function ChatWidget() {
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              style={{ background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.8)', cursor: 'pointer', padding: '4px' }}
+              style={{ background: 'transparent', border: 'none', color: 'inherit', cursor: 'pointer', padding: '4px', opacity: 0.8, transition: 'opacity 0.2s' }}
+              onMouseEnter={(e) => { e.currentTarget.style.opacity = '1' }}
+              onMouseLeave={(e) => { e.currentTarget.style.opacity = '0.8' }}
             >
               <X size={20} />
             </button>
@@ -311,7 +313,7 @@ export default function ChatWidget() {
                       required 
                       value={contactName} 
                       onChange={e => setContactName(e.target.value)} 
-                      style={{ padding: '6px 8px', fontSize: '11px', border: '1px solid var(--color-gray-300)', borderRadius: 'var(--radius-sm)', outline: 'none' }}
+                      style={{ padding: '6px 8px', fontSize: '11px', border: '1px solid var(--color-gray-300)', borderRadius: 'var(--radius-sm)', outline: 'none', background: 'var(--color-white)', color: 'var(--color-gray-900)' }}
                     />
                     <input 
                       type="email" 
@@ -319,14 +321,14 @@ export default function ChatWidget() {
                       required 
                       value={contactEmail} 
                       onChange={e => setContactEmail(e.target.value)} 
-                      style={{ padding: '6px 8px', fontSize: '11px', border: '1px solid var(--color-gray-300)', borderRadius: 'var(--radius-sm)', outline: 'none' }}
+                      style={{ padding: '6px 8px', fontSize: '11px', border: '1px solid var(--color-gray-300)', borderRadius: 'var(--radius-sm)', outline: 'none', background: 'var(--color-white)', color: 'var(--color-gray-900)' }}
                     />
                     <input 
                       type="tel" 
                       placeholder="Số điện thoại" 
                       value={contactPhone} 
                       onChange={e => setContactPhone(e.target.value)} 
-                      style={{ padding: '6px 8px', fontSize: '11px', border: '1px solid var(--color-gray-300)', borderRadius: 'var(--radius-sm)', outline: 'none' }}
+                      style={{ padding: '6px 8px', fontSize: '11px', border: '1px solid var(--color-gray-300)', borderRadius: 'var(--radius-sm)', outline: 'none', background: 'var(--color-white)', color: 'var(--color-gray-900)' }}
                     />
                     <textarea 
                       placeholder="Nội dung cần hỗ trợ... *" 
@@ -334,7 +336,7 @@ export default function ChatWidget() {
                       rows={2} 
                       value={contactMsg} 
                       onChange={e => setContactMsg(e.target.value)} 
-                      style={{ padding: '6px 8px', fontSize: '11px', border: '1px solid var(--color-gray-300)', borderRadius: 'var(--radius-sm)', outline: 'none', resize: 'vertical' }}
+                      style={{ padding: '6px 8px', fontSize: '11px', border: '1px solid var(--color-gray-300)', borderRadius: 'var(--radius-sm)', outline: 'none', resize: 'vertical', background: 'var(--color-white)', color: 'var(--color-gray-900)' }}
                     />
                     {submitError && <span style={{ fontSize: '10px', color: 'var(--color-danger)' }}>{submitError}</span>}
                     <button 
@@ -368,7 +370,7 @@ export default function ChatWidget() {
             {/* Suggested FAQ Questions */}
             {faqs.length > 0 && !showContactForm && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                <span style={{ fontSize: '9px', fontWeight: 700, color: 'var(--color-gray-400)', textTransform: 'uppercase', marginBottom: '2px', display: 'flex', alignItems: 'center', gap: '2px' }}>
+                <span style={{ fontSize: '9px', fontWeight: 700, color: 'var(--color-gray-500)', textTransform: 'uppercase', marginBottom: '2px', display: 'flex', alignItems: 'center', gap: '2px' }}>
                   <HelpCircle size={10} /> Câu hỏi thường gặp:
                 </span>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '120px', overflowY: 'auto', paddingRight: '4px', scrollbarWidth: 'thin' }}>
@@ -379,11 +381,11 @@ export default function ChatWidget() {
                       style={{
                         textAlign: 'left',
                         padding: '8px 12px',
-                        background: 'var(--color-gray-50)',
+                        background: 'var(--color-gray-100)',
                         border: '1px solid var(--color-gray-200)',
                         borderRadius: 'var(--radius-md)',
                         fontSize: '11px',
-                        color: 'var(--color-navy-light)',
+                        color: 'var(--color-navy)',
                         cursor: 'pointer',
                         fontWeight: 600,
                         transition: 'all 0.2s',
@@ -392,8 +394,8 @@ export default function ChatWidget() {
                         whiteSpace: 'nowrap',
                         flexShrink: 0
                       }}
-                      onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(255, 109, 0, 0.08)' }}
-                      onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--color-gray-50)' }}
+                      onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--color-gray-200)' }}
+                      onMouseLeave={(e) => { e.currentTarget.style.background = 'var(--color-gray-100)' }}
                     >
                       {faq.question}
                     </button>

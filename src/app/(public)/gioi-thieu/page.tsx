@@ -64,7 +64,7 @@ export default async function AboutPage() {
       >
         <div className="container">
           <h1 style={{ fontSize: 'var(--font-size-4xl)', fontWeight: 800, margin: 0, color: 'var(--color-gold)' }}>
-            Giới Thiệu Nhà Trường
+            Giới thiệu nhà trường
           </h1>
           <p style={{ opacity: 0.8, fontSize: 'var(--font-size-base)', marginTop: 'var(--space-2)', maxWidth: '600px', margin: 'var(--space-2) auto 0 auto' }}>
             Trường THPT Edison - Khát vọng, Sáng tạo và Bản lĩnh dẫn đầu.
@@ -78,7 +78,7 @@ export default async function AboutPage() {
           <div>
             <span className="section-label">Hành trình phát triển</span>
             <h2 style={{ fontSize: 'var(--font-size-3xl)', fontWeight: 800, color: 'var(--color-navy)', marginBottom: 'var(--space-4)', marginTop: 'var(--space-2)' }}>
-              Lịch Sử Hình Thành
+              Lịch sử hình thành
             </h2>
             <p style={{ color: 'var(--color-gray-600)', marginBottom: 'var(--space-3)', lineHeight: 1.6 }}>
               Được thành lập từ năm 2015, Trường THPT Edison tọa lạc tại khu đô thị hiện đại với quy mô ban đầu chỉ gồm vài lớp học. Trải qua hơn một thập kỷ xây dựng và trưởng thành, nhà trường đã vươn lên thành một trong những điểm sáng của giáo dục phổ thông.
@@ -112,7 +112,7 @@ export default async function AboutPage() {
         <div className="container">
           <div className="section-header">
             <span className="section-label">Định hướng tương lai</span>
-            <h2 className="section-title">Tầm Nhìn & Sứ Mệnh</h2>
+            <h2 className="section-title">Tầm nhìn & sứ mệnh</h2>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--space-8)' }}>
@@ -165,7 +165,7 @@ export default async function AboutPage() {
         <div className="container">
           <div className="section-header">
             <span className="section-label">Đội ngũ đầu tàu</span>
-            <h2 className="section-title">Ban Giám Hiệu</h2>
+            <h2 className="section-title">Ban giám hiệu</h2>
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'var(--space-8)' }}>
@@ -225,7 +225,7 @@ export default async function AboutPage() {
           <div className="container">
             <div className="section-header">
               <span className="section-label">Đội ngũ nhà giáo</span>
-              <h2 className="section-title">Giáo Viên Tiêu Biểu</h2>
+              <h2 className="section-title">Giáo viên tiêu biểu</h2>
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 'var(--space-6)' }}>
