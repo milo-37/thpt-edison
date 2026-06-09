@@ -17,6 +17,11 @@ export default function AdminSettingsPage() {
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
   const [address, setAddress] = useState('')
+  
+  // Admission page content states (HTML)
+  const [admissionQuotaHtml, setAdmissionQuotaHtml] = useState('')
+  const [admissionMethodsHtml, setAdmissionMethodsHtml] = useState('')
+  const [admissionTimelineHtml, setAdmissionTimelineHtml] = useState('')
 
   const fetchSettings = async () => {
     try {
@@ -30,6 +35,9 @@ export default function AdminSettingsPage() {
         setPhone(data.settings.phone || '')
         setEmail(data.settings.email || '')
         setAddress(data.settings.address || '')
+        setAdmissionQuotaHtml(data.settings.admissionQuotaHtml || '')
+        setAdmissionMethodsHtml(data.settings.admissionMethodsHtml || '')
+        setAdmissionTimelineHtml(data.settings.admissionTimelineHtml || '')
       }
     } catch (error) {
       console.error('Fetch settings error:', error)
@@ -63,7 +71,10 @@ export default function AdminSettingsPage() {
             logoUrl,
             phone,
             email,
-            address
+            address,
+            admissionQuotaHtml,
+            admissionMethodsHtml,
+            admissionTimelineHtml
           }
         })
       })
@@ -114,160 +125,213 @@ export default function AdminSettingsPage() {
         </div>
       </div>
 
-      <form onSubmit={handleSave} style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 'var(--space-6)' }}>
-        {/* Cột trái: Thông tin trường học & Liên hệ */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-          {/* Thông tin chung */}
-          <div style={{ background: 'var(--color-white)', padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-gray-200)', boxShadow: 'var(--shadow-md)' }}>
-            <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'var(--color-navy)', marginBottom: 'var(--space-4)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Info size={18} /> Thông tin chung trường học
-            </h3>
-            
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-              <div>
-                <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-700)', marginBottom: 'var(--space-1)' }}>
-                  Tên trường (Hiển thị trên Header / Footer)
-                </label>
-                <input
-                  type="text"
-                  value={schoolName}
-                  onChange={(e) => setSchoolName(e.target.value)}
-                  placeholder="Ví dụ: EDISON SCHOOL MINH DUC"
-                  style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-300)', outline: 'none', fontSize: 'var(--font-size-sm)' }}
-                  required
-                />
-              </div>
-
-              <div>
-                <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-700)', marginBottom: 'var(--space-2)' }}>
-                  Logo trường học
-                </label>
-                <FileUpload
-                  type="image"
-                  subDir="images"
-                  value={logoUrl}
-                  onUploadSuccess={(f) => setLogoUrl(f.filePath)}
-                  label="Tải lên ảnh logo"
-                />
-                <div style={{ marginTop: 'var(--space-2)' }}>
+      <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 'var(--space-6)' }}>
+          {/* Cột trái: Thông tin trường học & Liên hệ */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+            {/* Thông tin chung */}
+            <div style={{ background: 'var(--color-white)', padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-gray-200)', boxShadow: 'var(--shadow-md)' }}>
+              <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'var(--color-navy)', marginBottom: 'var(--space-4)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Info size={18} /> Thông tin chung trường học
+              </h3>
+              
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-700)', marginBottom: 'var(--space-1)' }}>
+                    Tên trường (Hiển thị trên Header / Footer)
+                  </label>
                   <input
                     type="text"
+                    value={schoolName}
+                    onChange={(e) => setSchoolName(e.target.value)}
+                    placeholder="Ví dụ: EDISON SCHOOL MINH DUC"
+                    style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-300)', outline: 'none', fontSize: 'var(--font-size-sm)' }}
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-700)', marginBottom: 'var(--space-2)' }}>
+                    Logo trường học
+                  </label>
+                  <FileUpload
+                    type="image"
+                    subDir="images"
                     value={logoUrl}
-                    onChange={(e) => setLogoUrl(e.target.value)}
-                    placeholder="Đường dẫn Logo"
-                    style={{ width: '100%', padding: 'var(--space-2)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-300)', outline: 'none', fontSize: 'var(--font-size-sm)' }}
+                    onUploadSuccess={(f) => setLogoUrl(f.filePath)}
+                    label="Tải lên ảnh logo"
+                  />
+                  <div style={{ marginTop: 'var(--space-2)' }}>
+                    <input
+                      type="text"
+                      value={logoUrl}
+                      onChange={(e) => setLogoUrl(e.target.value)}
+                      placeholder="Đường dẫn Logo"
+                      style={{ width: '100%', padding: 'var(--space-2)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-300)', outline: 'none', fontSize: 'var(--font-size-sm)' }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Thông tin liên hệ */}
+            <div style={{ background: 'var(--color-white)', padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-gray-200)', boxShadow: 'var(--shadow-md)' }}>
+              <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'var(--color-navy)', marginBottom: 'var(--space-4)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Phone size={18} /> Thông tin liên hệ công khai
+              </h3>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4)' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-700)', marginBottom: 'var(--space-1)' }}>
+                    Số điện thoại
+                  </label>
+                  <input
+                    type="text"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="Hotline liên hệ"
+                    style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-300)', outline: 'none', fontSize: 'var(--font-size-sm)' }}
+                  />
+                </div>
+
+                <div>
+                  <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-700)', marginBottom: 'var(--space-1)' }}>
+                    Địa chỉ Email
+                  </label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email liên hệ"
+                    style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-300)', outline: 'none', fontSize: 'var(--font-size-sm)' }}
+                  />
+                </div>
+
+                <div style={{ gridColumn: 'span 2' }}>
+                  <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-700)', marginBottom: 'var(--space-1)' }}>
+                    Địa chỉ chi tiết
+                  </label>
+                  <input
+                    type="text"
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    placeholder="Số nhà, Tên đường, Quận/Huyện, Tỉnh/Thành phố"
+                    style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-300)', outline: 'none', fontSize: 'var(--font-size-sm)' }}
                   />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Thông tin liên hệ */}
-          <div style={{ background: 'var(--color-white)', padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-gray-200)', boxShadow: 'var(--shadow-md)' }}>
-            <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'var(--color-navy)', marginBottom: 'var(--space-4)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <Phone size={18} /> Thông tin liên hệ công khai
-            </h3>
+          {/* Cột phải: Cấu hình ảnh giao diện */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+            <div style={{ background: 'var(--color-white)', padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-gray-200)', boxShadow: 'var(--shadow-md)' }}>
+              <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'var(--color-navy)', marginBottom: 'var(--space-4)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <ImageIcon size={18} /> Ảnh Sứ Mệnh - Tầm Nhìn
+              </h3>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4)' }}>
-              <div>
-                <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-700)', marginBottom: 'var(--space-1)' }}>
-                  Số điện thoại
-                </label>
-                <input
-                  type="text"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="Số hotline liên hệ"
-                  style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-300)', outline: 'none', fontSize: 'var(--font-size-sm)' }}
-                />
-              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-700)', marginBottom: 'var(--space-2)' }}>
+                    Tải lên ảnh mới (Phần giới thiệu trang chủ)
+                  </label>
+                  <FileUpload
+                    type="image"
+                    subDir="images"
+                    value={missionImageUrl}
+                    onUploadSuccess={(f) => setMissionImageUrl(f.filePath)}
+                    label="Upload ảnh sứ mệnh"
+                  />
+                </div>
 
-              <div>
-                <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-700)', marginBottom: 'var(--space-1)' }}>
-                  Địa chỉ Email
-                </label>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="hòm thư điện tử tuyển sinh"
-                  style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-300)', outline: 'none', fontSize: 'var(--font-size-sm)' }}
-                />
-              </div>
+                <div>
+                  <label style={{ display: 'block', fontSize: 'var(--font-size-xs)', color: 'var(--color-gray-500)', marginBottom: '4px' }}>
+                    Hoặc nhập URL ảnh trực tuyến:
+                  </label>
+                  <input
+                    type="text"
+                    value={missionImageUrl}
+                    onChange={(e) => setMissionImageUrl(e.target.value)}
+                    placeholder="https://..."
+                    style={{ width: '100%', padding: 'var(--space-2)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-300)', outline: 'none', fontSize: 'var(--font-size-sm)' }}
+                  />
+                </div>
 
-              <div style={{ gridColumn: 'span 2' }}>
-                <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-700)', marginBottom: 'var(--space-1)' }}>
-                  Địa chỉ chi tiết
-                </label>
-                <input
-                  type="text"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  placeholder="Số nhà, Tên đường, Quận/Huyện, Tỉnh/Thành phố"
-                  style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-300)', outline: 'none', fontSize: 'var(--font-size-sm)' }}
-                />
+                {missionImageUrl && (
+                  <div style={{ marginTop: 'var(--space-2)' }}>
+                    <label style={{ display: 'block', fontSize: 'var(--font-size-xs)', color: 'var(--color-gray-500)', marginBottom: 'var(--space-1)' }}>
+                      Xem trước ảnh hiện tại:
+                    </label>
+                    <div style={{ width: '100%', height: '180px', borderRadius: 'var(--radius-md)', overflow: 'hidden', border: '1px solid var(--color-gray-200)' }}>
+                      <img src={missionImageUrl} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Cột phải: Cấu hình ảnh giao diện */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-          <div style={{ background: 'var(--color-white)', padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-gray-200)', boxShadow: 'var(--shadow-md)' }}>
-            <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'var(--color-navy)', marginBottom: 'var(--space-4)', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <ImageIcon size={18} /> Ảnh Sứ Mệnh - Tầm Nhìn
-            </h3>
+        {/* Cấu hình Nội dung Trang Tuyển sinh */}
+        <div style={{ background: 'var(--color-white)', padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-gray-200)', boxShadow: 'var(--shadow-md)' }}>
+          <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'var(--color-navy)', marginBottom: 'var(--space-4)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Settings size={18} /> Cấu hình Nội dung Trang Tuyển sinh (Cột trái)
+          </h3>
+          <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-gray-500)', marginBottom: 'var(--space-4)', lineHeight: 1.5 }}>
+            Quản trị viên có thể nhập mã HTML hoặc văn bản thường để tùy chỉnh các nội dung chỉ tiêu, phương thức tuyển sinh và lịch trình của trang <a href="/tuyen-sinh" target="_blank" style={{ color: 'var(--color-primary)', textDecoration: 'underline', fontWeight: 600 }}>Tuyển sinh</a>.
+          </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-              <div>
-                <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-700)', marginBottom: 'var(--space-2)' }}>
-                  Tải lên ảnh mới (Phần giới thiệu trang chủ)
-                </label>
-                <FileUpload
-                  type="image"
-                  subDir="images"
-                  value={missionImageUrl}
-                  onUploadSuccess={(f) => setMissionImageUrl(f.filePath)}
-                  label="Upload ảnh sứ mệnh"
-                />
-              </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+            <div>
+              <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-700)', marginBottom: 'var(--space-1)' }}>
+                1. Chỉ tiêu & đối tượng tuyển sinh (Mã HTML)
+              </label>
+              <textarea
+                value={admissionQuotaHtml}
+                onChange={(e) => setAdmissionQuotaHtml(e.target.value)}
+                rows={6}
+                style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-300)', outline: 'none', fontSize: 'var(--font-size-sm)', fontFamily: 'monospace' }}
+                placeholder="Nhập mã HTML hiển thị..."
+              />
+            </div>
 
-              <div>
-                <label style={{ display: 'block', fontSize: 'var(--font-size-xs)', color: 'var(--color-gray-500)', marginBottom: '4px' }}>
-                  Hoặc nhập URL ảnh trực tuyến:
-                </label>
-                <input
-                  type="text"
-                  value={missionImageUrl}
-                  onChange={(e) => setMissionImageUrl(e.target.value)}
-                  placeholder="https://..."
-                  style={{ width: '100%', padding: 'var(--space-2)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-300)', outline: 'none', fontSize: 'var(--font-size-sm)' }}
-                />
-              </div>
+            <div>
+              <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-700)', marginBottom: 'var(--space-1)' }}>
+                2. Phương thức tuyển sinh (Mã HTML)
+              </label>
+              <textarea
+                value={admissionMethodsHtml}
+                onChange={(e) => setAdmissionMethodsHtml(e.target.value)}
+                rows={6}
+                style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-300)', outline: 'none', fontSize: 'var(--font-size-sm)', fontFamily: 'monospace' }}
+                placeholder="Nhập mã HTML hiển thị..."
+              />
+            </div>
 
-              {missionImageUrl && (
-                <div style={{ marginTop: 'var(--space-2)' }}>
-                  <label style={{ display: 'block', fontSize: 'var(--font-size-xs)', color: 'var(--color-gray-500)', marginBottom: 'var(--space-1)' }}>
-                    Xem trước ảnh hiện tại:
-                  </label>
-                  <div style={{ width: '100%', height: '180px', borderRadius: 'var(--radius-md)', overflow: 'hidden', border: '1px solid var(--color-gray-200)' }}>
-                    <img src={missionImageUrl} alt="Preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  </div>
-                </div>
-              )}
+            <div>
+              <label style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 600, color: 'var(--color-gray-700)', marginBottom: 'var(--space-1)' }}>
+                3. Mốc lịch trình quan trọng (Mã HTML)
+              </label>
+              <textarea
+                value={admissionTimelineHtml}
+                onChange={(e) => setAdmissionTimelineHtml(e.target.value)}
+                rows={6}
+                style={{ width: '100%', padding: 'var(--space-3)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-gray-300)', outline: 'none', fontSize: 'var(--font-size-sm)', fontFamily: 'monospace' }}
+                placeholder="Nhập mã HTML hiển thị..."
+              />
             </div>
           </div>
+        </div>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <button
-              type="submit"
-              className="btn btn-primary"
-              disabled={saving}
-              style={{ width: '100%', gap: '8px', padding: '14px 24px', borderRadius: '16px' }}
-            >
-              <Save size={18} /> {saving ? 'Đang lưu...' : 'Lưu cấu hình hệ thống'}
-            </button>
-          </div>
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={saving}
+            style={{ width: '280px', gap: '8px', padding: '14px 24px', borderRadius: '16px' }}
+          >
+            <Save size={18} /> {saving ? 'Đang lưu...' : 'Lưu cấu hình hệ thống'}
+          </button>
         </div>
       </form>
 
