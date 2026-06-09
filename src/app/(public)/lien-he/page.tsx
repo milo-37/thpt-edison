@@ -103,13 +103,13 @@ export default function ContactPage() {
       {/* Google Maps nhúng */}
       <section style={{ width: '100%', height: '450px', background: 'var(--color-gray-100)', position: 'relative' }}>
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.5902129487723!2d105.93481231540149!3d20.96896229518868!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135afe540000001%3A0xe54e6ff1b83d8e57!2sEdison%20Schools%20Ecopark!5e0!3m2!1svi!2s!4v1655970000000!5m2!1svi!2s"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3711.0253457187903!2d105.82064454378775!3d21.6017712856515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135274e9b4a8d45%3A0x6b116cadc452b4c0!2zVHLGsOG7nW5nIFRIUFQgRWRpc29uIC0gVGjDoGkgTmd1ecOqbg!5e0!3m2!1svi!2s!4v1717915200000!5m2!1svi!2s"
           width="100%"
           height="100%"
           style={{ border: 0 }}
           allowFullScreen
           loading="lazy"
-          title="Bản đồ Edison Schools Ecopark"
+          title="Bản đồ Trường THPT Edison - Thái Nguyên"
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </section>
