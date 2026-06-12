@@ -315,250 +315,505 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 6. Section Sự kiện & Album ảnh */}
-      <section className="section" style={{ background: 'var(--color-gray-50)', borderTop: '1px solid var(--color-gray-200)', borderBottom: '1px solid var(--color-gray-200)' }}>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'var(--space-12)' }}>
+      {/* 6. Section Sự kiện & Album ảnh - PREMIUM */}
+      <section className="section" style={{ background: 'var(--color-gray-50)', position: 'relative', overflow: 'hidden' }}>
+        <style>{`
+          .section6-card-container {
+            background: var(--color-white);
+            border-radius: 24px;
+            padding: var(--space-8);
+            border: 1px solid var(--color-gray-100);
+            box-shadow: 0 4px 24px rgba(15, 23, 42, 0.04);
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+          }
+          .section6-card-container:hover {
+            box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08);
+          }
+          .section6-card-container .accent-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            border-radius: 24px 24px 0 0;
+          }
+          .section6-header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 5px 14px;
+            border-radius: 999px;
+            margin-bottom: var(--space-3);
+          }
+          .section6-title {
+            font-size: var(--font-size-2xl);
+            font-weight: 800;
+            color: var(--color-navy);
+            margin: 0 0 var(--space-2) 0;
+            font-family: var(--font-title);
+            line-height: 1.2;
+          }
+          .section6-subtitle {
+            font-size: var(--font-size-sm);
+            color: var(--color-gray-500);
+            margin: 0 0 var(--space-6) 0;
+            line-height: 1.5;
+          }
+          .section6-view-all {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            color: var(--color-primary);
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 999px;
+            background: rgba(10, 75, 175, 0.06);
+            border: 1px solid rgba(10, 75, 175, 0.1);
+            transition: all 0.25s ease;
+          }
+          .section6-view-all:hover {
+            background: rgba(10, 75, 175, 0.12);
+            transform: translateX(3px);
+            border-color: rgba(10, 75, 175, 0.2);
+          }
+          @media (max-width: 768px) {
+            .section6-grid-layout { grid-template-columns: 1fr !important; }
+          }
+        `}</style>
+        {/* Subtle background pattern */}
+        <div style={{
+          position: 'absolute', inset: 0, opacity: 0.3, pointerEvents: 'none',
+          backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(10,75,175,0.05) 1px, transparent 0)',
+          backgroundSize: '40px 40px'
+        }} />
+
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <div className="section6-grid-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-8)' }}>
             
             {/* Cột trái: Album ảnh */}
-            <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 'var(--space-6)' }}>
+            <div className="section6-card-container">
+              <div className="accent-line" style={{ background: 'linear-gradient(90deg, var(--color-primary), var(--color-gold))' }} />
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 'var(--space-5)' }}>
                 <div>
-                  <span className="section-label">Thư viện đa phương tiện</span>
-                  <h3 style={{ fontSize: 'var(--font-size-2xl)', fontWeight: 800, color: 'var(--color-navy)', margin: 0, fontFamily: 'var(--font-title)' }}>
-                    Hình ảnh hoạt động
-                  </h3>
+                  <div className="section6-header-badge" style={{ color: 'var(--color-primary)', background: 'rgba(10, 75, 175, 0.06)', border: '1px solid rgba(10, 75, 175, 0.1)' }}>
+                    <Images size={13} />
+                    Thư viện
+                  </div>
+                  <h3 className="section6-title">Hình ảnh hoạt động</h3>
+                  <p className="section6-subtitle">Lưu giữ những khoảnh khắc đáng nhớ trong hành trình giáo dục Edison.</p>
                 </div>
-                <Link href="/hoat-dong?tab=gallery" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-1)', color: 'var(--color-primary)', fontWeight: 600, fontSize: 'var(--font-size-sm)', textDecoration: 'none' }}>
-                  Xem tất cả
-                  <ArrowRight size={16} />
-                </Link>
               </div>
               <GalleryGrid albums={latestAlbums} limit={4} />
+              <div style={{ marginTop: 'var(--space-5)', textAlign: 'center' }}>
+                <Link href="/hoat-dong?tab=gallery" className="section6-view-all">
+                  Xem toàn bộ thư viện ảnh
+                  <ArrowRight size={15} />
+                </Link>
+              </div>
             </div>
 
             {/* Cột phải: Lịch Sự kiện */}
-            <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 'var(--space-6)' }}>
+            <div className="section6-card-container">
+              <div className="accent-line" style={{ background: 'linear-gradient(90deg, var(--color-gold), var(--color-gold-dark))' }} />
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 'var(--space-5)' }}>
                 <div>
-                  <span className="section-label">Lịch trình</span>
-                  <h3 style={{ fontSize: 'var(--font-size-2xl)', fontWeight: 800, color: 'var(--color-navy)', margin: 0, fontFamily: 'var(--font-title)' }}>
-                    Sự kiện sắp tới
-                  </h3>
+                  <div className="section6-header-badge" style={{ color: 'var(--color-gold-dark)', background: 'rgba(255, 107, 0, 0.06)', border: '1px solid rgba(255, 107, 0, 0.12)' }}>
+                    <Calendar size={13} />
+                    Lịch trình
+                  </div>
+                  <h3 className="section6-title">Sự kiện sắp tới</h3>
+                  <p className="section6-subtitle">Các hoạt động, hội thảo và kỳ thi quan trọng trong năm học.</p>
                 </div>
-                <Link href="/hoat-dong?tab=calendar" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-1)', color: 'var(--color-primary)', fontWeight: 600, fontSize: 'var(--font-size-sm)', textDecoration: 'none' }}>
-                  Lịch hoạt động
-                  <ArrowRight size={16} />
-                </Link>
               </div>
               <EventCalendar events={upcomingEvents as any} />
+              <div style={{ marginTop: 'var(--space-5)', textAlign: 'center' }}>
+                <Link href="/hoat-dong?tab=calendar" className="section6-view-all" style={{ color: 'var(--color-gold-dark)', background: 'rgba(255, 107, 0, 0.06)', borderColor: 'rgba(255, 107, 0, 0.12)' }}>
+                  Xem lịch hoạt động đầy đủ
+                  <ArrowRight size={15} />
+                </Link>
+              </div>
             </div>
 
           </div>
         </div>
       </section>
 
-      {/* 7. Section Cơ hội học tập (Glass Card CTA khổng lồ) */}
-      <section className="section" style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(180deg, var(--color-white) 0%, var(--color-gray-50) 100%)' }}>
+      {/* 7. Section Tuyển sinh - FULL-WIDTH PREMIUM HERO */}
+      <section style={{ position: 'relative', overflow: 'hidden' }}>
         <style>{`
-          .cta-info-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          @keyframes admissionGlow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
+          }
+          @keyframes admissionFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+          }
+          @keyframes admissionPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 107, 0, 0); }
+          }
+          @keyframes admissionShimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+          }
+          @keyframes statCountUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .admission-stat-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 24px 20px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            animation: statCountUp 0.6s ease-out both;
+          }
+          .admission-stat-card:nth-child(1) { animation-delay: 0.1s; }
+          .admission-stat-card:nth-child(2) { animation-delay: 0.2s; }
+          .admission-stat-card:nth-child(3) { animation-delay: 0.3s; }
+          .admission-stat-card:nth-child(4) { animation-delay: 0.4s; }
+          .admission-stat-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-6px);
+            border-color: rgba(255, 107, 0, 0.3);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+          }
+          .admission-stat-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 0, 0.5), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+          }
+          .admission-stat-card:hover::after {
+            opacity: 1;
+          }
+          .admission-stat-number {
+            font-size: 36px;
+            font-weight: 900;
+            font-family: var(--font-title);
+            background: linear-gradient(135deg, #FFD700, #FF6B00, #FFD700);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 4px;
+          }
+          .admission-stat-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.5px;
+          }
+          .admission-feature-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            transition: all 0.3s ease;
+          }
+          .admission-feature-row:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 107, 0, 0.2);
+            transform: translateX(6px);
+          }
+          .admission-feature-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+          }
+          .admission-cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: linear-gradient(135deg, #FF6B00, #FF8C00, #FFB300);
+            color: white;
+            font-size: var(--font-size-base);
+            font-weight: 800;
+            border-radius: 999px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 24px rgba(255, 107, 0, 0.4);
+            animation: admissionPulse 2.5s ease-in-out infinite;
             position: relative;
             overflow: hidden;
           }
-          .cta-info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px -8px rgba(10, 75, 175, 0.12);
-            border-color: var(--hover-border-color, var(--color-primary)) !important;
-          }
-          .cta-info-card::before {
+          .admission-cta-primary::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: transparent;
-            transition: background-color 0.3s ease;
+            top: 0; left: -100%;
+            width: 200%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            animation: admissionShimmer 3s ease-in-out infinite;
           }
-          .cta-info-card:hover::before {
-            background: var(--theme-color, var(--color-primary));
+          .admission-cta-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 36px rgba(255, 107, 0, 0.5);
+          }
+          .admission-cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            background: transparent;
+            color: white;
+            font-size: var(--font-size-sm);
+            font-weight: 700;
+            border-radius: 999px;
+            text-decoration: none;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+          }
+          .admission-cta-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+          }
+          .admission-info-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 28px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+          }
+          .admission-info-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
+          }
+          .admission-info-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--card-accent, var(--color-gold)), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+          }
+          .admission-info-card:hover::before {
+            opacity: 1;
+          }
+          @media (max-width: 768px) {
+            .admission-stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
+            .admission-info-grid { grid-template-columns: 1fr !important; }
+            .admission-main-grid { grid-template-columns: 1fr !important; }
           }
         `}</style>
 
-        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div 
-            className="glass-card" 
-            style={{ 
-              borderRadius: '32px', 
-              padding: 'var(--space-10) var(--space-8)', 
-              background: 'var(--glass-bg)', 
-              backdropFilter: 'blur(20px)',
-              border: 'var(--glass-border)', 
-              boxShadow: 'var(--shadow-xl)',
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: 'var(--space-8)',
-              alignItems: 'center',
-              position: 'relative',
-              overflow: 'hidden'
-            }}
-          >
-            {/* Glowing background blobs */}
-            <div style={{
-              position: 'absolute',
-              top: '-20%',
-              right: '-10%',
-              width: '400px',
-              height: '400px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(255,107,0,0.08) 0%, transparent 70%)',
-              zIndex: 0,
-              pointerEvents: 'none'
-            }} />
-            <div style={{
-              position: 'absolute',
-              bottom: '-20%',
-              left: '-10%',
-              width: '400px',
-              height: '400px',
-              borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(10,75,175,0.06) 0%, transparent 70%)',
-              zIndex: 0,
-              pointerEvents: 'none'
-            }} />
+        {/* Full-width Navy Gradient Background */}
+        <div style={{
+          background: 'linear-gradient(135deg, #041C3D 0%, #0A4BAF 40%, #083A88 70%, #041C3D 100%)',
+          padding: 'var(--space-16, 80px) 0',
+          position: 'relative'
+        }}>
+          {/* Animated glow orbs */}
+          <div style={{
+            position: 'absolute', top: '-10%', right: '5%',
+            width: '500px', height: '500px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(255, 107, 0, 0.12) 0%, transparent 60%)',
+            animation: 'admissionGlow 6s ease-in-out infinite', pointerEvents: 'none'
+          }} />
+          <div style={{
+            position: 'absolute', bottom: '-15%', left: '0%',
+            width: '600px', height: '600px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(10, 75, 175, 0.2) 0%, transparent 60%)',
+            animation: 'admissionGlow 8s ease-in-out infinite 2s', pointerEvents: 'none'
+          }} />
+          <div style={{
+            position: 'absolute', top: '40%', left: '50%',
+            width: '300px', height: '300px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(255, 215, 0, 0.06) 0%, transparent 60%)',
+            animation: 'admissionFloat 7s ease-in-out infinite 1s', pointerEvents: 'none'
+          }} />
+          {/* Subtle grid pattern */}
+          <div style={{
+            position: 'absolute', inset: 0, opacity: 0.04, pointerEvents: 'none',
+            backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+            backgroundSize: '60px 60px'
+          }} />
 
-            {/* Trái: Giới thiệu tuyển sinh + Nút bấm */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)', position: 'relative', zIndex: 1 }}>
-              <span style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-gold-dark)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px' }}>
-                Tuyển sinh lớp 10 niên khóa 2026 - 2027
-              </span>
-              <h2 style={{ fontSize: 'var(--font-size-3xl)', fontWeight: 800, color: 'var(--color-navy)', margin: 0, lineHeight: 1.2, fontFamily: 'var(--font-title)' }}>
-                Đăng ký học tập tại Edison School Minh Đức
-              </h2>
-              <p style={{ color: 'var(--color-gray-600)', fontSize: 'var(--font-size-base)', lineHeight: 1.6, margin: 0 }}>
-                Hồ sơ đăng ký tuyển sinh chính thức mở. Hãy chuẩn bị các tài liệu cần thiết và đăng ký tham gia kỳ xét tuyển để có cơ hội nhận các suất học bổng giá trị.
-              </p>
-              
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', marginTop: 'var(--space-1)' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', fontSize: 'var(--font-size-sm)', color: 'var(--color-gray-700)', fontWeight: 600 }}>
-                  <CheckCircle2 size={20} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '2px' }} />
-                  <span>Chương trình giảng dạy ưu việt & tăng cường IELTS</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', fontSize: 'var(--font-size-sm)', color: 'var(--color-gray-700)', fontWeight: 600 }}>
-                  <CheckCircle2 size={20} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '2px' }} />
-                  <span>Học phí minh bạch, chính sách học bổng đa cấp độ</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', fontSize: 'var(--font-size-sm)', color: 'var(--color-gray-700)', fontWeight: 600 }}>
-                  <CheckCircle2 size={20} style={{ color: 'var(--color-primary)', flexShrink: 0, marginTop: '2px' }} />
-                  <span>Môi trường học tập hạnh phúc, an toàn & khai phóng</span>
-                </div>
+          <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+            {/* Top Section Label */}
+            <div style={{ textAlign: 'center', marginBottom: 'var(--space-8)' }}>
+              <div style={{
+                display: 'inline-flex', alignItems: 'center', gap: '10px',
+                background: 'linear-gradient(135deg, rgba(255, 107, 0, 0.15), rgba(255, 215, 0, 0.1))',
+                border: '1px solid rgba(255, 107, 0, 0.25)',
+                padding: '8px 24px', borderRadius: '999px',
+                marginBottom: 'var(--space-4)'
+              }}>
+                <span style={{ position: 'relative', display: 'flex', height: '8px', width: '8px' }}>
+                  <span style={{ position: 'absolute', display: 'inline-flex', height: '100%', width: '100%', borderRadius: '50%', backgroundColor: '#FF6B00', opacity: 0.75, animation: 'admissionPulse 2s ease-in-out infinite' }} />
+                  <span style={{ position: 'relative', display: 'inline-flex', borderRadius: '50%', height: '8px', width: '8px', backgroundColor: '#FF6B00' }} />
+                </span>
+                <span style={{ fontSize: '12px', fontWeight: 800, color: '#FFB300', letterSpacing: '2px', textTransform: 'uppercase' }}>
+                  Đang mở đăng ký tuyển sinh 2026 - 2027
+                </span>
               </div>
+              <h2 style={{
+                fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 900, color: 'white',
+                margin: '0 auto var(--space-3)', fontFamily: 'var(--font-title)',
+                lineHeight: 1.15, maxWidth: '700px'
+              }}>
+                Khởi đầu hành trình <br/>
+                <span style={{
+                  background: 'linear-gradient(135deg, #FFD700, #FF6B00)',
+                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'
+                }}>
+                  tại Edison School
+                </span>
+              </h2>
+              <p style={{
+                color: 'rgba(255, 255, 255, 0.6)', fontSize: 'var(--font-size-base)',
+                maxWidth: '580px', margin: '0 auto', lineHeight: 1.7
+              }}>
+                Hồ sơ đăng ký tuyển sinh lớp 10 chính thức mở. Hãy nắm bắt cơ hội trở thành học sinh Edison với chính sách học bổng hấp dẫn.
+              </p>
+            </div>
 
-              {/* Nút bấm CTA (moved here to fill the left column) */}
-              <div style={{ display: 'flex', gap: 'var(--space-4)', marginTop: 'var(--space-3)', flexWrap: 'wrap' }}>
-                <Link href="/tuyen-sinh" className="btn btn-gold btn-lg" style={{ padding: '14px 28px', display: 'inline-flex', alignItems: 'center', gap: '8px', boxShadow: '0 4px 14px rgba(255, 107, 0, 0.3)' }}>
-                  Đăng ký tuyển sinh ngay
-                  <ArrowRight size={18} />
-                </Link>
-                <Link href="/lien-he" className="btn btn-outline btn-lg" style={{ padding: '14px 28px', border: '2px solid var(--color-primary)', color: 'var(--color-primary)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
-                  Liên hệ nhận tư vấn
-                </Link>
+            {/* Stats Row */}
+            <div className="admission-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--space-4)', marginBottom: 'var(--space-10)', maxWidth: '800px', margin: '0 auto var(--space-10)' }}>
+              <div className="admission-stat-card">
+                <div className="admission-stat-number">450+</div>
+                <div className="admission-stat-label">Chỉ tiêu tuyển sinh</div>
+              </div>
+              <div className="admission-stat-card">
+                <div className="admission-stat-number">10</div>
+                <div className="admission-stat-label">Lớp học chính quy</div>
+              </div>
+              <div className="admission-stat-card">
+                <div className="admission-stat-number">98%</div>
+                <div className="admission-stat-label">Tỷ lệ đỗ TN THPT</div>
+              </div>
+              <div className="admission-stat-card">
+                <div className="admission-stat-number">2</div>
+                <div className="admission-stat-label">Lớp CLC Quốc tế</div>
               </div>
             </div>
-            
-            {/* Phải: Chi tiết các mục */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-4)', position: 'relative', zIndex: 1 }}>
-              {/* Box 1 */}
-              <div 
-                className="cta-info-card glass-card" 
-                style={{ 
-                  padding: 'var(--space-5) var(--space-4)', 
-                  borderRadius: '20px', 
-                  display: 'flex', 
-                  flexDirection: 'column', 
-                  gap: '8px', 
-                  border: '1px solid rgba(15, 23, 42, 0.06)', 
-                  background: 'var(--color-white)',
-                  // @ts-ignore
-                  '--theme-color': 'var(--color-primary)',
-                  '--hover-border-color': 'rgba(10, 75, 175, 0.2)'
-                }}
-              >
-                <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(10, 75, 175, 0.08)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <BookOpen size={20} />
+
+            {/* Main 2-column content */}
+            <div className="admission-main-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-10)', alignItems: 'start' }}>
+
+              {/* Left: Features */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+                <h3 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'white', margin: '0 0 var(--space-2) 0', fontFamily: 'var(--font-title)' }}>
+                  Tại sao chọn Edison?
+                </h3>
+                <div className="admission-feature-row">
+                  <div className="admission-feature-icon" style={{ background: 'rgba(255, 107, 0, 0.15)', color: '#FFB300' }}>
+                    <BookOpen size={18} />
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'white', marginBottom: '2px' }}>Chương trình tăng cường IELTS & STEM</div>
+                    <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}>Tích hợp ngoại ngữ, công nghệ thông tin và khoa học ứng dụng.</div>
+                  </div>
                 </div>
-                <h4 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'var(--color-navy)', margin: 0 }}>Chương trình đào tạo</h4>
-                <span style={{ fontSize: '12px', color: 'var(--color-gray-500)', lineHeight: 1.4 }}>Tích hợp phát triển kỹ năng ngoại ngữ, công nghệ & khoa học.</span>
+                <div className="admission-feature-row">
+                  <div className="admission-feature-icon" style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#34D399' }}>
+                    <Award size={18} />
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'white', marginBottom: '2px' }}>Học bổng lên đến 100% học phí</div>
+                    <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}>Dành cho học sinh xuất sắc, HSG cấp tỉnh/thành phố, IELTS 6.5+.</div>
+                  </div>
+                </div>
+                <div className="admission-feature-row">
+                  <div className="admission-feature-icon" style={{ background: 'rgba(59, 130, 246, 0.15)', color: '#60A5FA' }}>
+                    <ShieldCheck size={18} />
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'white', marginBottom: '2px' }}>Môi trường giáo dục hạnh phúc & an toàn</div>
+                    <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}>Cơ sở vật chất hiện đại, đội ngũ giáo viên tâm huyết.</div>
+                  </div>
+                </div>
+                <div className="admission-feature-row">
+                  <div className="admission-feature-icon" style={{ background: 'rgba(168, 85, 247, 0.15)', color: '#C084FC' }}>
+                    <CheckCircle2 size={18} />
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'white', marginBottom: '2px' }}>Đa dạng phương thức xét tuyển</div>
+                    <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}>Thi tuyển, xét tuyển thẳng, xét học bạ THCS.</div>
+                  </div>
+                </div>
+
+                {/* CTA Buttons */}
+                <div style={{ display: 'flex', gap: 'var(--space-4)', marginTop: 'var(--space-4)', flexWrap: 'wrap' }}>
+                  <Link href="/tuyen-sinh" className="admission-cta-primary">
+                    Đăng ký tuyển sinh ngay
+                    <ArrowRight size={18} />
+                  </Link>
+                  <Link href="/lien-he" className="admission-cta-secondary">
+                    Liên hệ tư vấn
+                    <ArrowRight size={16} />
+                  </Link>
+                </div>
               </div>
 
-              {/* Box 2 */}
-              <div 
-                className="cta-info-card glass-card" 
-                style={{ 
-                  padding: 'var(--space-5) var(--space-4)', 
-                  borderRadius: '20px', 
-                  display: 'flex', 
-                  flexDirection: 'column', 
-                  gap: '8px', 
-                  border: '1px solid rgba(15, 23, 42, 0.06)', 
-                  background: 'var(--color-white)',
-                  // @ts-ignore
-                  '--theme-color': 'var(--color-gold)',
-                  '--hover-border-color': 'rgba(255, 107, 0, 0.2)'
-                }}
-              >
-                <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(255, 109, 0, 0.08)', color: 'var(--color-gold)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Award size={20} />
+              {/* Right: Info cards grid */}
+              <div className="admission-info-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4)' }}>
+                {/* Card 1 */}
+                <div className="admission-info-card" style={{ '--card-accent': '#FF6B00' } as React.CSSProperties}>
+                  <div style={{ width: '44px', height: '44px', borderRadius: '14px', background: 'linear-gradient(135deg, rgba(255, 107, 0, 0.2), rgba(255, 179, 0, 0.1))', color: '#FFB300', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <BookOpen size={22} />
+                  </div>
+                  <h4 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'white', margin: 0 }}>Chương trình đào tạo</h4>
+                  <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>Giáo dục toàn diện theo chuẩn quốc tế, tăng cường kỹ năng thế kỷ 21.</span>
                 </div>
-                <h4 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'var(--color-navy)', margin: 0 }}>Học phí & học bổng</h4>
-                <span style={{ fontSize: '12px', color: 'var(--color-gray-500)', lineHeight: 1.4 }}>Nhiều cơ hội học bổng dành cho học sinh có thành tích vượt trội.</span>
-              </div>
-
-              {/* Box 3 */}
-              <div 
-                className="cta-info-card glass-card" 
-                style={{ 
-                  padding: 'var(--space-5) var(--space-4)', 
-                  borderRadius: '20px', 
-                  display: 'flex', 
-                  flexDirection: 'column', 
-                  gap: '8px', 
-                  border: '1px solid rgba(15, 23, 42, 0.06)', 
-                  background: 'var(--color-white)',
-                  // @ts-ignore
-                  '--theme-color': 'var(--color-success)',
-                  '--hover-border-color': 'rgba(16, 185, 129, 0.2)'
-                }}
-              >
-                <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(16, 185, 129, 0.08)', color: 'var(--color-success)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <ClipboardList size={20} />
+                {/* Card 2 */}
+                <div className="admission-info-card" style={{ '--card-accent': '#34D399' } as React.CSSProperties}>
+                  <div style={{ width: '44px', height: '44px', borderRadius: '14px', background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(52, 211, 153, 0.1))', color: '#34D399', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Award size={22} />
+                  </div>
+                  <h4 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'white', margin: 0 }}>Học phí & Học bổng</h4>
+                  <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>Chính sách học phí linh hoạt, học bổng giá trị cho học sinh tài năng.</span>
                 </div>
-                <h4 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'var(--color-navy)', margin: 0 }}>Quy trình nhập học</h4>
-                <span style={{ fontSize: '12px', color: 'var(--color-gray-500)', lineHeight: 1.4 }}>Hướng dẫn đăng ký trực tuyến, làm bài khảo sát năng lực.</span>
-              </div>
-
-              {/* Box 4 */}
-              <div 
-                className="cta-info-card glass-card" 
-                style={{ 
-                  padding: 'var(--space-5) var(--space-4)', 
-                  borderRadius: '20px', 
-                  display: 'flex', 
-                  flexDirection: 'column', 
-                  gap: '8px', 
-                  border: '1px solid rgba(15, 23, 42, 0.06)', 
-                  background: 'var(--color-white)',
-                  // @ts-ignore
-                  '--theme-color': 'rgba(59, 130, 246, 1)',
-                  '--hover-border-color': 'rgba(59, 130, 246, 0.2)'
-                }}
-              >
-                <div style={{ width: '40px', height: '40px', borderRadius: '12px', background: 'rgba(59, 130, 246, 0.08)', color: 'var(--color-primary-light)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Calendar size={20} />
+                {/* Card 3 */}
+                <div className="admission-info-card" style={{ '--card-accent': '#60A5FA' } as React.CSSProperties}>
+                  <div style={{ width: '44px', height: '44px', borderRadius: '14px', background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(96, 165, 250, 0.1))', color: '#60A5FA', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <ClipboardList size={22} />
+                  </div>
+                  <h4 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'white', margin: 0 }}>Quy trình nhập học</h4>
+                  <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>Đăng ký trực tuyến → Khảo sát → Xét duyệt → Nhập học chính thức.</span>
                 </div>
-                <h4 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'var(--color-navy)', margin: 0 }}>Hồ sơ cần thiết</h4>
-                <span style={{ fontSize: '12px', color: 'var(--color-gray-500)', lineHeight: 1.4 }}>Bản sao học bạ THCS, giấy chứng nhận tốt nghiệp tạm thời.</span>
+                {/* Card 4 */}
+                <div className="admission-info-card" style={{ '--card-accent': '#C084FC' } as React.CSSProperties}>
+                  <div style={{ width: '44px', height: '44px', borderRadius: '14px', background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(192, 132, 252, 0.1))', color: '#C084FC', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Calendar size={22} />
+                  </div>
+                  <h4 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'white', margin: 0 }}>Hồ sơ cần thiết</h4>
+                  <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>Học bạ THCS, giấy CN tốt nghiệp tạm thời, ảnh 3x4 và đơn đăng ký.</span>
+                </div>
               </div>
             </div>
           </div>

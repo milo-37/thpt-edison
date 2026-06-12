@@ -10,6 +10,7 @@ const DEFAULT_SETTINGS = {
   phone: '024 1234 5678',
   email: 'contact@edison.edu.vn',
   address: 'Minh Đức, Mỹ Hào, Hưng Yên',
+  defaultPostThumbnailUrl: '/uploads/thumbnails/tuyen-sinh-default.jpg',
   admissionQuotaHtml: `<ul style="display: flex; flex-direction: column; gap: var(--space-3); color: var(--color-gray-600); font-size: var(--font-size-sm); list-style: none; padding: 0; margin: 0;">
   <li style="display: flex; gap: var(--space-2); align-items: flex-start;">
     <span style="color: var(--color-success); font-weight: bold; margin-right: 4px;">✓</span>
@@ -96,7 +97,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Dữ liệu không hợp lệ' }, { status: 400 })
     }
 
-    // Thực hiện lưu từng setting trong transaction
+    // 1. Lấy ảnh đại diện mặc định cũ trước khi lưu mới
+    const oldDefaultSetting = await (prisma as any).setting.findUnique({
+      where: { key: 'defaultPostThumbnailUrl' }
+    })
+    const oldDefaultUrl = oldDefaultSetting?.value || '/uploads/thumbnails/tuyen-sinh-default.jpg'
+
+    // 2. Thực hiện lưu từng setting trong transaction
     await prisma.$transaction(
       Object.entries(settings).map(([key, value]) =>
         (prisma as any).setting.upsert({
@@ -107,12 +114,31 @@ export async function POST(request: NextRequest) {
       )
     )
 
+    // 3. Nếu cấu hình defaultPostThumbnailUrl thay đổi, cập nhật các bài viết cũ
+    if (settings.defaultPostThumbnailUrl) {
+      const newDefaultUrl = String(settings.defaultPostThumbnailUrl)
+      await prisma.post.updateMany({
+        where: {
+          OR: [
+            { thumbnail: null },
+            { thumbnail: '' },
+            { thumbnail: oldDefaultUrl },
+            { thumbnail: '/uploads/thumbnails/news-default.jpg' },
+            { thumbnail: '/uploads/thumbnails/tuyen-sinh-default.jpg' },
+          ]
+        },
+        data: {
+          thumbnail: newDefaultUrl
+        }
+      })
+    }
+
     await prisma.activityLog.create({
       data: {
         action: 'update',
         entity: 'setting',
         entityId: 'system',
-        details: 'Cập nhật cấu hình hệ thống',
+        details: 'Cập nhật cấu hình hệ thống và cập nhật ảnh đại diện mặc định cho các bài viết cũ',
         userId: user.id,
       },
     })

@@ -152,13 +152,22 @@ export async function POST(request: NextRequest) {
       }
     })
 
+    // Resolve thumbnail: fallback to defaultPostThumbnailUrl from system settings if missing
+    let finalThumbnail = thumbnail
+    if (!finalThumbnail || finalThumbnail.trim() === '') {
+      const defaultSetting = await (prisma as any).setting.findUnique({
+        where: { key: 'defaultPostThumbnailUrl' }
+      })
+      finalThumbnail = defaultSetting?.value || '/uploads/thumbnails/tuyen-sinh-default.jpg'
+    }
+
     const post = await prisma.post.create({
       data: {
         title,
         slug,
         content,
         excerpt,
-        thumbnail,
+        thumbnail: finalThumbnail,
         status: finalStatus,
         isFeatured: !!isFeatured,
         isPinned: !!isPinned,
