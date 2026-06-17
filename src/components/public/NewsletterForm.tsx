@@ -45,12 +45,13 @@ export default function NewsletterForm() {
           display: 'flex', 
           alignItems: 'center', 
           gap: '8px', 
-          color: 'var(--color-success)', 
-          background: 'rgba(16, 185, 129, 0.1)', 
+          color: '#10b981', 
+          background: 'rgba(16, 185, 129, 0.08)', 
           padding: '12px 16px', 
-          borderRadius: 'var(--radius-md)',
+          borderRadius: '12px',
           fontSize: 'var(--font-size-sm)',
-          fontWeight: 600,
+          fontWeight: 700,
+          border: '1px solid rgba(16, 185, 129, 0.15)',
           animation: 'scaleIn 0.3s ease-out'
         }}
       >
@@ -70,25 +71,44 @@ export default function NewsletterForm() {
         width: '100%'
       }}
     >
-      <div 
-        style={{ 
-          display: 'flex', 
-          background: 'rgba(255, 255, 255, 0.08)', 
-          borderRadius: 'var(--radius-md)', 
-          padding: '4px',
-          border: '1px solid rgba(255, 255, 255, 0.15)',
-          overflow: 'hidden',
-          transition: 'all 0.3s ease'
-        }}
-        onFocus={(e) => {
-          e.currentTarget.style.borderColor = 'var(--color-gold)'
-          e.currentTarget.style.boxShadow = '0 0 10px rgba(255, 109, 0, 0.2)'
-        }}
-        onBlur={(e) => {
-          e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)'
-          e.currentTarget.style.boxShadow = 'none'
-        }}
-      >
+      <style>{`
+        .newsletter-container {
+          display: flex;
+          background: rgba(255, 255, 255, 0.08);
+          border-radius: 10px;
+          padding: 4px;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          overflow: hidden;
+          transition: all 0.3s ease;
+        }
+        .newsletter-container:focus-within {
+          border-color: #6366f1;
+          box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+        }
+        .newsletter-btn {
+          background: linear-gradient(135deg, #6366f1, #a855f7);
+          color: white;
+          border: none;
+          border-radius: 6px;
+          width: 36px;
+          height: 36px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        .newsletter-btn:hover {
+          opacity: 0.9;
+          transform: scale(1.05);
+        }
+        .newsletter-btn:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          transform: none;
+        }
+      `}</style>
+      <div className="newsletter-container">
         <input
           type="email"
           value={email}
@@ -109,32 +129,13 @@ export default function NewsletterForm() {
         <button
           type="submit"
           disabled={loading || !email}
-          style={{
-            background: 'var(--color-gold)',
-            color: 'var(--color-navy-dark)',
-            border: 'none',
-            borderRadius: 'var(--radius-sm)',
-            width: '36px',
-            height: '36px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            transition: 'background 0.2s',
-            opacity: email ? 1 : 0.6
-          }}
-          onMouseEnter={(e) => {
-            if (email) e.currentTarget.style.background = 'var(--color-gold-light)'
-          }}
-          onMouseLeave={(e) => {
-            if (email) e.currentTarget.style.background = 'var(--color-gold)'
-          }}
+          className="newsletter-btn"
         >
           {loading ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
         </button>
       </div>
       {error && (
-        <span style={{ fontSize: '11px', color: 'var(--color-danger)', paddingLeft: '4px' }}>
+        <span style={{ fontSize: '11px', color: '#ef4444', paddingLeft: '4px' }}>
           {error}
         </span>
       )}

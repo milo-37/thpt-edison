@@ -65,28 +65,69 @@ export default async function PostDetailPage(props: Props) {
   const defaultThumbnail = '/uploads/thumbnails/news-default.jpg'
 
   return (
-    <div className="section section-alt" style={{ minHeight: '80vh', padding: 'var(--space-12) 0' }}>
-      <div className="container" style={{ maxWidth: 'var(--content-width)' }}>
+    <div className="section section-alt" style={{ minHeight: '80vh', padding: 'var(--space-12) 0', background: 'linear-gradient(180deg, #ffffff 0%, #f4f6ff 100%)', position: 'relative' }}>
+      <style>{`
+        .back-link-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          fontSize: var(--font-size-sm);
+          color: #4f46e5;
+          margin-bottom: var(--space-6);
+          font-weight: 700;
+          transition: transform 0.2s ease;
+        }
+        .back-link-btn:hover {
+          transform: translateX(-4px);
+        }
+        .attachment-link-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 12px 16px;
+          background: rgba(255, 255, 255, 0.5);
+          border-radius: 12px;
+          border: 1px solid rgba(99, 102, 241, 0.12);
+          font-size: 14px;
+          color: var(--color-gray-700);
+          transition: all 0.2s ease;
+        }
+        .attachment-link-item:hover {
+          background: rgba(99, 102, 241, 0.05);
+          border-color: #6366f1;
+        }
+        .related-post-card {
+          background: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(10px);
+          padding: var(--space-6);
+          border-radius: 16px;
+          border: 1px solid rgba(99, 102, 241, 0.12);
+          box-shadow: 0 4px 20px rgba(99, 102, 241, 0.02);
+          transition: all 0.3s ease;
+        }
+        .related-post-card:hover {
+          transform: translateY(-4px);
+          border-color: rgba(99, 102, 241, 0.25);
+          box-shadow: 0 10px 25px rgba(99, 102, 241, 0.05);
+        }
+      `}</style>
+      {/* Background blobs */}
+      <div style={{ position: 'absolute', top: '10%', left: '5%', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%)', filter: 'blur(50px)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', bottom: '15%', right: '5%', width: '250px', height: '250px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(168, 85, 247, 0.04) 0%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none' }} />
+
+      <div className="container" style={{ maxWidth: 'var(--content-width)', position: 'relative', zIndex: 1 }}>
         
         {/* Nút quay lại */}
         <Link
           href="/tin-tuc"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '4px',
-            fontSize: 'var(--font-size-sm)',
-            color: 'var(--color-primary)',
-            marginBottom: 'var(--space-6)',
-            fontWeight: 600
-          }}
+          className="back-link-btn"
         >
           <ChevronLeft size={16} />
           Quay lại danh sách tin tức
         </Link>
 
         {/* Nội dung bài viết */}
-        <article style={{ background: 'var(--color-white)', padding: 'var(--space-8) var(--space-10)', borderRadius: 'var(--radius-xl)', boxShadow: 'var(--shadow-md)' }}>
+        <article style={{ background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(12px)', padding: 'var(--space-8) var(--space-10)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.15)', boxShadow: '0 20px 45px rgba(99, 102, 241, 0.05)' }}>
           
           {/* Metadata */}
           {post.category && (
@@ -104,28 +145,26 @@ export default async function PostDetailPage(props: Props) {
               display: 'flex',
               gap: 'var(--space-6)',
               flexWrap: 'wrap',
-              fontSize: 'var(--font-size-xs)',
-              color: 'var(--color-gray-400)',
+              fontSize: '13px',
+              color: 'var(--color-gray-500)',
               paddingBottom: 'var(--space-6)',
-              borderBottom: '1px solid var(--color-gray-100)',
+              borderBottom: '1px solid rgba(99, 102, 241, 0.12)',
               marginBottom: 'var(--space-6)'
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <User size={14} />
+              <User size={14} style={{ color: '#6366f1' }} />
               <span>Người đăng: <strong>{post.author.name}</strong></span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <Calendar size={14} />
+              <Calendar size={14} style={{ color: '#6366f1' }} />
               <span>Ngày xuất bản: {post.publishedAt ? formatDateVi(post.publishedAt) : ''}</span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <Eye size={14} />
+              <Eye size={14} style={{ color: '#6366f1' }} />
               <span>{post.viewCount + 1} lượt xem</span>
             </div>
           </div>
-
-
 
           {/* Khối Nội Dung Rich Text */}
           <div
@@ -140,7 +179,7 @@ export default async function PostDetailPage(props: Props) {
 
           {/* Đính kèm tài liệu (nếu có) */}
           {post.attachments.length > 0 && (
-            <div style={{ marginTop: 'var(--space-10)', paddingTop: 'var(--space-6)', borderTop: '1px solid var(--color-gray-200)' }}>
+            <div style={{ marginTop: 'var(--space-10)', paddingTop: 'var(--space-6)', borderTop: '1px solid rgba(99, 102, 241, 0.15)' }}>
               <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'var(--color-navy)', marginBottom: 'var(--space-4)' }}>
                 Tài liệu đính kèm bài viết:
               </h3>
@@ -150,20 +189,10 @@ export default async function PostDetailPage(props: Props) {
                     key={file.id}
                     href={file.filePath}
                     download={file.fileName}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      padding: 'var(--space-3) var(--space-4)',
-                      background: 'var(--color-gray-50)',
-                      borderRadius: 'var(--radius-md)',
-                      border: '1px solid var(--color-gray-200)',
-                      fontSize: 'var(--font-size-sm)',
-                      color: 'var(--color-gray-700)',
-                    }}
+                    className="attachment-link-item"
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-                      <FileText size={16} style={{ color: 'var(--color-primary)' }} />
+                      <FileText size={16} style={{ color: '#4f46e5' }} />
                       <span>{file.fileName} ({formatFileSize(file.fileSize)})</span>
                     </div>
                     <Download size={16} style={{ color: 'var(--color-gray-400)' }} />
@@ -185,13 +214,7 @@ export default async function PostDetailPage(props: Props) {
               {relatedPosts.map((rPost) => (
                 <div
                   key={rPost.id}
-                  style={{
-                    background: 'var(--color-white)',
-                    padding: 'var(--space-6)',
-                    borderRadius: 'var(--radius-lg)',
-                    border: '1px solid var(--color-gray-100)',
-                    boxShadow: 'var(--shadow-sm)'
-                  }}
+                  className="related-post-card"
                 >
                   {rPost.category && (
                     <span className="card-category" style={{ fontSize: '10px', padding: '2px 8px' }}>

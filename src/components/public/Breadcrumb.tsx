@@ -34,16 +34,22 @@ export default function Breadcrumb({ customTitle }: BreadcrumbProps) {
   }
 
   return (
-    <div className="container" style={{ padding: 'var(--space-4) var(--space-4) 0 var(--space-4)' }}>
+    <div className="container" style={{ padding: 'var(--space-6) var(--space-4) 0 var(--space-4)' }}>
       <nav 
         aria-label="breadcrumb" 
         style={{ 
-          display: 'flex', 
+          display: 'inline-flex', 
           alignItems: 'center', 
           gap: '8px', 
-          fontSize: 'var(--font-size-xs)', 
+          fontSize: '13px', 
           color: 'var(--color-gray-500)',
-          flexWrap: 'wrap'
+          flexWrap: 'wrap',
+          background: 'rgba(255, 255, 255, 0.45)',
+          backdropFilter: 'blur(8px)',
+          border: '1px solid rgba(99, 102, 241, 0.1)',
+          padding: '8px 20px',
+          borderRadius: '999px',
+          boxShadow: '0 4px 20px -5px rgba(99, 102, 241, 0.05)',
         }}
       >
         <Link 
@@ -56,7 +62,7 @@ export default function Breadcrumb({ customTitle }: BreadcrumbProps) {
             textDecoration: 'none',
             transition: 'color var(--transition-fast)'
           }}
-          onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-primary)'}
+          onMouseEnter={(e) => e.currentTarget.style.color = '#4f46e5'}
           onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-gray-500)'}
         >
           <Home size={14} />
@@ -72,7 +78,7 @@ export default function Breadcrumb({ customTitle }: BreadcrumbProps) {
             <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <ChevronRight size={12} style={{ color: 'var(--color-gray-400)', flexShrink: 0 }} />
               {isLast ? (
-                <span style={{ fontWeight: 600, color: 'var(--color-navy-light)' }}>
+                <span style={{ fontWeight: 700, color: '#4f46e5' }}>
                   {label}
                 </span>
               ) : (
@@ -83,7 +89,7 @@ export default function Breadcrumb({ customTitle }: BreadcrumbProps) {
                     textDecoration: 'none',
                     transition: 'color var(--transition-fast)'
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-primary)'}
+                  onMouseEnter={(e) => e.currentTarget.style.color = '#4f46e5'}
                   onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-gray-500)'}
                 >
                   {label}

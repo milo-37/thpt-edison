@@ -19,27 +19,35 @@ export default async function FaqsPage() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      {/* Banner */}
+      {/* Banner - Light Futuristic */}
       <section
         style={{
-          background: 'linear-gradient(135deg, var(--color-navy-dark), var(--color-navy))',
-          color: 'var(--color-white)',
-          padding: 'var(--space-12) 0',
-          textAlign: 'center'
+          background: 'linear-gradient(135deg, #f0f4ff 0%, #e8eeff 50%, #f5f0ff 100%)',
+          color: '#0f172a',
+          padding: 'var(--space-16) 0',
+          textAlign: 'center',
+          position: 'relative',
+          overflow: 'hidden',
+          borderBottom: '1px solid rgba(99, 102, 241, 0.15)'
         }}
       >
-        <div className="container">
-          <h1 style={{ fontSize: 'var(--font-size-4xl)', fontWeight: 800, margin: 0, color: 'var(--color-gold)' }}>
+        {/* Animated grid overlay */}
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.3, pointerEvents: 'none', backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(99,102,241,0.08) 1px, transparent 0)', backgroundSize: '32px 32px' }} />
+        <div style={{ position: 'absolute', top: '-20%', left: '10%', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)', filter: 'blur(30px)', pointerEvents: 'none' }} />
+
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <span className="section-label">Giải đáp thắc mắc</span>
+          <h1 style={{ fontSize: 'var(--font-size-4xl)', fontWeight: 900, margin: '12px 0 0 0', background: 'linear-gradient(135deg, #3b82f6, #4f46e5, #7c3aed)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontFamily: 'var(--font-title)' }}>
             Hỏi đáp thường gặp (FAQ)
           </h1>
-          <p style={{ opacity: 0.8, fontSize: 'var(--font-size-base)', marginTop: 'var(--space-2)', maxWidth: '600px', margin: 'var(--space-2) auto 0 auto' }}>
+          <p style={{ color: 'var(--color-gray-600)', fontSize: 'var(--font-size-base)', marginTop: 'var(--space-3)', maxWidth: '600px', margin: 'var(--space-3) auto 0 auto', fontWeight: 500 }}>
             Giải đáp nhanh các thắc mắc phổ biến về tuyển sinh, đào tạo, học phí và đời sống học sinh.
           </p>
         </div>
       </section>
 
       {/* FAQs List Section */}
-      <section className="section">
+      <section className="section" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f5f8ff 100%)' }}>
         <div className="container" style={{ maxWidth: '800px' }}>
           <FaqsList initialFaqs={faqs} />
         </div>

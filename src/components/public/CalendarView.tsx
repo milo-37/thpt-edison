@@ -92,31 +92,62 @@ export default function CalendarView({ events }: CalendarViewProps) {
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'var(--space-8)' }}>
+      <style>{`
+        .calendar-cell {
+          aspect-ratio: 1;
+          background: transparent;
+          border: none;
+          border-radius: 8px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          position: relative;
+          transition: all 0.2s ease;
+          padding: 0;
+        }
+        .calendar-cell:hover {
+          background: rgba(99, 102, 241, 0.08) !important;
+          transform: scale(1.05);
+        }
+        .calendar-container {
+          background: rgba(255, 255, 255, 0.75);
+          backdrop-filter: blur(20px);
+          padding: var(--space-6);
+          border-radius: 24px;
+          border: 1px solid rgba(99, 102, 241, 0.12);
+          box-shadow: 0 4px 20px rgba(99, 102, 241, 0.01);
+        }
+        .events-panel {
+          background: rgba(255, 255, 255, 0.75);
+          backdrop-filter: blur(20px);
+          padding: var(--space-6);
+          border-radius: 24px;
+          border: 1px solid rgba(99, 102, 241, 0.12);
+          box-shadow: 0 4px 20px rgba(99, 102, 241, 0.01);
+          display: flex;
+          flex-direction: column;
+        }
+      `}</style>
+
       {/* Calendar Grid Container */}
-      <div 
-        style={{ 
-          background: 'var(--color-white)', 
-          padding: 'var(--space-6)', 
-          borderRadius: 'var(--radius-xl)', 
-          border: '1px solid var(--color-gray-200)',
-          boxShadow: 'var(--shadow-md)'
-        }}
-      >
+      <div className="calendar-container">
         {/* Calendar Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-6)' }}>
           <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 800, color: 'var(--color-navy)', textTransform: 'capitalize', margin: 0 }}>
             {monthYearLabel}
           </h3>
           <div style={{ display: 'flex', gap: '4px' }}>
-            <button onClick={handlePrevMonth} className="btn btn-ghost btn-icon btn-sm"><ChevronLeft size={18} /></button>
-            <button onClick={handleNextMonth} className="btn btn-ghost btn-icon btn-sm"><ChevronRight size={18} /></button>
+            <button onClick={handlePrevMonth} className="btn btn-ghost btn-icon btn-sm" style={{ color: '#6366f1' }}><ChevronLeft size={18} /></button>
+            <button onClick={handleNextMonth} className="btn btn-ghost btn-icon btn-sm" style={{ color: '#6366f1' }}><ChevronRight size={18} /></button>
           </div>
         </div>
 
         {/* Calendar Grid Header */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', textAlign: 'center', marginBottom: '8px', borderBottom: '1px solid var(--color-gray-100)', paddingBottom: '8px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', textAlign: 'center', marginBottom: '8px', borderBottom: '1px solid rgba(99, 102, 241, 0.08)', paddingBottom: '8px' }}>
           {dayNames.map((name, idx) => (
-            <span key={idx} style={{ fontSize: '11px', fontWeight: 700, color: idx === 0 ? 'var(--color-danger)' : 'var(--color-gray-400)' }}>
+            <span key={idx} style={{ fontSize: '11px', fontWeight: 700, color: idx === 0 ? '#ef4444' : 'var(--color-gray-400)' }}>
               {name}
             </span>
           ))}
@@ -133,28 +164,13 @@ export default function CalendarView({ events }: CalendarViewProps) {
               <button
                 key={idx}
                 onClick={() => handleDayClick(cell.date, dayEvents, cell.isCurrentMonth)}
+                className="calendar-cell"
                 style={{
-                  aspectRatio: '1',
-                  background: isToday ? 'rgba(15, 92, 183, 0.08)' : 'transparent',
-                  border: isToday ? '1.5px solid var(--color-primary)' : 'none',
-                  borderRadius: 'var(--radius-md)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: 'pointer',
-                  position: 'relative',
+                  background: isToday ? 'rgba(99, 102, 241, 0.08)' : 'transparent',
+                  border: isToday ? '1.5px solid #6366f1' : 'none',
                   color: cell.isCurrentMonth ? 'var(--color-navy)' : 'var(--color-gray-300)',
                   fontWeight: cell.isCurrentMonth ? 700 : 500,
                   fontSize: 'var(--font-size-sm)',
-                  transition: 'background 0.2s ease',
-                  padding: 0
-                }}
-                onMouseEnter={(e) => {
-                  if (!isToday) e.currentTarget.style.background = 'var(--color-gray-50)'
-                }}
-                onMouseLeave={(e) => {
-                  if (!isToday) e.currentTarget.style.background = 'transparent'
                 }}
               >
                 <span>{cell.day}</span>
@@ -164,7 +180,7 @@ export default function CalendarView({ events }: CalendarViewProps) {
                     style={{
                       width: '6px',
                       height: '6px',
-                      background: 'var(--color-gold)',
+                      background: 'linear-gradient(135deg, #6366f1, #a855f7)',
                       borderRadius: '50%',
                       position: 'absolute',
                       bottom: '4px'
@@ -178,23 +194,13 @@ export default function CalendarView({ events }: CalendarViewProps) {
       </div>
 
       {/* Selected Day Events Details panel */}
-      <div 
-        style={{ 
-          background: 'var(--color-white)', 
-          padding: 'var(--space-6)', 
-          borderRadius: 'var(--radius-xl)', 
-          border: '1px solid var(--color-gray-200)',
-          boxShadow: 'var(--shadow-md)',
-          display: 'flex',
-          flexDirection: 'column'
-        }}
-      >
+      <div className="events-panel">
         {selectedDateEvents ? (
           <>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: '1px solid var(--color-gray-100)', paddingBottom: 'var(--space-3)', marginBottom: 'var(--space-4)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', borderBottom: '1px solid rgba(99, 102, 241, 0.1)', paddingBottom: 'var(--space-3)', marginBottom: 'var(--space-4)' }}>
               <div>
-                <span style={{ fontSize: '10px', color: 'var(--color-gold-dark)', fontWeight: 700, textTransform: 'uppercase' }}>Danh sách sự kiện</span>
-                <h4 style={{ fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'var(--color-navy)', margin: '2px 0 0 0' }}>
+                <span style={{ fontSize: '10px', color: '#6366f1', fontWeight: 700, textTransform: 'uppercase' }}>Danh sách sự kiện</span>
+                <h4 style={{ fontSize: 'var(--font-size-sm)', fontWeight: 800, color: 'var(--color-navy)', margin: '2px 0 0 0' }}>
                   {selectedDayLabel}
                 </h4>
               </div>
@@ -207,15 +213,17 @@ export default function CalendarView({ events }: CalendarViewProps) {
                   key={event.id} 
                   style={{ 
                     padding: 'var(--space-4)', 
-                    background: 'var(--color-gray-50)', 
-                    borderRadius: 'var(--radius-lg)', 
-                    borderLeft: '4px solid var(--color-gold)',
+                    background: 'rgba(99, 102, 241, 0.04)', 
+                    borderRadius: '16px', 
+                    borderLeft: '4px solid #6366f1',
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '6px'
+                    gap: '6px',
+                    border: '1px solid rgba(99, 102, 241, 0.08)',
+                    borderLeftWidth: '4px'
                   }}
                 >
-                  <h5 style={{ fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'var(--color-navy)', margin: 0 }}>
+                  <h5 style={{ fontSize: 'var(--font-size-sm)', fontWeight: 800, color: 'var(--color-navy)', margin: 0 }}>
                     {event.title}
                   </h5>
                   {event.description && (
@@ -225,12 +233,12 @@ export default function CalendarView({ events }: CalendarViewProps) {
                   )}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '4px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: 'var(--color-gray-500)' }}>
-                      <Clock size={12} style={{ color: 'var(--color-primary)' }} />
+                      <Clock size={12} style={{ color: '#6366f1' }} />
                       <span>{new Date(event.startDate).toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}</span>
                     </div>
                     {event.location && (
                       <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '11px', color: 'var(--color-gray-500)' }}>
-                        <MapPin size={12} style={{ color: 'var(--color-primary)' }} />
+                        <MapPin size={12} style={{ color: '#6366f1' }} />
                         <span>{event.location}</span>
                       </div>
                     )}
@@ -241,8 +249,8 @@ export default function CalendarView({ events }: CalendarViewProps) {
           </>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, color: 'var(--color-gray-400)', textAlign: 'center', padding: 'var(--space-6)' }}>
-            <CalendarIcon size={40} style={{ color: 'var(--color-gray-300)', marginBottom: 'var(--space-2)' }} />
-            <p style={{ fontSize: 'var(--font-size-sm)', margin: 0 }}>Click chọn một ngày có dấu chấm vàng trên lịch để xem các hoạt động, sự kiện diễn ra.</p>
+            <CalendarIcon size={40} style={{ color: '#6366f1', opacity: 0.5, marginBottom: 'var(--space-2)' }} />
+            <p style={{ fontSize: 'var(--font-size-sm)', margin: 0, lineHeight: 1.5 }}>Click chọn một ngày có dấu chấm trên lịch để xem các hoạt động, sự kiện diễn ra.</p>
           </div>
         )}
       </div>

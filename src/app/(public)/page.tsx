@@ -6,7 +6,7 @@ import GalleryGrid from '@/components/public/GalleryGrid'
 import QuickStats from '@/components/public/QuickStats'
 import Testimonials from '@/components/public/Testimonials'
 import Link from 'next/link'
-import { ArrowRight, Bell, Calendar, Eye, Compass, ShieldCheck, CheckCircle2, Award, ClipboardList, BookOpen, Images } from 'lucide-react'
+import { ArrowRight, Bell, Calendar, Eye, Compass, ShieldCheck, CheckCircle2, Award, ClipboardList, BookOpen, Images, GraduationCap } from 'lucide-react'
 
 export const revalidate = 60
 
@@ -95,7 +95,7 @@ export default async function HomePage() {
                 background: 'var(--glass-bg)',
                 backdropFilter: 'var(--glass-blur)',
                 WebkitBackdropFilter: 'var(--glass-blur)',
-                border: '1px solid rgba(255, 107, 0, 0.15)',
+                border: '1px solid rgba(99, 102, 241, 0.15)',
                 borderRadius: 'var(--radius-xl)',
                 padding: '14px 24px',
                 boxShadow: 'var(--shadow-md)',
@@ -136,21 +136,21 @@ export default async function HomePage() {
                   align-items: center;
                   gap: 8px;
                   padding: 6px 16px;
-                  background: rgba(10, 75, 175, 0.03);
-                  border: 1px solid rgba(10, 75, 175, 0.06);
+                  background: rgba(99, 102, 241, 0.04);
+                  border: 1px solid rgba(99, 102, 241, 0.08);
                   border-radius: 12px;
                   transition: all var(--transition-base);
                 }
                 .pinned-link-card:hover {
-                  color: var(--color-navy) !important;
-                  background: rgba(10, 75, 175, 0.08);
-                  border-color: rgba(10, 75, 175, 0.15);
+                  color: #4f46e5 !important;
+                  background: rgba(99, 102, 241, 0.08);
+                  border-color: rgba(99, 102, 241, 0.2);
                   transform: translateY(-2px);
-                  box-shadow: 0 4px 12px rgba(10, 75, 175, 0.05);
+                  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.08);
                 }
                 .pinned-link-card .chevron-icon {
                   transition: transform var(--transition-fast);
-                  color: var(--color-gold);
+                  color: #6366f1;
                 }
                 .pinned-link-card:hover .chevron-icon {
                   transform: translateX(3px);
@@ -165,7 +165,7 @@ export default async function HomePage() {
                   left: 0, 
                   right: 0, 
                   height: '3px', 
-                  background: 'linear-gradient(90deg, var(--color-gold) 0%, var(--color-primary) 50%, var(--color-gold) 100%)',
+                  background: 'linear-gradient(90deg, #6366f1 0%, #8b5cf6 50%, #6366f1 100%)',
                 }} 
               />
 
@@ -176,22 +176,22 @@ export default async function HomePage() {
                   display: 'flex', 
                   alignItems: 'center', 
                   gap: '8px', 
-                  background: 'linear-gradient(135deg, rgba(255, 107, 0, 0.12) 0%, rgba(255, 107, 0, 0.05) 100%)', 
-                  color: 'var(--color-gold-dark)', 
+                  background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(139, 92, 246, 0.06) 100%)', 
+                  color: '#4f46e5', 
                   padding: '6px 14px', 
                   borderRadius: '9999px',
                   fontSize: '11px',
                   fontWeight: 800,
                   letterSpacing: '1px',
-                  border: '1px solid rgba(255, 107, 0, 0.2)',
+                  border: '1px solid rgba(99, 102, 241, 0.2)',
                   cursor: 'default',
                   userSelect: 'none'
                 }}
               >
                 {/* Pulsing indicator dot */}
                 <span style={{ position: 'relative', display: 'flex', height: '8px', width: '8px' }}>
-                  <span className="pulse-dot-ping" style={{ position: 'absolute', display: 'inline-flex', height: '100%', width: '100%', borderRadius: '50%', backgroundColor: 'var(--color-gold)', opacity: 0.75 }}></span>
-                  <span style={{ position: 'relative', display: 'inline-flex', borderRadius: '50%', height: '8px', width: '8px', backgroundColor: 'var(--color-gold)' }}></span>
+                  <span className="pulse-dot-ping" style={{ position: 'absolute', display: 'inline-flex', height: '100%', width: '100%', borderRadius: '50%', backgroundColor: '#6366f1', opacity: 0.75 }}></span>
+                  <span style={{ position: 'relative', display: 'inline-flex', borderRadius: '50%', height: '8px', width: '8px', backgroundColor: '#6366f1' }}></span>
                 </span>
                 <Bell size={13} className="bell-shake-auto" />
                 <span>THÔNG BÁO MỚI</span>
@@ -205,7 +205,7 @@ export default async function HomePage() {
                     href={`/tin-tuc/${post.slug}`}
                     className="pinned-link-card"
                   >
-                    <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '18px', height: '18px', borderRadius: '50%', background: 'rgba(255, 107, 0, 0.1)', fontSize: '10px' }}>📌</span>
+                    <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '18px', height: '18px', borderRadius: '50%', background: 'rgba(99, 102, 241, 0.1)', fontSize: '10px' }}>📌</span>
                     <span>{post.title}</span>
                     <span className="chevron-icon" style={{ fontSize: '12px', fontWeight: 'bold' }}>➔</span>
                   </Link>
@@ -237,7 +237,7 @@ export default async function HomePage() {
                   alt="Edison School học tập"
                   style={{ width: '100%', height: '400px', objectFit: 'cover' }}
                 />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(10, 75, 175, 0.3) 0%, transparent 60%)' }} />
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(79, 70, 229, 0.2) 0%, transparent 60%)' }} />
               </div>
             </div>
             
@@ -251,7 +251,7 @@ export default async function HomePage() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
                 {/* Tầm nhìn */}
                 <div className="glass-card" style={{ display: 'flex', gap: 'var(--space-4)', padding: 'var(--space-5)', borderRadius: '24px', background: 'rgba(255, 255, 255, 0.7)', border: '1px solid rgba(255,255,255,0.4)', boxShadow: 'var(--shadow-sm)' }}>
-                  <div style={{ width: '48px', height: '48px', borderRadius: '16px', background: 'rgba(10, 75, 175, 0.08)', color: 'var(--color-primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <div style={{ width: '48px', height: '48px', borderRadius: '16px', background: 'rgba(99, 102, 241, 0.08)', color: '#4f46e5', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <Eye size={22} />
                   </div>
                   <div>
@@ -264,7 +264,7 @@ export default async function HomePage() {
 
                 {/* Sứ mệnh */}
                 <div className="glass-card" style={{ display: 'flex', gap: 'var(--space-4)', padding: 'var(--space-5)', borderRadius: '24px', background: 'rgba(255, 255, 255, 0.7)', border: '1px solid rgba(255,255,255,0.4)', boxShadow: 'var(--shadow-sm)' }}>
-                  <div style={{ width: '48px', height: '48px', borderRadius: '16px', background: 'rgba(255, 109, 0, 0.08)', color: 'var(--color-gold-dark)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <div style={{ width: '48px', height: '48px', borderRadius: '16px', background: 'rgba(168, 85, 247, 0.08)', color: '#7c3aed', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                     <Compass size={22} />
                   </div>
                   <div>
@@ -315,104 +315,153 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 6. Section Sự kiện & Album ảnh - PREMIUM */}
+      {/* 6. Section Sự kiện & Album ảnh - FUTURISTIC PREMIUM */}
       <section className="section" style={{ background: 'var(--color-gray-50)', position: 'relative', overflow: 'hidden' }}>
         <style>{`
+          @keyframes s6MeshGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+          }
+          @keyframes s6Float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+          }
           .section6-card-container {
             background: var(--color-white);
-            border-radius: 24px;
-            padding: var(--space-8);
-            border: 1px solid var(--color-gray-100);
-            box-shadow: 0 4px 24px rgba(15, 23, 42, 0.04);
+            border-radius: 28px;
+            padding: 32px;
             position: relative;
             overflow: hidden;
-            transition: box-shadow 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 24px rgba(15, 23, 42, 0.04);
+          }
+          .section6-card-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+            padding: 1.5px;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(168, 85, 247, 0.1), rgba(99, 102, 241, 0.05));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
           }
           .section6-card-container:hover {
-            box-shadow: 0 8px 32px rgba(15, 23, 42, 0.08);
+            box-shadow: 0 16px 48px rgba(79, 70, 229, 0.08), 0 0 0 1px rgba(99, 102, 241, 0.06);
+            transform: translateY(-4px);
           }
           .section6-card-container .accent-line {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            border-radius: 24px 24px 0 0;
+            height: 3px;
+            border-radius: 28px 28px 0 0;
           }
           .section6-header-badge {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            font-size: 11px;
-            font-weight: 700;
+            font-size: 10px;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             padding: 5px 14px;
             border-radius: 999px;
             margin-bottom: var(--space-3);
           }
           .section6-title {
-            font-size: var(--font-size-2xl);
+            font-size: clamp(1.4rem, 3vw, var(--font-size-2xl));
             font-weight: 800;
             color: var(--color-navy);
-            margin: 0 0 var(--space-2) 0;
+            margin: 0 0 var(--space-1) 0;
             font-family: var(--font-title);
             line-height: 1.2;
+            letter-spacing: -0.02em;
+            position: relative;
+            display: inline-block;
+          }
+          .section6-title-underline {
+            display: block;
+            width: 48px;
+            height: 3px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            border-radius: 3px;
+            margin-top: 8px;
+            margin-bottom: 4px;
+            transition: width 0.3s ease;
+          }
+          .section6-card-container:hover .section6-title-underline {
+            width: 72px;
           }
           .section6-subtitle {
-            font-size: var(--font-size-sm);
-            color: var(--color-gray-500);
+            font-size: 14px;
+            color: var(--color-gray-400);
             margin: 0 0 var(--space-6) 0;
-            line-height: 1.5;
+            line-height: 1.6;
+            max-width: 400px;
           }
           .section6-view-all {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            font-size: var(--font-size-sm);
+            font-size: 14px;
             font-weight: 600;
-            color: var(--color-primary);
+            color: #4f46e5;
             text-decoration: none;
-            padding: 8px 20px;
+            padding: 10px 24px;
             border-radius: 999px;
-            background: rgba(10, 75, 175, 0.06);
-            border: 1px solid rgba(10, 75, 175, 0.1);
-            transition: all 0.25s ease;
+            background: rgba(99, 102, 241, 0.04);
+            border: 1px solid rgba(99, 102, 241, 0.1);
           }
           .section6-view-all:hover {
-            background: rgba(10, 75, 175, 0.12);
-            transform: translateX(3px);
-            border-color: rgba(10, 75, 175, 0.2);
+            background: rgba(99, 102, 241, 0.1);
+            transform: translateX(4px);
+            border-color: rgba(99, 102, 241, 0.25);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.08);
           }
           @media (max-width: 768px) {
             .section6-grid-layout { grid-template-columns: 1fr !important; }
+            .section6-card-container { padding: 24px !important; }
           }
         `}</style>
-        {/* Subtle background pattern */}
+
+        {/* Animated mesh background */}
         <div style={{
-          position: 'absolute', inset: 0, opacity: 0.3, pointerEvents: 'none',
-          backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(10,75,175,0.05) 1px, transparent 0)',
-          backgroundSize: '40px 40px'
+          position: 'absolute', inset: 0, opacity: 0.4, pointerEvents: 'none',
+          backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(99,102,241,0.04) 1px, transparent 0)',
+          backgroundSize: '32px 32px'
+        }} />
+        {/* Floating accent orbs */}
+        <div style={{
+          position: 'absolute', top: '-10%', right: '-5%', width: '400px', height: '400px',
+          borderRadius: '50%', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%)',
+          animation: 's6Float 12s ease-in-out infinite', pointerEvents: 'none'
+        }} />
+        <div style={{
+          position: 'absolute', bottom: '-15%', left: '-8%', width: '350px', height: '350px',
+          borderRadius: '50%', background: 'radial-gradient(circle, rgba(168, 85, 247, 0.06) 0%, transparent 70%)',
+          animation: 's6Float 15s ease-in-out infinite 3s', pointerEvents: 'none'
         }} />
 
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <div className="section6-grid-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-8)' }}>
+          <div className="section6-grid-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '28px' }}>
             
             {/* Cột trái: Album ảnh */}
             <div className="section6-card-container">
-              <div className="accent-line" style={{ background: 'linear-gradient(90deg, var(--color-primary), var(--color-gold))' }} />
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 'var(--space-5)' }}>
-                <div>
-                  <div className="section6-header-badge" style={{ color: 'var(--color-primary)', background: 'rgba(10, 75, 175, 0.06)', border: '1px solid rgba(10, 75, 175, 0.1)' }}>
-                    <Images size={13} />
-                    Thư viện
-                  </div>
-                  <h3 className="section6-title">Hình ảnh hoạt động</h3>
-                  <p className="section6-subtitle">Lưu giữ những khoảnh khắc đáng nhớ trong hành trình giáo dục Edison.</p>
+              <div className="accent-line" style={{ background: 'linear-gradient(90deg, #6366f1, #8b5cf6, #6366f1)' }} />
+              <div style={{ marginBottom: 'var(--space-5)' }}>
+                <div className="section6-header-badge" style={{ color: '#4f46e5', background: 'rgba(99, 102, 241, 0.06)', border: '1px solid rgba(99, 102, 241, 0.1)' }}>
+                  <Images size={12} />
+                  Thư viện ảnh
                 </div>
+                <h3 className="section6-title">Hình ảnh hoạt động</h3>
+                <div className="section6-title-underline" />
+                <p className="section6-subtitle">Lưu giữ những khoảnh khắc đáng nhớ trong hành trình giáo dục Edison.</p>
               </div>
               <GalleryGrid albums={latestAlbums} limit={4} />
-              <div style={{ marginTop: 'var(--space-5)', textAlign: 'center' }}>
+              <div style={{ marginTop: 'var(--space-6)', textAlign: 'center' }}>
                 <Link href="/hoat-dong?tab=gallery" className="section6-view-all">
                   Xem toàn bộ thư viện ảnh
                   <ArrowRight size={15} />
@@ -422,20 +471,19 @@ export default async function HomePage() {
 
             {/* Cột phải: Lịch Sự kiện */}
             <div className="section6-card-container">
-              <div className="accent-line" style={{ background: 'linear-gradient(90deg, var(--color-gold), var(--color-gold-dark))' }} />
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 'var(--space-5)' }}>
-                <div>
-                  <div className="section6-header-badge" style={{ color: 'var(--color-gold-dark)', background: 'rgba(255, 107, 0, 0.06)', border: '1px solid rgba(255, 107, 0, 0.12)' }}>
-                    <Calendar size={13} />
-                    Lịch trình
-                  </div>
-                  <h3 className="section6-title">Sự kiện sắp tới</h3>
-                  <p className="section6-subtitle">Các hoạt động, hội thảo và kỳ thi quan trọng trong năm học.</p>
+              <div className="accent-line" style={{ background: 'linear-gradient(90deg, #8b5cf6, #6366f1, #8b5cf6)' }} />
+              <div style={{ marginBottom: 'var(--space-5)' }}>
+                <div className="section6-header-badge" style={{ color: '#7c3aed', background: 'rgba(168, 85, 247, 0.06)', border: '1px solid rgba(168, 85, 247, 0.1)' }}>
+                  <Calendar size={12} />
+                  Lịch trình
                 </div>
+                <h3 className="section6-title">Sự kiện sắp tới</h3>
+                <div className="section6-title-underline" style={{ background: 'linear-gradient(90deg, #8b5cf6, #6366f1)' }} />
+                <p className="section6-subtitle">Các hoạt động, hội thảo và kỳ thi quan trọng trong năm học.</p>
               </div>
               <EventCalendar events={upcomingEvents as any} />
-              <div style={{ marginTop: 'var(--space-5)', textAlign: 'center' }}>
-                <Link href="/hoat-dong?tab=calendar" className="section6-view-all" style={{ color: 'var(--color-gold-dark)', background: 'rgba(255, 107, 0, 0.06)', borderColor: 'rgba(255, 107, 0, 0.12)' }}>
+              <div style={{ marginTop: 'var(--space-6)', textAlign: 'center' }}>
+                <Link href="/hoat-dong?tab=calendar" className="section6-view-all" style={{ color: '#7c3aed', background: 'rgba(168, 85, 247, 0.04)', borderColor: 'rgba(168, 85, 247, 0.1)' }}>
                   Xem lịch hoạt động đầy đủ
                   <ArrowRight size={15} />
                 </Link>
@@ -446,16 +494,16 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 7. Section Tuyển sinh - FULL-WIDTH PREMIUM HERO */}
+      {/* 7. Section Tuyển sinh - FUTURISTIC PREMIUM */}
       <section style={{ position: 'relative', overflow: 'hidden' }}>
         <style>{`
           @keyframes admissionGlow {
-            0%, 100% { opacity: 0.4; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.1); }
+            0%, 100% { opacity: 0.25; transform: scale(1); }
+            50% { opacity: 0.55; transform: scale(1.15); }
           }
           @keyframes admissionFloat {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(1deg); }
           }
           @keyframes admissionPulse {
             0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.4); }
@@ -466,17 +514,25 @@ export default async function HomePage() {
             100% { background-position: 200% 0; }
           }
           @keyframes statCountUp {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(16px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
           }
+          @keyframes auroraShift {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 50% 0%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 50% 100%; }
+          }
+
+          /* Stat Cards */
           .admission-stat-card {
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 24px 20px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 32px 24px 28px;
             text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
             animation: statCountUp 0.6s ease-out both;
@@ -486,131 +542,182 @@ export default async function HomePage() {
           .admission-stat-card:nth-child(3) { animation-delay: 0.3s; }
           .admission-stat-card:nth-child(4) { animation-delay: 0.4s; }
           .admission-stat-card:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateY(-6px);
+            background: rgba(255, 255, 255, 0.06);
+            transform: translateY(-10px) scale(1.02);
             border-color: rgba(255, 107, 0, 0.3);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35), 0 0 30px rgba(255, 107, 0, 0.15);
           }
-          .admission-stat-card::after {
+          .admission-stat-card::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
             height: 3px;
-            background: linear-gradient(90deg, transparent, rgba(255, 107, 0, 0.5), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 0, 0.4), rgba(255, 215, 0, 0.3), transparent);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
           }
-          .admission-stat-card:hover::after {
+          .admission-stat-card:hover::before {
             opacity: 1;
           }
+          .admission-stat-icon-ring {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          .admission-stat-card:hover .admission-stat-icon-ring {
+            transform: scale(1.15) rotate(5deg);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+          }
           .admission-stat-number {
-            font-size: 36px;
+            font-size: 44px;
             font-weight: 900;
             font-family: var(--font-title);
-            background: linear-gradient(135deg, #FFD700, #FF6B00, #FFD700);
+            background: linear-gradient(135deg, #FFF5C0 0%, #FFB300 50%, #FF6B00 100%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             line-height: 1;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
+            letter-spacing: -0.03em;
+            text-shadow: 0 0 20px rgba(255, 107, 0, 0.1);
           }
           .admission-stat-label {
             font-size: 13px;
             font-weight: 600;
-            color: rgba(255, 255, 255, 0.7);
-            letter-spacing: 0.5px;
+            color: rgba(255, 255, 255, 0.55);
+            letter-spacing: 0.3px;
+            line-height: 1.4;
           }
+
+          /* Feature Rows */
           .admission-feature-row {
             display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 14px 18px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            transition: all 0.3s ease;
+            align-items: flex-start;
+            gap: 18px;
+            padding: 20px 24px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            backdrop-filter: blur(12px);
           }
           .admission-feature-row:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 107, 0, 0.2);
-            transform: translateX(6px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--row-accent, rgba(255, 107, 0, 0.2)) !important;
+            transform: translateX(8px);
+            box-shadow: 0 16px 36px var(--row-glow, rgba(0, 0, 0, 0.15));
+          }
+          .admission-feature-row::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 0;
+            background: linear-gradient(to bottom, var(--row-accent, var(--color-gold)), transparent);
+            border-radius: 4px;
+            transition: height 0.35s ease;
+          }
+          .admission-feature-row:hover::before {
+            height: 50%;
           }
           .admission-feature-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
           }
+          .admission-feature-row:hover .admission-feature-icon {
+            transform: scale(1.12);
+            box-shadow: 0 0 20px var(--row-glow);
+          }
+
+          /* CTA Buttons */
           .admission-cta-primary {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 16px 36px;
+            padding: 16px 40px;
             background: linear-gradient(135deg, #FF6B00, #FF8C00, #FFB300);
             color: white;
             font-size: var(--font-size-base);
             font-weight: 800;
             border-radius: 999px;
             text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 24px rgba(255, 107, 0, 0.4);
-            animation: admissionPulse 2.5s ease-in-out infinite;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 6px 28px rgba(255, 107, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            animation: admissionPulse 3s ease-in-out infinite;
             position: relative;
             overflow: hidden;
+            letter-spacing: 0.3px;
           }
           .admission-cta-primary::before {
             content: '';
             position: absolute;
             top: 0; left: -100%;
             width: 200%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-            animation: admissionShimmer 3s ease-in-out infinite;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+            animation: admissionShimmer 3.5s ease-in-out infinite;
           }
           .admission-cta-primary:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 10px 36px rgba(255, 107, 0, 0.5);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 12px 40px rgba(255, 107, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
           }
           .admission-cta-secondary {
             display: inline-flex;
             align-items: center;
             gap: 8px;
             padding: 16px 32px;
-            background: transparent;
+            background: rgba(255, 255, 255, 0.04);
             color: white;
             font-size: var(--font-size-sm);
             font-weight: 700;
             border-radius: 999px;
             text-decoration: none;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
           }
           .admission-cta-secondary:hover {
             background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.6);
+            border-color: rgba(255, 255, 255, 0.5);
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
           }
+
+          /* Info Cards */
           .admission-info-card {
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 28px 24px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 24px;
+            padding: 32px 28px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            gap: 14px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
-          }
-          .admission-info-card:hover {
-            background: rgba(255, 255, 255, 0.12);
-            transform: translateY(-6px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15);
           }
           .admission-info-card::before {
             content: '';
@@ -619,11 +726,45 @@ export default async function HomePage() {
             width: 100%; height: 3px;
             background: linear-gradient(90deg, var(--card-accent, var(--color-gold)), transparent);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.35s ease;
+          }
+          .admission-info-card::after {
+            content: '';
+            position: absolute;
+            top: -50%; right: -50%;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle, var(--card-glow, rgba(255, 107, 0, 0.04)) 0%, transparent 70%);
+            pointer-events: none;
+            transition: opacity 0.45s ease;
+            opacity: 0;
+          }
+          .admission-info-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateY(-8px) scale(1.01);
+            border-color: var(--card-accent, rgba(255, 255, 255, 0.15)) !important;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35), 0 0 30px var(--card-glow);
           }
           .admission-info-card:hover::before {
             opacity: 1;
           }
+          .admission-info-card:hover::after {
+            opacity: 1;
+          }
+          .admission-info-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          .admission-info-card:hover .admission-info-card-icon {
+            transform: scale(1.15) rotate(4deg);
+            box-shadow: 0 0 20px var(--card-glow);
+          }
+
+          /* Responsive */
           @media (max-width: 768px) {
             .admission-stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
             .admission-info-grid { grid-template-columns: 1fr !important; }
@@ -631,139 +772,166 @@ export default async function HomePage() {
           }
         `}</style>
 
-        {/* Full-width Navy Gradient Background */}
+        {/* Full-width Background with Aurora Effect */}
         <div style={{
-          background: 'linear-gradient(135deg, #041C3D 0%, #0A4BAF 40%, #083A88 70%, #041C3D 100%)',
-          padding: 'var(--space-16, 80px) 0',
+          background: 'linear-gradient(160deg, #020B1A 0%, #041C3D 20%, #0A4BAF 45%, #083A88 65%, #041C3D 85%, #020B1A 100%)',
+          padding: 'var(--space-20, 100px) 0',
           position: 'relative'
         }}>
+          {/* Aurora mesh overlay */}
+          <div style={{
+            position: 'absolute', inset: 0, opacity: 0.15, pointerEvents: 'none',
+            background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(255, 107, 0, 0.2) 25%, rgba(139, 92, 246, 0.15) 50%, rgba(255, 215, 0, 0.1) 75%, rgba(59, 130, 246, 0.2) 100%)',
+            backgroundSize: '400% 400%',
+            animation: 'auroraShift 20s ease-in-out infinite',
+          }} />
+
           {/* Animated glow orbs */}
           <div style={{
-            position: 'absolute', top: '-10%', right: '5%',
-            width: '500px', height: '500px', borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(255, 107, 0, 0.12) 0%, transparent 60%)',
-            animation: 'admissionGlow 6s ease-in-out infinite', pointerEvents: 'none'
-          }} />
-          <div style={{
-            position: 'absolute', bottom: '-15%', left: '0%',
+            position: 'absolute', top: '-15%', right: '0%',
             width: '600px', height: '600px', borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(10, 75, 175, 0.2) 0%, transparent 60%)',
-            animation: 'admissionGlow 8s ease-in-out infinite 2s', pointerEvents: 'none'
+            background: 'radial-gradient(circle, rgba(255, 107, 0, 0.1) 0%, transparent 55%)',
+            animation: 'admissionGlow 8s ease-in-out infinite', pointerEvents: 'none'
           }} />
           <div style={{
-            position: 'absolute', top: '40%', left: '50%',
-            width: '300px', height: '300px', borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(255, 215, 0, 0.06) 0%, transparent 60%)',
-            animation: 'admissionFloat 7s ease-in-out infinite 1s', pointerEvents: 'none'
+            position: 'absolute', bottom: '-20%', left: '-5%',
+            width: '700px', height: '700px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(10, 75, 175, 0.15) 0%, transparent 55%)',
+            animation: 'admissionGlow 10s ease-in-out infinite 3s', pointerEvents: 'none'
           }} />
-          {/* Subtle grid pattern */}
           <div style={{
-            position: 'absolute', inset: 0, opacity: 0.04, pointerEvents: 'none',
-            backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-            backgroundSize: '60px 60px'
+            position: 'absolute', top: '30%', left: '60%',
+            width: '350px', height: '350px', borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 60%)',
+            animation: 'admissionFloat 9s ease-in-out infinite 1s', pointerEvents: 'none'
+          }} />
+
+          {/* Grid pattern */}
+          <div style={{
+            position: 'absolute', inset: 0, opacity: 0.03, pointerEvents: 'none',
+            backgroundImage: 'linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)',
+            backgroundSize: '80px 80px'
           }} />
 
           <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-            {/* Top Section Label */}
-            <div style={{ textAlign: 'center', marginBottom: 'var(--space-8)' }}>
+            {/* Top Section - Header */}
+            <div style={{ textAlign: 'center', marginBottom: 'var(--space-12)' }}>
               <div style={{
                 display: 'inline-flex', alignItems: 'center', gap: '10px',
-                background: 'linear-gradient(135deg, rgba(255, 107, 0, 0.15), rgba(255, 215, 0, 0.1))',
-                border: '1px solid rgba(255, 107, 0, 0.25)',
+                background: 'linear-gradient(135deg, rgba(255, 107, 0, 0.12), rgba(255, 215, 0, 0.08))',
+                border: '1px solid rgba(255, 107, 0, 0.2)',
                 padding: '8px 24px', borderRadius: '999px',
-                marginBottom: 'var(--space-4)'
+                marginBottom: 'var(--space-5)',
+                backdropFilter: 'blur(8px)',
               }}>
                 <span style={{ position: 'relative', display: 'flex', height: '8px', width: '8px' }}>
                   <span style={{ position: 'absolute', display: 'inline-flex', height: '100%', width: '100%', borderRadius: '50%', backgroundColor: '#FF6B00', opacity: 0.75, animation: 'admissionPulse 2s ease-in-out infinite' }} />
                   <span style={{ position: 'relative', display: 'inline-flex', borderRadius: '50%', height: '8px', width: '8px', backgroundColor: '#FF6B00' }} />
                 </span>
-                <span style={{ fontSize: '12px', fontWeight: 800, color: '#FFB300', letterSpacing: '2px', textTransform: 'uppercase' }}>
-                  Đang mở đăng ký tuyển sinh 2026 - 2027
+                <span style={{ fontSize: '11px', fontWeight: 800, color: '#FFB300', letterSpacing: '2.5px', textTransform: 'uppercase' }}>
+                  Đang mở đăng ký tuyển sinh 2026 – 2027
                 </span>
               </div>
               <h2 style={{
-                fontSize: 'clamp(28px, 4vw, 44px)', fontWeight: 900, color: 'white',
-                margin: '0 auto var(--space-3)', fontFamily: 'var(--font-title)',
-                lineHeight: 1.15, maxWidth: '700px'
+                fontSize: 'clamp(30px, 4.5vw, 48px)', fontWeight: 900, color: 'white',
+                margin: '0 auto var(--space-4)', fontFamily: 'var(--font-title)',
+                lineHeight: 1.1, maxWidth: '750px', letterSpacing: '-0.03em'
               }}>
                 Khởi đầu hành trình <br/>
                 <span style={{
-                  background: 'linear-gradient(135deg, #FFD700, #FF6B00)',
+                  background: 'linear-gradient(135deg, #FFD700, #FF6B00, #FF8C00)',
+                  backgroundSize: '200% auto',
                   WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'
                 }}>
                   tại Edison School
                 </span>
               </h2>
               <p style={{
-                color: 'rgba(255, 255, 255, 0.6)', fontSize: 'var(--font-size-base)',
-                maxWidth: '580px', margin: '0 auto', lineHeight: 1.7
+                color: 'rgba(255, 255, 255, 0.55)', fontSize: 'var(--font-size-base)',
+                maxWidth: '560px', margin: '0 auto', lineHeight: 1.7, letterSpacing: '0.01em'
               }}>
                 Hồ sơ đăng ký tuyển sinh lớp 10 chính thức mở. Hãy nắm bắt cơ hội trở thành học sinh Edison với chính sách học bổng hấp dẫn.
               </p>
             </div>
 
             {/* Stats Row */}
-            <div className="admission-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 'var(--space-4)', marginBottom: 'var(--space-10)', maxWidth: '800px', margin: '0 auto var(--space-10)' }}>
+            <div className="admission-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginBottom: 'var(--space-12)', maxWidth: '860px', margin: '0 auto var(--space-12)' }}>
               <div className="admission-stat-card">
+                <div className="admission-stat-icon-ring" style={{ background: 'rgba(255, 107, 0, 0.08)' }}>
+                  <GraduationCap size={20} style={{ color: '#FFB300' }} />
+                </div>
                 <div className="admission-stat-number">450+</div>
                 <div className="admission-stat-label">Chỉ tiêu tuyển sinh</div>
               </div>
               <div className="admission-stat-card">
+                <div className="admission-stat-icon-ring" style={{ background: 'rgba(59, 130, 246, 0.08)' }}>
+                  <BookOpen size={20} style={{ color: '#60A5FA' }} />
+                </div>
                 <div className="admission-stat-number">10</div>
                 <div className="admission-stat-label">Lớp học chính quy</div>
               </div>
               <div className="admission-stat-card">
+                <div className="admission-stat-icon-ring" style={{ background: 'rgba(16, 185, 129, 0.08)' }}>
+                  <Award size={20} style={{ color: '#34D399' }} />
+                </div>
                 <div className="admission-stat-number">98%</div>
                 <div className="admission-stat-label">Tỷ lệ đỗ TN THPT</div>
               </div>
               <div className="admission-stat-card">
+                <div className="admission-stat-icon-ring" style={{ background: 'rgba(168, 85, 247, 0.08)' }}>
+                  <ShieldCheck size={20} style={{ color: '#C084FC' }} />
+                </div>
                 <div className="admission-stat-number">2</div>
                 <div className="admission-stat-label">Lớp CLC Quốc tế</div>
               </div>
             </div>
 
             {/* Main 2-column content */}
-            <div className="admission-main-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-10)', alignItems: 'start' }}>
+            <div className="admission-main-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px', alignItems: 'start' }}>
 
               {/* Left: Features */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-                <h3 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'white', margin: '0 0 var(--space-2) 0', fontFamily: 'var(--font-title)' }}>
-                  Tại sao chọn Edison?
-                </h3>
-                <div className="admission-feature-row">
-                  <div className="admission-feature-icon" style={{ background: 'rgba(255, 107, 0, 0.15)', color: '#FFB300' }}>
-                    <BookOpen size={18} />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)' }}>
+                <div style={{ marginBottom: 'var(--space-2)' }}>
+                  <h3 style={{ fontSize: 'clamp(1.3rem, 2.5vw, var(--font-size-2xl))', fontWeight: 800, color: 'white', margin: '0 0 var(--space-2) 0', fontFamily: 'var(--font-title)', letterSpacing: '-0.02em' }}>
+                    Tại sao chọn Edison?
+                  </h3>
+                  <div style={{ width: '40px', height: '3px', background: 'linear-gradient(90deg, var(--color-gold), var(--color-primary))', borderRadius: '3px' }} />
+                </div>
+
+                <div className="admission-feature-row" style={{ '--row-accent': '#FFB300', '--row-glow': 'rgba(255, 179, 0, 0.08)' } as React.CSSProperties}>
+                  <div className="admission-feature-icon" style={{ background: 'linear-gradient(135deg, rgba(255, 107, 0, 0.15), rgba(255, 179, 0, 0.08))', color: '#FFB300', border: '1px solid rgba(255, 107, 0, 0.1)' }}>
+                    <BookOpen size={20} />
                   </div>
-                  <div>
-                    <div style={{ fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'white', marginBottom: '2px' }}>Chương trình tăng cường IELTS & STEM</div>
-                    <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}>Tích hợp ngoại ngữ, công nghệ thông tin và khoa học ứng dụng.</div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: '15px', fontWeight: 700, color: 'white', marginBottom: '4px', lineHeight: 1.3 }}>Chương trình tăng cường IELTS & STEM</div>
+                    <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.5 }}>Tích hợp ngoại ngữ, công nghệ thông tin và khoa học ứng dụng.</div>
                   </div>
                 </div>
-                <div className="admission-feature-row">
-                  <div className="admission-feature-icon" style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#34D399' }}>
-                    <Award size={18} />
+                <div className="admission-feature-row" style={{ '--row-accent': '#34D399', '--row-glow': 'rgba(16, 185, 129, 0.08)' } as React.CSSProperties}>
+                  <div className="admission-feature-icon" style={{ background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(52, 211, 153, 0.08))', color: '#34D399', border: '1px solid rgba(16, 185, 129, 0.1)' }}>
+                    <Award size={20} />
                   </div>
-                  <div>
-                    <div style={{ fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'white', marginBottom: '2px' }}>Học bổng lên đến 100% học phí</div>
-                    <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}>Dành cho học sinh xuất sắc, HSG cấp tỉnh/thành phố, IELTS 6.5+.</div>
-                  </div>
-                </div>
-                <div className="admission-feature-row">
-                  <div className="admission-feature-icon" style={{ background: 'rgba(59, 130, 246, 0.15)', color: '#60A5FA' }}>
-                    <ShieldCheck size={18} />
-                  </div>
-                  <div>
-                    <div style={{ fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'white', marginBottom: '2px' }}>Môi trường giáo dục hạnh phúc & an toàn</div>
-                    <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}>Cơ sở vật chất hiện đại, đội ngũ giáo viên tâm huyết.</div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: '15px', fontWeight: 700, color: 'white', marginBottom: '4px', lineHeight: 1.3 }}>Học bổng lên đến 100% học phí</div>
+                    <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.5 }}>Dành cho học sinh xuất sắc, HSG cấp tỉnh/thành phố, IELTS 6.5+.</div>
                   </div>
                 </div>
-                <div className="admission-feature-row">
-                  <div className="admission-feature-icon" style={{ background: 'rgba(168, 85, 247, 0.15)', color: '#C084FC' }}>
-                    <CheckCircle2 size={18} />
+                <div className="admission-feature-row" style={{ '--row-accent': '#60A5FA', '--row-glow': 'rgba(59, 130, 246, 0.08)' } as React.CSSProperties}>
+                  <div className="admission-feature-icon" style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(96, 165, 250, 0.08))', color: '#60A5FA', border: '1px solid rgba(59, 130, 246, 0.1)' }}>
+                    <ShieldCheck size={20} />
                   </div>
-                  <div>
-                    <div style={{ fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'white', marginBottom: '2px' }}>Đa dạng phương thức xét tuyển</div>
-                    <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.4 }}>Thi tuyển, xét tuyển thẳng, xét học bạ THCS.</div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: '15px', fontWeight: 700, color: 'white', marginBottom: '4px', lineHeight: 1.3 }}>Môi trường giáo dục hạnh phúc & an toàn</div>
+                    <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.5 }}>Cơ sở vật chất hiện đại, đội ngũ giáo viên tâm huyết.</div>
+                  </div>
+                </div>
+                <div className="admission-feature-row" style={{ '--row-accent': '#C084FC', '--row-glow': 'rgba(168, 85, 247, 0.08)' } as React.CSSProperties}>
+                  <div className="admission-feature-icon" style={{ background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(192, 132, 252, 0.08))', color: '#C084FC', border: '1px solid rgba(168, 85, 247, 0.1)' }}>
+                    <CheckCircle2 size={20} />
+                  </div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontSize: '15px', fontWeight: 700, color: 'white', marginBottom: '4px', lineHeight: 1.3 }}>Đa dạng phương thức xét tuyển</div>
+                    <div style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.5 }}>Thi tuyển, xét tuyển thẳng, xét học bạ THCS.</div>
                   </div>
                 </div>
 
@@ -781,38 +949,38 @@ export default async function HomePage() {
               </div>
 
               {/* Right: Info cards grid */}
-              <div className="admission-info-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4)' }}>
+              <div className="admission-info-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                 {/* Card 1 */}
-                <div className="admission-info-card" style={{ '--card-accent': '#FF6B00' } as React.CSSProperties}>
-                  <div style={{ width: '44px', height: '44px', borderRadius: '14px', background: 'linear-gradient(135deg, rgba(255, 107, 0, 0.2), rgba(255, 179, 0, 0.1))', color: '#FFB300', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div className="admission-info-card" style={{ '--card-accent': '#FF6B00', '--card-glow': 'rgba(255, 107, 0, 0.06)' } as React.CSSProperties}>
+                  <div className="admission-info-card-icon" style={{ background: 'linear-gradient(135deg, rgba(255, 107, 0, 0.15), rgba(255, 179, 0, 0.08))', color: '#FFB300', border: '1px solid rgba(255, 107, 0, 0.1)' }}>
                     <BookOpen size={22} />
                   </div>
-                  <h4 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'white', margin: 0 }}>Chương trình đào tạo</h4>
-                  <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>Giáo dục toàn diện theo chuẩn quốc tế, tăng cường kỹ năng thế kỷ 21.</span>
+                  <h4 style={{ fontSize: '15px', fontWeight: 700, color: 'white', margin: 0, lineHeight: 1.3 }}>Chương trình đào tạo</h4>
+                  <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.6 }}>Giáo dục toàn diện theo chuẩn quốc tế, tăng cường kỹ năng thế kỷ 21.</span>
                 </div>
                 {/* Card 2 */}
-                <div className="admission-info-card" style={{ '--card-accent': '#34D399' } as React.CSSProperties}>
-                  <div style={{ width: '44px', height: '44px', borderRadius: '14px', background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(52, 211, 153, 0.1))', color: '#34D399', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div className="admission-info-card" style={{ '--card-accent': '#34D399', '--card-glow': 'rgba(16, 185, 129, 0.06)' } as React.CSSProperties}>
+                  <div className="admission-info-card-icon" style={{ background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(52, 211, 153, 0.08))', color: '#34D399', border: '1px solid rgba(16, 185, 129, 0.1)' }}>
                     <Award size={22} />
                   </div>
-                  <h4 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'white', margin: 0 }}>Học phí & Học bổng</h4>
-                  <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>Chính sách học phí linh hoạt, học bổng giá trị cho học sinh tài năng.</span>
+                  <h4 style={{ fontSize: '15px', fontWeight: 700, color: 'white', margin: 0, lineHeight: 1.3 }}>Học phí & Học bổng</h4>
+                  <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.6 }}>Chính sách học phí linh hoạt, học bổng giá trị cho học sinh tài năng.</span>
                 </div>
                 {/* Card 3 */}
-                <div className="admission-info-card" style={{ '--card-accent': '#60A5FA' } as React.CSSProperties}>
-                  <div style={{ width: '44px', height: '44px', borderRadius: '14px', background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(96, 165, 250, 0.1))', color: '#60A5FA', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div className="admission-info-card" style={{ '--card-accent': '#60A5FA', '--card-glow': 'rgba(59, 130, 246, 0.06)' } as React.CSSProperties}>
+                  <div className="admission-info-card-icon" style={{ background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(96, 165, 250, 0.08))', color: '#60A5FA', border: '1px solid rgba(59, 130, 246, 0.1)' }}>
                     <ClipboardList size={22} />
                   </div>
-                  <h4 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'white', margin: 0 }}>Quy trình nhập học</h4>
-                  <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>Đăng ký trực tuyến → Khảo sát → Xét duyệt → Nhập học chính thức.</span>
+                  <h4 style={{ fontSize: '15px', fontWeight: 700, color: 'white', margin: 0, lineHeight: 1.3 }}>Quy trình nhập học</h4>
+                  <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.6 }}>Đăng ký trực tuyến → Khảo sát → Xét duyệt → Nhập học chính thức.</span>
                 </div>
                 {/* Card 4 */}
-                <div className="admission-info-card" style={{ '--card-accent': '#C084FC' } as React.CSSProperties}>
-                  <div style={{ width: '44px', height: '44px', borderRadius: '14px', background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(192, 132, 252, 0.1))', color: '#C084FC', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div className="admission-info-card" style={{ '--card-accent': '#C084FC', '--card-glow': 'rgba(168, 85, 247, 0.06)' } as React.CSSProperties}>
+                  <div className="admission-info-card-icon" style={{ background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(192, 132, 252, 0.08))', color: '#C084FC', border: '1px solid rgba(168, 85, 247, 0.1)' }}>
                     <Calendar size={22} />
                   </div>
-                  <h4 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'white', margin: 0 }}>Hồ sơ cần thiết</h4>
-                  <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>Học bạ THCS, giấy CN tốt nghiệp tạm thời, ảnh 3x4 và đơn đăng ký.</span>
+                  <h4 style={{ fontSize: '15px', fontWeight: 700, color: 'white', margin: 0, lineHeight: 1.3 }}>Hồ sơ cần thiết</h4>
+                  <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.45)', lineHeight: 1.6 }}>Học bạ THCS, giấy CN tốt nghiệp tạm thời, ảnh 3x4 và đơn đăng ký.</span>
                 </div>
               </div>
             </div>

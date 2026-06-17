@@ -97,14 +97,34 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         position: 'fixed',
         inset: 0,
         zIndex: 9999,
-        background: 'rgba(9, 22, 46, 0.85)',
-        backdropFilter: 'blur(12px)',
+        background: 'rgba(255, 255, 255, 0.75)',
+        backdropFilter: 'blur(16px)',
         display: 'flex',
         justifyContent: 'center',
         padding: '8vh var(--space-4) 0 var(--space-4)',
         animation: 'fadeIn 0.2s ease-out'
       }}
     >
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        .search-item {
+          display: flex;
+          gap: 12px;
+          padding: 12px;
+          border-radius: 12px;
+          transition: all 0.2s ease;
+          text-decoration: none;
+          background: transparent;
+          border: 1px solid transparent;
+        }
+        .search-item:hover {
+          background: rgba(99, 102, 241, 0.05);
+          border-color: rgba(99, 102, 241, 0.1);
+        }
+      `}</style>
       <div 
         style={{
           width: '100%',
@@ -121,13 +141,13 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             display: 'flex',
             alignItems: 'center',
             background: 'var(--color-white)',
-            borderRadius: 'var(--radius-xl)',
-            boxShadow: 'var(--shadow-2xl)',
+            borderRadius: '20px',
+            boxShadow: '0 20px 40px rgba(99, 102, 241, 0.08)',
             padding: 'var(--space-1) var(--space-4)',
-            border: '1px solid rgba(255,255,255,0.1)'
+            border: '1px solid rgba(99, 102, 241, 0.15)'
           }}
         >
-          <Search size={22} style={{ color: 'var(--color-gray-400)', marginRight: '12px' }} />
+          <Search size={22} style={{ color: '#6366f1', marginRight: '12px' }} />
           <input
             ref={inputRef}
             type="text"
@@ -148,7 +168,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           <button 
             onClick={onClose}
             style={{
-              background: 'var(--color-gray-100)',
+              background: 'rgba(99, 102, 241, 0.08)',
               border: 'none',
               borderRadius: '50%',
               width: '32px',
@@ -157,8 +177,9 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              color: 'var(--color-gray-500)',
-              marginLeft: '12px'
+              color: '#6366f1',
+              marginLeft: '12px',
+              transition: 'background 0.2s ease'
             }}
             title="Đóng (Esc)"
           >
@@ -169,9 +190,11 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         {/* Results Container */}
         <div 
           style={{
-            background: 'var(--color-white)',
-            borderRadius: 'var(--radius-xl)',
-            boxShadow: 'var(--shadow-2xl)',
+            background: 'rgba(255, 255, 255, 0.9)',
+            backdropFilter: 'blur(20px)',
+            borderRadius: '24px',
+            boxShadow: '0 25px 60px rgba(99, 102, 241, 0.1)',
+            border: '1px solid rgba(99, 102, 241, 0.15)',
             maxHeight: '65vh',
             overflowY: 'auto',
             padding: 'var(--space-6)',
@@ -181,7 +204,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           }}
         >
           {loading && (
-            <div style={{ textAlign: 'center', color: 'var(--color-gray-400)', padding: 'var(--space-4)' }}>Đang tìm kiếm...</div>
+            <div style={{ textAlign: 'center', color: '#6366f1', padding: 'var(--space-4)', fontWeight: 500 }}>Đang tìm kiếm...</div>
           )}
 
           {!loading && query.trim().length > 0 && query.trim().length < 2 && (
@@ -202,19 +225,16 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
               {/* Posts (Tin tức) */}
               {results.posts.length > 0 && (
                 <div>
-                  <h4 style={{ fontSize: '11px', fontWeight: 700, color: 'var(--color-primary)', textTransform: 'uppercase', marginBottom: '8px', borderBottom: '1px solid var(--color-gray-100)', paddingBottom: '4px' }}>Tin tức & Thông báo</h4>
+                  <h4 style={{ fontSize: '11px', fontWeight: 700, color: '#6366f1', textTransform: 'uppercase', marginBottom: '8px', borderBottom: '1px solid rgba(99, 102, 241, 0.1)', paddingBottom: '4px' }}>Tin tức & Thông báo</h4>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     {results.posts.map(post => (
                       <Link 
                         key={post.id} 
                         href={`/tin-tuc/${post.slug}`} 
                         onClick={onClose}
-                        style={{ display: 'flex', gap: '12px', padding: '10px', borderRadius: 'var(--radius-md)', transition: 'background 0.2s', textDecoration: 'none' }}
                         className="search-item"
-                        onMouseEnter={(e) => e.currentTarget.style.background = 'var(--color-gray-50)'}
-                        onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                       >
-                        <FileText size={18} style={{ color: 'var(--color-gray-400)', flexShrink: 0, marginTop: '2px' }} />
+                        <FileText size={18} style={{ color: '#6366f1', flexShrink: 0, marginTop: '2px' }} />
                         <div>
                           <div style={{ fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'var(--color-navy)' }}>{highlightText(post.title, query)}</div>
                           {post.excerpt && <p style={{ fontSize: '11px', color: 'var(--color-gray-500)', margin: '2px 0 0 0', display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{highlightText(post.excerpt, query)}</p>}
@@ -228,7 +248,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
               {/* Documents (Tài liệu) */}
               {results.documents.length > 0 && (
                 <div>
-                  <h4 style={{ fontSize: '11px', fontWeight: 700, color: 'var(--color-success-dark)', textTransform: 'uppercase', marginBottom: '8px', borderBottom: '1px solid var(--color-gray-100)', paddingBottom: '4px' }}>Tài liệu học tập</h4>
+                  <h4 style={{ fontSize: '11px', fontWeight: 700, color: '#10b981', textTransform: 'uppercase', marginBottom: '8px', borderBottom: '1px solid rgba(16, 185, 129, 0.1)', paddingBottom: '4px' }}>Tài liệu học tập</h4>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     {results.documents.map(doc => (
                       <a 
@@ -236,12 +256,9 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
                         href={doc.filePath} 
                         download
                         onClick={onClose}
-                        style={{ display: 'flex', gap: '12px', padding: '10px', borderRadius: 'var(--radius-md)', transition: 'background 0.2s', textDecoration: 'none' }}
                         className="search-item"
-                        onMouseEnter={(e) => e.currentTarget.style.background = 'var(--color-gray-50)'}
-                        onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                       >
-                        <FolderDown size={18} style={{ color: 'var(--color-gray-400)', flexShrink: 0, marginTop: '2px' }} />
+                        <FolderDown size={18} style={{ color: '#10b981', flexShrink: 0, marginTop: '2px' }} />
                         <div>
                           <div style={{ fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'var(--color-navy)' }}>{highlightText(doc.title, query)}</div>
                           {doc.description && <p style={{ fontSize: '11px', color: 'var(--color-gray-500)', margin: '2px 0 0 0', display: '-webkit-box', WebkitLineClamp: 1, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{highlightText(doc.description, query)}</p>}
@@ -255,22 +272,19 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
               {/* Events (Sự kiện) */}
               {results.events.length > 0 && (
                 <div>
-                  <h4 style={{ fontSize: '11px', fontWeight: 700, color: 'var(--color-gold-dark)', textTransform: 'uppercase', marginBottom: '8px', borderBottom: '1px solid var(--color-gray-100)', paddingBottom: '4px' }}>Sự kiện trường</h4>
+                  <h4 style={{ fontSize: '11px', fontWeight: 700, color: '#a855f7', textTransform: 'uppercase', marginBottom: '8px', borderBottom: '1px solid rgba(168, 85, 247, 0.1)', paddingBottom: '4px' }}>Sự kiện trường</h4>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     {results.events.map(event => (
                       <Link 
                         key={event.id} 
                         href="/hoat-dong" 
                         onClick={onClose}
-                        style={{ display: 'flex', gap: '12px', padding: '10px', borderRadius: 'var(--radius-md)', transition: 'background 0.2s', textDecoration: 'none' }}
                         className="search-item"
-                        onMouseEnter={(e) => e.currentTarget.style.background = 'var(--color-gray-50)'}
-                        onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
                       >
-                        <Calendar size={18} style={{ color: 'var(--color-gray-400)', flexShrink: 0, marginTop: '2px' }} />
+                        <Calendar size={18} style={{ color: '#a855f7', flexShrink: 0, marginTop: '2px' }} />
                         <div>
                           <div style={{ fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'var(--color-navy)' }}>{highlightText(event.title, query)}</div>
-                          <div style={{ fontSize: '10px', color: 'var(--color-gold-dark)', fontWeight: 600, marginTop: '2px' }}>
+                          <div style={{ fontSize: '10px', color: '#a855f7', fontWeight: 600, marginTop: '2px' }}>
                             {new Date(event.startDate).toLocaleDateString('vi-VN')} {event.location ? `• Địa điểm: ${event.location}` : ''}
                           </div>
                         </div>

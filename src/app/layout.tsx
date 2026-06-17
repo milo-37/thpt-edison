@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -17,7 +18,11 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#09162e" />
         <link rel="apple-touch-icon" href="/school-logo.jpg" />
-        <script
+      </head>
+      <body style={{ margin: 0, padding: 0 }}>
+        <Script
+          id="service-worker-registration"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               if ('serviceWorker' in navigator) {
@@ -52,8 +57,8 @@ export default function RootLayout({
             `,
           }}
         />
-      </head>
-      <body style={{ margin: 0, padding: 0 }}>{children}</body>
+        {children}
+      </body>
     </html>
   );
 }

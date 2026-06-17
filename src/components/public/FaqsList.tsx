@@ -42,6 +42,28 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-8)' }}>
+      <style>{`
+        .faq-tab-btn {
+          padding: 8px 20px;
+          border-radius: 12px;
+          font-size: var(--font-size-sm);
+          font-weight: 600;
+          cursor: pointer;
+          border: none;
+          transition: all 0.25s ease;
+        }
+        .faq-item-card {
+          background: rgba(255, 255, 255, 0.7);
+          border-radius: 20px;
+          overflow: hidden;
+          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          backdrop-filter: blur(20px);
+        }
+        .faq-item-card:hover {
+          background: rgba(255, 255, 255, 0.95);
+          box-shadow: 0 12px 30px rgba(99, 102, 241, 0.05);
+        }
+      `}</style>
       {/* Search Input (Glass style) */}
       <div 
         style={{ 
@@ -58,7 +80,7 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
             left: '18px', 
             top: '50%', 
             transform: 'translateY(-50%)', 
-            color: 'var(--color-primary)',
+            color: '#6366f1',
             zIndex: 2
           }} 
         />
@@ -71,23 +93,25 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
           style={{
             padding: '14px 18px 14px 48px',
             borderRadius: '16px',
-            border: '1px solid var(--color-gray-200)',
+            border: '1.5px solid rgba(99, 102, 241, 0.15)',
             outline: 'none',
             fontSize: 'var(--font-size-sm)',
-            boxShadow: 'var(--shadow-sm)',
-            background: 'var(--glass-bg)',
-            color: 'var(--color-gray-900)',
+            boxShadow: '0 4px 20px rgba(99, 102, 241, 0.02)',
+            background: 'rgba(255, 255, 255, 0.75)',
+            color: 'var(--color-navy)',
             backdropFilter: 'blur(10px)',
             width: '100%',
-            transition: 'all var(--transition-base)'
+            transition: 'all 0.25s ease'
           }}
           onFocus={(e) => {
-            e.target.style.borderColor = 'var(--color-primary)'
-            e.target.style.boxShadow = '0 0 0 4px rgba(56, 189, 248, 0.15), var(--shadow-md)'
+            e.target.style.borderColor = '#6366f1'
+            e.target.style.background = '#ffffff'
+            e.target.style.boxShadow = '0 0 0 4px rgba(99, 102, 241, 0.12)'
           }}
           onBlur={(e) => {
-            e.target.style.borderColor = 'var(--color-gray-200)'
-            e.target.style.boxShadow = 'var(--shadow-sm)'
+            e.target.style.borderColor = 'rgba(99, 102, 241, 0.15)'
+            e.target.style.background = 'rgba(255, 255, 255, 0.75)'
+            e.target.style.boxShadow = '0 4px 20px rgba(99, 102, 241, 0.02)'
           }}
         />
       </div>
@@ -99,26 +123,20 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
           justifyContent: 'center', 
           gap: '8px', 
           flexWrap: 'wrap',
-          background: 'rgba(148, 163, 184, 0.08)',
+          background: 'rgba(99, 102, 241, 0.05)',
           padding: '6px',
           borderRadius: '16px',
           width: 'fit-content',
           margin: '0 auto',
-          border: '1px solid rgba(148, 163, 184, 0.1)'
+          border: '1px solid rgba(99, 102, 241, 0.1)'
         }}
       >
         <button
           onClick={() => { setActiveTab('all'); setExpandedId(null); }}
+          className="faq-tab-btn"
           style={{
-            padding: '8px 20px',
-            borderRadius: '12px',
-            fontSize: 'var(--font-size-sm)',
-            fontWeight: 600,
-            cursor: 'pointer',
-            border: 'none',
-            background: activeTab === 'all' ? 'var(--color-navy)' : 'transparent',
-            color: activeTab === 'all' ? 'var(--color-white)' : 'var(--color-gray-600)',
-            transition: 'all var(--transition-base)'
+            background: activeTab === 'all' ? 'linear-gradient(135deg, #6366f1, #a855f7)' : 'transparent',
+            color: activeTab === 'all' ? '#ffffff' : '#6366f1',
           }}
         >
           Tất cả
@@ -127,16 +145,10 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
           <button
             key={k}
             onClick={() => { setActiveTab(k); setExpandedId(null); }}
+            className="faq-tab-btn"
             style={{
-              padding: '8px 20px',
-              borderRadius: '12px',
-              fontSize: 'var(--font-size-sm)',
-              fontWeight: 600,
-              cursor: 'pointer',
-              border: 'none',
-              background: activeTab === k ? 'var(--color-navy)' : 'transparent',
-              color: activeTab === k ? 'var(--color-white)' : 'var(--color-gray-600)',
-              transition: 'all var(--transition-base)'
+              background: activeTab === k ? 'linear-gradient(135deg, #6366f1, #a855f7)' : 'transparent',
+              color: activeTab === k ? '#ffffff' : '#6366f1',
             }}
           >
             {v}
@@ -146,8 +158,8 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
 
       {/* Accordion List */}
       {filtered.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)', background: 'var(--color-white)', borderRadius: '24px', border: '1px solid var(--color-gray-200)' }}>
-          <MessageSquare size={48} style={{ margin: '0 auto var(--space-4) auto', opacity: 0.5, color: 'var(--color-primary)' }} />
+        <div style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)', background: 'rgba(255, 255, 255, 0.8)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.12)' }}>
+          <MessageSquare size={48} style={{ margin: '0 auto var(--space-4) auto', opacity: 0.5, color: '#6366f1' }} />
           <p style={{ margin: 0, fontWeight: 500 }}>Không tìm thấy câu hỏi nào phù hợp với từ khóa của bạn.</p>
         </div>
       ) : (
@@ -157,15 +169,10 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
             return (
               <div
                 key={item.id}
-                className="glass-card"
+                className="faq-item-card"
                 style={{
-                  background: 'var(--glass-bg)',
-                  borderRadius: '24px',
-                  border: isExpanded ? '1px solid var(--color-primary)' : 'var(--glass-border)',
-                  boxShadow: isExpanded ? 'var(--shadow-md), var(--shadow-glow)' : 'var(--shadow-sm)',
-                  overflow: 'hidden',
-                  transition: 'all var(--transition-spring)',
-                  backdropFilter: 'blur(20px)'
+                  border: isExpanded ? '1px solid rgba(99, 102, 241, 0.3)' : '1px solid rgba(99, 102, 241, 0.12)',
+                  boxShadow: isExpanded ? '0 10px 30px rgba(99, 102, 241, 0.06)' : '0 4px 15px rgba(99, 102, 241, 0.01)',
                 }}
               >
                 {/* Header Button */}
@@ -188,7 +195,7 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
                     <HelpCircle 
                       size={22} 
                       style={{ 
-                        color: isExpanded ? 'var(--color-gold)' : 'var(--color-primary)', 
+                        color: isExpanded ? '#a855f7' : '#6366f1', 
                         flexShrink: 0,
                         transition: 'color 0.3s ease'
                       }} 
@@ -197,7 +204,7 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
                       style={{ 
                         fontSize: 'var(--font-size-base)', 
                         fontWeight: 700, 
-                        color: isExpanded ? 'var(--color-primary)' : 'var(--color-navy)',
+                        color: isExpanded ? '#6366f1' : 'var(--color-navy)',
                         transition: 'color 0.3s ease',
                         fontFamily: 'var(--font-title)'
                       }}
@@ -210,7 +217,7 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
                       width: '28px',
                       height: '28px',
                       borderRadius: '50%',
-                      background: isExpanded ? 'rgba(10, 75, 175, 0.08)' : 'rgba(15, 23, 42, 0.03)',
+                      background: isExpanded ? 'rgba(99, 102, 241, 0.08)' : 'rgba(99, 102, 241, 0.02)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -220,7 +227,7 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
                     <ChevronDown 
                       size={16} 
                       style={{ 
-                        color: isExpanded ? 'var(--color-primary)' : 'var(--color-gray-500)',
+                        color: isExpanded ? '#6366f1' : 'var(--color-gray-500)',
                         transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
                         transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                         flexShrink: 0
@@ -241,9 +248,9 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
                     style={{ 
                       padding: '0 24px 24px 60px',
                       fontSize: 'var(--font-size-sm)',
-                      color: 'var(--color-gray-700)',
+                      color: 'var(--color-gray-600)',
                       lineHeight: 1.7,
-                      borderTop: 'var(--glass-border)',
+                      borderTop: '1px solid rgba(99, 102, 241, 0.08)',
                       paddingTop: '16px',
                       whiteSpace: 'pre-line'
                     }}

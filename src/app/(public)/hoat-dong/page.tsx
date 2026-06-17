@@ -43,20 +43,45 @@ export default async function ActivityPage(props: PageProps) {
     }
 
     return (
-      <div className="section section-alt" style={{ minHeight: '80vh' }}>
-        <div className="container">
+      <div className="section section-alt" style={{ minHeight: '80vh', background: 'linear-gradient(180deg, #ffffff 0%, #f4f6ff 100%)', position: 'relative' }}>
+        <style>{`
+          .back-link-btn:hover {
+            transform: translateX(-4px);
+          }
+          .photo-card-item {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.03);
+            border: 1px solid rgba(99, 102, 241, 0.12);
+            transition: all 0.3s ease;
+          }
+          .photo-card-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, 0.25);
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.08);
+          }
+        `}</style>
+        {/* Background blobs */}
+        <div style={{ position: 'absolute', top: '10%', left: '5%', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%)', filter: 'blur(50px)', pointerEvents: 'none' }} />
+        <div style={{ position: 'absolute', bottom: '15%', right: '5%', width: '250px', height: '250px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(168, 85, 247, 0.04) 0%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none' }} />
+
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
           
           {/* Nút quay lại */}
           <Link
             href="/hoat-dong"
+            className="back-link-btn"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '4px',
+              gap: '6px',
               fontSize: 'var(--font-size-sm)',
-              color: 'var(--color-primary)',
+              color: '#4f46e5',
               marginBottom: 'var(--space-6)',
-              fontWeight: 600
+              fontWeight: 700,
+              transition: 'transform 0.2s'
             }}
           >
             <ChevronLeft size={16} />
@@ -73,7 +98,7 @@ export default async function ActivityPage(props: PageProps) {
               {album.title}
             </h1>
             {album.description && (
-              <p style={{ color: 'var(--color-gray-500)', fontSize: 'var(--font-size-base)', margin: 0, maxWidth: '700px' }}>
+              <p style={{ color: 'var(--color-gray-600)', fontSize: 'var(--font-size-base)', margin: 0, maxWidth: '700px' }}>
                 {album.description}
               </p>
             )}
@@ -81,7 +106,7 @@ export default async function ActivityPage(props: PageProps) {
 
           {/* Lưới hiển thị các ảnh trong Album */}
           {album.photos.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: 'var(--space-12)', background: 'var(--color-white)', borderRadius: 'var(--radius-xl)', color: 'var(--color-gray-400)' }}>
+            <div style={{ textAlign: 'center', padding: 'var(--space-12)', background: 'rgba(255, 255, 255, 0.75)', backdropFilter: 'blur(10px)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.15)', color: 'var(--color-gray-400)' }}>
               Chưa có hình ảnh nào được thêm vào album này.
             </div>
           ) : (
@@ -95,14 +120,7 @@ export default async function ActivityPage(props: PageProps) {
               {album.photos.map((photo) => (
                 <div
                   key={photo.id}
-                  style={{
-                    background: 'var(--color-white)',
-                    borderRadius: 'var(--radius-xl)',
-                    overflow: 'hidden',
-                    boxShadow: 'var(--shadow-sm)',
-                    border: '1px solid var(--color-gray-200)'
-                  }}
-                  className="photo-card"
+                  className="photo-card-item"
                 >
                   <div style={{ width: '100%', aspectRatio: '4/3', overflow: 'hidden' }}>
                     <img
@@ -112,14 +130,13 @@ export default async function ActivityPage(props: PageProps) {
                         width: '100%',
                         height: '100%',
                         objectFit: 'cover',
-                        transition: 'transform var(--transition-slow)'
+                        transition: 'transform 0.5s ease'
                       }}
-                      className="zoom-on-hover"
                     />
                   </div>
                   {photo.caption && (
-                    <div style={{ padding: 'var(--space-3)', background: 'var(--color-white)', borderTop: '1px solid var(--color-gray-100)' }}>
-                      <p style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-gray-600)', margin: 0, lineHeight: 1.4 }}>
+                    <div style={{ padding: 'var(--space-3)', background: 'rgba(255, 255, 255, 0.5)', borderTop: '1px solid rgba(99, 102, 241, 0.08)' }}>
+                      <p style={{ fontSize: '13px', color: 'var(--color-gray-600)', margin: 0, lineHeight: 1.4 }}>
                         {photo.caption}
                       </p>
                     </div>
@@ -150,8 +167,12 @@ export default async function ActivityPage(props: PageProps) {
   ])
 
   return (
-    <div className="section section-alt" style={{ minHeight: '80vh' }}>
-      <div className="container">
+    <div className="section section-alt" style={{ minHeight: '80vh', background: 'linear-gradient(180deg, #ffffff 0%, #f4f6ff 100%)', position: 'relative' }}>
+      {/* Decorative background blobs */}
+      <div style={{ position: 'absolute', top: '10%', right: '10%', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%)', filter: 'blur(45px)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', bottom: '15%', left: '5%', width: '250px', height: '250px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(168, 85, 247, 0.04) 0%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none' }} />
+
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         
         <div style={{ textAlign: 'center', marginBottom: 'var(--space-10)' }}>
           <span className="section-label">Kho lưu giữ khoảnh khắc & Lịch trình</span>

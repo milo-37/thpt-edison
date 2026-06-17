@@ -63,13 +63,37 @@ export default async function NewsPage(props: PageProps) {
   const totalPages = Math.ceil(total / limit)
 
   return (
-    <div className="section section-alt" style={{ minHeight: '80vh' }}>
-      <div className="container">
+    <div className="section section-alt" style={{ minHeight: '80vh', background: 'linear-gradient(180deg, #ffffff 0%, #f4f6ff 100%)', padding: 'var(--space-12) 0', position: 'relative' }}>
+      <style>{`
+        .search-input-field {
+          width: 100%;
+          padding: 8px 16px 8px 36px;
+          border-radius: 12px;
+          border: 1.5px solid rgba(99, 102, 241, 0.15);
+          background: rgba(255, 255, 255, 0.7);
+          backdrop-filter: blur(8px);
+          outline: none;
+          font-size: 14px;
+          color: var(--color-navy);
+          transition: all 0.3s ease;
+        }
+        .search-input-field:focus {
+          border-color: #6366f1 !important;
+          background: #ffffff !important;
+          box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+        }
+      `}</style>
+      
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         
         {/* Header trang */}
         <div style={{ textAlign: 'center', marginBottom: 'var(--space-8)' }}>
-          <span className="section-label">Tin mới cập nhật</span>
-          <h1 className="section-title">Tin tức & sự kiện</h1>
+          <span className="section-label" style={{ background: 'linear-gradient(135deg, #6366f1, #a855f7)', color: 'white', padding: '4px 12px', borderRadius: '12px', fontSize: 'var(--font-size-xs)', fontWeight: 700, display: 'inline-block', marginBottom: 'var(--space-3)' }}>
+            Tin mới cập nhật
+          </span>
+          <h1 style={{ fontSize: 'var(--font-size-3xl)', fontWeight: 800, color: 'var(--color-navy)', margin: 0 }}>
+            Tin tức & sự kiện
+          </h1>
         </div>
 
         {/* Thanh lọc & tìm kiếm */}
@@ -84,18 +108,19 @@ export default async function NewsPage(props: PageProps) {
           }}
         >
           {/* Danh mục lọc nhanh */}
-          <div style={{ display: 'flex', gap: 'var(--space-2)', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
             <Link
               href="/tin-tuc"
               style={{
-                padding: 'var(--space-2) var(--space-4)',
-                borderRadius: 'var(--radius-full)',
-                fontSize: 'var(--font-size-xs)',
-                fontWeight: 600,
-                background: !categorySlug ? 'var(--color-navy)' : 'var(--color-white)',
-                color: !categorySlug ? 'var(--color-gold)' : 'var(--color-gray-600)',
-                border: '1px solid var(--color-gray-200)',
-                transition: 'all var(--transition-fast)'
+                padding: '8px 18px',
+                borderRadius: '999px',
+                fontSize: '13px',
+                fontWeight: 700,
+                background: !categorySlug ? 'linear-gradient(135deg, #6366f1, #a855f7)' : 'rgba(255, 255, 255, 0.7)',
+                color: !categorySlug ? '#ffffff' : '#6366f1',
+                border: !categorySlug ? 'none' : '1px solid rgba(99, 102, 241, 0.15)',
+                boxShadow: !categorySlug ? '0 4px 12px rgba(99, 102, 241, 0.2)' : 'none',
+                transition: 'all 0.2s ease'
               }}
             >
               Tất cả
@@ -107,14 +132,15 @@ export default async function NewsPage(props: PageProps) {
                   key={cat.id}
                   href={`/tin-tuc?category=${cat.slug}${search ? `&search=${search}` : ''}`}
                   style={{
-                    padding: 'var(--space-2) var(--space-4)',
-                    borderRadius: 'var(--radius-full)',
-                    fontSize: 'var(--font-size-xs)',
-                    fontWeight: 600,
-                    background: isSelected ? 'var(--color-navy)' : 'var(--color-white)',
-                    color: isSelected ? 'var(--color-gold)' : 'var(--color-gray-600)',
-                    border: '1px solid var(--color-gray-200)',
-                    transition: 'all var(--transition-fast)'
+                    padding: '8px 18px',
+                    borderRadius: '999px',
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    background: isSelected ? 'linear-gradient(135deg, #6366f1, #a855f7)' : 'rgba(255, 255, 255, 0.7)',
+                    color: isSelected ? '#ffffff' : '#6366f1',
+                    border: isSelected ? 'none' : '1px solid rgba(99, 102, 241, 0.15)',
+                    boxShadow: isSelected ? '0 4px 12px rgba(99, 102, 241, 0.2)' : 'none',
+                    transition: 'all 0.2s ease'
                   }}
                 >
                   {cat.name}
@@ -123,7 +149,7 @@ export default async function NewsPage(props: PageProps) {
             })}
           </div>
 
-          {/* Form tìm kiếm (Sử dụng form GET thuần để tìm kiếm đơn giản không cần JS phức tạp) */}
+          {/* Form tìm kiếm */}
           <form method="GET" action="/tin-tuc" style={{ display: 'flex', gap: 'var(--space-2)', width: '100%', maxWidth: '320px' }}>
             {categorySlug && <input type="hidden" name="category" value={categorySlug} />}
             <div style={{ position: 'relative', flex: 1 }}>
@@ -132,18 +158,11 @@ export default async function NewsPage(props: PageProps) {
                 name="search"
                 defaultValue={search}
                 placeholder="Tìm kiếm bài viết..."
-                style={{
-                  width: '100%',
-                  padding: 'var(--space-2) var(--space-4) var(--space-2) var(--space-10)',
-                  borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--color-gray-200)',
-                  outline: 'none',
-                  fontSize: 'var(--font-size-sm)'
-                }}
+                className="search-input-field"
               />
               <Search size={16} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-gray-400)' }} />
             </div>
-            <button type="submit" className="btn btn-primary btn-sm">
+            <button type="submit" className="btn btn-primary btn-sm" style={{ background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', border: 'none', borderRadius: '12px', color: '#ffffff', fontWeight: 600, padding: '0 16px' }}>
               Tìm
             </button>
           </form>
@@ -151,9 +170,9 @@ export default async function NewsPage(props: PageProps) {
 
         {/* Danh sách tin tức */}
         {posts.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-500)', background: 'var(--color-white)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-gray-200)' }}>
+          <div style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-500)', background: 'rgba(255, 255, 255, 0.8)', backdropFilter: 'blur(10px)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.15)' }}>
             <p>Không tìm thấy bài viết nào phù hợp với bộ lọc hiện tại.</p>
-            <Link href="/tin-tuc" className="btn btn-primary btn-sm" style={{ marginTop: 'var(--space-4)' }}>
+            <Link href="/tin-tuc" className="btn btn-primary btn-sm" style={{ marginTop: 'var(--space-4)', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', border: 'none', borderRadius: '12px', color: '#ffffff' }}>
               Quay lại danh sách
             </Link>
           </div>
@@ -167,7 +186,7 @@ export default async function NewsPage(props: PageProps) {
 
             {/* Phân trang đơn giản */}
             {totalPages > 1 && (
-              <div style={{ display: 'flex', justifyContent: 'center', gap: 'var(--space-2)', marginTop: 'var(--space-8)' }}>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: 'var(--space-8)' }}>
                 {Array.from({ length: totalPages }).map((_, i) => {
                   const pageNum = i + 1
                   const isCurrent = pageNum === currentPage
@@ -182,12 +201,14 @@ export default async function NewsPage(props: PageProps) {
                         height: '36px',
                         padding: 0,
                         borderRadius: '50%',
-                        background: isCurrent ? 'var(--color-navy)' : 'var(--color-white)',
-                        color: isCurrent ? 'var(--color-gold)' : 'var(--color-gray-600)',
-                        border: isCurrent ? 'none' : '1px solid var(--color-gray-200)',
+                        background: isCurrent ? 'linear-gradient(135deg, #6366f1, #8b5cf6)' : 'rgba(255, 255, 255, 0.8)',
+                        color: isCurrent ? '#ffffff' : 'var(--color-gray-600)',
+                        border: isCurrent ? 'none' : '1px solid rgba(99, 102, 241, 0.12)',
+                        boxShadow: isCurrent ? '0 4px 10px rgba(99, 102, 241, 0.15)' : 'none',
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'center'
+                        justifyContent: 'center',
+                        fontWeight: 700
                       }}
                     >
                       {pageNum}

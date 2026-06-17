@@ -56,18 +56,22 @@ export default function Footer({ settings }: FooterProps) {
   const { title, subtitle } = splitSchoolName(schoolName)
 
   return (
-    <footer className="public-footer" style={{ background: '#0F172A', color: 'var(--color-white)', padding: 'var(--space-16) 0 var(--space-8) 0', borderTop: '4px solid var(--color-gold)' }}>
-      <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'var(--space-10)' }}>
+    <footer className="public-footer" style={{ background: 'linear-gradient(180deg, #0b0f19 0%, #06080e 100%)', color: 'var(--color-white)', padding: 'var(--space-16) 0 var(--space-8) 0', borderTop: '4px solid #6366f1', position: 'relative', overflow: 'hidden' }}>
+      {/* Decorative background grid and blob */}
+      <div style={{ position: 'absolute', inset: 0, opacity: 0.04, pointerEvents: 'none', backgroundImage: 'radial-gradient(circle at 1px 1px, #6366f1 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+      <div style={{ position: 'absolute', bottom: '-50px', right: '-50px', width: '250px', height: '250px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
+      <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'var(--space-10)', position: 'relative', zIndex: 1 }}>
 
         {/* Cột 1: Thông tin trường */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-            <div style={{ width: '40px', height: '40px', background: 'var(--color-gold)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#0F172A' }}>
+            <div style={{ width: '40px', height: '40px', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff', boxShadow: '0 0 15px rgba(99, 102, 241, 0.3)' }}>
               <GraduationCap size={24} />
             </div>
             <div>
               <h2 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 800, color: 'var(--color-white)', margin: 0, lineHeight: 1.1, fontFamily: 'var(--font-title)' }}>{title}</h2>
-              {subtitle && <span style={{ fontSize: '11px', color: 'var(--color-gold)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>{subtitle}</span>}
+              {subtitle && <span style={{ fontSize: '11px', color: '#a78bfa', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>{subtitle}</span>}
             </div>
           </div>
           <p style={{ color: 'var(--color-gray-400)', fontSize: 'var(--font-size-sm)', lineHeight: 1.6 }}>
@@ -95,7 +99,7 @@ export default function Footer({ settings }: FooterProps) {
         <div>
           <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 800, color: 'var(--color-white)', marginBottom: 'var(--space-6)', position: 'relative', paddingBottom: 'var(--space-2)', fontFamily: 'var(--font-title)' }}>
             Liên kết nhanh
-            <span style={{ position: 'absolute', bottom: 0, left: 0, width: '40px', height: '3px', background: 'var(--color-gold)', borderRadius: 'var(--radius-full)' }} />
+            <span style={{ position: 'absolute', bottom: 0, left: 0, width: '40px', height: '3px', background: 'linear-gradient(90deg, #6366f1, #8b5cf6)', borderRadius: 'var(--radius-full)' }} />
           </h3>
           <ul className="footer-links" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
             <li>
@@ -123,7 +127,7 @@ export default function Footer({ settings }: FooterProps) {
         <div>
           <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 800, color: 'var(--color-white)', marginBottom: 'var(--space-6)', position: 'relative', paddingBottom: 'var(--space-2)', fontFamily: 'var(--font-title)' }}>
             Tuyển sinh & học vụ
-            <span style={{ position: 'absolute', bottom: 0, left: 0, width: '40px', height: '3px', background: 'var(--color-gold)', borderRadius: 'var(--radius-full)' }} />
+            <span style={{ position: 'absolute', bottom: 0, left: 0, width: '40px', height: '3px', background: 'linear-gradient(90deg, #6366f1, #8b5cf6)', borderRadius: 'var(--radius-full)' }} />
           </h3>
           <ul className="footer-links" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
             <li>
@@ -153,19 +157,19 @@ export default function Footer({ settings }: FooterProps) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
           <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 800, color: 'var(--color-white)', position: 'relative', paddingBottom: 'var(--space-2)', fontFamily: 'var(--font-title)', margin: 0 }}>
             Liên hệ với chúng tôi
-            <span style={{ position: 'absolute', bottom: 0, left: 0, width: '40px', height: '3px', background: 'var(--color-gold)', borderRadius: 'var(--radius-full)' }} />
+            <span style={{ position: 'absolute', bottom: 0, left: 0, width: '40px', height: '3px', background: 'linear-gradient(90deg, #6366f1, #8b5cf6)', borderRadius: 'var(--radius-full)' }} />
           </h3>
           <ul style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', color: 'var(--color-gray-400)', fontSize: 'var(--font-size-sm)', padding: 0 }}>
             <li style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-2)' }}>
-              <MapPin size={16} style={{ flexShrink: 0, color: 'var(--color-gold)', marginTop: '4px' }} />
+              <MapPin size={16} style={{ flexShrink: 0, color: '#818cf8', marginTop: '4px' }} />
               <span style={{ lineHeight: 1.4 }}>{address}</span>
             </li>
             <li style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-              <Phone size={16} style={{ flexShrink: 0, color: 'var(--color-gold)' }} />
+              <Phone size={16} style={{ flexShrink: 0, color: '#818cf8' }} />
               <span>{phone}</span>
             </li>
             <li style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-              <Mail size={16} style={{ flexShrink: 0, color: 'var(--color-gold)' }} />
+              <Mail size={16} style={{ flexShrink: 0, color: '#818cf8' }} />
               <span>{email}</span>
             </li>
           </ul>

@@ -78,66 +78,95 @@ export default async function AdmissionPage() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       
-      {/* Banner đầu trang */}
-      <section style={{ background: 'linear-gradient(135deg, var(--color-navy-dark), var(--color-navy))', color: 'var(--color-white)', padding: 'var(--space-12) 0', textAlign: 'center' }}>
-        <div className="container">
-          <h1 style={{ fontSize: 'var(--font-size-4xl)', fontWeight: 800, margin: 0, color: 'var(--color-gold)' }}>
+      <style>{`
+        .admission-grid {
+          display: grid;
+          grid-template-columns: 3fr 2fr;
+          gap: var(--space-8);
+        }
+        @media (max-width: 992px) {
+          .admission-grid {
+            grid-template-columns: 1fr;
+            gap: var(--space-8);
+          }
+        }
+      `}</style>
+      
+      {/* Banner đầu trang - Light Futuristic */}
+      <section style={{
+        background: 'linear-gradient(135deg, #f0f4ff 0%, #e8eeff 50%, #f5f0ff 100%)',
+        color: '#0f172a',
+        padding: 'var(--space-16) 0',
+        textAlign: 'center',
+        position: 'relative',
+        overflow: 'hidden',
+        borderBottom: '1px solid rgba(99, 102, 241, 0.15)'
+      }}>
+        {/* Animated grid overlay */}
+        <div style={{ position: 'absolute', inset: 0, opacity: 0.3, pointerEvents: 'none', backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(99,102,241,0.08) 1px, transparent 0)', backgroundSize: '32px 32px' }} />
+        <div style={{ position: 'absolute', top: '-20%', left: '10%', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)', filter: 'blur(30px)', pointerEvents: 'none' }} />
+
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+          <span className="section-label">Tuyển sinh 2026</span>
+          <h1 style={{ fontSize: 'var(--font-size-4xl)', fontWeight: 900, margin: '12px 0 0 0', background: 'linear-gradient(135deg, #3b82f6, #4f46e5, #7c3aed)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontFamily: 'var(--font-title)' }}>
             Thông tin tuyển sinh
           </h1>
-          <p style={{ opacity: 0.8, fontSize: 'var(--font-size-base)', marginTop: 'var(--space-2)' }}>
+          <p style={{ color: 'var(--color-gray-600)', fontSize: 'var(--font-size-base)', marginTop: 'var(--space-3)', fontWeight: 500 }}>
             Thông báo tuyển sinh lớp 10 Trường THPT Edison năm học 2026 - 2027
           </p>
         </div>
       </section>
 
       {/* Nội dung quy trình & form đăng ký */}
-      <section className="section">
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: '3fr 2fr', gap: 'var(--space-12)' }}>
-          
-          {/* Cột trái: Thông tin chỉ tiêu, quy chế */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-8)' }}>
+      <section className="section" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f5f8ff 100%)' }}>
+        <div className="container">
+          <div className="admission-grid">
             
-            {/* Khối 1: Tổng quan chỉ tiêu */}
-            <div style={{ background: 'var(--color-white)', padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-gray-200)', boxShadow: 'var(--shadow-sm)' }}>
-              <h2 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-4)' }}>
-                <Award style={{ color: 'var(--color-gold)' }} />
-                Chỉ tiêu & đối tượng tuyển sinh
-              </h2>
-              <div 
-                dangerouslySetInnerHTML={{ __html: settings.admissionQuotaHtml }}
-                style={{ fontSize: 'var(--font-size-sm)' }}
-              />
+            {/* Cột trái: Thông tin chỉ tiêu, quy chế */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-8)' }}>
+              
+              {/* Khối 1: Tổng quan chỉ tiêu */}
+              <div style={{ background: 'rgba(255, 255, 255, 0.75)', backdropFilter: 'blur(12px)', padding: 'var(--space-6)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.15)', boxShadow: '0 10px 30px rgba(99, 102, 241, 0.03)' }}>
+                <h2 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-4)' }}>
+                  <Award style={{ color: '#6366f1' }} />
+                  Chỉ tiêu & đối tượng tuyển sinh
+                </h2>
+                <div 
+                  dangerouslySetInnerHTML={{ __html: settings.admissionQuotaHtml }}
+                  style={{ fontSize: 'var(--font-size-sm)' }}
+                />
+              </div>
+
+              {/* Khối 2: Phương thức xét tuyển */}
+              <div style={{ background: 'rgba(255, 255, 255, 0.75)', backdropFilter: 'blur(12px)', padding: 'var(--space-6)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.15)', boxShadow: '0 10px 30px rgba(99, 102, 241, 0.03)' }}>
+                <h2 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-4)' }}>
+                  <FileText style={{ color: '#6366f1' }} />
+                  Phương thức tuyển sinh
+                </h2>
+                <div 
+                  dangerouslySetInnerHTML={{ __html: settings.admissionMethodsHtml }}
+                />
+              </div>
+
+              {/* Khối 3: Lịch trình nộp hồ sơ */}
+              <div style={{ background: 'rgba(255, 255, 255, 0.75)', backdropFilter: 'blur(12px)', padding: 'var(--space-6)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.15)', boxShadow: '0 10px 30px rgba(99, 102, 241, 0.03)' }}>
+                <h2 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-4)' }}>
+                  <Calendar style={{ color: '#6366f1' }} />
+                  Mốc lịch trình quan trọng
+                </h2>
+                <div 
+                  dangerouslySetInnerHTML={{ __html: settings.admissionTimelineHtml }}
+                />
+              </div>
+
             </div>
 
-            {/* Khối 2: Phương thức xét tuyển */}
-            <div style={{ background: 'var(--color-white)', padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-gray-200)', boxShadow: 'var(--shadow-sm)' }}>
-              <h2 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-4)' }}>
-                <FileText style={{ color: 'var(--color-gold)' }} />
-                Phương thức tuyển sinh
-              </h2>
-              <div 
-                dangerouslySetInnerHTML={{ __html: settings.admissionMethodsHtml }}
-              />
-            </div>
-
-            {/* Khối 3: Lịch trình nộp hồ sơ */}
-            <div style={{ background: 'var(--color-white)', padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid var(--color-gray-200)', boxShadow: 'var(--shadow-sm)' }}>
-              <h2 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-4)' }}>
-                <Calendar style={{ color: 'var(--color-gold)' }} />
-                Mốc lịch trình quan trọng
-              </h2>
-              <div 
-                dangerouslySetInnerHTML={{ __html: settings.admissionTimelineHtml }}
-              />
+            {/* Cột phải: Form đăng ký tư vấn tuyển sinh */}
+            <div>
+              <AdmissionForm />
             </div>
 
           </div>
-
-          {/* Cột phải: Form đăng ký tư vấn tuyển sinh */}
-          <div>
-            <AdmissionForm />
-          </div>
-
         </div>
       </section>
 

@@ -37,13 +37,13 @@ function Counter({ target, suffix = '', label, icon }: StatItemProps) {
 
   return (
     <div className="glass-card" style={{ padding: 'var(--space-6) var(--space-8)', display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flex: 1, minWidth: '220px' }}>
-      <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: 'rgba(10, 75, 175, 0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-primary)', flexShrink: 0 }}>
+      <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: 'rgba(99, 102, 241, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6366f1', flexShrink: 0 }}>
         {icon}
       </div>
       <div>
         <div style={{ fontSize: 'var(--font-size-3xl)', fontWeight: 800, color: 'var(--color-navy)', fontFamily: 'var(--font-title)', lineHeight: 1.1, letterSpacing: '-0.02em', display: 'flex', alignItems: 'baseline' }}>
           <span>{count.toLocaleString('vi-VN')}</span>
-          <span style={{ color: 'var(--color-gold)', marginLeft: '2px' }}>{suffix}</span>
+          <span style={{ color: '#6366f1', marginLeft: '2px' }}>{suffix}</span>
         </div>
         <div style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-gray-500)', fontWeight: 600, marginTop: '4px' }}>
           {label}

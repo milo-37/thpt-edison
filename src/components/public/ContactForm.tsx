@@ -68,18 +68,69 @@ export default function ContactForm() {
       onSubmit={handleSubmit} 
       className="glass-card" 
       style={{ 
-        background: 'var(--glass-bg)', 
+        background: 'rgba(255, 255, 255, 0.75)', 
         backdropFilter: 'blur(20px)',
         padding: 'var(--space-8)', 
-        borderRadius: 'var(--radius-xl)', 
-        border: 'var(--glass-border)', 
-        boxShadow: 'var(--shadow-lg)', 
+        borderRadius: '24px', 
+        border: '1px solid rgba(99, 102, 241, 0.15)', 
+        boxShadow: '0 20px 40px rgba(99, 102, 241, 0.04)', 
         display: 'flex', 
         flexDirection: 'column', 
-        gap: 'var(--space-5)' 
+        gap: 'var(--space-5)',
+        position: 'relative'
       }}
     >
-      <h3 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--color-navy)', borderBottom: '2px solid var(--color-gold)', paddingBottom: 'var(--space-2)', margin: '0 0 var(--space-1) 0', fontFamily: 'var(--font-title)' }}>
+      <style>{`
+        .futuristic-input {
+          width: 100%;
+          padding: 12px 16px;
+          border-radius: 12px;
+          border: 1.5px solid rgba(99, 102, 241, 0.15);
+          outline: none;
+          background: rgba(255, 255, 255, 0.8);
+          color: var(--color-navy);
+          font-size: 14px;
+          transition: all 0.25s ease;
+        }
+        .futuristic-input:focus {
+          border-color: #6366f1;
+          background: #ffffff;
+          box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
+        }
+        .submit-btn {
+          width: 100%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          margin-top: var(--space-2);
+          border-radius: 12px;
+          padding: 14px 28px;
+          font-weight: 700;
+          font-size: 15px;
+          color: white;
+          background: linear-gradient(135deg, #6366f1, #a855f7);
+          border: none;
+          cursor: pointer;
+          transition: all 0.25s ease;
+          box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+        }
+        .submit-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+          opacity: 0.95;
+        }
+        .submit-btn:active {
+          transform: translateY(0);
+        }
+        .submit-btn:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+          transform: none;
+        }
+      `}</style>
+
+      <h3 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--color-navy)', paddingBottom: 'var(--space-2)', margin: '0 0 var(--space-1) 0', fontFamily: 'var(--font-title)', borderBottom: '1px solid rgba(99, 102, 241, 0.1)' }}>
         Gửi Tin Nhắn Liên Hệ
       </h3>
 
@@ -92,9 +143,9 @@ export default function ContactForm() {
             padding: 'var(--space-4)',
             borderRadius: '16px',
             fontSize: 'var(--font-size-sm)',
-            background: status.type === 'success' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
-            color: status.type === 'success' ? 'var(--color-success-dark)' : 'var(--color-danger-dark)',
-            border: `1px solid ${status.type === 'success' ? 'rgba(16, 185, 129, 0.2)' : 'rgba(239, 68, 68, 0.2)'}`,
+            background: status.type === 'success' ? 'rgba(16, 185, 129, 0.08)' : 'rgba(239, 68, 68, 0.08)',
+            color: status.type === 'success' ? '#10b981' : '#ef4444',
+            border: `1px solid ${status.type === 'success' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(239, 68, 68, 0.15)'}`,
             fontWeight: 500
           }}
         >
@@ -105,7 +156,7 @@ export default function ContactForm() {
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 'var(--space-4)' }}>
         <div>
-          <label htmlFor="name" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-700)', marginBottom: '6px' }}>
+          <label htmlFor="name" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '6px' }}>
             Họ và tên *
           </label>
           <input
@@ -115,30 +166,13 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="form-input"
-            style={{ 
-              width: '100%', 
-              padding: '12px 16px', 
-              borderRadius: 'var(--radius-input)', 
-              border: '1.5px solid var(--color-gray-200)', 
-              outline: 'none',
-              background: 'var(--color-white)',
-              transition: 'all var(--transition-fast)'
-            }}
-            onFocus={(e) => {
-              e.target.style.borderColor = 'var(--color-primary)'
-              e.target.style.boxShadow = '0 0 0 3px rgba(10, 75, 175, 0.1)'
-            }}
-            onBlur={(e) => {
-              e.target.style.borderColor = 'var(--color-gray-200)'
-              e.target.style.boxShadow = 'none'
-            }}
+            className="futuristic-input"
             placeholder="Nguyễn Văn A"
           />
         </div>
 
         <div>
-          <label htmlFor="phone" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-700)', marginBottom: '6px' }}>
+          <label htmlFor="phone" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '6px' }}>
             Số điện thoại
           </label>
           <input
@@ -147,31 +181,14 @@ export default function ContactForm() {
             name="phone"
             value={formData.phone}
             onChange={handleChange}
-            className="form-input"
-            style={{ 
-              width: '100%', 
-              padding: '12px 16px', 
-              borderRadius: 'var(--radius-input)', 
-              border: '1.5px solid var(--color-gray-200)', 
-              outline: 'none',
-              background: 'var(--color-white)',
-              transition: 'all var(--transition-fast)'
-            }}
-            onFocus={(e) => {
-              e.target.style.borderColor = 'var(--color-primary)'
-              e.target.style.boxShadow = '0 0 0 3px rgba(10, 75, 175, 0.1)'
-            }}
-            onBlur={(e) => {
-              e.target.style.borderColor = 'var(--color-gray-200)'
-              e.target.style.boxShadow = 'none'
-            }}
+            className="futuristic-input"
             placeholder="0912345678"
           />
         </div>
       </div>
 
       <div>
-        <label htmlFor="email" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-700)', marginBottom: '6px' }}>
+        <label htmlFor="email" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '6px' }}>
           Địa chỉ Email *
         </label>
         <input
@@ -181,30 +198,13 @@ export default function ContactForm() {
           value={formData.email}
           onChange={handleChange}
           required
-          className="form-input"
-          style={{ 
-            width: '100%', 
-            padding: '12px 16px', 
-            borderRadius: 'var(--radius-input)', 
-            border: '1.5px solid var(--color-gray-200)', 
-            outline: 'none',
-            background: 'var(--color-white)',
-            transition: 'all var(--transition-fast)'
-          }}
-          onFocus={(e) => {
-            e.target.style.borderColor = 'var(--color-primary)'
-            e.target.style.boxShadow = '0 0 0 3px rgba(10, 75, 175, 0.1)'
-          }}
-          onBlur={(e) => {
-            e.target.style.borderColor = 'var(--color-gray-200)'
-            e.target.style.boxShadow = 'none'
-          }}
+          className="futuristic-input"
           placeholder="example@gmail.com"
         />
       </div>
 
       <div>
-        <label htmlFor="subject" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-700)', marginBottom: '6px' }}>
+        <label htmlFor="subject" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '6px' }}>
           Tiêu đề *
         </label>
         <input
@@ -214,30 +214,13 @@ export default function ContactForm() {
           value={formData.subject}
           onChange={handleChange}
           required
-          className="form-input"
-          style={{ 
-            width: '100%', 
-            padding: '12px 16px', 
-            borderRadius: 'var(--radius-input)', 
-            border: '1.5px solid var(--color-gray-200)', 
-            outline: 'none',
-            background: 'var(--color-white)',
-            transition: 'all var(--transition-fast)'
-          }}
-          onFocus={(e) => {
-            e.target.style.borderColor = 'var(--color-primary)'
-            e.target.style.boxShadow = '0 0 0 3px rgba(10, 75, 175, 0.1)'
-          }}
-          onBlur={(e) => {
-            e.target.style.borderColor = 'var(--color-gray-200)'
-            e.target.style.boxShadow = 'none'
-          }}
+          className="futuristic-input"
           placeholder="Hỏi về học phí, tuyển sinh lớp 10..."
         />
       </div>
 
       <div>
-        <label htmlFor="message" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-gray-700)', marginBottom: '6px' }}>
+        <label htmlFor="message" style={{ display: 'block', fontSize: 'var(--font-size-xs)', fontWeight: 700, color: 'var(--color-navy)', marginBottom: '6px' }}>
           Nội dung liên hệ *
         </label>
         <textarea
@@ -247,25 +230,8 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           rows={5}
-          className="form-textarea"
-          style={{ 
-            width: '100%', 
-            padding: '12px 16px', 
-            borderRadius: 'var(--radius-input)', 
-            border: '1.5px solid var(--color-gray-200)', 
-            outline: 'none', 
-            resize: 'vertical',
-            background: 'var(--color-white)',
-            transition: 'all var(--transition-fast)'
-          }}
-          onFocus={(e) => {
-            e.target.style.borderColor = 'var(--color-primary)'
-            e.target.style.boxShadow = '0 0 0 3px rgba(10, 75, 175, 0.1)'
-          }}
-          onBlur={(e) => {
-            e.target.style.borderColor = 'var(--color-gray-200)'
-            e.target.style.boxShadow = 'none'
-          }}
+          className="futuristic-input"
+          style={{ resize: 'vertical' }}
           placeholder="Nhập nội dung tin nhắn của bạn ở đây..."
         />
       </div>
@@ -273,14 +239,7 @@ export default function ContactForm() {
       <button
         type="submit"
         disabled={loading}
-        className="btn btn-primary btn-lg"
-        style={{ 
-          width: '100%', 
-          gap: 'var(--space-2)', 
-          marginTop: 'var(--space-2)', 
-          borderRadius: 'var(--radius-button)',
-          padding: '14px 28px'
-        }}
+        className="submit-btn"
       >
         <Send size={16} />
         {loading ? 'Đang gửi...' : 'Gửi liên hệ'}

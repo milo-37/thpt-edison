@@ -61,8 +61,8 @@ export default function DocumentList({ initialDocuments }: DocumentListProps) {
 
   if (documents.length === 0) {
     return (
-      <div style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-500)', border: '1px dashed var(--color-gray-300)', borderRadius: 'var(--radius-lg)' }}>
-        <FileText size={36} style={{ margin: '0 auto var(--space-3) auto', opacity: 0.5 }} />
+      <div style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)', background: 'rgba(255, 255, 255, 0.7)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.12)' }}>
+        <FileText size={36} style={{ margin: '0 auto var(--space-3) auto', opacity: 0.5, color: '#6366f1' }} />
         <p>Kho tài liệu hiện chưa có tệp tin nào được đăng tải.</p>
       </div>
     )
@@ -70,23 +70,52 @@ export default function DocumentList({ initialDocuments }: DocumentListProps) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+      <style>{`
+        .document-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: var(--space-4);
+          background: rgba(255, 255, 255, 0.75);
+          backdrop-filter: blur(20px);
+          padding: 20px 24px;
+          border-radius: 20px;
+          border: 1px solid rgba(99, 102, 241, 0.12);
+          box-shadow: 0 4px 15px rgba(99, 102, 241, 0.01);
+          transition: all 0.25s ease;
+        }
+        .document-row:hover {
+          transform: translateY(-2px);
+          border-color: rgba(99, 102, 241, 0.25);
+          box-shadow: 0 10px 25px rgba(99, 102, 241, 0.05);
+          background: #ffffff;
+        }
+        .download-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          border-radius: 10px;
+          padding: 10px 20px;
+          font-weight: 700;
+          font-size: 13px;
+          color: white;
+          background: linear-gradient(135deg, #6366f1, #a855f7);
+          border: none;
+          cursor: pointer;
+          transition: all 0.2s ease;
+          box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+        }
+        .download-btn:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 6px 15px rgba(99, 102, 241, 0.25);
+          opacity: 0.95;
+        }
+      `}</style>
       {documents.map((doc) => {
         const icon = getFileIcon(doc.fileType)
         return (
           <div
             key={doc.id}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              gap: 'var(--space-4)',
-              background: 'var(--color-white)',
-              padding: 'var(--space-4) var(--space-6)',
-              borderRadius: 'var(--radius-xl)',
-              border: '1px solid var(--color-gray-100)',
-              boxShadow: 'var(--shadow-sm)',
-              transition: 'all var(--transition-base)'
-            }}
             className="document-row"
           >
             {/* Cột Trái: Icon & Tên tài liệu */}
@@ -96,17 +125,18 @@ export default function DocumentList({ initialDocuments }: DocumentListProps) {
                   fontSize: 'var(--font-size-3xl)',
                   width: '50px',
                   height: '50px',
-                  background: 'var(--color-gray-50)',
-                  borderRadius: 'var(--radius-md)',
+                  background: 'rgba(99, 102, 241, 0.06)',
+                  borderRadius: '12px',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  color: '#6366f1'
                 }}
               >
                 {icon}
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                <h4 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'var(--color-gray-800)', margin: 0 }}>
+                <h4 style={{ fontSize: 'var(--font-size-base)', fontWeight: 800, color: 'var(--color-navy)', margin: 0 }}>
                   {doc.title}
                 </h4>
                 {doc.description && (
@@ -126,7 +156,7 @@ export default function DocumentList({ initialDocuments }: DocumentListProps) {
             {/* Cột Phải: Lượt tải & Nút tải về */}
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-6)' }}>
               <div style={{ textAlign: 'right', fontSize: 'var(--font-size-xs)', color: 'var(--color-gray-400)' }}>
-                <span style={{ display: 'block', fontWeight: 600, color: 'var(--color-navy)', fontSize: 'var(--font-size-sm)' }}>
+                <span style={{ display: 'block', fontWeight: 800, color: 'var(--color-navy)', fontSize: 'var(--font-size-sm)' }}>
                   {doc.downloadCount}
                 </span>
                 <span>lượt tải</span>
@@ -134,8 +164,7 @@ export default function DocumentList({ initialDocuments }: DocumentListProps) {
               
               <button
                 onClick={() => handleDownload(doc.id, doc.filePath)}
-                className="btn btn-primary"
-                style={{ gap: 'var(--space-2)' }}
+                className="download-btn"
               >
                 <Download size={16} />
                 Tải xuống

@@ -26,9 +26,9 @@ const categoryLabels: Record<string, string> = {
 }
 
 const categoryColors: Record<string, string> = {
-  academic: '#2563eb', // Blue
-  sports: '#16a34a',   // Green
-  arts: '#9333ea',     // Purple
+  academic: '#6366f1', // Indigo
+  sports: '#10b981',   // Emerald
+  arts: '#a855f7',     // Purple
   other: '#6b7280'     // Gray
 }
 
@@ -54,32 +54,56 @@ export default function AchievementsList({ initialAchievements }: AchievementsLi
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-8)' }}>
+      <style>{`
+        .achievement-tab-btn {
+          padding: 8px 24px;
+          border-radius: 12px;
+          font-size: var(--font-size-sm);
+          font-weight: 600;
+          cursor: pointer;
+          border: none;
+          transition: all 0.25s ease;
+        }
+        .achievement-item-card {
+          display: flex;
+          flex-direction: column;
+          background: rgba(255, 255, 255, 0.75);
+          backdrop-filter: blur(20px);
+          border-radius: 24px;
+          border: 1px solid rgba(99, 102, 241, 0.12);
+          box-shadow: 0 4px 15px rgba(99, 102, 241, 0.01);
+          overflow: hidden;
+          transition: all 0.3s ease;
+        }
+        .achievement-item-card:hover {
+          transform: translateY(-4px);
+          border-color: rgba(99, 102, 241, 0.25);
+          box-shadow: 0 12px 30px rgba(99, 102, 241, 0.06);
+          background: #ffffff;
+        }
+      `}</style>
+
       {/* Filter Tabs */}
       <div 
         style={{ 
           display: 'flex', 
           justifyContent: 'center', 
-          gap: 'var(--space-2)', 
+          gap: '8px', 
           flexWrap: 'wrap',
-          background: 'var(--color-gray-100)',
+          background: 'rgba(99, 102, 241, 0.05)',
           padding: '6px',
-          borderRadius: 'var(--radius-lg)',
+          borderRadius: '16px',
           width: 'fit-content',
-          margin: '0 auto'
+          margin: '0 auto',
+          border: '1px solid rgba(99, 102, 241, 0.1)'
         }}
       >
         <button
           onClick={() => setActiveTab('all')}
+          className="achievement-tab-btn"
           style={{
-            padding: 'var(--space-2) var(--space-6)',
-            borderRadius: 'var(--radius-md)',
-            fontSize: 'var(--font-size-sm)',
-            fontWeight: 600,
-            cursor: 'pointer',
-            border: 'none',
-            background: activeTab === 'all' ? 'var(--color-navy)' : 'transparent',
-            color: activeTab === 'all' ? 'var(--color-white)' : 'var(--color-gray-600)',
-            transition: 'all var(--transition-base)'
+            background: activeTab === 'all' ? 'linear-gradient(135deg, #6366f1, #a855f7)' : 'transparent',
+            color: activeTab === 'all' ? '#ffffff' : '#6366f1',
           }}
         >
           Tất cả thành tích
@@ -88,16 +112,10 @@ export default function AchievementsList({ initialAchievements }: AchievementsLi
           <button
             key={k}
             onClick={() => setActiveTab(k)}
+            className="achievement-tab-btn"
             style={{
-              padding: 'var(--space-2) var(--space-6)',
-              borderRadius: 'var(--radius-md)',
-              fontSize: 'var(--font-size-sm)',
-              fontWeight: 600,
-              cursor: 'pointer',
-              border: 'none',
-              background: activeTab === k ? 'var(--color-navy)' : 'transparent',
-              color: activeTab === k ? 'var(--color-white)' : 'var(--color-gray-600)',
-              transition: 'all var(--transition-base)',
+              background: activeTab === k ? 'linear-gradient(135deg, #6366f1, #a855f7)' : 'transparent',
+              color: activeTab === k ? '#ffffff' : '#6366f1',
               display: 'flex',
               alignItems: 'center',
               gap: '6px'
@@ -111,8 +129,8 @@ export default function AchievementsList({ initialAchievements }: AchievementsLi
 
       {/* Grid List */}
       {filtered.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)' }}>
-          <Flame size={48} style={{ margin: '0 auto var(--space-4) auto', opacity: 0.5 }} />
+        <div style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)', background: 'rgba(255, 255, 255, 0.7)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.12)' }}>
+          <Flame size={48} style={{ margin: '0 auto var(--space-4) auto', opacity: 0.5, color: '#6366f1' }} />
           <p>Chưa có dữ liệu thành tích cho danh mục này.</p>
         </div>
       ) : (
@@ -120,14 +138,10 @@ export default function AchievementsList({ initialAchievements }: AchievementsLi
           {filtered.map((item) => (
             <div
               key={item.id}
-              className="card achievement-card animate-fadeIn"
-              style={{
-                display: 'flex',
-                flexDirection: 'column'
-              }}
+              className="achievement-item-card animate-fadeIn"
             >
               {/* Card Image */}
-              <div style={{ height: '200px', background: 'var(--color-navy-dark)', position: 'relative' }}>
+              <div style={{ height: '200px', background: 'rgba(99, 102, 241, 0.05)', position: 'relative', overflow: 'hidden' }}>
                 {item.imageUrl ? (
                   <img
                     src={item.imageUrl}
@@ -135,7 +149,7 @@ export default function AchievementsList({ initialAchievements }: AchievementsLi
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
                 ) : (
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--color-gold-light)', background: 'linear-gradient(135deg, var(--color-navy-dark), var(--color-navy-light))' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#6366f1', background: 'linear-gradient(135deg, #f5f3ff, #e0e7ff)' }}>
                     <Trophy size={64} className="animate-float" />
                   </div>
                 )}
@@ -146,13 +160,14 @@ export default function AchievementsList({ initialAchievements }: AchievementsLi
                       position: 'absolute',
                       top: 'var(--space-4)',
                       left: 'var(--space-4)',
-                      background: 'rgba(9, 22, 46, 0.8)',
+                      background: 'rgba(255, 255, 255, 0.85)',
                       backdropFilter: 'blur(4px)',
-                      color: 'var(--color-white)',
+                      color: 'var(--color-navy)',
                       fontSize: '11px',
                       fontWeight: 700,
                       padding: '4px 8px',
-                      borderRadius: 'var(--radius-sm)'
+                      borderRadius: '8px',
+                      border: '1px solid rgba(99, 102, 241, 0.12)'
                     }}
                   >
                     {item.year}
@@ -173,7 +188,7 @@ export default function AchievementsList({ initialAchievements }: AchievementsLi
                     display: 'flex',
                     alignItems: 'center',
                     gap: '4px',
-                    boxShadow: 'var(--shadow-sm)'
+                    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)'
                   }}
                 >
                   {getCategoryIcon(item.category)}
@@ -183,12 +198,12 @@ export default function AchievementsList({ initialAchievements }: AchievementsLi
 
               {/* Card Content */}
               <div style={{ padding: 'var(--space-6)', display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', flex: 1 }}>
-                <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'var(--color-navy)', margin: 0, lineHeight: 1.4 }}>
+                <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 800, color: 'var(--color-navy)', margin: 0, lineHeight: 1.4 }}>
                   {item.title}
                 </h3>
                 
                 {item.studentName && (
-                  <div style={{ fontSize: 'var(--font-size-xs)', fontWeight: 600, color: 'var(--color-gold-dark)' }}>
+                  <div style={{ fontSize: 'var(--font-size-xs)', fontWeight: 700, color: '#a855f7' }}>
                     🏆 Cán sự: {item.studentName}
                   </div>
                 )}

@@ -198,14 +198,14 @@ export default function Header({ settings }: HeaderProps) {
               className="btn btn-outline"
               style={{
                 marginLeft: '8px',
-                border: '1.5px solid var(--color-primary)',
-                color: 'var(--color-primary)',
+                border: '1.5px solid #4f46e5',
+                color: '#4f46e5',
                 padding: '8px 16px',
                 borderRadius: '12px',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '8px',
-                background: 'rgba(10, 75, 175, 0.05)'
+                background: 'rgba(99, 102, 241, 0.05)'
               }}
               title="Đến trang quản lý"
             >
@@ -214,7 +214,7 @@ export default function Header({ settings }: HeaderProps) {
                   width: '20px',
                   height: '20px',
                   borderRadius: '50%',
-                  background: 'var(--color-primary)',
+                  background: 'linear-gradient(135deg, #6366f1, #8b5cf6)',
                   color: 'var(--color-white)',
                   display: 'flex',
                   alignItems: 'center',
@@ -233,12 +233,12 @@ export default function Header({ settings }: HeaderProps) {
               <span style={{ fontSize: 'var(--font-size-xs)', fontWeight: 600 }}>{user.name.split(' ').pop()}</span>
             </Link>
           ) : (
-            <Link href="/admin/login" className="btn btn-outline" style={{ marginLeft: '8px', border: '1.5px solid var(--color-primary)', color: 'var(--color-primary)', padding: '8px 16px', borderRadius: '12px' }}>
+            <Link href="/admin/login" className="btn btn-outline" style={{ marginLeft: '8px', border: '1.5px solid #4f46e5', color: '#4f46e5', padding: '8px 16px', borderRadius: '12px', background: 'rgba(99, 102, 241, 0.04)' }}>
               CMS Portal
             </Link>
           )}
 
-          <Link href="/tuyen-sinh" className="btn btn-gold" style={{ marginLeft: '8px', padding: '8px 16px', borderRadius: '12px' }}>
+          <Link href="/tuyen-sinh" className="btn btn-gold" style={{ marginLeft: '8px', padding: '8px 16px', borderRadius: '12px', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', border: 'none', color: '#ffffff', boxShadow: '0 4px 15px rgba(99, 102, 241, 0.25)' }}>
             Tuyển Sinh Ngay
           </Link>
         </nav>
@@ -297,8 +297,8 @@ export default function Header({ settings }: HeaderProps) {
               className="btn btn-outline"
               style={{
                 flex: 1,
-                border: '1.5px solid var(--color-primary)',
-                color: 'var(--color-primary)',
+                border: '1.5px solid #4f46e5',
+                color: '#4f46e5',
                 padding: '10px 0',
                 borderRadius: '12px',
                 textAlign: 'center',
@@ -306,18 +306,18 @@ export default function Header({ settings }: HeaderProps) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: '8px',
-                background: 'rgba(10, 75, 175, 0.05)'
+                background: 'rgba(99, 102, 241, 0.05)'
               }}
             >
               <User size={16} />
               <span>Quản trị ({user.name.split(' ').pop()})</span>
             </Link>
           ) : (
-            <Link href="/admin/login" className="btn btn-outline" style={{ flex: 1, border: '1.5px solid var(--color-primary)', color: 'var(--color-primary)', padding: '10px 0', borderRadius: '12px', textAlign: 'center' }}>
+            <Link href="/admin/login" className="btn btn-outline" style={{ flex: 1, border: '1.5px solid #4f46e5', color: '#4f46e5', padding: '10px 0', borderRadius: '12px', textAlign: 'center', background: 'rgba(99, 102, 241, 0.04)' }}>
               CMS Portal
             </Link>
           )}
-          <Link href="/tuyen-sinh" className="btn btn-gold" style={{ flex: 1, padding: '10px 0', borderRadius: '12px', textAlign: 'center' }}>
+          <Link href="/tuyen-sinh" className="btn btn-gold" style={{ flex: 1, padding: '10px 0', borderRadius: '12px', textAlign: 'center', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', border: 'none', color: '#ffffff' }}>
             Tuyển Sinh Ngay
           </Link>
         </div>
