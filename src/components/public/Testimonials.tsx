@@ -65,56 +65,126 @@ export default function Testimonials() {
   if (testimonials.length === 0) return null
 
   return (
-    <section className="section section-alt" style={{ overflow: 'hidden', position: 'relative', background: 'linear-gradient(180deg, var(--color-white) 0%, var(--color-gray-50) 100%)' }}>
+    <section className="section" style={{ overflow: 'hidden', position: 'relative', background: 'linear-gradient(180deg, var(--color-white) 0%, var(--color-gray-50) 100%)' }}>
+      <style>{`
+        .testimonial-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          background: rgba(255, 255, 255, 0.8);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border: 1px solid rgba(99, 102, 241, 0.1);
+          border-radius: 28px;
+          padding: var(--space-8) var(--space-10);
+          text-align: center;
+          gap: 18px;
+          position: relative;
+          overflow: hidden;
+        }
+        .testimonial-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 3px;
+          background: linear-gradient(90deg, transparent, #6366f1, #8b5cf6, transparent);
+          border-radius: 28px 28px 0 0;
+        }
+        [data-theme="dark"] .testimonial-card {
+          background: rgba(15, 23, 42, 0.65);
+          border-color: rgba(99, 102, 241, 0.08);
+        }
+        .testimonial-quote-icon {
+          width: 48px;
+          height: 48px;
+          border-radius: 14px;
+          background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(168, 85, 247, 0.04));
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #6366f1;
+        }
+        [data-theme="dark"] .testimonial-quote-icon {
+          background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(139, 92, 246, 0.06));
+          color: #818cf8;
+        }
+        .testimonial-nav-btn {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 42px;
+          height: 42px;
+          border-radius: 14px;
+          background: rgba(255, 255, 255, 0.85);
+          backdrop-filter: blur(8px);
+          border: 1px solid rgba(99, 102, 241, 0.12);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--color-gray-500);
+          transition: all 0.3s ease;
+          cursor: pointer;
+          z-index: 10;
+        }
+        .testimonial-nav-btn:hover {
+          background: rgba(99, 102, 241, 0.08);
+          border-color: rgba(99, 102, 241, 0.3);
+          color: #4f46e5;
+          box-shadow: 0 4px 16px rgba(99, 102, 241, 0.1);
+        }
+        [data-theme="dark"] .testimonial-nav-btn {
+          background: rgba(15, 23, 42, 0.85);
+          border-color: rgba(99, 102, 241, 0.1);
+          color: var(--color-gray-400);
+        }
+        [data-theme="dark"] .testimonial-nav-btn:hover {
+          background: rgba(99, 102, 241, 0.12);
+          border-color: rgba(99, 102, 241, 0.3);
+          color: #818cf8;
+        }
+      `}</style>
       
-      {/* Background shapes */}
-      <div style={{ position: 'absolute', top: '20%', left: '-10%', width: '300px', height: '300px', background: 'rgba(59, 130, 246, 0.06)', borderRadius: '50%', filter: 'blur(60px)' }} />
+      {/* Background decoration */}
+      <div style={{ position: 'absolute', top: '15%', left: '-8%', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(60px)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', bottom: '10%', right: '-5%', width: '250px', height: '250px', background: 'radial-gradient(circle, rgba(168, 85, 247, 0.05) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(50px)', pointerEvents: 'none' }} />
       
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: 'var(--space-12)' }}>
           <span className="section-label">Đánh giá từ cộng đồng</span>
-          <h2 className="section-title">Phụ huynh & học sinh nói về Edison</h2>
+          <h2 className="section-title section-title--underlined" style={{ display: 'block' }}>Phụ huynh & học sinh nói về Edison</h2>
           <p className="section-desc">Những chia sẻ chân thực về hành trình nuôi dưỡng tri thức và trưởng thành tại Edison School Minh Đức.</p>
         </div>
 
-        <div style={{ position: 'relative', maxWidth: '800px', margin: '0 auto', padding: '0 40px' }}>
+        <div style={{ position: 'relative', maxWidth: '800px', margin: '0 auto', padding: '0 50px' }}>
           
           {/* Testimonial Cards Wrapper */}
-          <div style={{ position: 'relative', minHeight: '260px' }}>
+          <div style={{ position: 'relative', minHeight: '280px' }}>
             {testimonials.map((t, idx) => {
               const isActive = idx === activeIndex
               return (
                 <div
                   key={t.id}
+                  className="testimonial-card"
                   style={{
                     position: isActive ? 'relative' : 'absolute',
                     inset: 0,
                     opacity: isActive ? 1 : 0,
                     visibility: isActive ? 'visible' : 'hidden',
-                    transform: isActive ? 'scale(1) translateY(0)' : 'scale(0.95) translateY(10px)',
+                    transform: isActive ? 'scale(1) translateY(0)' : 'scale(0.96) translateY(12px)',
                     transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
                     pointerEvents: isActive ? 'auto' : 'none',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    background: 'var(--glass-bg)',
-                    backdropFilter: 'blur(20px)',
-                    border: 'var(--glass-border)',
-                    borderRadius: '24px',
-                    padding: 'var(--space-8) var(--space-10)',
-                    boxShadow: 'var(--shadow-card)',
-                    textAlign: 'center',
-                    gap: '16px'
                   }}
                 >
                   {/* Quote Icon */}
-                  <div style={{ color: 'rgba(255, 109, 0, 0.15)', display: 'flex', justifyContent: 'center' }}>
-                    <Quote size={40} fill="currentColor" />
+                  <div className="testimonial-quote-icon">
+                    <Quote size={20} />
                   </div>
 
                   {/* Review text */}
                   <p style={{ fontSize: 'var(--font-size-base)', fontStyle: 'italic', color: 'var(--color-gray-700)', lineHeight: 1.7, margin: 0 }}>
-                    "{t.content}"
+                    &ldquo;{t.content}&rdquo;
                   </p>
 
                   {/* Stars Rating */}
@@ -125,13 +195,13 @@ export default function Testimonials() {
                   </div>
 
                   {/* User info */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '8px' }}>
-                    <div style={{ width: '48px', height: '48px', borderRadius: '50%', overflow: 'hidden', border: '2px solid var(--color-gold)', background: 'var(--color-gray-100)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginTop: '8px' }}>
+                    <div style={{ width: '50px', height: '50px', borderRadius: '50%', overflow: 'hidden', border: '2.5px solid #6366f1', background: 'var(--color-gray-100)', boxShadow: '0 0 12px rgba(99, 102, 241, 0.15)' }}>
                       <img src={t.avatar || '/uploads/images/31aaeadd-50b6-4821-b138-f841c019f772.jpg'} alt={t.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                     <div style={{ textAlign: 'left' }}>
                       <h4 style={{ margin: 0, fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'var(--color-navy)' }}>{t.name}</h4>
-                      <span style={{ fontSize: '11px', color: 'var(--color-gray-500)', fontWeight: 500 }}>{t.role}</span>
+                      <span style={{ fontSize: '12px', color: 'var(--color-gray-500)', fontWeight: 500 }}>{t.role}</span>
                     </div>
                   </div>
                 </div>
@@ -141,38 +211,38 @@ export default function Testimonials() {
 
           {/* Nav Controls */}
           <button
+            className="testimonial-nav-btn"
             onClick={() => setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-            style={{ position: 'absolute', left: '-10px', top: '50%', transform: 'translateY(-50%)', width: '40px', height: '40px', borderRadius: '50%', background: 'var(--color-white)', border: '1px solid var(--color-gray-200)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-gray-600)', transition: 'all 0.3s', cursor: 'pointer', boxShadow: 'var(--shadow-sm)', zIndex: 10 }}
-            onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--color-primary)'}
-            onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--color-gray-200)'}
+            style={{ left: '-5px' }}
             aria-label="Previous review"
           >
             <ChevronLeft size={18} />
           </button>
           <button
+            className="testimonial-nav-btn"
             onClick={() => setActiveIndex((prev) => (prev + 1) % testimonials.length)}
-            style={{ position: 'absolute', right: '-10px', top: '50%', transform: 'translateY(-50%)', width: '40px', height: '40px', borderRadius: '50%', background: 'var(--color-white)', border: '1px solid var(--color-gray-200)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--color-gray-600)', transition: 'all 0.3s', cursor: 'pointer', boxShadow: 'var(--shadow-sm)', zIndex: 10 }}
-            onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--color-primary)'}
-            onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--color-gray-200)'}
+            style={{ right: '-5px' }}
             aria-label="Next review"
           >
             <ChevronRight size={18} />
           </button>
 
-          {/* Dots Indicator */}
-          <div style={{ display: 'flex', gap: '6px', justifyContent: 'center', marginTop: '24px' }}>
+          {/* Dots Indicator — synced with hero banner style */}
+          <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginTop: '28px' }}>
             {testimonials.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setActiveIndex(idx)}
                 style={{
-                  width: idx === activeIndex ? '20px' : '8px',
-                  height: '8px',
-                  borderRadius: 'var(--radius-full)',
-                  background: idx === activeIndex ? 'var(--color-primary)' : 'var(--color-gray-300)',
+                  width: idx === activeIndex ? '28px' : '8px',
+                  height: '4px',
+                  borderRadius: '9999px',
+                  background: idx === activeIndex ? 'linear-gradient(90deg, #4f46e5, #7c3aed)' : 'rgba(99, 102, 241, 0.2)',
                   border: 'none',
                   padding: 0,
-                  transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                  transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  cursor: 'pointer',
+                  boxShadow: idx === activeIndex ? '0 0 12px rgba(79, 70, 229, 0.35)' : 'none',
                 }}
                 aria-label={`Go to slide ${idx + 1}`}
               />

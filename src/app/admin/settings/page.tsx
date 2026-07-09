@@ -1,11 +1,11 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Save, Info, Phone, Mail, MapPin, Image as ImageIcon, Settings, Layout } from 'lucide-react'
+import { Save, Info, Phone, Mail, MapPin, Image as ImageIcon, Settings, Layout, BarChart2, Trash2, Plus } from 'lucide-react'
 import FileUpload from '@/components/admin/FileUpload'
 import Toast, { ToastMessage } from '@/components/admin/Toast'
 
-type TabType = 'general' | 'contact' | 'media'
+type TabType = 'general' | 'contact' | 'media' | 'stats'
 
 export default function AdminSettingsPage() {
   const [loading, setLoading] = useState(true)
@@ -21,21 +21,29 @@ export default function AdminSettingsPage() {
   const [email, setEmail] = useState('')
   const [address, setAddress] = useState('')
   const [defaultPostThumbnailUrl, setDefaultPostThumbnailUrl] = useState('')
+  const [admissionStats, setAdmissionStats] = useState<any[]>([])
+  const [quickStats, setQuickStats] = useState<any[]>([])
 
   const fetchSettings = async () => {
     try {
       setLoading(true)
       const res = await fetch('/api/settings')
       const data = await res.json()
-      if (data.settings) {
-        setMissionImageUrl(data.settings.missionImageUrl || '')
-        setSchoolName(data.settings.schoolName || '')
-        setLogoUrl(data.settings.logoUrl || '')
-        setPhone(data.settings.phone || '')
-        setEmail(data.settings.email || '')
-        setAddress(data.settings.address || '')
-        setDefaultPostThumbnailUrl(data.settings.defaultPostThumbnailUrl || '')
-      }
+        if (data.settings) {
+          setMissionImageUrl(data.settings.missionImageUrl || '')
+          setSchoolName(data.settings.schoolName || '')
+          setLogoUrl(data.settings.logoUrl || '')
+          setPhone(data.settings.phone || '')
+          setEmail(data.settings.email || '')
+          setAddress(data.settings.address || '')
+          setDefaultPostThumbnailUrl(data.settings.defaultPostThumbnailUrl || '')
+          try {
+            setAdmissionStats(data.settings.admissionStats ? JSON.parse(data.settings.admissionStats) : [])
+            setQuickStats(data.settings.quickStats ? JSON.parse(data.settings.quickStats) : [])
+          } catch (e) {
+            console.error('Error parsing stats JSON', e)
+          }
+        }
     } catch (error) {
       console.error('Fetch settings error:', error)
       setToast({
@@ -69,7 +77,9 @@ export default function AdminSettingsPage() {
             phone,
             email,
             address,
-            defaultPostThumbnailUrl
+            defaultPostThumbnailUrl,
+            admissionStats: JSON.stringify(admissionStats),
+            quickStats: JSON.stringify(quickStats)
           }
         })
       })
@@ -259,6 +269,14 @@ export default function AdminSettingsPage() {
           <Layout size={16} />
           Hình ảnh & Giao diện
         </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab('stats')}
+          className={`settings-tab-btn ${activeTab === 'stats' ? 'active' : ''}`}
+        >
+          <BarChart2 size={16} />
+          Thống kê
+        </button>
       </div>
 
       {/* Main Settings Form */}
@@ -443,6 +461,163 @@ export default function AdminSettingsPage() {
                 </div>
               </div>
             </div>
+          </div>
+        )}
+
+        {/* Tab 4: Statistics */}
+        {activeTab === 'stats' && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-8)' }}>
+            
+            {/* Admission Stats */}
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid var(--color-gray-100)', margin: '0 0 16px 0', paddingBottom: '8px' }}>
+                <h4 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
+                  <BarChart2 size={18} /> Thống kê Tuyển Sinh (Trang chủ)
+                </h4>
+                <button
+                  type="button"
+                  onClick={() => setAdmissionStats([...admissionStats, { value: '0', label: 'Tiêu đề', suffix: '', icon: 'Users' }])}
+                  style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', padding: '6px 12px', background: 'var(--color-navy)', color: 'white', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
+                >
+                  <Plus size={14} /> Thêm chỉ số
+                </button>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4)' }}>
+                {admissionStats.map((stat, index) => (
+                  <div key={index} style={{ position: 'relative', border: '1px solid var(--color-gray-200)', borderRadius: '12px', padding: '16px', background: 'var(--color-gray-50)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                      <div style={{ fontWeight: 600, color: 'var(--color-gray-600)', fontSize: '13px' }}>Chỉ số {index + 1}</div>
+                      <button type="button" onClick={() => {
+                        const newStats = [...admissionStats];
+                        newStats.splice(index, 1);
+                        setAdmissionStats(newStats);
+                      }} style={{ background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', display: 'flex', padding: '4px' }} title="Xóa chỉ số này">
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '8px' }}>
+                      <div className="settings-input-group">
+                        <label className="settings-label">Nhãn (Label)</label>
+                        <input type="text" className="settings-input" value={stat.label} onChange={e => {
+                          const newStats = [...admissionStats];
+                          newStats[index].label = e.target.value;
+                          setAdmissionStats(newStats);
+                        }} />
+                      </div>
+                      <div className="settings-input-group">
+                        <label className="settings-label">Biểu tượng</label>
+                        <select className="settings-input" value={stat.icon} onChange={e => {
+                          const newStats = [...admissionStats];
+                          newStats[index].icon = e.target.value;
+                          setAdmissionStats(newStats);
+                        }}>
+                          <option value="Users">Users</option>
+                          <option value="UserCheck">UserCheck</option>
+                          <option value="BookOpen">BookOpen</option>
+                          <option value="GraduationCap">GraduationCap</option>
+                          <option value="Award">Award</option>
+                          <option value="ShieldCheck">ShieldCheck</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                      <div className="settings-input-group">
+                        <label className="settings-label">Giá trị (Số)</label>
+                        <input type="text" className="settings-input" value={stat.value} onChange={e => {
+                          const newStats = [...admissionStats];
+                          newStats[index].value = e.target.value;
+                          setAdmissionStats(newStats);
+                        }} />
+                      </div>
+                      <div className="settings-input-group">
+                        <label className="settings-label">Hậu tố (+, %)</label>
+                        <input type="text" className="settings-input" value={stat.suffix} onChange={e => {
+                          const newStats = [...admissionStats];
+                          newStats[index].suffix = e.target.value;
+                          setAdmissionStats(newStats);
+                        }} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick Stats */}
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid var(--color-gray-100)', margin: '0 0 16px 0', paddingBottom: '8px' }}>
+                <h4 style={{ fontSize: 'var(--font-size-base)', fontWeight: 700, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
+                  <BarChart2 size={18} /> Thống kê Nhanh (Trang chủ)
+                </h4>
+                <button
+                  type="button"
+                  onClick={() => setQuickStats([...quickStats, { value: '0', label: 'Tiêu đề', suffix: '', icon: 'Users' }])}
+                  style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', padding: '6px 12px', background: 'var(--color-navy)', color: 'white', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
+                >
+                  <Plus size={14} /> Thêm chỉ số
+                </button>
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-4)' }}>
+                {quickStats.map((stat, index) => (
+                  <div key={index} style={{ position: 'relative', border: '1px solid var(--color-gray-200)', borderRadius: '12px', padding: '16px', background: 'var(--color-gray-50)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                      <div style={{ fontWeight: 600, color: 'var(--color-gray-600)', fontSize: '13px' }}>Chỉ số {index + 1}</div>
+                      <button type="button" onClick={() => {
+                        const newStats = [...quickStats];
+                        newStats.splice(index, 1);
+                        setQuickStats(newStats);
+                      }} style={{ background: 'transparent', border: 'none', color: '#ef4444', cursor: 'pointer', display: 'flex', padding: '4px' }} title="Xóa chỉ số này">
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '8px' }}>
+                      <div className="settings-input-group">
+                        <label className="settings-label">Nhãn (Label)</label>
+                        <input type="text" className="settings-input" value={stat.label} onChange={e => {
+                          const newStats = [...quickStats];
+                          newStats[index].label = e.target.value;
+                          setQuickStats(newStats);
+                        }} />
+                      </div>
+                      <div className="settings-input-group">
+                        <label className="settings-label">Biểu tượng</label>
+                        <select className="settings-input" value={stat.icon} onChange={e => {
+                          const newStats = [...quickStats];
+                          newStats[index].icon = e.target.value;
+                          setQuickStats(newStats);
+                        }}>
+                          <option value="Users">Users</option>
+                          <option value="UserCheck">UserCheck</option>
+                          <option value="BookOpen">BookOpen</option>
+                          <option value="GraduationCap">GraduationCap</option>
+                          <option value="Award">Award</option>
+                          <option value="ShieldCheck">ShieldCheck</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                      <div className="settings-input-group">
+                        <label className="settings-label">Giá trị (Số)</label>
+                        <input type="text" className="settings-input" value={stat.value} onChange={e => {
+                          const newStats = [...quickStats];
+                          newStats[index].value = e.target.value;
+                          setQuickStats(newStats);
+                        }} />
+                      </div>
+                      <div className="settings-input-group">
+                        <label className="settings-label">Hậu tố (+, %)</label>
+                        <input type="text" className="settings-input" value={stat.suffix} onChange={e => {
+                          const newStats = [...quickStats];
+                          newStats[index].suffix = e.target.value;
+                          setQuickStats(newStats);
+                        }} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         )}
 

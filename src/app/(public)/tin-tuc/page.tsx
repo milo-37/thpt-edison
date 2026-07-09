@@ -3,6 +3,8 @@ import NewsCard from '@/components/public/NewsCard'
 import Link from 'next/link'
 import { Search } from 'lucide-react'
 
+import PageBanner from '@/components/public/PageBanner'
+
 // Ép kiểu dynamic fetch để tránh static cache lỗi thời
 export const revalidate = 0
 
@@ -63,7 +65,7 @@ export default async function NewsPage(props: PageProps) {
   const totalPages = Math.ceil(total / limit)
 
   return (
-    <div className="section section-alt" style={{ minHeight: '80vh', background: 'linear-gradient(180deg, #ffffff 0%, #f4f6ff 100%)', padding: 'var(--space-12) 0', position: 'relative' }}>
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
       <style>{`
         .search-input-field {
           width: 100%;
@@ -84,17 +86,17 @@ export default async function NewsPage(props: PageProps) {
         }
       `}</style>
       
-      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        
-        {/* Header trang */}
-        <div style={{ textAlign: 'center', marginBottom: 'var(--space-8)' }}>
-          <span className="section-label" style={{ background: 'linear-gradient(135deg, #6366f1, #a855f7)', color: 'white', padding: '4px 12px', borderRadius: '12px', fontSize: 'var(--font-size-xs)', fontWeight: 700, display: 'inline-block', marginBottom: 'var(--space-3)' }}>
-            Tin mới cập nhật
-          </span>
-          <h1 style={{ fontSize: 'var(--font-size-3xl)', fontWeight: 800, color: 'var(--color-navy)', margin: 0 }}>
-            Tin tức & sự kiện
-          </h1>
-        </div>
+      {/* Header trang */}
+      <PageBanner
+        label="Tin mới cập nhật"
+        title="Tin tức & sự kiện"
+      />
+
+      {/* Gradient Divider */}
+      <div className="gradient-divider" />
+
+      <section className="section section-alt" style={{ minHeight: '80vh', background: 'linear-gradient(180deg, #ffffff 0%, #f4f6ff 100%)', position: 'relative' }}>
+        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
 
         {/* Thanh lọc & tìm kiếm */}
         <div
@@ -221,6 +223,7 @@ export default async function NewsPage(props: PageProps) {
         )}
 
       </div>
+      </section>
     </div>
   )
 }

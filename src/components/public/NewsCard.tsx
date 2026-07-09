@@ -31,17 +31,17 @@ export default function NewsCard({ post, isFeatured = false }: PostProps) {
   if (isFeatured) {
     return (
       <Link href={postUrl} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
-        <article className="card news-featured" style={{ cursor: 'pointer', transition: 'transform 0.2s ease, box-shadow 0.2s ease' }}>
-          <div className="card-image">
+        <article className="premium-card news-featured" style={{ cursor: 'pointer', padding: 0 }}>
+          <div className="card-image" style={{ height: '100%', minHeight: '350px' }}>
             <img src={postThumbnail} alt={post.title} />
-            <div className="card-image-overlay"></div>
+            <div className="card-image-overlay" style={{ background: 'linear-gradient(to right, rgba(15,23,42,0.8) 0%, transparent 100%)' }}></div>
           </div>
-          <div className="card-body">
+          <div className="card-body" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 'var(--space-8)' }}>
             {post.category && (
               <span className="card-category">{post.category.name}</span>
             )}
-            <h3 className="card-title">{post.title}</h3>
-            <p className="card-excerpt">{post.excerpt}</p>
+            <h3 className="card-title" style={{ fontSize: 'var(--font-size-2xl)' }}>{post.title}</h3>
+            <p className="card-excerpt" style={{ fontSize: 'var(--font-size-base)' }}>{post.excerpt}</p>
             <div className="card-meta">
               <div className="card-meta-item">
                 <User size={14} />
@@ -63,18 +63,18 @@ export default function NewsCard({ post, isFeatured = false }: PostProps) {
   }
 
   return (
-    <Link href={postUrl} style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}>
-      <article className="card" style={{ cursor: 'pointer', transition: 'transform 0.2s ease, box-shadow 0.2s ease', height: '100%' }}>
+    <Link href={postUrl} style={{ textDecoration: 'none', color: 'inherit', display: 'block', height: '100%' }}>
+      <article className="premium-card" style={{ cursor: 'pointer', height: '100%', padding: 0, display: 'flex', flexDirection: 'column' }}>
         <div className="card-image">
           <img src={postThumbnail} alt={post.title} />
         </div>
-        <div className="card-body">
+        <div className="card-body" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
           {post.category && (
             <span className="card-category">{post.category.name}</span>
           )}
           <h3 className="card-title">{post.title}</h3>
-          <p className="card-excerpt">{post.excerpt}</p>
-          <div className="card-meta">
+          <p className="card-excerpt" style={{ flex: 1 }}>{post.excerpt}</p>
+          <div className="card-meta" style={{ marginTop: 'auto' }}>
             <div className="card-meta-item">
               <Calendar size={14} />
               <span>{publishedDate}</span>

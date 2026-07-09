@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { Image as ImageIcon, ChevronLeft, Calendar } from 'lucide-react'
 import { formatDateVi } from '@/lib/validation'
 import ActivityTabs from '@/components/public/ActivityTabs'
+import PageBanner from '@/components/public/PageBanner'
 
 // Ép kiểu dynamic fetch để tránh static cache lỗi thời
 export const revalidate = 0
@@ -173,14 +174,12 @@ export default async function ActivityPage(props: PageProps) {
       <div style={{ position: 'absolute', bottom: '15%', left: '5%', width: '250px', height: '250px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(168, 85, 247, 0.04) 0%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none' }} />
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-        
-        <div style={{ textAlign: 'center', marginBottom: 'var(--space-10)' }}>
-          <span className="section-label">Kho lưu giữ khoảnh khắc & Lịch trình</span>
-          <h1 className="section-title">Hoạt động & sự kiện học sinh</h1>
-          <p className="section-desc">
-            Hình ảnh các hoạt động thú vị và lịch trình chi tiết các hoạt động học tập, sự kiện ngoại khóa của Trường THPT Edison.
-          </p>
-        </div>
+        <PageBanner
+          label="Kho lưu giữ khoảnh khắc & Lịch trình"
+          title="Hoạt động & sự kiện học sinh"
+          description="Hình ảnh các hoạt động thú vị và lịch trình chi tiết các hoạt động học tập, sự kiện ngoại khóa của Trường THPT Edison."
+        />
+        <div className="gradient-divider" style={{ marginBottom: 'var(--space-10)' }} />
 
         <ActivityTabs albums={albums as any} events={events as any} />
 

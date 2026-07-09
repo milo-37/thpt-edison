@@ -1,6 +1,7 @@
 import prisma from '@/lib/prisma'
 import { Award, FileText, Calendar } from 'lucide-react'
 import AdmissionForm from '@/components/public/AdmissionForm'
+import PageBanner from '@/components/public/PageBanner'
 
 export const revalidate = 60
 
@@ -92,30 +93,15 @@ export default async function AdmissionPage() {
         }
       `}</style>
       
-      {/* Banner đầu trang - Light Futuristic */}
-      <section style={{
-        background: 'linear-gradient(135deg, #f0f4ff 0%, #e8eeff 50%, #f5f0ff 100%)',
-        color: '#0f172a',
-        padding: 'var(--space-16) 0',
-        textAlign: 'center',
-        position: 'relative',
-        overflow: 'hidden',
-        borderBottom: '1px solid rgba(99, 102, 241, 0.15)'
-      }}>
-        {/* Animated grid overlay */}
-        <div style={{ position: 'absolute', inset: 0, opacity: 0.3, pointerEvents: 'none', backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(99,102,241,0.08) 1px, transparent 0)', backgroundSize: '32px 32px' }} />
-        <div style={{ position: 'absolute', top: '-20%', left: '10%', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)', filter: 'blur(30px)', pointerEvents: 'none' }} />
+      {/* Banner đầu trang — Unified PageBanner */}
+      <PageBanner
+        label="Tuyển sinh 2026"
+        title="Thông tin tuyển sinh"
+        description="Thông báo tuyển sinh lớp 10 Trường THPT Edison năm học 2026 - 2027"
+      />
 
-        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <span className="section-label">Tuyển sinh 2026</span>
-          <h1 style={{ fontSize: 'var(--font-size-4xl)', fontWeight: 900, margin: '12px 0 0 0', background: 'linear-gradient(135deg, #3b82f6, #4f46e5, #7c3aed)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', fontFamily: 'var(--font-title)' }}>
-            Thông tin tuyển sinh
-          </h1>
-          <p style={{ color: 'var(--color-gray-600)', fontSize: 'var(--font-size-base)', marginTop: 'var(--space-3)', fontWeight: 500 }}>
-            Thông báo tuyển sinh lớp 10 Trường THPT Edison năm học 2026 - 2027
-          </p>
-        </div>
-      </section>
+      {/* Gradient Divider */}
+      <div className="gradient-divider" />
 
       {/* Nội dung quy trình & form đăng ký */}
       <section className="section" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f5f8ff 100%)' }}>

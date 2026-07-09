@@ -4,6 +4,13 @@ import prisma from '@/lib/prisma'
 import { verifyAuth, requireRole } from '@/lib/auth'
 
 const DEFAULT_SETTINGS = {
+  aboutHistoryText: `Được thành lập từ năm 2015, Trường THPT Edison tọa lạc tại khu đô thị hiện đại với quy mô ban đầu chỉ gồm vài lớp học. Trải qua hơn một thập kỷ xây dựng và trưởng thành, nhà trường đã vươn lên thành một trong những điểm sáng của giáo dục phổ thông.
+
+Edison tự hào sở hữu tỷ lệ học sinh đỗ tốt nghiệp luôn đạt 100%, tỷ lệ đỗ vào các trường đại học top đầu cả nước và du học đạt trên 85%. Nhiều thế hệ học sinh Edison đã ghi danh tại các kỳ thi học sinh giỏi cấp Thành phố và Quốc gia.`,
+  aboutHistoryImage: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&auto=format&fit=crop&q=60',
+  aboutVisionText: 'Trở thành ngôi trường THPT hàng đầu về đổi mới giáo dục, đào tạo ra những thế hệ công dân toàn cầu có tư duy độc lập, giàu lòng nhân ái và khả năng thích ứng cao với kỷ nguyên số.',
+  aboutMissionText: 'Xây dựng môi trường giáo dục hạnh phúc và sáng tạo, khơi dậy tối đa tiềm năng riêng biệt của từng học sinh, trang bị đầy đủ kiến thức, kỹ năng sống và đạo đức để các em tự tin lập nghiệp.',
+  aboutCoreValuesText: 'Khát vọng học hỏi - Tư duy sáng tạo - Trách nhiệm bản thân - Tôn trọng sự khác biệt - Tự hào nguồn cội dân tộc.',
   missionImageUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop&q=80',
   schoolName: 'EDISON SCHOOL MINH DUC',
   logoUrl: '/school-logo.jpg',
@@ -65,6 +72,18 @@ const DEFAULT_SETTINGS = {
     </div>
   </div>
 </div>`,
+  admissionStats: JSON.stringify([
+    { value: '450', suffix: '+', label: 'Chỉ tiêu tuyển sinh', icon: 'GraduationCap' },
+    { value: '10', suffix: '', label: 'Lớp học chính quy', icon: 'BookOpen' },
+    { value: '98', suffix: '%', label: 'Tỷ lệ đỗ TN THPT', icon: 'Award' },
+    { value: '2', suffix: '', label: 'Lớp CLC Quốc tế', icon: 'ShieldCheck' }
+  ]),
+  quickStats: JSON.stringify([
+    { value: '1.500', suffix: '+', label: 'Học sinh đang theo học', icon: 'Users' },
+    { value: '120', suffix: '+', label: 'Giáo viên chuyên môn', icon: 'UserCheck' },
+    { value: '30', suffix: '+', label: 'Phòng học hiện đại', icon: 'BookOpen' },
+    { value: '98', suffix: '%', label: 'Tỷ lệ đỗ Đại học', icon: 'GraduationCap' }
+  ]),
 }
 
 // GET: Lấy cấu hình hệ thống (Công khai)
