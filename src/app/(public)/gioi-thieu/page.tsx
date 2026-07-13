@@ -160,7 +160,7 @@ export default async function AboutPage() {
       {/* 1. Lịch sử hình thành */}
       <section className="section" style={{ background: 'var(--color-white)', position: 'relative' }}>
         <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'var(--space-12)', alignItems: 'center' }}>
-          <div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <span className="section-label">Hành trình phát triển</span>
             <h2 className="section-title section-title--underlined" style={{ marginTop: 'var(--space-2)' }}>
               Lịch sử hình thành

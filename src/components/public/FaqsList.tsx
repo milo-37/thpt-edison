@@ -65,16 +65,18 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
         }
       `}</style>
       {/* Search Input (Glass style) */}
-      <div 
+      <search 
         style={{ 
           position: 'relative', 
           width: '100%', 
           maxWidth: '540px', 
           margin: '0 auto' 
         }}
+        aria-label="Tìm kiếm câu hỏi"
       >
         <Search 
           size={18} 
+          aria-hidden="true"
           style={{ 
             position: 'absolute', 
             left: '18px', 
@@ -85,11 +87,12 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
           }} 
         />
         <input
-          type="text"
+          type="search"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Tìm kiếm câu hỏi hoặc nội dung..."
           className="form-input"
+          aria-label="Tìm kiếm câu hỏi FAQ"
           style={{
             padding: '14px 18px 14px 48px',
             borderRadius: '16px',
@@ -114,10 +117,12 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
             e.target.style.boxShadow = '0 4px 20px rgba(99, 102, 241, 0.02)'
           }}
         />
-      </div>
+      </search>
 
       {/* Filter Tabs */}
       <div 
+        role="group"
+        aria-label="Lọc theo danh mục"
         style={{ 
           display: 'flex', 
           justifyContent: 'center', 
@@ -158,16 +163,18 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
 
       {/* Accordion List */}
       {filtered.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)', background: 'rgba(255, 255, 255, 0.8)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.12)' }}>
-          <MessageSquare size={48} style={{ margin: '0 auto var(--space-4) auto', opacity: 0.5, color: '#6366f1' }} />
-          <p style={{ margin: 0, fontWeight: 500 }}>Không tìm thấy câu hỏi nào phù hợp với từ khóa của bạn.</p>
-        </div>
+        <p role="status" style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)', background: 'rgba(255, 255, 255, 0.8)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.12)' }}>
+          <MessageSquare size={48} aria-hidden="true" style={{ margin: '0 auto var(--space-4) auto', display: 'block', opacity: 0.5, color: '#6366f1' }} />
+          Không tìm thấy câu hỏi nào phù hợp với từ khóa của bạn.
+        </p>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <ul style={{ display: 'flex', flexDirection: 'column', gap: '16px', listStyle: 'none', padding: 0, margin: 0 }}>
           {filtered.map((item) => {
             const isExpanded = expandedId === item.id
+            const panelId = `faq-panel-${item.id}`
+            const btnId = `faq-btn-${item.id}`
             return (
-              <div
+              <li
                 key={item.id}
                 className="faq-item-card"
                 style={{
@@ -177,7 +184,10 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
               >
                 {/* Header Button */}
                 <button
+                  id={btnId}
                   onClick={() => toggleExpand(item.id)}
+                  aria-expanded={isExpanded}
+                  aria-controls={panelId}
                   style={{
                     width: '100%',
                     padding: '20px 24px',
@@ -238,6 +248,9 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
 
                 {/* Answer Content Panel */}
                 <div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={btnId}
                   style={{
                     maxHeight: isExpanded ? '1000px' : '0',
                     overflow: 'hidden',
@@ -258,10 +271,10 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
                     {item.answer}
                   </div>
                 </div>
-              </div>
+              </li>
             )
           })}
-        </div>
+        </ul>
       )}
     </div>
   )

@@ -2,8 +2,13 @@ import { SignJWT, jwtVerify } from 'jose'
 import { NextRequest } from 'next/server'
 import bcrypt from 'bcryptjs'
 
+const jwtSecret = process.env.JWT_SECRET
+if (!jwtSecret && process.env.NODE_ENV === 'production') {
+  throw new Error('JWT_SECRET must be set in production. See .env.example.')
+}
+
 const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || 'thpt-edison-default-secret'
+  jwtSecret || 'dev-only-fallback-secret-do-not-use-in-production'
 )
 
 // ==================== PASSWORD ====================
@@ -28,7 +33,7 @@ export interface JWTPayload {
 export async function signToken(payload: JWTPayload): Promise<string> {
   return new SignJWT({ ...payload })
     .setProtectedHeader({ alg: 'HS256' })
-    .setExpirationTime('7d')
+    .setExpirationTime('2h')
     .setIssuedAt()
     .sign(JWT_SECRET)
 }
@@ -60,6 +65,24 @@ export function requireRole(user: JWTPayload | null, roles: string[]): boolean {
 
 const loginAttempts = new Map<string, { count: number; lastAttempt: number }>()
 
+// Dọn dẹp entries cũ mỗi 5 phút để tránh memory leak
+if (typeof setInterval !== 'undefined') {
+  setInterval(() => {
+    const now = Date.now()
+    for (const [ip, attempt] of loginAttempts.entries()) {
+      if (now - attempt.lastAttempt > 300000) { // 5 phút
+        loginAttempts.delete(ip)
+      }
+    }
+  }, 300000)
+}
+
+/**
+ * Kiểm tra rate limit cho một IP.
+ * @param ip - Địa chỉ IP client
+ * @param maxAttempts - Số lần thử tối đa (mặc định 5)
+ * @param windowMs - Cửa sổ thời gian tính bằng ms (mặc định 60s)
+ */
 export function checkRateLimit(ip: string, maxAttempts = 5, windowMs = 60000): boolean {
   const now = Date.now()
   const attempt = loginAttempts.get(ip)

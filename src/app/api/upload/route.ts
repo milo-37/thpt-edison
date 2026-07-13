@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { verifyAuth } from '@/lib/auth'
-import { validateFile, saveFile } from '@/lib/upload'
+import { validateFile, validateFileContent, saveFile } from '@/lib/upload'
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,6 +24,12 @@ export async function POST(request: NextRequest) {
     const validation = validateFile(file, type)
     if (!validation.valid) {
       return NextResponse.json({ error: validation.error }, { status: 400 })
+    }
+
+    // Kiểm tra magic bytes — xác thực nội dung file thực sự
+    const contentCheck = await validateFileContent(file)
+    if (!contentCheck.valid) {
+      return NextResponse.json({ error: contentCheck.error }, { status: 400 })
     }
 
     // Lưu file vào thư mục local

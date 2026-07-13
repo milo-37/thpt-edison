@@ -85,6 +85,8 @@ export default function AchievementsList({ initialAchievements }: AchievementsLi
 
       {/* Filter Tabs */}
       <div 
+        role="group"
+        aria-label="Lọc theo danh mục thành tích"
         style={{ 
           display: 'flex', 
           justifyContent: 'center', 
@@ -101,6 +103,7 @@ export default function AchievementsList({ initialAchievements }: AchievementsLi
         <button
           onClick={() => setActiveTab('all')}
           className="achievement-tab-btn"
+          aria-pressed={activeTab === 'all'}
           style={{
             background: activeTab === 'all' ? 'linear-gradient(135deg, #6366f1, #a855f7)' : 'transparent',
             color: activeTab === 'all' ? '#ffffff' : '#6366f1',
@@ -113,6 +116,7 @@ export default function AchievementsList({ initialAchievements }: AchievementsLi
             key={k}
             onClick={() => setActiveTab(k)}
             className="achievement-tab-btn"
+            aria-pressed={activeTab === k}
             style={{
               background: activeTab === k ? 'linear-gradient(135deg, #6366f1, #a855f7)' : 'transparent',
               color: activeTab === k ? '#ffffff' : '#6366f1',
@@ -121,7 +125,7 @@ export default function AchievementsList({ initialAchievements }: AchievementsLi
               gap: '6px'
             }}
           >
-            {getCategoryIcon(k)}
+            <span aria-hidden="true">{getCategoryIcon(k)}</span>
             {v}
           </button>
         ))}
@@ -129,94 +133,95 @@ export default function AchievementsList({ initialAchievements }: AchievementsLi
 
       {/* Grid List */}
       {filtered.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)', background: 'rgba(255, 255, 255, 0.7)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.12)' }}>
-          <Flame size={48} style={{ margin: '0 auto var(--space-4) auto', opacity: 0.5, color: '#6366f1' }} />
-          <p>Chưa có dữ liệu thành tích cho danh mục này.</p>
-        </div>
+        <p role="status" style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)', background: 'rgba(255, 255, 255, 0.7)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.12)' }}>
+          <span aria-hidden="true" style={{ display: 'block', marginBottom: 'var(--space-4)' }}><Flame size={48} style={{ opacity: 0.5, color: '#6366f1' }} /></span>
+          Chưa có dữ liệu thành tích cho danh mục này.
+        </p>
       ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 'var(--space-8)' }}>
+        <ul style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 'var(--space-8)', listStyle: 'none', padding: 0, margin: 0 }}>
           {filtered.map((item) => (
-            <div
-              key={item.id}
-              className="achievement-item-card animate-fadeIn"
-            >
-              {/* Card Image */}
-              <div style={{ height: '200px', background: 'rgba(99, 102, 241, 0.05)', position: 'relative', overflow: 'hidden' }}>
-                {item.imageUrl ? (
-                  <img
-                    src={item.imageUrl}
-                    alt={item.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                ) : (
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#6366f1', background: 'linear-gradient(135deg, #f5f3ff, #e0e7ff)' }}>
-                    <Trophy size={64} className="animate-float" />
-                  </div>
-                )}
-                {/* Year Badge */}
-                {item.year && (
+            <li key={item.id}>
+              <article
+                className="achievement-item-card animate-fadeIn"
+              >
+                {/* Card Image */}
+                <div style={{ height: '200px', background: 'rgba(99, 102, 241, 0.05)', position: 'relative', overflow: 'hidden' }}>
+                  {item.imageUrl ? (
+                    <img
+                      src={item.imageUrl}
+                      alt={item.title}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                    />
+                  ) : (
+                    <span aria-hidden="true" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: '#6366f1', background: 'linear-gradient(135deg, #f5f3ff, #e0e7ff)' }}>
+                      <Trophy size={64} className="animate-float" />
+                    </span>
+                  )}
+                  {/* Year Badge */}
+                  {item.year && (
+                    <span
+                      style={{
+                        position: 'absolute',
+                        top: 'var(--space-4)',
+                        left: 'var(--space-4)',
+                        background: 'rgba(255, 255, 255, 0.85)',
+                        backdropFilter: 'blur(4px)',
+                        color: 'var(--color-navy)',
+                        fontSize: '11px',
+                        fontWeight: 700,
+                        padding: '4px 8px',
+                        borderRadius: '8px',
+                        border: '1px solid rgba(99, 102, 241, 0.12)'
+                      }}
+                    >
+                      {item.year}
+                    </span>
+                  )}
+                  {/* Category Badge */}
                   <span
                     style={{
                       position: 'absolute',
-                      top: 'var(--space-4)',
-                      left: 'var(--space-4)',
-                      background: 'rgba(255, 255, 255, 0.85)',
-                      backdropFilter: 'blur(4px)',
-                      color: 'var(--color-navy)',
+                      bottom: 'var(--space-4)',
+                      right: 'var(--space-4)',
+                      background: categoryColors[item.category],
+                      color: 'var(--color-white)',
                       fontSize: '11px',
                       fontWeight: 700,
-                      padding: '4px 8px',
-                      borderRadius: '8px',
-                      border: '1px solid rgba(99, 102, 241, 0.12)'
+                      padding: '4px 10px',
+                      borderRadius: 'var(--radius-full)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)'
                     }}
                   >
-                    {item.year}
+                    <span aria-hidden="true">{getCategoryIcon(item.category)}</span>
+                    {categoryLabels[item.category]}
                   </span>
-                )}
-                {/* Category Badge */}
-                <span
-                  style={{
-                    position: 'absolute',
-                    bottom: 'var(--space-4)',
-                    right: 'var(--space-4)',
-                    background: categoryColors[item.category],
-                    color: 'var(--color-white)',
-                    fontSize: '11px',
-                    fontWeight: 700,
-                    padding: '4px 10px',
-                    borderRadius: 'var(--radius-full)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '4px',
-                    boxShadow: '0 4px 10px rgba(0, 0, 0, 0.05)'
-                  }}
-                >
-                  {getCategoryIcon(item.category)}
-                  {categoryLabels[item.category]}
-                </span>
-              </div>
+                </div>
 
-              {/* Card Content */}
-              <div style={{ padding: 'var(--space-6)', display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', flex: 1 }}>
-                <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 800, color: 'var(--color-navy)', margin: 0, lineHeight: 1.4 }}>
-                  {item.title}
-                </h3>
-                
-                {item.studentName && (
-                  <div style={{ fontSize: 'var(--font-size-xs)', fontWeight: 700, color: '#a855f7' }}>
-                    🏆 Cán sự: {item.studentName}
-                  </div>
-                )}
-                
-                {item.description && (
-                  <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-gray-500)', margin: 0, lineHeight: 1.6 }}>
-                    {item.description}
-                  </p>
-                )}
-              </div>
-            </div>
+                {/* Card Content */}
+                <div style={{ padding: 'var(--space-6)', display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', flex: 1 }}>
+                  <h3 style={{ fontSize: 'var(--font-size-base)', fontWeight: 800, color: 'var(--color-navy)', margin: 0, lineHeight: 1.4 }}>
+                    {item.title}
+                  </h3>
+                  
+                  {item.studentName && (
+                    <p style={{ fontSize: 'var(--font-size-xs)', fontWeight: 700, color: '#a855f7', margin: 0 }}>
+                      🏆 Cán sự: {item.studentName}
+                    </p>
+                  )}
+                  
+                  {item.description && (
+                    <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-gray-500)', margin: 0, lineHeight: 1.6 }}>
+                      {item.description}
+                    </p>
+                  )}
+                </div>
+              </article>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     </div>
   )

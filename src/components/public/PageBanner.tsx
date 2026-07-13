@@ -173,11 +173,11 @@ export default function PageBanner({ label, title, description, children }: Page
       `}</style>
 
       {/* Background layers */}
-      <div className="page-banner__grid" />
-      <div className="page-banner__orb page-banner__orb--1" />
-      <div className="page-banner__orb page-banner__orb--2" />
-      <div className="page-banner__orb page-banner__orb--3" />
-      <div className="page-banner__glow-line" />
+      <div aria-hidden="true" role="presentation" className="page-banner__grid" />
+      <div aria-hidden="true" role="presentation" className="page-banner__orb page-banner__orb--1" />
+      <div aria-hidden="true" role="presentation" className="page-banner__orb page-banner__orb--2" />
+      <div aria-hidden="true" role="presentation" className="page-banner__orb page-banner__orb--3" />
+      <div aria-hidden="true" role="presentation" className="page-banner__glow-line" />
 
       {/* Content */}
       <div className="container page-banner__content">

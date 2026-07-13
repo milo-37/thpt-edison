@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import prisma from '@/lib/prisma'
-import { verifyAuth, requireRole } from '@/lib/auth'
+import { verifyAuth, requireRole, checkRateLimit } from '@/lib/auth'
 import { isValidEmail, isValidPhone } from '@/lib/validation'
 
 // GET: Lấy danh sách liên hệ (Admin)
@@ -63,9 +63,18 @@ export async function GET(request: NextRequest) {
   }
 }
 
-// POST: Gửi liên hệ mới (Public)
+// POST: Gửi liên hệ mới (Public — có rate limit chống spam)
 export async function POST(request: NextRequest) {
   try {
+    // Rate limit: tối đa 3 lần gửi / phút / IP
+    const ip = request.headers.get('x-forwarded-for') || '127.0.0.1'
+    if (!checkRateLimit(`contact:${ip}`, 3, 60000)) {
+      return NextResponse.json(
+        { error: 'Bạn đã gửi quá nhiều yêu cầu. Vui lòng thử lại sau 1 phút.' },
+        { status: 429 }
+      )
+    }
+
     const { name, email, phone, subject, message } = await request.json()
 
     // Validation
@@ -79,6 +88,11 @@ export async function POST(request: NextRequest) {
 
     if (phone && !isValidPhone(phone)) {
       return NextResponse.json({ error: 'Số điện thoại không đúng định dạng Việt Nam' }, { status: 400 })
+    }
+
+    // Kiểm tra độ dài input để chống payload quá lớn
+    if (name.length > 100 || subject.length > 200 || message.length > 5000 || email.length > 254) {
+      return NextResponse.json({ error: 'Nội dung vượt quá độ dài cho phép' }, { status: 400 })
     }
 
     const contact = await prisma.contact.create({

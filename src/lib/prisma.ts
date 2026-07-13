@@ -5,15 +5,25 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient
 }
 
+function createPrismaClient(): PrismaClient {
+  const dbUrl = process.env.DATABASE_URL
+  if (!dbUrl) {
+    throw new Error(
+      'DATABASE_URL is not set. Please configure .env file. ' +
+      'See .env.example for reference.'
+    )
+  }
+  const adapter = new PrismaMariaDb(dbUrl)
+  return new PrismaClient({ adapter })
+}
+
 let prisma: PrismaClient
 
 if (process.env.NODE_ENV === 'production') {
-  const adapter = new PrismaMariaDb(process.env.DATABASE_URL || 'mysql://root:@localhost:3306/thpt_edison')
-  prisma = new PrismaClient({ adapter })
+  prisma = createPrismaClient()
 } else {
   if (!globalForPrisma.prisma) {
-    const adapter = new PrismaMariaDb(process.env.DATABASE_URL || 'mysql://root:@localhost:3306/thpt_edison')
-    globalForPrisma.prisma = new PrismaClient({ adapter })
+    globalForPrisma.prisma = createPrismaClient()
   }
   prisma = globalForPrisma.prisma
 }

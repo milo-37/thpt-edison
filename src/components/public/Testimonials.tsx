@@ -147,8 +147,8 @@ export default function Testimonials() {
       `}</style>
       
       {/* Background decoration */}
-      <div style={{ position: 'absolute', top: '15%', left: '-8%', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(60px)', pointerEvents: 'none' }} />
-      <div style={{ position: 'absolute', bottom: '10%', right: '-5%', width: '250px', height: '250px', background: 'radial-gradient(circle, rgba(168, 85, 247, 0.05) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(50px)', pointerEvents: 'none' }} />
+      <div aria-hidden="true" role="presentation" style={{ position: 'absolute', top: '15%', left: '-8%', width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(60px)', pointerEvents: 'none' }} />
+      <div aria-hidden="true" role="presentation" style={{ position: 'absolute', bottom: '10%', right: '-5%', width: '250px', height: '250px', background: 'radial-gradient(circle, rgba(168, 85, 247, 0.05) 0%, transparent 70%)', borderRadius: '50%', filter: 'blur(50px)', pointerEvents: 'none' }} />
       
       <div className="container">
         <div style={{ textAlign: 'center', marginBottom: 'var(--space-12)' }}>
@@ -164,7 +164,7 @@ export default function Testimonials() {
             {testimonials.map((t, idx) => {
               const isActive = idx === activeIndex
               return (
-                <div
+                <figure
                   key={t.id}
                   className="testimonial-card"
                   style={{
@@ -175,36 +175,42 @@ export default function Testimonials() {
                     transform: isActive ? 'scale(1) translateY(0)' : 'scale(0.96) translateY(12px)',
                     transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
                     pointerEvents: isActive ? 'auto' : 'none',
+                    margin: 0,
                   }}
+                  aria-hidden={!isActive}
                 >
                   {/* Quote Icon */}
-                  <div className="testimonial-quote-icon">
+                  <span className="testimonial-quote-icon" aria-hidden="true">
                     <Quote size={20} />
-                  </div>
+                  </span>
 
                   {/* Review text */}
-                  <p style={{ fontSize: 'var(--font-size-base)', fontStyle: 'italic', color: 'var(--color-gray-700)', lineHeight: 1.7, margin: 0 }}>
+                  <blockquote style={{ fontSize: 'var(--font-size-base)', fontStyle: 'italic', color: 'var(--color-gray-700)', lineHeight: 1.7, margin: 0 }}>
                     &ldquo;{t.content}&rdquo;
-                  </p>
+                  </blockquote>
 
                   {/* Stars Rating */}
-                  <div style={{ display: 'flex', gap: '4px', color: '#fbbf24', justifyContent: 'center' }}>
+                  <div
+                    role="img"
+                    aria-label={`Đánh giá ${t.rating} sao`}
+                    style={{ display: 'flex', gap: '4px', color: '#fbbf24', justifyContent: 'center' }}
+                  >
                     {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} size={16} fill="currentColor" />
+                      <Star key={i} size={16} fill="currentColor" aria-hidden="true" />
                     ))}
                   </div>
 
                   {/* User info */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginTop: '8px' }}>
-                    <div style={{ width: '50px', height: '50px', borderRadius: '50%', overflow: 'hidden', border: '2.5px solid #6366f1', background: 'var(--color-gray-100)', boxShadow: '0 0 12px rgba(99, 102, 241, 0.15)' }}>
+                  <figcaption style={{ display: 'flex', alignItems: 'center', gap: '14px', marginTop: '8px', justifyContent: 'center' }}>
+                    <span style={{ width: '50px', height: '50px', borderRadius: '50%', overflow: 'hidden', border: '2.5px solid #6366f1', background: 'var(--color-gray-100)', boxShadow: '0 0 12px rgba(99, 102, 241, 0.15)', display: 'block', flexShrink: 0 }}>
                       <img src={t.avatar || '/uploads/images/31aaeadd-50b6-4821-b138-f841c019f772.jpg'} alt={t.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                    </div>
+                    </span>
                     <div style={{ textAlign: 'left' }}>
-                      <h4 style={{ margin: 0, fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'var(--color-navy)' }}>{t.name}</h4>
+                      <strong style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'var(--color-navy)' }}>{t.name}</strong>
                       <span style={{ fontSize: '12px', color: 'var(--color-gray-500)', fontWeight: 500 }}>{t.role}</span>
                     </div>
-                  </div>
-                </div>
+                  </figcaption>
+                </figure>
               )
             })}
           </div>
@@ -214,25 +220,28 @@ export default function Testimonials() {
             className="testimonial-nav-btn"
             onClick={() => setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
             style={{ left: '-5px' }}
-            aria-label="Previous review"
+            aria-label="Đánh giá trước"
           >
-            <ChevronLeft size={18} />
+            <ChevronLeft size={18} aria-hidden="true" />
           </button>
           <button
             className="testimonial-nav-btn"
             onClick={() => setActiveIndex((prev) => (prev + 1) % testimonials.length)}
             style={{ right: '-5px' }}
-            aria-label="Next review"
+            aria-label="Đánh giá tiếp theo"
           >
-            <ChevronRight size={18} />
+            <ChevronRight size={18} aria-hidden="true" />
           </button>
 
           {/* Dots Indicator — synced with hero banner style */}
-          <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginTop: '28px' }}>
-            {testimonials.map((_, idx) => (
+          <div role="tablist" aria-label="Danh sách đánh giá" style={{ display: 'flex', gap: '8px', justifyContent: 'center', marginTop: '28px' }}>
+            {testimonials.map((t, idx) => (
               <button
                 key={idx}
+                role="tab"
                 onClick={() => setActiveIndex(idx)}
+                aria-selected={idx === activeIndex}
+                aria-label={`Đánh giá của ${t.name}`}
                 style={{
                   width: idx === activeIndex ? '28px' : '8px',
                   height: '4px',
@@ -244,7 +253,6 @@ export default function Testimonials() {
                   cursor: 'pointer',
                   boxShadow: idx === activeIndex ? '0 0 12px rgba(79, 70, 229, 0.35)' : 'none',
                 }}
-                aria-label={`Go to slide ${idx + 1}`}
               />
             ))}
           </div>

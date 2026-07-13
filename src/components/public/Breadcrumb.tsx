@@ -34,9 +34,21 @@ export default function Breadcrumb({ customTitle }: BreadcrumbProps) {
   }
 
   return (
-    <div className="container" style={{ padding: 'var(--space-6) var(--space-4) 0 var(--space-4)' }}>
-      <nav 
-        aria-label="breadcrumb" 
+    <nav 
+      className="container"
+      aria-label="breadcrumb" 
+      style={{ 
+        padding: 'var(--space-6) var(--space-4) 0 var(--space-4)',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '8px',
+        fontSize: '13px',
+        color: 'var(--color-gray-500)',
+        flexWrap: 'wrap',
+      }}
+    >
+      <ol
+        aria-label="breadcrumb"
         style={{ 
           display: 'inline-flex', 
           alignItems: 'center', 
@@ -50,24 +62,28 @@ export default function Breadcrumb({ customTitle }: BreadcrumbProps) {
           padding: '8px 20px',
           borderRadius: '999px',
           boxShadow: '0 4px 20px -5px rgba(99, 102, 241, 0.05)',
+          listStyle: 'none',
+          margin: 0,
         }}
       >
-        <Link 
-          href="/" 
-          style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '4px', 
-            color: 'var(--color-gray-500)',
-            textDecoration: 'none',
-            transition: 'color var(--transition-fast)'
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.color = '#4f46e5'}
-          onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-gray-500)'}
-        >
-          <Home size={14} />
-          <span>Trang chủ</span>
-        </Link>
+        <li>
+          <Link 
+            href="/" 
+            style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: '4px', 
+              color: 'var(--color-gray-500)',
+              textDecoration: 'none',
+              transition: 'color var(--transition-fast)'
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.color = '#4f46e5'}
+            onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-gray-500)'}
+          >
+            <Home size={14} aria-hidden="true" />
+            <span>Trang chủ</span>
+          </Link>
+        </li>
 
         {segments.map((segment, idx) => {
           const url = '/' + segments.slice(0, idx + 1).join('/')
@@ -75,10 +91,12 @@ export default function Breadcrumb({ customTitle }: BreadcrumbProps) {
           const label = customTitle && isLast ? customTitle : (segmentMap[segment] || prettifySlug(segment))
 
           return (
-            <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <ChevronRight size={12} style={{ color: 'var(--color-gray-400)', flexShrink: 0 }} />
+            <li key={idx} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span aria-hidden="true" style={{ color: 'var(--color-gray-400)', flexShrink: 0 }}>
+                <ChevronRight size={12} />
+              </span>
               {isLast ? (
-                <span style={{ fontWeight: 700, color: '#4f46e5' }}>
+                <span aria-current="page" style={{ fontWeight: 700, color: '#4f46e5' }}>
                   {label}
                 </span>
               ) : (
@@ -95,10 +113,10 @@ export default function Breadcrumb({ customTitle }: BreadcrumbProps) {
                   {label}
                 </Link>
               )}
-            </div>
+            </li>
           )
         })}
-      </nav>
-    </div>
+      </ol>
+    </nav>
   )
 }

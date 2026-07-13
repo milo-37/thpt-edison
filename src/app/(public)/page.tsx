@@ -296,7 +296,7 @@ export default async function HomePage() {
             
             {/* Cột phải: Thông tin */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-              <div>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
                 <span className="section-label">Hành trình khai phóng</span>
                 <h2 className="section-title section-title--underlined" style={{ margin: '8px 0 0 0' }}>Kiến tạo thế hệ tiên phong</h2>
               </div>
@@ -350,7 +350,7 @@ export default async function HomePage() {
       <section className="section">
         <div className="container">
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 'var(--space-8)' }}>
-            <div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
               <span className="section-label">Tin tức & Thông báo</span>
               <h2 className="section-title section-title--underlined" style={{ margin: 0, marginTop: 'var(--space-2)' }}>Tin mới nhất</h2>
             </div>
@@ -504,7 +504,7 @@ export default async function HomePage() {
             {/* Cột trái: Album ảnh */}
             <div className="section6-card-container">
               <div className="accent-line" style={{ background: 'linear-gradient(90deg, #6366f1, #8b5cf6, #6366f1)' }} />
-              <div style={{ marginBottom: 'var(--space-5)' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: 'var(--space-5)' }}>
                 <div className="section6-header-badge" style={{ color: '#4f46e5', background: 'rgba(99, 102, 241, 0.06)', border: '1px solid rgba(99, 102, 241, 0.1)' }}>
                   <Images size={12} />
                   Thư viện ảnh
@@ -525,7 +525,7 @@ export default async function HomePage() {
             {/* Cột phải: Lịch Sự kiện */}
             <div className="section6-card-container">
               <div className="accent-line" style={{ background: 'linear-gradient(90deg, #8b5cf6, #6366f1, #8b5cf6)' }} />
-              <div style={{ marginBottom: 'var(--space-5)' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', marginBottom: 'var(--space-5)' }}>
                 <div className="section6-header-badge" style={{ color: '#7c3aed', background: 'rgba(168, 85, 247, 0.06)', border: '1px solid rgba(168, 85, 247, 0.1)' }}>
                   <Calendar size={12} />
                   Lịch trình

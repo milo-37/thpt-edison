@@ -58,26 +58,26 @@ export default function Footer({ settings }: FooterProps) {
   return (
     <footer className="public-footer" style={{ background: 'linear-gradient(180deg, #0b0f19 0%, #06080e 100%)', color: 'var(--color-white)', padding: 'var(--space-16) 0 var(--space-8) 0', borderTop: '4px solid #6366f1', position: 'relative', overflow: 'hidden' }}>
       {/* Decorative background grid and blob */}
-      <div style={{ position: 'absolute', inset: 0, opacity: 0.04, pointerEvents: 'none', backgroundImage: 'radial-gradient(circle at 1px 1px, #6366f1 1px, transparent 0)', backgroundSize: '24px 24px' }} />
-      <div style={{ position: 'absolute', bottom: '-50px', right: '-50px', width: '250px', height: '250px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%)', pointerEvents: 'none' }} />
+      <div aria-hidden="true" role="presentation" style={{ position: 'absolute', inset: 0, opacity: 0.04, pointerEvents: 'none', backgroundImage: 'radial-gradient(circle at 1px 1px, #6366f1 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+      <div aria-hidden="true" role="presentation" style={{ position: 'absolute', bottom: '-50px', right: '-50px', width: '250px', height: '250px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%)', pointerEvents: 'none' }} />
 
       <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'var(--space-10)', position: 'relative', zIndex: 1 }}>
 
         {/* Cột 1: Thông tin trường */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-            <div style={{ width: '40px', height: '40px', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff', boxShadow: '0 0 15px rgba(99, 102, 241, 0.3)' }}>
-              <GraduationCap size={24} />
-            </div>
+            <span aria-hidden="true" style={{ width: '40px', height: '40px', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#ffffff', boxShadow: '0 0 15px rgba(99, 102, 241, 0.3)' }}>
+              <GraduationCap size={24} aria-hidden="true" />
+            </span>
             <div>
-              <h2 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 800, color: 'var(--color-white)', margin: 0, lineHeight: 1.1, fontFamily: 'var(--font-title)' }}>{title}</h2>
+              <p style={{ fontSize: 'var(--font-size-lg)', fontWeight: 800, color: 'var(--color-white)', margin: 0, lineHeight: 1.1, fontFamily: 'var(--font-title)' }}>{title}</p>
               {subtitle && <span style={{ fontSize: '11px', color: '#a78bfa', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 600 }}>{subtitle}</span>}
             </div>
           </div>
           <p style={{ color: 'var(--color-gray-400)', fontSize: 'var(--font-size-sm)', lineHeight: 1.6 }}>
             {schoolName} kiến tạo tương lai bằng giáo dục hiện đại, khai phóng trí tuệ và chuẩn bị cho học sinh vững bước trở thành những công dân toàn cầu ưu tú.
           </p>
-          <div className="footer-social" style={{ display: 'flex', gap: 'var(--space-3)', marginTop: 'var(--space-2)' }}>
+          <nav className="footer-social" aria-label="Mạng xã hội" style={{ display: 'flex', gap: 'var(--space-3)', marginTop: 'var(--space-2)' }}>
             <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook">
               <svg width={18} height={18} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
@@ -92,7 +92,7 @@ export default function Footer({ settings }: FooterProps) {
             <a href="/" aria-label="Website">
               <Globe size={18} />
             </a>
-          </div>
+          </nav>
         </div>
 
         {/* Cột 2: Liên kết nhanh */}
@@ -159,20 +159,20 @@ export default function Footer({ settings }: FooterProps) {
             Liên hệ với chúng tôi
             <span style={{ position: 'absolute', bottom: 0, left: 0, width: '40px', height: '3px', background: 'linear-gradient(90deg, #6366f1, #8b5cf6)', borderRadius: 'var(--radius-full)' }} />
           </h3>
-          <ul style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', color: 'var(--color-gray-400)', fontSize: 'var(--font-size-sm)', padding: 0 }}>
-            <li style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-2)' }}>
-              <MapPin size={16} style={{ flexShrink: 0, color: '#818cf8', marginTop: '4px' }} />
+          <address style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', color: 'var(--color-gray-400)', fontSize: 'var(--font-size-sm)', padding: 0, fontStyle: 'normal' }}>
+            <span style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-2)' }}>
+              <MapPin size={16} aria-hidden="true" style={{ flexShrink: 0, color: '#818cf8', marginTop: '4px' }} />
               <span style={{ lineHeight: 1.4 }}>{address}</span>
-            </li>
-            <li style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-              <Phone size={16} style={{ flexShrink: 0, color: '#818cf8' }} />
-              <span>{phone}</span>
-            </li>
-            <li style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
-              <Mail size={16} style={{ flexShrink: 0, color: '#818cf8' }} />
-              <span>{email}</span>
-            </li>
-          </ul>
+            </span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+              <Phone size={16} aria-hidden="true" style={{ flexShrink: 0, color: '#818cf8' }} />
+              <a href={`tel:${phone.replace(/\s/g, '')}`} style={{ color: 'inherit', textDecoration: 'none' }}>{phone}</a>
+            </span>
+            <span style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)' }}>
+              <Mail size={16} aria-hidden="true" style={{ flexShrink: 0, color: '#818cf8' }} />
+              <a href={`mailto:${email}`} style={{ color: 'inherit', textDecoration: 'none' }}>{email}</a>
+            </span>
+          </address>
           
           <div style={{ marginTop: 'var(--space-2)' }}>
             <span style={{ fontSize: '11px', color: 'var(--color-gray-300)', fontWeight: 700, textTransform: 'uppercase', display: 'block', marginBottom: '8px' }}>
@@ -186,8 +186,10 @@ export default function Footer({ settings }: FooterProps) {
 
       {/* Dòng Copyright */}
       <div className="container" style={{ marginTop: 'var(--space-12)', paddingTop: 'var(--space-6)', borderTop: '1px solid rgba(255, 255, 255, 0.08)', textAlign: 'center', color: 'var(--color-gray-500)', fontSize: 'var(--font-size-xs)' }}>
-        <p style={{ margin: 0 }}>&copy; 2026 {schoolName}. All rights reserved.</p>
-        <p style={{ marginTop: 'var(--space-1)', opacity: 0.7 }}>Powered by Next.js 16 & Premium Design Tokens</p>
+        <small style={{ display: 'block', color: 'var(--color-gray-500)', fontSize: 'var(--font-size-xs)', textAlign: 'center' }}>
+          &copy; 2026 {schoolName}. All rights reserved.
+        </small>
+        <p style={{ marginTop: 'var(--space-1)', opacity: 0.7, fontSize: 'var(--font-size-xs)', textAlign: 'center', color: 'var(--color-gray-500)' }}>Powered by Next.js 16 &amp; Premium Design Tokens</p>
       </div>
     </footer>
   )

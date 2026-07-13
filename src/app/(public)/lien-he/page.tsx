@@ -110,7 +110,7 @@ export default function ContactPage() {
 
           {/* Cột trái: Các thẻ liên hệ */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
-            <div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
               <span className="section-label">Thông tin liên lạc</span>
               <h2 className="section-title section-title--underlined" style={{ marginTop: 'var(--space-2)' }}>
                 Thông tin chi tiết

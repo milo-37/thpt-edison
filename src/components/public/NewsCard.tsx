@@ -26,6 +26,7 @@ export default function NewsCard({ post, isFeatured = false }: PostProps) {
   const defaultThumbnail = '/uploads/thumbnails/news-default.jpg'
   const postThumbnail = post.thumbnail || defaultThumbnail
   const publishedDate = post.publishedAt ? formatDateVi(post.publishedAt) : 'Chưa xuất bản'
+  const isoDate = post.publishedAt ? new Date(post.publishedAt).toISOString() : undefined
   const postUrl = `/tin-tuc/${post.slug}`
 
   if (isFeatured) {
@@ -42,20 +43,20 @@ export default function NewsCard({ post, isFeatured = false }: PostProps) {
             )}
             <h3 className="card-title" style={{ fontSize: 'var(--font-size-2xl)' }}>{post.title}</h3>
             <p className="card-excerpt" style={{ fontSize: 'var(--font-size-base)' }}>{post.excerpt}</p>
-            <div className="card-meta">
-              <div className="card-meta-item">
-                <User size={14} />
-                <span>{post.author.name}</span>
-              </div>
-              <div className="card-meta-item">
-                <Calendar size={14} />
-                <span>{publishedDate}</span>
-              </div>
-              <div className="card-meta-item">
-                <Eye size={14} />
-                <span>{post.viewCount} lượt xem</span>
-              </div>
-            </div>
+            <footer className="card-meta">
+              <span className="card-meta-item">
+                <User size={14} aria-hidden="true" />
+                <address rel="author" style={{ fontStyle: 'normal', display: 'inline' }}>{post.author.name}</address>
+              </span>
+              <span className="card-meta-item">
+                <Calendar size={14} aria-hidden="true" />
+                <time dateTime={isoDate}>{publishedDate}</time>
+              </span>
+              <span className="card-meta-item">
+                <Eye size={14} aria-hidden="true" />
+                <span aria-label={`${post.viewCount} lượt xem`}>{post.viewCount} lượt xem</span>
+              </span>
+            </footer>
           </div>
         </article>
       </Link>
@@ -74,16 +75,16 @@ export default function NewsCard({ post, isFeatured = false }: PostProps) {
           )}
           <h3 className="card-title">{post.title}</h3>
           <p className="card-excerpt" style={{ flex: 1 }}>{post.excerpt}</p>
-          <div className="card-meta" style={{ marginTop: 'auto' }}>
-            <div className="card-meta-item">
-              <Calendar size={14} />
-              <span>{publishedDate}</span>
-            </div>
-            <div className="card-meta-item">
-              <Eye size={14} />
-              <span>{post.viewCount}</span>
-            </div>
-          </div>
+          <footer className="card-meta" style={{ marginTop: 'auto' }}>
+            <span className="card-meta-item">
+              <Calendar size={14} aria-hidden="true" />
+              <time dateTime={isoDate}>{publishedDate}</time>
+            </span>
+            <span className="card-meta-item">
+              <Eye size={14} aria-hidden="true" />
+              <span aria-label={`${post.viewCount} lượt xem`}>{post.viewCount}</span>
+            </span>
+          </footer>
         </div>
       </article>
     </Link>

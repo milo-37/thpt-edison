@@ -23,36 +23,37 @@ export default function GalleryGrid({ albums, limit }: GalleryGridProps) {
   if (albums.length === 0) {
     return (
       <div style={{ textAlign: 'center', padding: 'var(--space-10)', color: 'var(--color-gray-400)', borderRadius: '24px', background: 'rgba(99, 102, 241, 0.03)', border: '1px dashed rgba(99, 102, 241, 0.15)' }}>
-        <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: 'rgba(99, 102, 241, 0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto var(--space-3) auto' }}>
-          <Camera size={24} style={{ color: '#6366f1', opacity: 0.6 }} />
-        </div>
-        <p style={{ margin: 0, fontWeight: 700, fontSize: 'var(--font-size-sm)', color: 'var(--color-navy)' }}>Thư viện ảnh đang được cập nhật.</p>
+        <span aria-hidden="true" style={{ width: '56px', height: '56px', borderRadius: '16px', background: 'rgba(99, 102, 241, 0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto var(--space-3) auto' }}>
+          <Camera size={24} style={{ color: '#6366f1', opacity: 0.6 }} aria-hidden="true" />
+        </span>
+        <p role="status" style={{ margin: 0, fontWeight: 700, fontSize: 'var(--font-size-sm)', color: 'var(--color-navy)' }}>Thư viện ảnh đang được cập nhật.</p>
       </div>
     )
   }
 
   return (
-    <div className="gallery-grid">
+    <div className="gallery-grid" role="list" aria-label="Thư viện ảnh">
       {displayAlbums.map((album, index) => (
-        <div
+        <figure
           key={album.id}
-          className="gallery-item card"
+          role="listitem"
+          className="gallery-item"
           style={{
             position: 'relative',
             overflow: 'hidden',
             border: 'none',
             borderRadius: '24px',
-            boxShadow: '0 10px 25px rgba(99, 102, 241, 0.04)'
+            boxShadow: '0 10px 25px rgba(99, 102, 241, 0.04)',
+            margin: 0,
           }}
         >
           <img
             src={album.coverImage || defaultCover}
             alt={album.title}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           />
-          {/* Gradient overlay - always visible but stronger on hover via CSS */}
-          <div
-            className="gallery-overlay"
+          {/* Gradient overlay */}
+          <figcaption
             style={{
               position: 'absolute',
               inset: 0,
@@ -82,11 +83,11 @@ export default function GalleryGrid({ albums, limit }: GalleryGridProps) {
               width: 'fit-content',
               border: '1px solid rgba(255, 255, 255, 0.2)',
             }}>
-              <Camera size={11} />
-              {album._count?.photos || 0} ảnh
+              <Camera size={11} aria-hidden="true" />
+              <span>{album._count?.photos || 0} ảnh</span>
             </span>
             {/* Title */}
-            <h4 style={{
+            <h3 style={{
               fontSize: index === 0 ? 'var(--font-size-base)' : 'var(--font-size-sm)',
               fontWeight: 800,
               margin: 0,
@@ -95,7 +96,7 @@ export default function GalleryGrid({ albums, limit }: GalleryGridProps) {
               textShadow: '0 1px 3px rgba(0,0,0,0.2)',
             }}>
               {album.title}
-            </h4>
+            </h3>
             {/* Description - only on featured */}
             {index === 0 && album.description && (
               <p style={{
@@ -114,6 +115,7 @@ export default function GalleryGrid({ albums, limit }: GalleryGridProps) {
             {/* Arrow link button */}
             <Link
               href={`/hoat-dong?albumId=${album.id}`}
+              aria-label={`Xem album ${album.title}`}
               style={{
                 position: 'absolute',
                 top: 'var(--space-3)',
@@ -131,10 +133,10 @@ export default function GalleryGrid({ albums, limit }: GalleryGridProps) {
                 border: '1px solid rgba(255, 255, 255, 0.2)',
               }}
             >
-              <ArrowUpRight size={16} />
+              <ArrowUpRight size={16} aria-hidden="true" />
             </Link>
-          </div>
-        </div>
+          </figcaption>
+        </figure>
       ))}
     </div>
   )

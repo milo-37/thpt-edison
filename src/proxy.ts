@@ -1,7 +1,10 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { verifyToken } from './lib/auth'
-import prisma from './lib/prisma'
+
+// Next.js 16 Proxy — KHÔNG import Prisma/shared modules tại đây
+// (theo best practice: "you should not attempt relying on shared modules or globals")
+// Kiểm tra isActive sẽ do route handler đảm nhiệm qua verifyAuth()
 
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -15,26 +18,11 @@ export async function proxy(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // Lấy token từ cookie
+  // Lấy token từ cookie và verify JWT (không gọi DB)
   const token = request.cookies.get('auth-token')?.value
-
-  // Kiểm tra tính hợp lệ của token
   let user = null
   if (token) {
-    const payload = await verifyToken(token)
-    if (payload) {
-      try {
-        const dbUser = await prisma.user.findUnique({
-          where: { id: payload.id },
-          select: { id: true, isActive: true }
-        })
-        if (dbUser && dbUser.isActive) {
-          user = payload
-        }
-      } catch (error) {
-        console.error('Proxy auth check error:', error)
-      }
-    }
+    user = await verifyToken(token)
   }
 
   // 2. Bảo vệ các tuyến đường Admin

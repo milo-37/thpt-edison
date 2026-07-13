@@ -41,10 +41,67 @@ export default async function PublicLayout({
 }) {
   const settings = await getSettings()
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'EducationalOrganization',
+        '@id': `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/#organization`,
+        name: settings.schoolName,
+        url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+        logo: {
+          '@type': 'ImageObject',
+          url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}${settings.logoUrl}`,
+        },
+        contactPoint: [
+          {
+            '@type': 'ContactPoint',
+            telephone: settings.phone,
+            email: settings.email,
+            contactType: 'customer support',
+            availableLanguage: 'Vietnamese',
+          }
+        ],
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: settings.address,
+          addressCountry: 'VN',
+        },
+        description: 'Trường THPT Edison - Môi trường giáo dục khai phóng, hiện đại và toàn diện tại Minh Đức, Mỹ Hào, Hưng Yên.',
+        sameAs: [
+          'https://facebook.com',
+          'https://youtube.com',
+        ],
+      },
+      {
+        '@type': 'WebSite',
+        '@id': `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/#website`,
+        url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+        name: settings.schoolName,
+        publisher: {
+          '@id': `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/#organization`,
+        },
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: {
+            '@type': 'EntryPoint',
+            urlTemplate: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/tin-tuc?q={search_term_string}`,
+          },
+          'query-input': 'required name=search_term_string',
+        },
+        inLanguage: 'vi-VN',
+      },
+    ]
+  }
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Dynamic Futuristic Glow Background Blobs */}
-      <div className="futuristic-glow-container">
+      <div aria-hidden="true" role="presentation" className="futuristic-glow-container">
         <div className="glow-blob glow-blob-1"></div>
         <div className="glow-blob glow-blob-2"></div>
         <div className="glow-blob glow-blob-3"></div>
@@ -57,7 +114,7 @@ export default async function PublicLayout({
       </main>
       <Footer settings={settings} />
       <ChatWidget />
-    </div>
+    </>
   )
 }
 

@@ -14,7 +14,7 @@ interface StatItemProps {
 function Counter({ target, suffix = '', label, icon, delay = 0 }: StatItemProps) {
   const [count, setCount] = useState(0)
   const [hasStarted, setHasStarted] = useState(false)
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLLIElement>(null)
 
   // IntersectionObserver — only start counting when scrolled into view
   useEffect(() => {
@@ -59,7 +59,7 @@ function Counter({ target, suffix = '', label, icon, delay = 0 }: StatItemProps)
   }, [target, hasStarted, delay])
 
   return (
-    <div
+    <li
       ref={ref}
       className="stat-card"
       style={{
@@ -68,19 +68,19 @@ function Counter({ target, suffix = '', label, icon, delay = 0 }: StatItemProps)
         transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms, box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease`,
       }}
     >
-      <div className="stat-card__icon">
+      <span className="stat-card__icon" aria-hidden="true">
         {icon}
-      </div>
+      </span>
       <div>
-        <div className="stat-card__number">
-          <span>{count.toLocaleString('vi-VN')}</span>
+        <p className="stat-card__number">
+          <strong>{count.toLocaleString('vi-VN')}</strong>
           <span className="stat-card__suffix">{suffix}</span>
-        </div>
-        <div className="stat-card__label">
+        </p>
+        <span className="stat-card__label">
           {label}
-        </div>
+        </span>
       </div>
-    </div>
+    </li>
   )
 }
 
@@ -100,9 +100,9 @@ export default function QuickStats({ stats = [] }: { stats?: any[] }) {
   }
 
   return (
-    <section className="section" style={{ position: 'relative', zIndex: 5, marginTop: '-60px', padding: '0 0 var(--space-12) 0' }}>
+    <section className="section" aria-label="Thống kê nhanh về trường" style={{ position: 'relative', zIndex: 5, marginTop: '-60px', padding: '0 0 var(--space-12) 0' }}>
       <div className="container">
-        <div style={{ display: 'flex', gap: 'var(--space-6)', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <ul style={{ display: 'flex', gap: 'var(--space-6)', flexWrap: 'wrap', justifyContent: 'center', listStyle: 'none', padding: 0, margin: 0 }}>
           {stats.map((stat, idx) => (
             <Counter 
               key={idx}
@@ -113,7 +113,7 @@ export default function QuickStats({ stats = [] }: { stats?: any[] }) {
               delay={idx * 100}
             />
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   )

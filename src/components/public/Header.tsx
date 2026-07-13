@@ -144,14 +144,14 @@ export default function Header({ settings }: HeaderProps) {
             />
           </div>
           <div className="header-logo-text">
-            <h1>{title}</h1>
-            {subtitle && <span>{subtitle}</span>}
+            <span className="logo-title">{title}</span>
+            {subtitle && <span className="logo-subtitle">{subtitle}</span>}
           </div>
         </Link>
 
 
         {/* Desktop Menu */}
-        <nav className="header-nav">
+        <nav className="header-nav" aria-label="Điều hướng chính">
           {menuItems.map((item) => {
             const baseHref = item.href.split('?')[0]
             const queryTab = item.href.includes('?tab=') ? item.href.split('?tab=')[1] : null
@@ -176,16 +176,17 @@ export default function Header({ settings }: HeaderProps) {
             )
           })}
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '12px', paddingLeft: '12px', borderLeft: '1px solid rgba(148, 163, 184, 0.2)' }}>
+          <div role="group" aria-label="Công cụ trang" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '12px', paddingLeft: '12px', borderLeft: '1px solid rgba(148, 163, 184, 0.2)' }}>
             {/* Search Icon Trigger */}
             <button
               onClick={() => setIsSearchOpen(true)}
               style={{ background: 'transparent', border: 'none', color: 'inherit', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: '8px', borderRadius: '50%' }}
               title="Tìm kiếm toàn trang"
+              aria-label="Mở hộp tìm kiếm"
               onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(148, 163, 184, 0.15)' }}
               onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent' }}
             >
-              <Search size={20} />
+              <Search size={20} aria-hidden="true" />
             </button>
             
             {/* Theme Toggle */}
@@ -209,7 +210,8 @@ export default function Header({ settings }: HeaderProps) {
               }}
               title="Đến trang quản lý"
             >
-              <div
+              <span
+                aria-hidden="true"
                 style={{
                   width: '20px',
                   height: '20px',
@@ -225,11 +227,11 @@ export default function Header({ settings }: HeaderProps) {
                 }}
               >
                 {user.avatar ? (
-                  <img src={user.avatar} alt={user.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <img src={user.avatar} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 ) : (
                   user.name.charAt(0).toUpperCase()
                 )}
-              </div>
+              </span>
               <span style={{ fontSize: 'var(--font-size-xs)', fontWeight: 600 }}>{user.name.split(' ').pop()}</span>
             </Link>
           ) : (
@@ -247,14 +249,16 @@ export default function Header({ settings }: HeaderProps) {
         <button
           className="mobile-menu-btn"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label="Toggle menu"
+          aria-label={isMobileMenuOpen ? 'Đóng menu' : 'Mở menu'}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-nav"
         >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          {isMobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
         </button>
       </div>
 
       {/* Mobile Menu Dropdown */}
-      <div className={`mobile-nav ${isMobileMenuOpen ? 'open' : ''}`}>
+      <nav id="mobile-nav" className={`mobile-nav ${isMobileMenuOpen ? 'open' : ''}`} aria-label="Điều hướng di động" aria-hidden={!isMobileMenuOpen}>
         {menuItems.map((item) => {
           const baseHref = item.href.split('?')[0]
           const queryTab = item.href.includes('?tab=') ? item.href.split('?tab=')[1] : null
@@ -280,7 +284,7 @@ export default function Header({ settings }: HeaderProps) {
         })}
 
         {/* Mobile search & theme controls */}
-        <div style={{ display: 'flex', gap: 'var(--space-4)', marginTop: '15px', padding: '10px 0', borderTop: '1px solid var(--color-gray-200)', justifyContent: 'center', alignItems: 'center' }}>
+        <div role="group" aria-label="Công cụ tìm kiếm và giao diện" style={{ display: 'flex', gap: 'var(--space-4)', marginTop: '15px', padding: '10px 0', borderTop: '1px solid var(--color-gray-200)', justifyContent: 'center', alignItems: 'center' }}>
           <button
             onClick={() => { setIsSearchOpen(true); setIsMobileMenuOpen(false); }}
             style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'transparent', border: 'none', color: 'inherit', fontSize: 'var(--font-size-sm)', fontWeight: 600, cursor: 'pointer' }}
@@ -321,7 +325,7 @@ export default function Header({ settings }: HeaderProps) {
             Tuyển Sinh Ngay
           </Link>
         </div>
-      </div>
+      </nav>
 
       {/* Global Search Modal overlay */}
       <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />

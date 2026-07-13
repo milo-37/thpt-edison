@@ -3,8 +3,33 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Trường THPT Edison - Khát vọng & Sáng tạo",
-  description: "Hệ thống website chính thức của Trường Trung Học Phổ Thông Edison",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
+  title: {
+    default: "Trường THPT Edison - Khát vọng & Sáng tạo",
+    template: "%s | THPT Edison",
+  },
+  description: "Website chính thức của Trường THPT Edison. Môi trường giáo dục khai phóng, hiện đại và toàn diện.",
+  keywords: ['THPT Edison', 'trường trung học phổ thông', 'tuyển sinh lớp 10', 'giáo dục', 'Edison School'],
+  authors: [{ name: 'Trường THPT Edison' }],
+  openGraph: {
+    type: 'website',
+    locale: 'vi_VN',
+    siteName: 'Trường THPT Edison',
+    title: 'Trường THPT Edison - Khát vọng & Sáng tạo',
+    description: 'Website chính thức của Trường THPT Edison. Môi trường giáo dục khai phóng, hiện đại và toàn diện.',
+    images: [
+      {
+        url: '/school-logo.jpg',
+        width: 512,
+        height: 512,
+        alt: 'Logo Trường THPT Edison',
+      },
+    ],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({

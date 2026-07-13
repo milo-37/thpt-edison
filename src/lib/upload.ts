@@ -26,8 +26,22 @@ const DANGEROUS_EXTENSIONS = [
   '.scr', '.pif', '.msi', '.msp', '.mst', '.cpl', '.hta', '.inf',
   '.ins', '.isp', '.jse', '.lnk', '.reg', '.rgs', '.sct', '.shb',
   '.shs', '.vbe', '.vb', '.wsc', '.wsh', '.php', '.asp', '.aspx',
-  '.jsp', '.cgi', '.py', '.pl', '.sh', '.ps1',
+  '.jsp', '.cgi', '.py', '.pl', '.sh', '.ps1', '.html', '.htm',
+  '.svg', '.xml',
 ]
+
+// Magic bytes cho việc kiểm tra nội dung file thực sự
+const MAGIC_BYTES: Record<string, number[][]> = {
+  'image/jpeg': [[0xFF, 0xD8, 0xFF]],
+  'image/png': [[0x89, 0x50, 0x4E, 0x47]],
+  'image/gif': [[0x47, 0x49, 0x46, 0x38]],
+  'image/webp': [[0x52, 0x49, 0x46, 0x46]], // RIFF header
+  'application/pdf': [[0x25, 0x50, 0x44, 0x46]], // %PDF
+  'application/msword': [[0xD0, 0xCF, 0x11, 0xE0]], // OLE2
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document': [[0x50, 0x4B, 0x03, 0x04]], // ZIP/PK
+  'application/vnd.ms-excel': [[0xD0, 0xCF, 0x11, 0xE0]], // OLE2
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': [[0x50, 0x4B, 0x03, 0x04]], // ZIP/PK
+}
 
 export interface UploadResult {
   filePath: string
@@ -73,6 +87,40 @@ export function validateFile(
   }
 
   return { valid: true }
+}
+
+/**
+ * Kiểm tra magic bytes của file để xác thực nội dung thực sự khớp với MIME type khai báo.
+ * Chống giả mạo extension (ví dụ: đổi .php thành .jpg)
+ */
+export async function validateFileContent(
+  file: File
+): Promise<{ valid: boolean; error?: string }> {
+  try {
+    const buffer = await file.arrayBuffer()
+    const bytes = new Uint8Array(buffer.slice(0, 8))
+
+    const expectedSignatures = MAGIC_BYTES[file.type]
+    if (!expectedSignatures) {
+      // Không có magic bytes cho loại file này — bỏ qua kiểm tra
+      return { valid: true }
+    }
+
+    const matches = expectedSignatures.some(sig =>
+      sig.every((byte, index) => bytes[index] === byte)
+    )
+
+    if (!matches) {
+      return {
+        valid: false,
+        error: 'Nội dung file không khớp với định dạng khai báo. File có thể đã bị giả mạo.',
+      }
+    }
+
+    return { valid: true }
+  } catch {
+    return { valid: false, error: 'Không thể đọc nội dung file để kiểm tra' }
+  }
 }
 
 /**

@@ -361,22 +361,26 @@ ul, ol {
   overflow: hidden;
 }
 
-.header-logo-text h1 {
+.header-logo-text h1,
+.header-logo-text .logo-title {
   font-size: var(--font-size-lg);
   font-weight: 800;
   color: var(--color-navy);
   line-height: 1.2;
   white-space: nowrap;
   transition: all var(--transition-spring);
+  display: block;
 }
 
-.header-logo-text span {
+.header-logo-text span:not(.logo-subtitle),
+.header-logo-text .logo-subtitle {
   font-size: var(--font-size-xs);
   color: var(--color-gray-500);
   text-transform: uppercase;
   letter-spacing: 1px;
   white-space: nowrap;
   transition: all var(--transition-spring);
+  display: block;
 }
 
 /* Scrolled Header Logo Scaling */
@@ -385,11 +389,13 @@ ul, ol {
   height: 44px;
 }
 
-.public-header.scrolled .header-logo-text h1 {
+.public-header.scrolled .header-logo-text h1,
+.public-header.scrolled .header-logo-text .logo-title {
   font-size: var(--font-size-base);
 }
 
-.public-header.scrolled .header-logo-text span {
+.public-header.scrolled .header-logo-text span:not(.logo-subtitle),
+.public-header.scrolled .header-logo-text .logo-subtitle {
   font-size: 10px;
   letter-spacing: 0.5px;
 }
@@ -498,10 +504,12 @@ ul, ol {
     padding: var(--space-2) var(--space-2) !important;
     font-size: 13px !important;
   }
-  .header-logo-text h1 {
+  .header-logo-text h1,
+  .header-logo-text .logo-title {
     font-size: var(--font-size-base) !important;
   }
-  .header-logo-text span {
+  .header-logo-text span:not(.logo-subtitle),
+  .header-logo-text .logo-subtitle {
     font-size: 10px !important;
   }
 }
@@ -820,6 +828,9 @@ ul, ol {
 }
 
 .section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   margin-bottom: var(--space-12);
 }

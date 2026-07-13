@@ -107,8 +107,8 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const user = await verifyAuth(request)
-    if (!user || !requireRole(user, ['admin', 'editor'])) {
-      return NextResponse.json({ error: 'Không có quyền thực hiện thao tác này' }, { status: 403 })
+    if (!user || !requireRole(user, ['admin'])) {
+      return NextResponse.json({ error: 'Chỉ Admin mới có quyền thay đổi cấu hình hệ thống' }, { status: 403 })
     }
 
     const { settings } = await request.json()
