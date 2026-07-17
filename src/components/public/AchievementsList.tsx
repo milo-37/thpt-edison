@@ -67,7 +67,7 @@ export default function AchievementsList({ initialAchievements }: AchievementsLi
         .achievement-item-card {
           display: flex;
           flex-direction: column;
-          background: rgba(255, 255, 255, 0.75);
+          background: var(--glass-bg);
           backdrop-filter: blur(20px);
           border-radius: 24px;
           border: 1px solid rgba(99, 102, 241, 0.12);
@@ -79,7 +79,7 @@ export default function AchievementsList({ initialAchievements }: AchievementsLi
           transform: translateY(-4px);
           border-color: rgba(99, 102, 241, 0.25);
           box-shadow: 0 12px 30px rgba(99, 102, 241, 0.06);
-          background: #ffffff;
+          background: var(--glass-bg);
         }
       `}</style>
 
@@ -133,7 +133,7 @@ export default function AchievementsList({ initialAchievements }: AchievementsLi
 
       {/* Grid List */}
       {filtered.length === 0 ? (
-        <p role="status" style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)', background: 'rgba(255, 255, 255, 0.7)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.12)' }}>
+        <p role="status" style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)', background: 'var(--glass-bg)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.12)' }}>
           <span aria-hidden="true" style={{ display: 'block', marginBottom: 'var(--space-4)' }}><Flame size={48} style={{ opacity: 0.5, color: '#6366f1' }} /></span>
           Chưa có dữ liệu thành tích cho danh mục này.
         </p>
@@ -164,7 +164,7 @@ export default function AchievementsList({ initialAchievements }: AchievementsLi
                         position: 'absolute',
                         top: 'var(--space-4)',
                         left: 'var(--space-4)',
-                        background: 'rgba(255, 255, 255, 0.85)',
+                        background: 'var(--glass-bg)',
                         backdropFilter: 'blur(4px)',
                         color: 'var(--color-navy)',
                         fontSize: '11px',

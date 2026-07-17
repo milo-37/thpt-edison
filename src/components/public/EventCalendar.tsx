@@ -69,7 +69,7 @@ export default function EventCalendar({ events }: EventListProps) {
             key={event.id}
             className="event-timeline-item"
           >
-            <div className="event-timeline-card" style={{ background: 'rgba(255, 255, 255, 0.75)', backdropFilter: 'blur(20px)', border: '1px solid rgba(99, 102, 241, 0.12)', boxShadow: '0 4px 15px rgba(99, 102, 241, 0.01)' }}>
+            <div className="event-timeline-card" style={{ background: 'var(--glass-bg)', backdropFilter: 'blur(20px)', border: '1px solid rgba(99, 102, 241, 0.12)', boxShadow: '0 4px 15px rgba(99, 102, 241, 0.01)' }}>
               {/* Compact Calendar Badge */}
               <div
                 style={{
@@ -80,7 +80,9 @@ export default function EventCalendar({ events }: EventListProps) {
                   borderRadius: '16px',
                   overflow: 'hidden',
                   boxShadow: '0 4px 16px rgba(99, 102, 241, 0.04)',
-                  backgroundColor: 'var(--color-white)',
+                  backgroundColor: 'var(--glass-bg)',
+                  backdropFilter: 'blur(4px)',
+                  WebkitBackdropFilter: 'blur(4px)',
                   flexShrink: 0,
                   border: '1px solid rgba(99, 102, 241, 0.12)',
                 }}

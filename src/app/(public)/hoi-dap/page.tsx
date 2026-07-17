@@ -22,7 +22,7 @@ export default async function FaqsPage() {
       {/* Banner - Light Futuristic */}
       <section
         style={{
-          background: 'linear-gradient(135deg, #f0f4ff 0%, #e8eeff 50%, #f5f0ff 100%)',
+          background: 'transparent',
           color: '#0f172a',
           padding: 'var(--space-16) 0',
           textAlign: 'center',
@@ -47,7 +47,7 @@ export default async function FaqsPage() {
       </section>
 
       {/* FAQs List Section */}
-      <section className="section" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f5f8ff 100%)' }}>
+      <section className="section" >
         <div className="container" style={{ maxWidth: '800px' }}>
           <FaqsList initialFaqs={faqs} />
         </div>

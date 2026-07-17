@@ -263,7 +263,7 @@ export default function ChatWidget() {
           style={{
             width: '360px',
             height: '480px',
-            background: 'rgba(255, 255, 255, 0.95)',
+            background: 'var(--glass-bg)',
             backdropFilter: 'blur(20px)',
             borderRadius: '24px',
             boxShadow: '0 20px 50px rgba(99, 102, 241, 0.15)',
@@ -292,7 +292,7 @@ export default function ChatWidget() {
                   width: '36px', 
                   height: '36px', 
                   borderRadius: '50%', 
-                  background: 'rgba(255, 255, 255, 0.2)', 
+                  background: 'var(--glass-bg)', 
                   display: 'flex', 
                   alignItems: 'center', 
                   justifyContent: 'center',
@@ -373,7 +373,7 @@ export default function ChatWidget() {
             {showContactForm && (
               <div 
                 style={{ 
-                  background: 'white', 
+                  background: 'transparent', 
                   border: '1px solid rgba(99, 102, 241, 0.15)', 
                   borderRadius: '16px', 
                   padding: '14px', 
@@ -448,7 +448,7 @@ export default function ChatWidget() {
             style={{ 
               padding: '12px', 
               borderTop: '1px solid rgba(99, 102, 241, 0.1)', 
-              background: 'white',
+              background: 'transparent',
               display: 'flex',
               flexDirection: 'column',
               gap: '6px'

@@ -43,9 +43,9 @@ export default function ContactPage() {
     <div style={{ display: 'flex', flexDirection: 'column', position: 'relative' }}>
       <style>{`
         .contact-card-item {
-          background: rgba(255, 255, 255, 0.8);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
+          background: var(--glass-bg);
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
           padding: var(--space-5);
           border-radius: 20px;
           border: 1px solid rgba(99, 102, 241, 0.1);
@@ -105,7 +105,7 @@ export default function ContactPage() {
       <div style={{ position: 'absolute', bottom: '25%', right: '3%', width: '250px', height: '250px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(168, 85, 247, 0.03) 0%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none' }} />
 
       {/* Thông tin và Form liên hệ */}
-      <section className="section" style={{ position: 'relative', zIndex: 1, background: 'linear-gradient(180deg, var(--color-white) 0%, var(--color-gray-50) 100%)' }}>
+      <section className="section" style={{ position: 'relative', zIndex: 1, background: 'transparent' }}>
         <div className="container contact-grid-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-12)' }}>
 
           {/* Cột trái: Các thẻ liên hệ */}

@@ -19,7 +19,7 @@ const sectionGroups = [
   {
     label: 'Dữ liệu của bạn',
     title: 'Thu thập & sử dụng thông tin',
-    bg: 'linear-gradient(180deg, var(--color-white) 0%, var(--color-gray-50) 100%)',
+    bg: 'transparent',
     cards: [
       {
         icon: FileText,
@@ -49,7 +49,7 @@ const sectionGroups = [
   {
     label: 'An toàn kỹ thuật',
     title: 'Biện pháp bảo vệ dữ liệu',
-    bg: 'var(--color-white)',
+    bg: 'transparent',
     cards: [
       {
         icon: Lock,
@@ -79,7 +79,7 @@ const sectionGroups = [
   {
     label: 'Quyền & cập nhật',
     title: 'Quyền người dùng & thay đổi',
-    bg: 'linear-gradient(180deg, var(--color-white) 0%, var(--color-gray-50) 100%)',
+    bg: 'transparent',
     cards: [
       {
         icon: UserCheck,
@@ -123,9 +123,9 @@ export default function PrivacyPolicyPage() {
         }
 
         .policy-card {
-          background: rgba(255, 255, 255, 0.75);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
+          background: var(--glass-bg);
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
           padding: var(--space-7);
           border-radius: 24px;
           border: 1px solid rgba(99, 102, 241, 0.1);
@@ -210,7 +210,7 @@ export default function PrivacyPolicyPage() {
           align-items: center;
           gap: 10px;
           padding: var(--space-4) var(--space-5);
-          background: rgba(255, 255, 255, 0.8);
+          background: var(--glass-bg);
           backdrop-filter: blur(12px);
           border: 1px solid rgba(99, 102, 241, 0.1);
           border-radius: 16px;
@@ -260,7 +260,7 @@ export default function PrivacyPolicyPage() {
       <div className="gradient-divider" />
 
       {/* ── Cam kết nổi bật ────────────────────── */}
-      <section className="section" style={{ background: 'var(--color-white)' }}>
+      <section className="section" style={{ background: 'transparent' }}>
         <div className="container">
           <div className="section-header">
             <span className="section-label">Tóm tắt cam kết</span>
@@ -347,7 +347,7 @@ export default function PrivacyPolicyPage() {
       <div className="gradient-divider" />
 
       {/* ── Liên hệ ────────────────────────────── */}
-      <section className="section" style={{ background: 'var(--color-white)' }}>
+      <section className="section" style={{ background: 'transparent' }}>
         <div className="container">
           <div className="section-header">
             <span className="section-label">Hỗ trợ</span>

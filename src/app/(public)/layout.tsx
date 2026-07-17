@@ -3,6 +3,7 @@ import Header from '@/components/public/Header'
 import Footer from '@/components/public/Footer'
 import Breadcrumb from '@/components/public/Breadcrumb'
 import ChatWidget from '@/components/public/ChatWidget'
+import GlobalAnimatedBackground from '@/components/public/GlobalAnimatedBackground'
 import prisma from '@/lib/prisma'
 
 export const metadata = {
@@ -15,7 +16,7 @@ const DEFAULT_SETTINGS = {
   logoUrl: '/school-logo.jpg',
   phone: '024 1234 5678',
   email: 'contact@edison.edu.vn',
-  address: 'Minh Đức, Mỹ Hào, Hưng Yên',
+  address: '937 Dương Tự Minh, Phan Đình Phùng, Thái Nguyên',
 }
 
 async function getSettings() {
@@ -100,6 +101,9 @@ export default async function PublicLayout({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {/* Global Canvas Particle Animation */}
+      <GlobalAnimatedBackground />
+
       {/* Dynamic Futuristic Glow Background Blobs */}
       <div aria-hidden="true" role="presentation" className="futuristic-glow-container">
         <div className="glow-blob glow-blob-1"></div>

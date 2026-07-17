@@ -44,13 +44,13 @@ export default async function ActivityPage(props: PageProps) {
     }
 
     return (
-      <div className="section section-alt" style={{ minHeight: '80vh', background: 'linear-gradient(180deg, #ffffff 0%, #f4f6ff 100%)', position: 'relative' }}>
+      <div className="section section-alt" style={{ minHeight: '80vh', position: 'relative' }}>
         <style>{`
           .back-link-btn:hover {
             transform: translateX(-4px);
           }
           .photo-card-item {
-            background: rgba(255, 255, 255, 0.8);
+            background: var(--glass-bg);
             backdrop-filter: blur(12px);
             border-radius: 20px;
             overflow: hidden;
@@ -107,7 +107,7 @@ export default async function ActivityPage(props: PageProps) {
 
           {/* Lưới hiển thị các ảnh trong Album */}
           {album.photos.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: 'var(--space-12)', background: 'rgba(255, 255, 255, 0.75)', backdropFilter: 'blur(10px)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.15)', color: 'var(--color-gray-400)' }}>
+            <div style={{ textAlign: 'center', padding: 'var(--space-12)', background: 'var(--glass-bg)', backdropFilter: 'blur(10px)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.15)', color: 'var(--color-gray-400)' }}>
               Chưa có hình ảnh nào được thêm vào album này.
             </div>
           ) : (
@@ -136,7 +136,7 @@ export default async function ActivityPage(props: PageProps) {
                     />
                   </div>
                   {photo.caption && (
-                    <div style={{ padding: 'var(--space-3)', background: 'rgba(255, 255, 255, 0.5)', borderTop: '1px solid rgba(99, 102, 241, 0.08)' }}>
+                    <div style={{ padding: 'var(--space-3)', background: 'var(--glass-bg)', borderTop: '1px solid rgba(99, 102, 241, 0.08)' }}>
                       <p style={{ fontSize: '13px', color: 'var(--color-gray-600)', margin: 0, lineHeight: 1.4 }}>
                         {photo.caption}
                       </p>
@@ -168,7 +168,7 @@ export default async function ActivityPage(props: PageProps) {
   ])
 
   return (
-    <div className="section section-alt" style={{ minHeight: '80vh', background: 'linear-gradient(180deg, #ffffff 0%, #f4f6ff 100%)', position: 'relative' }}>
+    <div className="section section-alt" style={{ minHeight: '80vh', position: 'relative' }}>
       {/* Decorative background blobs */}
       <div style={{ position: 'absolute', top: '10%', right: '10%', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%)', filter: 'blur(45px)', pointerEvents: 'none' }} />
       <div style={{ position: 'absolute', bottom: '15%', left: '5%', width: '250px', height: '250px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(168, 85, 247, 0.04) 0%, transparent 70%)', filter: 'blur(40px)', pointerEvents: 'none' }} />

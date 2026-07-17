@@ -72,7 +72,7 @@ export default async function NewsPage(props: PageProps) {
           padding: 8px 16px 8px 36px;
           border-radius: 12px;
           border: 1.5px solid rgba(99, 102, 241, 0.15);
-          background: rgba(255, 255, 255, 0.7);
+          background: var(--glass-bg);
           backdrop-filter: blur(8px);
           outline: none;
           font-size: 14px;
@@ -81,7 +81,7 @@ export default async function NewsPage(props: PageProps) {
         }
         .search-input-field:focus {
           border-color: #6366f1 !important;
-          background: #ffffff !important;
+          background: var(--glass-bg)!important;
           box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
         }
       `}</style>
@@ -95,7 +95,7 @@ export default async function NewsPage(props: PageProps) {
       {/* Gradient Divider */}
       <div className="gradient-divider" />
 
-      <section className="section section-alt" style={{ minHeight: '80vh', background: 'linear-gradient(180deg, #ffffff 0%, #f4f6ff 100%)', position: 'relative' }}>
+      <section className="section section-alt" style={{ minHeight: '80vh', position: 'relative' }}>
         <div className="container" style={{ position: 'relative', zIndex: 1 }}>
 
         {/* Thanh lọc & tìm kiếm */}
@@ -172,7 +172,7 @@ export default async function NewsPage(props: PageProps) {
 
         {/* Danh sách tin tức */}
         {posts.length === 0 ? (
-          <div style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-500)', background: 'rgba(255, 255, 255, 0.8)', backdropFilter: 'blur(10px)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.15)' }}>
+          <div style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-500)', background: 'var(--glass-bg)', backdropFilter: 'blur(10px)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.15)' }}>
             <p>Không tìm thấy bài viết nào phù hợp với bộ lọc hiện tại.</p>
             <Link href="/tin-tuc" className="btn btn-primary btn-sm" style={{ marginTop: 'var(--space-4)', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', border: 'none', borderRadius: '12px', color: '#ffffff' }}>
               Quay lại danh sách

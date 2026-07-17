@@ -61,7 +61,7 @@ export default function DocumentList({ initialDocuments }: DocumentListProps) {
 
   if (documents.length === 0) {
     return (
-      <div style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)', background: 'rgba(255, 255, 255, 0.7)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.12)' }}>
+      <div style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)', background: 'var(--glass-bg)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.12)' }}>
         <FileText size={36} style={{ margin: '0 auto var(--space-3) auto', opacity: 0.5, color: '#6366f1' }} />
         <p>Kho tài liệu hiện chưa có tệp tin nào được đăng tải.</p>
       </div>
@@ -76,7 +76,7 @@ export default function DocumentList({ initialDocuments }: DocumentListProps) {
           align-items: center;
           justify-content: space-between;
           gap: var(--space-4);
-          background: rgba(255, 255, 255, 0.75);
+          background: var(--glass-bg);
           backdrop-filter: blur(20px);
           padding: 20px 24px;
           border-radius: 20px;
@@ -88,7 +88,7 @@ export default function DocumentList({ initialDocuments }: DocumentListProps) {
           transform: translateY(-2px);
           border-color: rgba(99, 102, 241, 0.25);
           box-shadow: 0 10px 25px rgba(99, 102, 241, 0.05);
-          background: #ffffff;
+          background: var(--glass-bg);
         }
         .download-btn {
           display: inline-flex;

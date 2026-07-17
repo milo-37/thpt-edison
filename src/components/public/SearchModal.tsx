@@ -97,8 +97,8 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         position: 'fixed',
         inset: 0,
         zIndex: 9999,
-        background: 'rgba(255, 255, 255, 0.75)',
-        backdropFilter: 'blur(16px)',
+        background: 'var(--glass-bg)',
+        backdropFilter: 'blur(4px)',
         display: 'flex',
         justifyContent: 'center',
         padding: '8vh var(--space-4) 0 var(--space-4)',
@@ -140,7 +140,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             position: 'relative',
             display: 'flex',
             alignItems: 'center',
-            background: 'var(--color-white)',
+            background: 'transparent',
             borderRadius: '20px',
             boxShadow: '0 20px 40px rgba(99, 102, 241, 0.08)',
             padding: 'var(--space-1) var(--space-4)',
@@ -190,7 +190,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         {/* Results Container */}
         <div 
           style={{
-            background: 'rgba(255, 255, 255, 0.9)',
+            background: 'var(--glass-bg)',
             backdropFilter: 'blur(20px)',
             borderRadius: '24px',
             boxShadow: '0 25px 60px rgba(99, 102, 241, 0.1)',

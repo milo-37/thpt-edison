@@ -86,7 +86,7 @@ export default function AdmissionForm() {
     <form 
       onSubmit={handleSubmit} 
       style={{ 
-        background: 'rgba(255, 255, 255, 0.8)', 
+        background: 'var(--glass-bg)', 
         backdropFilter: 'blur(20px)',
         padding: 'var(--space-6)', 
         borderRadius: '24px', 
@@ -106,14 +106,14 @@ export default function AdmissionForm() {
           border-radius: 12px;
           border: 1.5px solid rgba(99, 102, 241, 0.15);
           outline: none;
-          background: rgba(255, 255, 255, 0.85);
+          background: var(--glass-bg);
           color: var(--color-navy);
           font-size: 14px;
           transition: all 0.25s ease;
         }
         .admission-input:focus {
           border-color: #6366f1;
-          background: #ffffff;
+          background: var(--glass-bg);
           box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
         }
         .admission-btn {

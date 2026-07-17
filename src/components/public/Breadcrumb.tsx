@@ -56,7 +56,7 @@ export default function Breadcrumb({ customTitle }: BreadcrumbProps) {
           fontSize: '13px', 
           color: 'var(--color-gray-500)',
           flexWrap: 'wrap',
-          background: 'rgba(255, 255, 255, 0.45)',
+          background: 'var(--glass-bg)',
           backdropFilter: 'blur(8px)',
           border: '1px solid rgba(99, 102, 241, 0.1)',
           padding: '8px 20px',

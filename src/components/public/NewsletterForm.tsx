@@ -74,7 +74,7 @@ export default function NewsletterForm() {
       <style>{`
         .newsletter-container {
           display: flex;
-          background: rgba(255, 255, 255, 0.08);
+          background: var(--glass-bg);
           border-radius: 10px;
           padding: 4px;
           border: 1px solid rgba(255, 255, 255, 0.15);

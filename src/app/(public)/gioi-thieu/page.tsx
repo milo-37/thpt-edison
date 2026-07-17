@@ -63,9 +63,9 @@ export default async function AboutPage() {
       
       <style>{`
         .vision-card {
-          background: rgba(255, 255, 255, 0.75);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
+          background: var(--glass-bg);
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
           padding: var(--space-8);
           border-radius: 24px;
           border: 1px solid rgba(99, 102, 241, 0.1);
@@ -107,9 +107,9 @@ export default async function AboutPage() {
           align-items: center;
           padding: var(--space-8);
           text-align: center;
-          background: rgba(255, 255, 255, 0.8);
-          backdrop-filter: blur(16px);
-          -webkit-backdrop-filter: blur(16px);
+          background: var(--glass-bg);
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(4px);
           border: 1px solid rgba(99, 102, 241, 0.1);
           border-radius: 24px;
           box-shadow: 0 10px 30px rgba(99, 102, 241, 0.03);
@@ -158,7 +158,7 @@ export default async function AboutPage() {
       <div className="gradient-divider" />
 
       {/* 1. Lịch sử hình thành */}
-      <section className="section" style={{ background: 'var(--color-white)', position: 'relative' }}>
+      <section className="section" style={{ background: 'transparent', position: 'relative' }}>
         <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'var(--space-12)', alignItems: 'center' }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             <span className="section-label">Hành trình phát triển</span>
@@ -196,7 +196,7 @@ Edison tự hào sở hữu tỷ lệ học sinh đỗ tốt nghiệp luôn đ�
       <div className="gradient-divider" />
 
       {/* 2. Tầm nhìn & Sứ mệnh */}
-      <section className="section" style={{ background: 'linear-gradient(180deg, var(--color-white) 0%, var(--color-gray-50) 100%)' }}>
+      <section className="section" style={{ background: 'transparent' }}>
         <div className="container">
           <div className="section-header">
             <span className="section-label">Định hướng tương lai</span>
@@ -244,7 +244,7 @@ Edison tự hào sở hữu tỷ lệ học sinh đỗ tốt nghiệp luôn đ�
       <div className="gradient-divider" />
 
       {/* 3. Ban giám hiệu */}
-      <section className="section" style={{ background: 'var(--color-white)' }}>
+      <section className="section" style={{ background: 'transparent' }}>
         <div className="container">
           <div className="section-header">
             <span className="section-label">Đội ngũ đầu tàu</span>
@@ -298,7 +298,7 @@ Edison tự hào sở hữu tỷ lệ học sinh đỗ tốt nghiệp luôn đ�
       {teachers.length > 0 && (
         <>
           <div className="gradient-divider" />
-          <section className="section" style={{ background: 'linear-gradient(180deg, var(--color-white) 0%, var(--color-gray-50) 100%)' }}>
+          <section className="section" style={{ background: 'transparent' }}>
             <div className="container">
               <div className="section-header">
                 <span className="section-label">Đội ngũ nhà giáo</span>

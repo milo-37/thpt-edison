@@ -112,7 +112,7 @@ export default function CalendarView({ events }: CalendarViewProps) {
           transform: scale(1.05);
         }
         .calendar-container {
-          background: rgba(255, 255, 255, 0.75);
+          background: var(--glass-bg);
           backdrop-filter: blur(20px);
           padding: var(--space-6);
           border-radius: 24px;
@@ -120,7 +120,7 @@ export default function CalendarView({ events }: CalendarViewProps) {
           box-shadow: 0 4px 20px rgba(99, 102, 241, 0.01);
         }
         .events-panel {
-          background: rgba(255, 255, 255, 0.75);
+          background: var(--glass-bg);
           backdrop-filter: blur(20px);
           padding: var(--space-6);
           border-radius: 24px;

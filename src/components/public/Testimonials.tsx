@@ -65,13 +65,13 @@ export default function Testimonials() {
   if (testimonials.length === 0) return null
 
   return (
-    <section className="section" style={{ overflow: 'hidden', position: 'relative', background: 'linear-gradient(180deg, var(--color-white) 0%, var(--color-gray-50) 100%)' }}>
+    <section className="section" style={{ overflow: 'hidden', position: 'relative', background: 'transparent' }}>
       <style>{`
         .testimonial-card {
           display: flex;
           flex-direction: column;
           align-items: center;
-          background: rgba(255, 255, 255, 0.8);
+          background: var(--glass-bg);
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
           border: 1px solid rgba(99, 102, 241, 0.1);
@@ -117,7 +117,7 @@ export default function Testimonials() {
           width: 42px;
           height: 42px;
           border-radius: 14px;
-          background: rgba(255, 255, 255, 0.85);
+          background: var(--glass-bg);
           backdrop-filter: blur(8px);
           border: 1px solid rgba(99, 102, 241, 0.12);
           display: flex;

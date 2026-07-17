@@ -113,8 +113,8 @@ export default async function HomePage() {
                 alignItems: 'center', 
                 gap: 'var(--space-4)', 
                 background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)',
-                backdropFilter: 'blur(16px)',
-                WebkitBackdropFilter: 'blur(16px)',
+                backdropFilter: 'blur(4px)',
+                WebkitBackdropFilter: 'blur(4px)',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
                 borderRadius: '20px',
                 padding: '16px 24px',
@@ -172,7 +172,7 @@ export default async function HomePage() {
                   align-items: center;
                   gap: 10px;
                   padding: 8px 18px;
-                  background: rgba(255, 255, 255, 0.1);
+                  background: var(--glass-bg);
                   border: 1px solid rgba(255, 255, 255, 0.2);
                   border-radius: 99px;
                   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -186,7 +186,7 @@ export default async function HomePage() {
                   border-color: rgba(255, 255, 255, 0.6);
                   transform: translateY(-3px);
                   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(236, 72, 153, 0.4);
-                  background: rgba(255, 255, 255, 0.2);
+                  background: var(--glass-bg);
                 }
 
                 .pinned-link-card:hover .chevron-icon {
@@ -234,8 +234,8 @@ export default async function HomePage() {
               <div className="pinned-badge bell-shake-hover">
                 {/* Pulsing indicator dot */}
                 <span style={{ position: 'relative', display: 'flex', height: '10px', width: '10px' }}>
-                  <span className="pulse-dot-ping" style={{ position: 'absolute', display: 'inline-flex', height: '100%', width: '100%', borderRadius: '50%', backgroundColor: '#ffffff', opacity: 0.9 }}></span>
-                  <span style={{ position: 'relative', display: 'inline-flex', borderRadius: '50%', height: '10px', width: '10px', backgroundColor: '#ffffff' }}></span>
+                  <span className="pulse-dot-ping" style={{ position: 'absolute', display: 'inline-flex', height: '100%', width: '100%', borderRadius: '50%', background: 'var(--glass-bg)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)', opacity: 0.9 }}></span>
+                  <span style={{ position: 'relative', display: 'inline-flex', borderRadius: '50%', height: '10px', width: '10px', background: 'var(--glass-bg)', backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)' }}></span>
                 </span>
                 <Bell size={16} className="bell-shake-auto" />
                 <span>THÔNG BÁO QUAN TRỌNG</span>
@@ -270,7 +270,7 @@ export default async function HomePage() {
       )}
 
       {/* 4. Section Giới thiệu nhanh (Sứ mệnh - Tầm nhìn) */}
-      <section className="section" style={{ background: 'var(--color-gray-50)' }}>
+      <section className="section" >
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'var(--space-12)', alignItems: 'center' }}>
             {/* Cột trái: Hình ảnh */}
@@ -369,7 +369,7 @@ export default async function HomePage() {
       </section>
 
       {/* 6. Section Sự kiện & Album ảnh - FUTURISTIC PREMIUM */}
-      <section className="section" style={{ background: 'var(--color-gray-50)', position: 'relative', overflow: 'hidden' }}>
+      <section className="section" style={{ position: 'relative', overflow: 'hidden' }}>
         <style>{`
           @keyframes s6MeshGradient {
             0%, 100% { background-position: 0% 50%; }
@@ -380,7 +380,9 @@ export default async function HomePage() {
             50% { transform: translateY(-20px) rotate(2deg); }
           }
           .section6-card-container {
-            background: var(--color-white);
+            background: var(--glass-bg);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
             border-radius: 28px;
             padding: 32px;
             position: relative;
@@ -548,11 +550,11 @@ export default async function HomePage() {
       </section>
 
       {/* 7. Section Tuyển sinh - FUTURISTIC PREMIUM (Synchronized Light Theme) */}
-      <section className="section" style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(180deg, var(--color-white) 0%, var(--color-gray-50) 100%)' }}>
+      <section className="section" style={{ position: 'relative', overflow: 'hidden', background: 'transparent' }}>
         <style>{`
           .admission-stat-card-custom {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(16px);
+            background: var(--glass-bg);
+            backdrop-filter: blur(4px);
             border: 1px solid rgba(99, 102, 241, 0.1);
             border-radius: 24px;
             padding: 32px 24px;
@@ -650,7 +652,7 @@ export default async function HomePage() {
             align-items: center;
             gap: 8px;
             padding: 16px 36px;
-            background: rgba(255, 255, 255, 0.8);
+            background: var(--glass-bg);
             color: var(--color-navy);
             font-size: 16px;
             font-weight: 700;

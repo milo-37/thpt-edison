@@ -71,14 +71,14 @@ export default async function DocumentsPage(props: PageProps) {
   const totalPages = Math.ceil(total / limit)
 
   return (
-    <div className="section section-alt" style={{ minHeight: '80vh', background: 'linear-gradient(180deg, #ffffff 0%, #f4f6ff 100%)', padding: 'var(--space-12) 0', position: 'relative' }}>
+    <div className="section section-alt" style={{ minHeight: '80vh', padding: 'var(--space-12) 0', position: 'relative' }}>
       <style>{`
         .search-input-field {
           width: 100%;
           padding: 8px 16px 8px 36px;
           border-radius: 12px;
           border: 1.5px solid rgba(99, 102, 241, 0.15);
-          background: rgba(255, 255, 255, 0.7);
+          background: var(--glass-bg);
           backdrop-filter: blur(8px);
           outline: none;
           font-size: 14px;
@@ -87,7 +87,7 @@ export default async function DocumentsPage(props: PageProps) {
         }
         .search-input-field:focus {
           border-color: #6366f1 !important;
-          background: #ffffff !important;
+          background: var(--glass-bg)!important;
           box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.12);
         }
       `}</style>

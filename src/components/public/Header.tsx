@@ -130,7 +130,7 @@ export default function Header({ settings }: HeaderProps) {
     <header className={`public-header glass-header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="header-container">
         <Link href="/" className="header-logo">
-          <div className="header-logo-icon" style={{ background: '#ffffff', overflow: 'hidden' }}>
+          <div className="header-logo-icon" style={{ background: 'var(--glass-bg)', overflow: 'hidden' }}>
             <img 
               src={logoUrl} 
               alt="Logo" 

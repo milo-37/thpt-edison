@@ -53,14 +53,14 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
           transition: all 0.25s ease;
         }
         .faq-item-card {
-          background: rgba(255, 255, 255, 0.7);
+          background: var(--glass-bg);
           border-radius: 20px;
           overflow: hidden;
           transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
           backdrop-filter: blur(20px);
         }
         .faq-item-card:hover {
-          background: rgba(255, 255, 255, 0.95);
+          background: var(--glass-bg);
           box-shadow: 0 12px 30px rgba(99, 102, 241, 0.05);
         }
       `}</style>
@@ -100,7 +100,7 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
             outline: 'none',
             fontSize: 'var(--font-size-sm)',
             boxShadow: '0 4px 20px rgba(99, 102, 241, 0.02)',
-            background: 'rgba(255, 255, 255, 0.75)',
+            background: 'var(--glass-bg)',
             color: 'var(--color-navy)',
             backdropFilter: 'blur(10px)',
             width: '100%',
@@ -163,7 +163,7 @@ export default function FaqsList({ initialFaqs }: FaqsListProps) {
 
       {/* Accordion List */}
       {filtered.length === 0 ? (
-        <p role="status" style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)', background: 'rgba(255, 255, 255, 0.8)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.12)' }}>
+        <p role="status" style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)', background: 'var(--glass-bg)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.12)' }}>
           <MessageSquare size={48} aria-hidden="true" style={{ margin: '0 auto var(--space-4) auto', display: 'block', opacity: 0.5, color: '#6366f1' }} />
           Không tìm thấy câu hỏi nào phù hợp với từ khóa của bạn.
         </p>

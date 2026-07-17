@@ -44,7 +44,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
       "img-src 'self' data: blob: https://images.unsplash.com https://*.unsplash.com",
       "font-src 'self' https://fonts.gstatic.com",
-      "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://drive.google.com https://docs.google.com",
+      "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://drive.google.com https://docs.google.com https://www.google.com",
       "connect-src 'self' https://generativelanguage.googleapis.com",
       "media-src 'self'",
       "object-src 'none'",

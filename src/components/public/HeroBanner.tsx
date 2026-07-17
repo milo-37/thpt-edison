@@ -618,7 +618,7 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
           padding: 14px 28px;
           min-width: 200px;
           border-radius: 16px;
-          background: rgba(255, 255, 255, 0.7);
+          background: var(--glass-bg);
           color: #334155;
           font-weight: 600;
           font-size: 1rem;
@@ -631,7 +631,7 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
 
         .hero-futuristic__btn-secondary:hover {
           transform: translateY(-3px);
-          background: rgba(255, 255, 255, 0.9);
+          background: var(--glass-bg);
           border-color: rgba(99, 102, 241, 0.35);
           color: #1e293b;
           box-shadow: 0 8px 25px rgba(99, 102, 241, 0.12);
@@ -641,12 +641,12 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
         }
 
         [data-theme="dark"] .hero-futuristic__btn-secondary {
-          background: rgba(255, 255, 255, 0.04);
+          background: var(--glass-bg);
           color: #cbd5e1;
           border-color: rgba(148, 163, 184, 0.2);
         }
         [data-theme="dark"] .hero-futuristic__btn-secondary:hover {
-          background: rgba(255, 255, 255, 0.08);
+          background: var(--glass-bg);
           border-color: rgba(148, 163, 184, 0.4);
           color: #f1f5f9;
           box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
@@ -816,9 +816,9 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
           gap: 8px;
           padding: 10px 16px;
           border-radius: 14px;
-          background: rgba(255, 255, 255, 0.85);
+          background: var(--glass-bg);
           border: 1px solid rgba(99, 102, 241, 0.15);
-          backdrop-filter: blur(16px);
+          backdrop-filter: blur(4px);
           color: #1e293b;
           font-size: 0.8rem;
           font-weight: 600;
@@ -900,7 +900,7 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
           width: 42px;
           height: 42px;
           border-radius: 12px;
-          background: rgba(255, 255, 255, 0.7);
+          background: var(--glass-bg);
           border: 1px solid rgba(99, 102, 241, 0.12);
           display: flex;
           align-items: center;
@@ -918,7 +918,7 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
         }
 
         [data-theme="dark"] .hero-futuristic__control-btn {
-          background: rgba(255, 255, 255, 0.05);
+          background: var(--glass-bg);
           border-color: rgba(148, 163, 184, 0.15);
           color: #94a3b8;
         }

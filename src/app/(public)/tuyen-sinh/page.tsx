@@ -104,7 +104,7 @@ export default async function AdmissionPage() {
       <div className="gradient-divider" />
 
       {/* Nội dung quy trình & form đăng ký */}
-      <section className="section" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f5f8ff 100%)' }}>
+      <section className="section" >
         <div className="container">
           <div className="admission-grid">
             
@@ -112,7 +112,7 @@ export default async function AdmissionPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-8)' }}>
               
               {/* Khối 1: Tổng quan chỉ tiêu */}
-              <div style={{ background: 'rgba(255, 255, 255, 0.75)', backdropFilter: 'blur(12px)', padding: 'var(--space-6)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.15)', boxShadow: '0 10px 30px rgba(99, 102, 241, 0.03)' }}>
+              <div style={{ background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', padding: 'var(--space-6)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.15)', boxShadow: '0 10px 30px rgba(99, 102, 241, 0.03)' }}>
                 <h2 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-4)' }}>
                   <Award style={{ color: '#6366f1' }} />
                   Chỉ tiêu & đối tượng tuyển sinh
@@ -124,7 +124,7 @@ export default async function AdmissionPage() {
               </div>
 
               {/* Khối 2: Phương thức xét tuyển */}
-              <div style={{ background: 'rgba(255, 255, 255, 0.75)', backdropFilter: 'blur(12px)', padding: 'var(--space-6)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.15)', boxShadow: '0 10px 30px rgba(99, 102, 241, 0.03)' }}>
+              <div style={{ background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', padding: 'var(--space-6)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.15)', boxShadow: '0 10px 30px rgba(99, 102, 241, 0.03)' }}>
                 <h2 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-4)' }}>
                   <FileText style={{ color: '#6366f1' }} />
                   Phương thức tuyển sinh
@@ -135,7 +135,7 @@ export default async function AdmissionPage() {
               </div>
 
               {/* Khối 3: Lịch trình nộp hồ sơ */}
-              <div style={{ background: 'rgba(255, 255, 255, 0.75)', backdropFilter: 'blur(12px)', padding: 'var(--space-6)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.15)', boxShadow: '0 10px 30px rgba(99, 102, 241, 0.03)' }}>
+              <div style={{ background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', padding: 'var(--space-6)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.15)', boxShadow: '0 10px 30px rgba(99, 102, 241, 0.03)' }}>
                 <h2 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 800, color: 'var(--color-navy)', display: 'flex', alignItems: 'center', gap: 'var(--space-2)', marginBottom: 'var(--space-4)' }}>
                   <Calendar style={{ color: '#6366f1' }} />
                   Mốc lịch trình quan trọng

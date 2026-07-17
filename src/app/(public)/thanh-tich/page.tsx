@@ -32,7 +32,7 @@ export default async function AchievementsPage() {
       <div className="gradient-divider" />
 
       {/* Interactive Achievements Section */}
-      <section className="section" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f5f8ff 100%)' }}>
+      <section className="section" >
         <div className="container">
           <AchievementsList initialAchievements={achievements} />
         </div>

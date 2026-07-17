@@ -65,7 +65,7 @@ export default async function PostDetailPage(props: Props) {
   const defaultThumbnail = '/uploads/thumbnails/news-default.jpg'
 
   return (
-    <div className="section section-alt" style={{ minHeight: '80vh', padding: 'var(--space-12) 0', background: 'linear-gradient(180deg, #ffffff 0%, #f4f6ff 100%)', position: 'relative' }}>
+    <div className="section section-alt" style={{ minHeight: '80vh', padding: 'var(--space-12) 0', position: 'relative' }}>
       <style>{`
         .back-link-btn {
           display: inline-flex;
@@ -85,7 +85,7 @@ export default async function PostDetailPage(props: Props) {
           align-items: center;
           justify-content: space-between;
           padding: 12px 16px;
-          background: rgba(255, 255, 255, 0.5);
+          background: var(--glass-bg);
           border-radius: 12px;
           border: 1px solid rgba(99, 102, 241, 0.12);
           font-size: 14px;
@@ -97,7 +97,7 @@ export default async function PostDetailPage(props: Props) {
           border-color: #6366f1;
         }
         .related-post-card {
-          background: rgba(255, 255, 255, 0.85);
+          background: var(--glass-bg);
           backdrop-filter: blur(10px);
           padding: var(--space-6);
           border-radius: 16px;
@@ -127,7 +127,7 @@ export default async function PostDetailPage(props: Props) {
         </Link>
 
         {/* Nội dung bài viết */}
-        <article style={{ background: 'rgba(255, 255, 255, 0.85)', backdropFilter: 'blur(12px)', padding: 'var(--space-8) var(--space-10)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.15)', boxShadow: '0 20px 45px rgba(99, 102, 241, 0.05)' }}>
+        <article style={{ background: 'var(--glass-bg)', backdropFilter: 'blur(12px)', padding: 'var(--space-8) var(--space-10)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.15)', boxShadow: '0 20px 45px rgba(99, 102, 241, 0.05)' }}>
           
           {/* Metadata */}
           {post.category && (

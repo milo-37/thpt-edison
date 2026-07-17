@@ -58,7 +58,7 @@ function ActivityTabsContent({ albums, events }: ActivityTabsProps) {
           gap: 8px;
         }
         .album-item-card {
-          background: rgba(255, 255, 255, 0.75);
+          background: var(--glass-bg);
           backdrop-filter: blur(20px);
           border-radius: 24px;
           border: 1px solid rgba(99, 102, 241, 0.12);
@@ -72,7 +72,7 @@ function ActivityTabsContent({ albums, events }: ActivityTabsProps) {
           transform: translateY(-4px);
           border-color: rgba(99, 102, 241, 0.25);
           box-shadow: 0 12px 30px rgba(99, 102, 241, 0.06);
-          background: #ffffff;
+          background: var(--glass-bg);
         }
         .view-album-btn {
           margin-top: auto;
@@ -138,7 +138,7 @@ function ActivityTabsContent({ albums, events }: ActivityTabsProps) {
         {activeTab === 'gallery' ? (
           <div>
             {albums.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)', background: 'rgba(255, 255, 255, 0.7)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.12)' }}>
+              <div style={{ textAlign: 'center', padding: 'var(--space-12)', color: 'var(--color-gray-400)', background: 'var(--glass-bg)', borderRadius: '24px', border: '1px solid rgba(99, 102, 241, 0.12)' }}>
                 <ImageIcon size={32} style={{ margin: '0 auto var(--space-2) auto', opacity: 0.5, color: '#6366f1' }} />
                 <p>Kho album ảnh hiện đang trống.</p>
               </div>
