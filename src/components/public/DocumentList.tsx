@@ -97,7 +97,7 @@ export default function DocumentList({ initialDocuments }: DocumentListProps) {
           border-radius: 10px;
           padding: 10px 20px;
           font-weight: 700;
-          font-size: 13px;
+          font-size: var(--font-size-sm);
           color: white;
           background: linear-gradient(135deg, #6366f1, #a855f7);
           border: none;

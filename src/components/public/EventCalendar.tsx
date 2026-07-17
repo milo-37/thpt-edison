@@ -53,7 +53,7 @@ export default function EventCalendar({ events }: EventListProps) {
           <Calendar size={24} style={{ color: '#6366f1', opacity: 0.6 }} />
         </div>
         <p style={{ margin: 0, fontWeight: 700, fontSize: 'var(--font-size-sm)', color: 'var(--color-navy)' }}>Hiện không có sự kiện nào sắp diễn ra.</p>
-        <p style={{ margin: '4px 0 0 0', fontSize: '13px', color: 'var(--color-gray-500)' }}>Các sự kiện mới sẽ được cập nhật tại đây.</p>
+        <p style={{ margin: '4px 0 0 0', fontSize: 'var(--font-size-sm)', color: 'var(--color-gray-500)' }}>Các sự kiện mới sẽ được cập nhật tại đây.</p>
       </div>
     )
   }
@@ -162,7 +162,7 @@ export default function EventCalendar({ events }: EventListProps) {
                 {/* Description */}
                 {event.description && (
                   <p style={{
-                    fontSize: '13px',
+                    fontSize: 'var(--font-size-sm)',
                     color: 'var(--color-gray-500)',
                     margin: 0,
                     display: '-webkit-box',
@@ -177,12 +177,12 @@ export default function EventCalendar({ events }: EventListProps) {
 
                 {/* Meta info row */}
                 <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginTop: '2px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '12px', color: 'var(--color-gray-400)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: 'var(--font-size-xs)', color: 'var(--color-gray-400)' }}>
                     <Clock size={12} style={{ color: '#6366f1', opacity: 0.7 }} />
                     <span>{formatTime(event.startDate)}</span>
                   </div>
                   {event.location && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: '12px', color: 'var(--color-gray-400)' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '5px', fontSize: 'var(--font-size-xs)', color: 'var(--color-gray-400)' }}>
                       <MapPin size={12} style={{ color: '#6366f1', opacity: 0.7 }} />
                       <span>{event.location}</span>
                     </div>

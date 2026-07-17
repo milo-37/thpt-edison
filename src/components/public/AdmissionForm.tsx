@@ -108,7 +108,7 @@ export default function AdmissionForm() {
           outline: none;
           background: var(--glass-bg);
           color: var(--color-navy);
-          font-size: 14px;
+          font-size: var(--font-size-sm);
           transition: all 0.25s ease;
         }
         .admission-input:focus {
@@ -126,7 +126,7 @@ export default function AdmissionForm() {
           border-radius: 12px;
           padding: 12px 24px;
           font-weight: 700;
-          font-size: 14px;
+          font-size: var(--font-size-sm);
           color: white;
           background: linear-gradient(135deg, #6366f1, #a855f7);
           border: none;

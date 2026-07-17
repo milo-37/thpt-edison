@@ -164,7 +164,7 @@ export default async function HomePage() {
                 }
 
                 .pinned-link-card {
-                  font-size: 14px;
+                  font-size: var(--font-size-sm);
                   color: #e0e7ff;
                   font-weight: 600;
                   text-decoration: none;
@@ -207,7 +207,7 @@ export default async function HomePage() {
                   color: white;
                   padding: 8px 18px;
                   border-radius: 99px;
-                  font-size: 13px;
+                  font-size: var(--font-size-sm);
                   font-weight: 800;
                   letter-spacing: 0.5px;
                   box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
@@ -451,7 +451,7 @@ export default async function HomePage() {
             width: 72px;
           }
           .section6-subtitle {
-            font-size: 14px;
+            font-size: var(--font-size-sm);
             color: var(--color-gray-400);
             margin: 0 0 var(--space-6) 0;
             line-height: 1.6;
@@ -461,7 +461,7 @@ export default async function HomePage() {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            font-size: 14px;
+            font-size: var(--font-size-sm);
             font-weight: 600;
             color: #4f46e5;
             text-decoration: none;
@@ -617,14 +617,14 @@ export default async function HomePage() {
           }
           
           .feature-title {
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 800;
             color: var(--color-navy);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             line-height: 1.3;
           }
           .feature-desc {
-            font-size: 15px;
+            font-size: 17px;
             color: var(--color-gray-600);
             line-height: 1.6;
           }
@@ -633,10 +633,10 @@ export default async function HomePage() {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 16px 36px;
+            padding: 18px 40px;
             background: linear-gradient(135deg, #4f46e5, #7c3aed);
             color: white;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
             border-radius: 999px;
             text-decoration: none;
@@ -681,7 +681,7 @@ export default async function HomePage() {
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           {/* Top Section - Header */}
           <div style={{ textAlign: 'center', marginBottom: 'var(--space-16)' }}>
-            <span className="section-label" style={{ fontSize: '14px', padding: '6px 16px' }}>Đang mở đăng ký tuyển sinh 2026 – 2027</span>
+            <span className="section-label" style={{ fontSize: 'var(--font-size-sm)', padding: '6px 16px' }}>Đang mở đăng ký tuyển sinh 2026 – 2027</span>
             <h2 className="section-title section-title--underlined" style={{ display: 'block', margin: 'var(--space-4) auto', maxWidth: '750px', fontSize: 'clamp(32px, 4vw, 48px)' }}>
               Khởi đầu hành trình tại Edison School
             </h2>
@@ -690,8 +690,19 @@ export default async function HomePage() {
             </p>
           </div>
 
-          {/* Stats Row */}
-          <div className="admission-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '24px', marginBottom: 'var(--space-16)', maxWidth: '1000px', margin: '0 auto var(--space-16)' }}>
+          {/* Stats Row — flex+wrap: items always center regardless of count */}
+          <div
+            className="admission-stats-grid"
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              gap: '24px',
+              marginBottom: 'var(--space-16)',
+              maxWidth: '1000px',
+              margin: '0 auto var(--space-16)',
+            }}
+          >
             {admissionStats.map((stat: any, index: number) => {
               let IconComp: any = null;
               if (stat.icon === 'GraduationCap') IconComp = GraduationCap;
@@ -710,7 +721,11 @@ export default async function HomePage() {
               const textColors = ['#f59e0b', '#3b82f6', '#10b981', '#a855f7']
 
               return (
-                <div key={index} className="admission-stat-card-custom">
+                <div
+                  key={index}
+                  className="admission-stat-card-custom"
+                  style={{ flex: '1 1 220px', maxWidth: '280px' }}
+                >
                   <div className="admission-stat-icon" style={{ background: bgColors[index % 4], color: textColors[index % 4] }}>
                     {IconComp && <IconComp size={28} />}
                   </div>
@@ -729,7 +744,7 @@ export default async function HomePage() {
             {/* Left: Features */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-5)' }}>
               <div style={{ marginBottom: 'var(--space-2)' }}>
-                <h3 style={{ fontSize: '32px', fontWeight: 800, color: 'var(--color-navy)', margin: '0 0 var(--space-3) 0', fontFamily: 'var(--font-title)' }}>
+                <h3 style={{ fontSize: '38px', fontWeight: 800, color: 'var(--color-navy)', margin: '0 0 var(--space-3) 0', fontFamily: 'var(--font-title)' }}>
                   Tại sao chọn Edison?
                 </h3>
               </div>

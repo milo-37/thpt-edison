@@ -88,7 +88,7 @@ export default async function PostDetailPage(props: Props) {
           background: var(--glass-bg);
           border-radius: 12px;
           border: 1px solid rgba(99, 102, 241, 0.12);
-          font-size: 14px;
+          font-size: var(--font-size-sm);
           color: var(--color-gray-700);
           transition: all 0.2s ease;
         }
@@ -145,7 +145,7 @@ export default async function PostDetailPage(props: Props) {
               display: 'flex',
               gap: 'var(--space-6)',
               flexWrap: 'wrap',
-              fontSize: '13px',
+              fontSize: 'var(--font-size-sm)',
               color: 'var(--color-gray-500)',
               paddingBottom: 'var(--space-6)',
               borderBottom: '1px solid rgba(99, 102, 241, 0.12)',

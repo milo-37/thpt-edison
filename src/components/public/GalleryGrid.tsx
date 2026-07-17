@@ -100,7 +100,7 @@ export default function GalleryGrid({ albums, limit }: GalleryGridProps) {
             {/* Description - only on featured */}
             {index === 0 && album.description && (
               <p style={{
-                fontSize: '13px',
+                fontSize: 'var(--font-size-sm)',
                 opacity: 0.9,
                 margin: '4px 0 0 0',
                 display: '-webkit-box',

@@ -225,12 +225,12 @@ Edison tự hào sở hữu tỷ lệ học sinh đỗ tốt nghiệp luôn đ�
                       transition: 'all 0.35s ease',
                     }}
                   >
-                    <Icon size={24} />
+                    <Icon size={32} />
                   </div>
-                  <h3 style={{ fontSize: 'var(--font-size-lg)', fontWeight: 700, color: 'var(--color-navy)', margin: 0 }}>
+                  <h3 style={{ fontSize: 'var(--font-size-xl)', fontWeight: 700, color: 'var(--color-navy)', margin: 0 }}>
                     {item.title}
                   </h3>
-                  <p style={{ color: 'var(--color-gray-600)', fontSize: '14px', lineHeight: 1.6, margin: 0 }}>
+                  <p style={{ color: 'var(--color-gray-600)', fontSize: 'var(--font-size-base)', lineHeight: 1.7, margin: 0 }}>
                     {item.desc}
                   </p>
                 </div>
@@ -285,7 +285,7 @@ Edison tự hào sở hữu tỷ lệ học sinh đỗ tốt nghiệp luôn đ�
                 <span style={{ fontSize: '11px', fontWeight: 700, color: '#7c3aed', textTransform: 'uppercase', marginBottom: 'var(--space-3)', letterSpacing: '0.5px' }}>
                   {leader.role}
                 </span>
-                <p style={{ fontSize: '14px', color: 'var(--color-gray-600)', margin: 0, lineHeight: 1.5 }}>
+                <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-gray-600)', margin: 0, lineHeight: 1.5 }}>
                   {leader.description}
                 </p>
               </div>
@@ -347,7 +347,7 @@ Edison tự hào sở hữu tỷ lệ học sinh đỗ tốt nghiệp luôn đ�
                       {teacher.subject} {teacher.degree ? `• ${teacher.degree}` : ''}
                     </span>
                     {teacher.description && (
-                      <p style={{ fontSize: '13px', color: 'var(--color-gray-500)', margin: 0, lineHeight: 1.4 }}>
+                      <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-gray-500)', margin: 0, lineHeight: 1.4 }}>
                         {teacher.description}
                       </p>
                     )}

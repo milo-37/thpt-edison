@@ -89,7 +89,7 @@ export default function ContactForm() {
           outline: none;
           background: var(--glass-bg);
           color: var(--color-navy);
-          font-size: 14px;
+          font-size: var(--font-size-sm);
           transition: all 0.25s ease;
         }
         .futuristic-input:focus {
@@ -107,7 +107,7 @@ export default function ContactForm() {
           border-radius: 12px;
           padding: 14px 28px;
           font-weight: 700;
-          font-size: 15px;
+          font-size: var(--font-size-base);
           color: white;
           background: linear-gradient(135deg, #6366f1, #a855f7);
           border: none;

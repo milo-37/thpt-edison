@@ -75,7 +75,7 @@ export default async function NewsPage(props: PageProps) {
           background: var(--glass-bg);
           backdrop-filter: blur(8px);
           outline: none;
-          font-size: 14px;
+          font-size: var(--font-size-sm);
           color: var(--color-navy);
           transition: all 0.3s ease;
         }
@@ -116,7 +116,7 @@ export default async function NewsPage(props: PageProps) {
               style={{
                 padding: '8px 18px',
                 borderRadius: '999px',
-                fontSize: '13px',
+                fontSize: 'var(--font-size-sm)',
                 fontWeight: 700,
                 background: !categorySlug ? 'linear-gradient(135deg, #6366f1, #a855f7)' : 'rgba(255, 255, 255, 0.7)',
                 color: !categorySlug ? '#ffffff' : '#6366f1',
@@ -136,7 +136,7 @@ export default async function NewsPage(props: PageProps) {
                   style={{
                     padding: '8px 18px',
                     borderRadius: '999px',
-                    fontSize: '13px',
+                    fontSize: 'var(--font-size-sm)',
                     fontWeight: 700,
                     background: isSelected ? 'linear-gradient(135deg, #6366f1, #a855f7)' : 'rgba(255, 255, 255, 0.7)',
                     color: isSelected ? '#ffffff' : '#6366f1',

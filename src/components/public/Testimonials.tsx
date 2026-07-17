@@ -207,7 +207,7 @@ export default function Testimonials() {
                     </span>
                     <div style={{ textAlign: 'left' }}>
                       <strong style={{ display: 'block', fontSize: 'var(--font-size-sm)', fontWeight: 700, color: 'var(--color-navy)' }}>{t.name}</strong>
-                      <span style={{ fontSize: '12px', color: 'var(--color-gray-500)', fontWeight: 500 }}>{t.role}</span>
+                      <span style={{ fontSize: 'var(--font-size-xs)', color: 'var(--color-gray-500)', fontWeight: 500 }}>{t.role}</span>
                     </div>
                   </figcaption>
                 </figure>

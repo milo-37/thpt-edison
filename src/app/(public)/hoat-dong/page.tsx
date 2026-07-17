@@ -137,7 +137,7 @@ export default async function ActivityPage(props: PageProps) {
                   </div>
                   {photo.caption && (
                     <div style={{ padding: 'var(--space-3)', background: 'var(--glass-bg)', borderTop: '1px solid rgba(99, 102, 241, 0.08)' }}>
-                      <p style={{ fontSize: '13px', color: 'var(--color-gray-600)', margin: 0, lineHeight: 1.4 }}>
+                      <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-gray-600)', margin: 0, lineHeight: 1.4 }}>
                         {photo.caption}
                       </p>
                     </div>

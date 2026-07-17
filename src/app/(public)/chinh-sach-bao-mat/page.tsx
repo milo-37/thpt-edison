@@ -175,7 +175,7 @@ export default function PrivacyPolicyPage() {
           display: flex;
           align-items: flex-start;
           gap: 10px;
-          font-size: 14px;
+          font-size: var(--font-size-sm);
           line-height: 1.7;
           color: var(--color-gray-600);
         }
@@ -214,7 +214,7 @@ export default function PrivacyPolicyPage() {
           backdrop-filter: blur(12px);
           border: 1px solid rgba(99, 102, 241, 0.1);
           border-radius: 16px;
-          font-size: 13px;
+          font-size: var(--font-size-sm);
           font-weight: 600;
           color: var(--color-gray-700);
           line-height: 1.4;

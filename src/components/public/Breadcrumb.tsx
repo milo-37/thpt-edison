@@ -42,7 +42,7 @@ export default function Breadcrumb({ customTitle }: BreadcrumbProps) {
         display: 'flex',
         alignItems: 'center',
         gap: '8px',
-        fontSize: '13px',
+        fontSize: 'var(--font-size-sm)',
         color: 'var(--color-gray-500)',
         flexWrap: 'wrap',
       }}
@@ -53,7 +53,7 @@ export default function Breadcrumb({ customTitle }: BreadcrumbProps) {
           display: 'inline-flex', 
           alignItems: 'center', 
           gap: '8px', 
-          fontSize: '13px', 
+          fontSize: 'var(--font-size-sm)', 
           color: 'var(--color-gray-500)',
           flexWrap: 'wrap',
           background: 'var(--glass-bg)',
