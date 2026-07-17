@@ -122,7 +122,6 @@ export default function Header({ settings }: HeaderProps) {
     { label: 'Tin tức', href: '/tin-tuc' },
     { label: 'Hoạt động', href: '/hoat-dong?tab=calendar' },
     { label: 'Thư viện', href: '/tai-lieu' },
-    { label: 'Tuyển sinh', href: '/tuyen-sinh' },
     { label: 'Liên hệ', href: '/lien-he' },
   ]
 
@@ -150,11 +149,11 @@ export default function Header({ settings }: HeaderProps) {
         </Link>
 
 
-        {/* Desktop Menu */}
+
+        {/* Desktop Navigation - menu links only */}
         <nav className="header-nav" aria-label="Điều hướng chính">
           {menuItems.map((item) => {
             const baseHref = item.href.split('?')[0]
-            const queryTab = item.href.includes('?tab=') ? item.href.split('?tab=')[1] : null
             
             let isActive = false
             if (item.href === '/') {
@@ -175,30 +174,31 @@ export default function Header({ settings }: HeaderProps) {
               </Link>
             )
           })}
+        </nav>
 
-          <div role="group" aria-label="Công cụ trang" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '12px', paddingLeft: '12px', borderLeft: '1px solid rgba(148, 163, 184, 0.2)' }}>
-            {/* Search Icon Trigger */}
-            <button
-              onClick={() => setIsSearchOpen(true)}
-              style={{ background: 'transparent', border: 'none', color: 'inherit', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: '8px', borderRadius: '50%' }}
-              title="Tìm kiếm toàn trang"
-              aria-label="Mở hộp tìm kiếm"
-              onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(148, 163, 184, 0.15)' }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent' }}
-            >
-              <Search size={20} aria-hidden="true" />
-            </button>
-            
-            {/* Theme Toggle */}
-            <ThemeToggle />
-          </div>
+        {/* Desktop Action Buttons */}
+        <div className="header-actions" role="group" aria-label="Công cụ và hành động">
+          {/* Search */}
+          <button
+            onClick={() => setIsSearchOpen(true)}
+            style={{ background: 'transparent', border: 'none', color: 'inherit', cursor: 'pointer', display: 'flex', alignItems: 'center', padding: '8px', borderRadius: '50%' }}
+            title="Tìm kiếm toàn trang"
+            aria-label="Mở hộp tìm kiếm"
+            onMouseEnter={(e) => { e.currentTarget.style.background = 'rgba(148, 163, 184, 0.15)' }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent' }}
+          >
+            <Search size={20} aria-hidden="true" />
+          </button>
 
+          {/* Theme Toggle */}
+          <ThemeToggle />
+
+          {/* CMS Portal / User */}
           {user ? (
             <Link
               href="/admin/dashboard"
               className="btn btn-outline"
               style={{
-                marginLeft: '8px',
                 border: '1.5px solid #4f46e5',
                 color: '#4f46e5',
                 padding: '8px 16px',
@@ -235,15 +235,16 @@ export default function Header({ settings }: HeaderProps) {
               <span style={{ fontSize: 'var(--font-size-xs)', fontWeight: 600 }}>{user.name.split(' ').pop()}</span>
             </Link>
           ) : (
-            <Link href="/admin/login" className="btn btn-outline" style={{ marginLeft: '8px', border: '1.5px solid #4f46e5', color: '#4f46e5', padding: '8px 16px', borderRadius: '12px', background: 'rgba(99, 102, 241, 0.04)' }}>
+            <Link href="/admin/login" className="btn btn-outline" style={{ border: '1.5px solid #4f46e5', color: '#4f46e5', padding: '8px 16px', borderRadius: '12px', background: 'rgba(99, 102, 241, 0.04)', whiteSpace: 'nowrap' }}>
               CMS Portal
             </Link>
           )}
 
-          <Link href="/tuyen-sinh" className="btn btn-gold" style={{ marginLeft: '8px', padding: '8px 16px', borderRadius: '12px', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', border: 'none', color: '#ffffff', boxShadow: '0 4px 15px rgba(99, 102, 241, 0.25)' }}>
-            Tuyển Sinh Ngay
+          {/* Enroll CTA */}
+          <Link href="/tuyen-sinh" className="btn btn-gold" style={{ padding: '8px 16px', borderRadius: '12px', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', border: 'none', color: '#ffffff', boxShadow: '0 4px 15px rgba(99, 102, 241, 0.25)', whiteSpace: 'nowrap' }}>
+            Tuyển Sinh
           </Link>
-        </nav>
+        </div>
 
         {/* Mobile Menu Button */}
         <button
@@ -256,6 +257,7 @@ export default function Header({ settings }: HeaderProps) {
           {isMobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
         </button>
       </div>
+
 
       {/* Mobile Menu Dropdown */}
       <nav id="mobile-nav" className={`mobile-nav ${isMobileMenuOpen ? 'open' : ''}`} aria-label="Điều hướng di động" aria-hidden={!isMobileMenuOpen}>
