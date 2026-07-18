@@ -45,7 +45,7 @@ const securityHeaders = [
       "img-src 'self' data: blob: https://images.unsplash.com https://*.unsplash.com",
       "font-src 'self' https://fonts.gstatic.com",
       "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://drive.google.com https://docs.google.com https://www.google.com",
-      "connect-src 'self' https://generativelanguage.googleapis.com",
+      "connect-src 'self' https://generativelanguage.googleapis.com wss: ws:",
       "media-src 'self'",
       "object-src 'none'",
       "base-uri 'self'",
@@ -56,6 +56,16 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Cho phép ngrok và các tunnel khác truy cập dev server
+  // Next.js 16 mặc định chặn cross-origin requests trong dev mode
+  allowedDevOrigins: [
+    '*.ngrok-free.dev',
+    '*.ngrok.io',
+    '*.ngrok.app',
+    '*.loca.lt',
+    '*.serveo.net',
+  ],
+
   // Ẩn header X-Powered-By để không lộ công nghệ
   poweredByHeader: false,
 
