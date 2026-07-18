@@ -1197,20 +1197,6 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
             {/* Orbit ring */}
             <div className="hero-futuristic__orbit" />
 
-            {/* Floating tech badges */}
-            <div className="hero-futuristic__float-badge hero-futuristic__float-badge--1">
-              <div className="hero-futuristic__float-badge-icon hero-futuristic__float-badge-icon--blue">
-                <Zap size={14} />
-              </div>
-              <span>Chuẩn Quốc Tế</span>
-            </div>
-            <div className="hero-futuristic__float-badge hero-futuristic__float-badge--2">
-              <div className="hero-futuristic__float-badge-icon hero-futuristic__float-badge-icon--gold">
-                <Sparkles size={14} />
-              </div>
-              <span>Toàn Diện</span>
-            </div>
-
             {/* Image Frame */}
             <div
               key={`img-frame-${currentSlide.id}`}
