@@ -100,7 +100,7 @@ export default function QuickStats({ stats = [] }: { stats?: any[] }) {
   }
 
   return (
-    <section className="section" aria-label="Thống kê nhanh về trường" style={{ position: 'relative', zIndex: 5, marginTop: '-60px', padding: '0 0 var(--space-12) 0' }}>
+    <section className="section" aria-label="Thống kê nhanh về trường" style={{ position: 'relative', zIndex: 5, marginTop: '-60px', padding: '0 0 var(--space-4) 0' }}>
       <div className="container">
         <ul style={{ display: 'flex', gap: 'var(--space-6)', flexWrap: 'wrap', justifyContent: 'center', listStyle: 'none', padding: 0, margin: 0 }}>
           {stats.map((stat, idx) => (

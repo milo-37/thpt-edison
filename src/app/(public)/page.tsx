@@ -269,8 +269,11 @@ export default async function HomePage() {
         </section>
       )}
 
+      {/* Divider */}
+      <div className="section-divider" aria-hidden="true" role="presentation" />
+
       {/* 4. Section Giới thiệu nhanh (Sứ mệnh - Tầm nhìn) */}
-      <section className="section" >
+      <section className="section section-alt" >
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'var(--space-12)', alignItems: 'center' }}>
             {/* Cột trái: Hình ảnh */}
@@ -346,6 +349,9 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="section-divider" aria-hidden="true" role="presentation" />
+
       {/* 5. Section Tin tức mới nhất */}
       <section className="section">
         <div className="container">
@@ -368,8 +374,11 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="section-divider" aria-hidden="true" role="presentation" />
+
       {/* 6. Section Sự kiện & Album ảnh - FUTURISTIC PREMIUM */}
-      <section className="section" style={{ position: 'relative', overflow: 'hidden' }}>
+      <section className="section section-alt" style={{ position: 'relative', overflow: 'hidden' }}>
         <style>{`
           @keyframes s6MeshGradient {
             0%, 100% { background-position: 0% 50%; }
@@ -548,6 +557,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Divider */}
+      <div className="section-divider" aria-hidden="true" role="presentation" />
 
       {/* 7. Section Tuyển sinh - FUTURISTIC PREMIUM (Synchronized Light Theme) */}
       <section className="section" style={{ position: 'relative', overflow: 'hidden', background: 'transparent' }}>
@@ -818,6 +830,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Divider */}
+      <div className="section-divider" aria-hidden="true" role="presentation" />
 
       {/* 8. Section Testimonials */}
       <Testimonials />

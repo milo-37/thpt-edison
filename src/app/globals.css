@@ -924,13 +924,61 @@ ol {
 /* ==================== SECTIONS ==================== */
 
 .section {
-  padding: var(--space-20) 0;
+  padding: var(--space-8) 0;
   position: relative;
 }
 
+/* ---- Section Divider: gradient line between sections ---- */
+.section + .section,
+.section + section {
+  /* No extra margin — divider is purely visual */
+}
+
+.section-divider {
+  position: relative;
+  height: 1px;
+  margin: 0;
+  overflow: visible;
+}
+
+.section-divider::before {
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(99, 102, 241, 0.15) 15%,
+    rgba(139, 92, 246, 0.25) 50%,
+    rgba(99, 102, 241, 0.15) 85%,
+    transparent 100%
+  );
+}
+
+.section-divider::after {
+  content: '';
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  top: -1px;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(99, 102, 241, 0.06) 30%,
+    rgba(139, 92, 246, 0.1) 50%,
+    rgba(99, 102, 241, 0.06) 70%,
+    transparent 100%
+  );
+  filter: blur(2px);
+}
+
+/* ---- Section Alt: frosted tinted background ---- */
 .section-alt {
   position: relative;
-  background: transparent;
   z-index: 1;
 }
 
@@ -938,11 +986,14 @@ ol {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(248, 250, 252, 0.25);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+  background: linear-gradient(
+    180deg,
+    rgba(99, 102, 241, 0.025) 0%,
+    rgba(139, 92, 246, 0.018) 40%,
+    rgba(99, 102, 241, 0.025) 100%
+  );
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
   z-index: -1;
   pointer-events: none;
 }
@@ -950,29 +1001,43 @@ ol {
 .section-alt::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(10, 75, 175, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(10, 75, 175, 0.02) 1px, transparent 1px);
-  background-size: 32px 32px;
+  top: 0;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(99, 102, 241, 0.12) 20%,
+    rgba(168, 85, 247, 0.2) 50%,
+    rgba(99, 102, 241, 0.12) 80%,
+    transparent 100%
+  );
+  z-index: 2;
   pointer-events: none;
-  z-index: 0;
-}
-
-[data-theme="dark"] .section-alt {
-  background: transparent;
 }
 
 [data-theme="dark"] .section-alt::after {
-  background: rgba(15, 23, 42, 0.3);
+  background: linear-gradient(
+    180deg,
+    rgba(99, 102, 241, 0.04) 0%,
+    rgba(139, 92, 246, 0.025) 40%,
+    rgba(99, 102, 241, 0.04) 100%
+  );
 }
 
 [data-theme="dark"] .section-alt::before {
-  background-image:
-    linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(129, 140, 248, 0.15) 20%,
+    rgba(168, 85, 247, 0.25) 50%,
+    rgba(129, 140, 248, 0.15) 80%,
+    transparent 100%
+  );
 }
 
+/* ---- Section Dark ---- */
 .section-dark {
   background: radial-gradient(circle at 50% -20%, #1e3a8a 0%, var(--color-navy-dark) 80%);
   color: var(--color-white);
@@ -3545,7 +3610,7 @@ ol {
   }
 
   .section {
-    padding: var(--space-12) 0;
+    padding: var(--space-6) 0;
   }
 
   .contact-info-cards {
@@ -3633,7 +3698,7 @@ ol {
   }
 
   .section {
-    padding: calc(var(--space-20) * 1.2) 0;
+    padding: var(--space-10) 0;
   }
 
   .hero-section {
@@ -3681,7 +3746,7 @@ ol {
   }
 
   .section {
-    padding: calc(var(--space-20) * 1.4) 0;
+    padding: var(--space-12) 0;
   }
 
   /* Mission section grid 60/40 */
@@ -3719,7 +3784,7 @@ ol {
   }
 
   .section {
-    padding: calc(var(--space-20) * 1.6) 0;
+    padding: var(--space-12) 0;
   }
 
   .hero-section {
