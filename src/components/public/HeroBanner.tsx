@@ -806,31 +806,54 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
           border-radius: 24px;
         }
 
-        /* Floating tech stats badges */
+        /* Floating tech stats badges - Futuristic Dark Glass */
         .hero-futuristic__float-badge {
           position: absolute;
           display: flex;
           align-items: center;
-          gap: 8px;
-          padding: 10px 16px;
-          border-radius: 14px;
-          background: var(--glass-bg);
-          border: 1px solid rgba(99, 102, 241, 0.15);
-          backdrop-filter: blur(4px);
-          color: #1e293b;
-          font-size: 0.8rem;
+          gap: 12px;
+          padding: 10px 20px 10px 12px;
+          border-radius: 16px;
+          background: rgba(15, 23, 42, 0.65);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          color: #f8fafc;
+          font-size: 0.85rem;
           font-weight: 600;
+          letter-spacing: 0.5px;
           z-index: 10;
-          box-shadow: 0 8px 30px rgba(99, 102, 241, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05);
+          box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.3),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.05);
           animation: hero-float-badge 6s ease-in-out infinite;
           white-space: nowrap;
+          overflow: hidden;
+        }
+
+        /* Sweeping Light Animation */
+        .hero-futuristic__float-badge::after {
+          content: '';
+          position: absolute;
+          top: 0; left: -100%;
+          width: 50%; height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          transform: skewX(-25deg);
+          animation: badge-sweep 4s infinite;
+        }
+
+        @keyframes badge-sweep {
+          0% { left: -100%; }
+          20% { left: 200%; }
+          100% { left: 200%; }
         }
 
         [data-theme="dark"] .hero-futuristic__float-badge {
-          background: rgba(15, 23, 42, 0.85);
-          border-color: rgba(59, 130, 246, 0.2);
-          color: #e2e8f0;
-          box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+          background: rgba(2, 6, 23, 0.75);
+          border-color: rgba(99, 102, 241, 0.3);
+          box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.5),
+            inset 0 0 0 1px rgba(99, 102, 241, 0.2);
         }
 
         .hero-futuristic__float-badge--1 {
@@ -850,29 +873,34 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
         }
 
         .hero-futuristic__float-badge-icon {
-          width: 28px;
-          height: 28px;
-          border-radius: 8px;
+          width: 32px;
+          height: 32px;
+          border-radius: 10px;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
+          position: relative;
         }
         .hero-futuristic__float-badge-icon--blue {
-          background: rgba(79, 70, 229, 0.12);
-          color: #4f46e5;
+          background: rgba(59, 130, 246, 0.15);
+          color: #60a5fa;
+          border: 1px solid rgba(59, 130, 246, 0.3);
+          box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
         }
         [data-theme="dark"] .hero-futuristic__float-badge-icon--blue {
           background: rgba(59, 130, 246, 0.2);
-          color: #60a5fa;
+          color: #93c5fd;
         }
         .hero-futuristic__float-badge-icon--gold {
-          background: rgba(245, 158, 11, 0.12);
-          color: #d97706;
-        }
-        [data-theme="dark"] .hero-futuristic__float-badge-icon--gold {
           background: rgba(251, 191, 36, 0.15);
           color: #fbbf24;
+          border: 1px solid rgba(251, 191, 36, 0.3);
+          box-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+        }
+        [data-theme="dark"] .hero-futuristic__float-badge-icon--gold {
+          background: rgba(251, 191, 36, 0.2);
+          color: #fcd34d;
         }
 
         /* Carousel Controls */
