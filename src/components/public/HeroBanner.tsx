@@ -744,8 +744,14 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
           height: 100%;
           position: relative;
           z-index: 1;
-          transition: object-fit 0.3s ease;
+          transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
           filter: brightness(1.05) contrast(1.02) saturate(1.1);
+          transform: scale(1.01);
+        }
+        
+        .hero-futuristic__frame:hover .hero-futuristic__frame-inner img {
+          transform: scale(1.06);
+          filter: brightness(1.12) contrast(1.05) saturate(1.2);
         }
 
         .hero-futuristic__frame-blur-bg {
