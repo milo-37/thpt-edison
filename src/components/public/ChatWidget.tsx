@@ -231,6 +231,79 @@ export default function ChatWidget() {
         .chat-submit-btn:hover {
           opacity: 0.95;
         }
+
+        /* --- Chat Body & Messages --- */
+        .chat-body-container {
+          flex: 1;
+          padding: 16px;
+          overflow-y: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          background: rgba(244, 246, 255, 0.5);
+        }
+        [data-theme="dark"] .chat-body-container {
+          background: rgba(15, 23, 42, 0.5);
+        }
+
+        .chat-bot-avatar {
+          background: linear-gradient(135deg, #6366f1, #a855f7);
+          color: white;
+        }
+        .chat-user-avatar {
+          background: rgba(99, 102, 241, 0.1);
+          color: #6366f1;
+        }
+        [data-theme="dark"] .chat-user-avatar {
+          background: rgba(99, 102, 241, 0.2);
+          color: #818cf8;
+        }
+
+        .chat-msg-bubble-bot {
+          background: white;
+          color: var(--color-navy);
+          border: 1px solid rgba(99, 102, 241, 0.08);
+          padding: 10px 14px;
+          border-radius: 0 14px 14px 14px;
+          font-size: var(--font-size-xs);
+          line-height: 1.5;
+          box-shadow: 0 4px 15px rgba(99, 102, 241, 0.03);
+          white-space: pre-line;
+        }
+        [data-theme="dark"] .chat-msg-bubble-bot {
+          background: rgba(30, 41, 59, 0.8);
+          color: #f1f5f9;
+          border-color: rgba(148, 163, 184, 0.2);
+        }
+
+        .chat-msg-bubble-user {
+          background: linear-gradient(135deg, #6366f1, #a855f7);
+          color: white;
+          border: none;
+          padding: 10px 14px;
+          border-radius: 14px 0 14px 14px;
+          font-size: var(--font-size-xs);
+          line-height: 1.5;
+          box-shadow: 0 4px 15px rgba(99, 102, 241, 0.03);
+          white-space: pre-line;
+        }
+
+        /* --- Dark mode for inputs & quick actions --- */
+        [data-theme="dark"] .faq-suggestion-btn {
+          background: rgba(148, 163, 184, 0.05);
+          border-color: rgba(148, 163, 184, 0.1);
+          color: #cbd5e1;
+        }
+        [data-theme="dark"] .faq-suggestion-btn:hover {
+          background: rgba(99, 102, 241, 0.15);
+          border-color: rgba(99, 102, 241, 0.3);
+          color: #e0e7ff;
+        }
+        [data-theme="dark"] .chat-input-field {
+          background: rgba(15, 23, 42, 0.6);
+          color: #f8fafc;
+          border-color: rgba(148, 163, 184, 0.2);
+        }
       `}</style>
 
       {/* Floating Chat Bubble Button */}
@@ -317,7 +390,7 @@ export default function ChatWidget() {
           </div>
 
           {/* Chat Messages / Body */}
-          <div style={{ flex: 1, padding: '16px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '12px', background: 'rgba(244, 246, 255, 0.5)' }}>
+          <div className="chat-body-container">
             
             {messages.map((msg, idx) => {
               const isBot = msg.sender === 'bot'
@@ -334,12 +407,11 @@ export default function ChatWidget() {
                   }}
                 >
                   <div
+                    className={isBot ? "chat-bot-avatar" : "chat-user-avatar"}
                     style={{
                       width: '24px',
                       height: '24px',
                       borderRadius: '50%',
-                      background: isBot ? 'linear-gradient(135deg, #6366f1, #a855f7)' : 'rgba(99, 102, 241, 0.1)',
-                      color: isBot ? 'white' : '#6366f1',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -351,17 +423,7 @@ export default function ChatWidget() {
                     {isBot ? 'ED' : <User size={12} />}
                   </div>
                   <div
-                    style={{
-                      background: isBot ? 'white' : 'linear-gradient(135deg, #6366f1, #a855f7)',
-                      color: isBot ? 'var(--color-navy)' : 'white',
-                      padding: '10px 14px',
-                      borderRadius: isBot ? '0 14px 14px 14px' : '14px 0 14px 14px',
-                      fontSize: 'var(--font-size-xs)',
-                      lineHeight: 1.5,
-                      boxShadow: '0 4px 15px rgba(99, 102, 241, 0.03)',
-                      whiteSpace: 'pre-line',
-                      border: isBot ? '1px solid rgba(99, 102, 241, 0.08)' : 'none'
-                    }}
+                    className={isBot ? "chat-msg-bubble-bot" : "chat-msg-bubble-user"}
                   >
                     {msg.text}
                   </div>
