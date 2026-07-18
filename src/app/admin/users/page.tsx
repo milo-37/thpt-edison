@@ -44,11 +44,17 @@ export default function AdminUsersPage() {
 
   // Load Current User
   useEffect(() => {
-    fetch('/api/auth/me')
+    fetch('/api/auth/me', {
+      cache: 'no-store',
+      headers: {
+        'ngrok-skip-browser-warning': 'true',
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.user) setCurrentUser(data.user)
       })
+      .catch((err) => console.error(err))
   }, [])
 
   // Load Users List

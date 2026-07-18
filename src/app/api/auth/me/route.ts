@@ -10,7 +10,12 @@ export async function GET(request: NextRequest) {
     if (!session) {
       return NextResponse.json(
         { error: 'Chưa đăng nhập hoặc phiên làm việc hết hạn' },
-        { status: 401 }
+        { 
+          status: 401,
+          headers: {
+            'Cache-Control': 'no-store, max-age=0',
+          }
+        }
       )
     }
 
@@ -31,11 +36,23 @@ export async function GET(request: NextRequest) {
     if (!user || !user.isActive) {
       return NextResponse.json(
         { error: 'Tài khoản không tồn tại hoặc đã bị khóa' },
-        { status: 403 }
+        { 
+          status: 403,
+          headers: {
+            'Cache-Control': 'no-store, max-age=0',
+          }
+        }
       )
     }
 
-    return NextResponse.json({ user })
+    return NextResponse.json(
+      { user },
+      {
+        headers: {
+          'Cache-Control': 'no-store, max-age=0',
+        },
+      }
+    )
   } catch (error) {
     console.error('Auth me error:', error)
     return NextResponse.json(

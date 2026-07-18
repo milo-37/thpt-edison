@@ -40,7 +40,10 @@ export default function Sidebar() {
 
   useEffect(() => {
     // Gọi API để lấy user info hiện hành
-    fetch('/api/auth/me')
+    fetch('/api/auth/me', {
+      cache: 'no-store',
+      headers: { 'ngrok-skip-browser-warning': 'true' }
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.user) {

@@ -73,7 +73,10 @@ export default function Header({ settings }: HeaderProps) {
 
   // Fetch logged in user info
   useEffect(() => {
-    fetch('/api/auth/me')
+    fetch('/api/auth/me', {
+      cache: 'no-store',
+      headers: { 'ngrok-skip-browser-warning': 'true' }
+    })
       .then((res) => {
         if (res.ok) return res.json()
         throw new Error('Not logged in')

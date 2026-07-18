@@ -16,14 +16,21 @@ export default function AdminHeader() {
 
   useEffect(() => {
     // Lấy user info
-    fetch('/api/auth/me')
+    fetch('/api/auth/me', {
+      cache: 'no-store',
+      headers: {
+        'ngrok-skip-browser-warning': 'true',
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.user) {
           setUser(data.user)
         }
       })
-      .catch(() => {})
+      .catch((err) => {
+        console.error('Lỗi khi tải thông tin user:', err)
+      })
 
     // Format ngày giờ Việt Nam
     const options: Intl.DateTimeFormatOptions = {

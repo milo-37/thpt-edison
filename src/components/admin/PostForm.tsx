@@ -39,7 +39,10 @@ export default function PostForm({ postId }: PostFormProps) {
 
   // Load User info
   useEffect(() => {
-    fetch('/api/auth/me')
+    fetch('/api/auth/me', {
+      cache: 'no-store',
+      headers: { 'ngrok-skip-browser-warning': 'true' }
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.user) setCurrentUser(data.user)
