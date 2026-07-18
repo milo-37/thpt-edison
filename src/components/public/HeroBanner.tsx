@@ -688,8 +688,8 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
         /* Holographic Image Frame */
         .hero-futuristic__frame {
           width: 100%;
-          max-width: 460px;
-          aspect-ratio: 4/3;
+          max-width: 580px;
+          aspect-ratio: 16/10;
           border-radius: 28px;
           padding: 4px;
           background: linear-gradient(
@@ -880,19 +880,24 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
         /* Carousel Controls */
         .hero-futuristic__controls {
           position: absolute;
-          bottom: 100px;
-          left: var(--space-6);
+          bottom: 30px;
+          left: 50%;
+          transform: translateX(-50%);
           display: flex;
           align-items: center;
           gap: 14px;
           z-index: 10;
+          padding: 10px 20px;
+          border-radius: 24px;
+          background: rgba(255, 255, 255, 0.15);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         @media (max-width: 991px) {
           .hero-futuristic__controls {
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 80px;
+            bottom: 20px;
           }
         }
 
@@ -952,6 +957,16 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
         }
         .hero-futuristic__dot--inactive:hover {
           background: rgba(99, 102, 241, 0.45);
+        }
+
+        /* Slide Transition */
+        @keyframes heroSlideEnter {
+          from { opacity: 0; transform: translateY(15px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-slide-enter {
+          animation: heroSlideEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         /* Floating particles */
@@ -1061,7 +1076,7 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
               {/* Title */}
               <h1
                 key={`title-${currentSlide.id}`}
-                className="hero-futuristic__title"
+                className="hero-futuristic__title hero-slide-enter"
               >
                 {currentSlide.id === 'default' ? (
                   <>
@@ -1078,14 +1093,14 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
               {/* Subtitle */}
               <p
                 key={`sub-${currentSlide.id}`}
-                className="hero-futuristic__subtitle"
+                className="hero-futuristic__subtitle hero-slide-enter"
               >
                 {currentSlide.subtitle || 'Môi trường giáo dục khai phóng giúp học sinh phát triển năng lực học thuật toàn diện, rèn luyện kỹ năng thời đại số và xây dựng nền tảng nhân cách vững vàng.'}
               </p>
             </div>
 
             {/* Buttons */}
-            <div className="hero-futuristic__buttons">
+            <div className="hero-futuristic__buttons hero-slide-enter" key={`btns-${currentSlide.id}`}>
               {(() => {
                 const linkUrl = currentSlide.linkUrl || '/gioi-thieu';
 
@@ -1192,14 +1207,17 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
                     <>
                       {!useCover && (
                         <img
+                          key={`blur-${currentSlide.id}`}
                           src={currentSlide.imageUrl}
                           alt=""
-                          className="hero-futuristic__frame-blur-bg"
+                          className="hero-futuristic__frame-blur-bg hero-slide-enter"
                         />
                       )}
                       <img
+                        key={`img-${currentSlide.id}`}
                         src={currentSlide.imageUrl}
                         alt={currentSlide.title}
+                        className="hero-slide-enter"
                         onLoad={(e) => {
                           const img = e.currentTarget
                           handleImageLoad(currentSlide.id, img.naturalWidth, img.naturalHeight)
