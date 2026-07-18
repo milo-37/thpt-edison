@@ -1890,7 +1890,7 @@ export default function PostEditor({ value, onChange, onNormalize, currentTitle,
       </EditorModal>
 
       {/* ======== Inline styling helper ======== */}
-      <style jsx global>{`
+      <style>{`
         @keyframes spin {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }

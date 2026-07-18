@@ -13,7 +13,9 @@ export default function GlobalAnimatedBackground() {
 
     let animationId: number
     let particles: Particle[] = []
-    
+    // DPR ở outer scope để init() có thể truy cập
+    let dpr = window.devicePixelRatio || 1
+
     // Mouse interaction state
     let mouse = { x: -1000, y: -1000 }
 
@@ -45,32 +47,33 @@ export default function GlobalAnimatedBackground() {
       speedY: number
       color: string
 
-      constructor(width: number, height: number) {
-        this.x = Math.random() * width
-        this.y = Math.random() * height
+      constructor(cssWidth: number, cssHeight: number) {
+        // Khởi tạo bằng CSS pixels (không nhân DPR)
+        this.x = Math.random() * cssWidth
+        this.y = Math.random() * cssHeight
         this.size = Math.random() * 2 + 0.5
         this.speedX = (Math.random() - 0.5) * 0.8
         this.speedY = (Math.random() - 0.5) * 0.8
         this.color = colors[Math.floor(Math.random() * colors.length)]
       }
 
-      update(width: number, height: number) {
+      update(cssWidth: number, cssHeight: number) {
         this.x += this.speedX
         this.y += this.speedY
 
-        // Bounce off edges
-        if (this.x > width) this.speedX *= -1
-        else if (this.x < 0) this.speedX *= -1
-        
-        if (this.y > height) this.speedY *= -1
-        else if (this.y < 0) this.speedY *= -1
+        // Bounce off edges (CSS pixel bounds)
+        if (this.x > cssWidth) { this.x = cssWidth; this.speedX *= -1 }
+        else if (this.x < 0)   { this.x = 0;        this.speedX *= -1 }
+
+        if (this.y > cssHeight) { this.y = cssHeight; this.speedY *= -1 }
+        else if (this.y < 0)    { this.y = 0;         this.speedY *= -1 }
       }
 
       draw(ctx: CanvasRenderingContext2D) {
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
         ctx.fillStyle = this.color
-        // Thêm glow cho hạt
+        // Glow effect
         ctx.shadowBlur = 10
         ctx.shadowColor = this.color
         ctx.fill()
@@ -78,30 +81,39 @@ export default function GlobalAnimatedBackground() {
       }
     }
 
+    // Trả về CSS dimensions (logical pixels) của canvas
+    const getCssDimensions = () => ({
+      w: canvas.width / dpr,
+      h: canvas.height / dpr,
+    })
+
     const init = () => {
       particles = []
-      const numberOfParticles = Math.floor((canvas.width * canvas.height) / 15000)
-      // Giới hạn số lượng hạt để đảm bảo hiệu năng (tối đa ~100 hạt)
+      const { w, h } = getCssDimensions()
+      const numberOfParticles = Math.floor((w * h) / 15000)
+      // Giới hạn số lượng hạt để đảm bảo hiệu năng (tối đa ~120 hạt)
       const clampedCount = Math.min(numberOfParticles, 120)
-      
+
       for (let i = 0; i < clampedCount; i++) {
-        particles.push(new Particle(canvas.width, canvas.height))
+        particles.push(new Particle(w, h))
       }
     }
 
     const resize = () => {
-      const dpr = window.devicePixelRatio || 1
+      // Cập nhật DPR mỗi khi resize (có thể thay đổi khi drag window sang màn khác)
+      dpr = window.devicePixelRatio || 1
+      // Đặt kích thước vật lý (physical pixels) cho canvas
       canvas.width = window.innerWidth * dpr
       canvas.height = window.innerHeight * dpr
+      // Scale context về CSS pixels — setting canvas.width/height reset transform tự động
       ctx.scale(dpr, dpr)
       init()
     }
-    
+
     resize()
     window.addEventListener('resize', resize)
 
     const connect = () => {
-      let opacityValue = 1
       for (let a = 0; a < particles.length; a++) {
         for (let b = a; b < particles.length; b++) {
           const dx = particles[a].x - particles[b].x
@@ -109,8 +121,8 @@ export default function GlobalAnimatedBackground() {
           const distance = Math.sqrt(dx * dx + dy * dy)
 
           if (distance < 120) {
-            opacityValue = 1 - (distance / 120)
-            ctx.strokeStyle = `rgba(99, 102, 241, ${opacityValue * 0.15})`
+            const opacity = (1 - distance / 120) * 0.15
+            ctx.strokeStyle = `rgba(99, 102, 241, ${opacity})`
             ctx.lineWidth = 1
             ctx.beginPath()
             ctx.moveTo(particles[a].x, particles[a].y)
@@ -118,15 +130,15 @@ export default function GlobalAnimatedBackground() {
             ctx.stroke()
           }
         }
-        
-        // Connect with mouse
+
+        // Kết nối với chuột
         const dxMouse = particles[a].x - mouse.x
         const dyMouse = particles[a].y - mouse.y
         const distanceMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse)
-        
+
         if (distanceMouse < 150) {
-          opacityValue = 1 - (distanceMouse / 150)
-          ctx.strokeStyle = `rgba(10, 75, 175, ${opacityValue * 0.3})`
+          const opacity = (1 - distanceMouse / 150) * 0.3
+          ctx.strokeStyle = `rgba(10, 75, 175, ${opacity})`
           ctx.lineWidth = 1.5
           ctx.beginPath()
           ctx.moveTo(particles[a].x, particles[a].y)
@@ -137,13 +149,15 @@ export default function GlobalAnimatedBackground() {
     }
 
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      
+      const { w, h } = getCssDimensions()
+      // Clear bằng CSS dimensions (không dùng canvas.width vật lý)
+      ctx.clearRect(0, 0, w, h)
+
       for (let i = 0; i < particles.length; i++) {
-        particles[i].update(canvas.width / (window.devicePixelRatio || 1), canvas.height / (window.devicePixelRatio || 1))
+        particles[i].update(w, h)
         particles[i].draw(ctx)
       }
-      
+
       connect()
       animationId = requestAnimationFrame(animate)
     }
@@ -161,6 +175,8 @@ export default function GlobalAnimatedBackground() {
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
+      role="presentation"
       style={{
         position: 'fixed',
         top: 0,
@@ -168,8 +184,8 @@ export default function GlobalAnimatedBackground() {
         width: '100%',
         height: '100%',
         pointerEvents: 'none',
-        zIndex: -1,
-        opacity: 0.8
+        zIndex: 1,
+        opacity: 0.6,
       }}
       className="global-animated-canvas"
     />

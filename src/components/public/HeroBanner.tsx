@@ -215,7 +215,7 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
       onMouseMove={handleSectionMouseMove}
     >
 
-      <style jsx global>{`
+      <style>{`
         /* ============================================
            FUTURISTIC HERO BANNER 2026
            ============================================ */

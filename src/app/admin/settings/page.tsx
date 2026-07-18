@@ -121,7 +121,7 @@ export default function AdminSettingsPage() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)', maxWidth: '1000px', margin: '0 auto' }}>
       {/* Premium CSS styling rules */}
-      <style jsx global>{`
+      <style>{`
         .settings-tab-nav {
           display: flex;
           gap: 8px;
