@@ -685,36 +685,31 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
           to { transform: rotate(360deg); }
         }
 
-        /* Holographic Image Frame */
+        /* Holographic Image Frame - Premium Glass Design */
         .hero-futuristic__frame {
           width: 100%;
           max-width: 580px;
           aspect-ratio: 16/10;
           border-radius: 28px;
-          padding: 4px;
-          background: linear-gradient(
-            135deg,
-            rgba(79, 70, 229, 0.8),
-            rgba(139, 92, 246, 0.6),
-            rgba(59, 130, 246, 0.7),
-            rgba(99, 102, 241, 0.6),
-            rgba(79, 70, 229, 0.8)
-          );
-          background-size: 400% 400%;
-          animation: hero-holo-border 5s ease infinite, hero-float-frame 8s ease-in-out infinite;
+          padding: 10px;
+          background: rgba(255, 255, 255, 0.4);
+          backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(24px);
+          border: 1px solid rgba(255, 255, 255, 0.7);
+          animation: hero-float-frame 8s ease-in-out infinite;
           z-index: 1;
           transform-style: preserve-3d;
           position: relative;
           box-shadow:
-            0 25px 60px rgba(79, 70, 229, 0.15),
-            0 0 80px rgba(99, 102, 241, 0.1),
-            0 0 120px rgba(139, 92, 246, 0.06);
+            0 20px 40px rgba(0, 0, 0, 0.04),
+            0 0 80px rgba(99, 102, 241, 0.15);
         }
-
-        @keyframes hero-holo-border {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
+        [data-theme="dark"] .hero-futuristic__frame {
+          background: rgba(15, 23, 42, 0.4);
+          border: 1px solid rgba(148, 163, 184, 0.2);
+          box-shadow:
+            0 20px 40px rgba(0, 0, 0, 0.2),
+            0 0 80px rgba(99, 102, 241, 0.1);
         }
 
         @keyframes hero-float-frame {
@@ -725,10 +720,11 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
         .hero-futuristic__frame-inner {
           width: 100%;
           height: 100%;
-          border-radius: 24px;
+          border-radius: 20px;
           overflow: hidden;
           position: relative;
           background: #f8fafc;
+          box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
         }
 
         /* Glowing light reflection on top edge */
@@ -767,35 +763,37 @@ export default function HeroBanner({ slides }: HeroBannerProps) {
         /* HUD corner overlay */
         .hero-futuristic__hud-corner {
           position: absolute;
-          width: 24px;
-          height: 24px;
+          width: 18px;
+          height: 18px;
           z-index: 5;
           pointer-events: none;
           transition: all 0.3s ease;
         }
         .hero-futuristic__frame:hover .hero-futuristic__hud-corner {
-          border-color: rgba(99, 102, 241, 0.8) !important;
-          filter: drop-shadow(0 0 4px rgba(99, 102, 241, 0.4));
+          border-color: #4f46e5 !important;
+          filter: drop-shadow(0 0 6px rgba(79, 70, 229, 0.5));
+          width: 22px;
+          height: 22px;
         }
         .hero-futuristic__hud-corner--tl {
-          top: 14px; left: 14px;
-          border-top: 2px solid rgba(59, 130, 246, 0.6);
-          border-left: 2px solid rgba(59, 130, 246, 0.6);
+          top: 16px; left: 16px;
+          border-top: 1.5px solid rgba(99, 102, 241, 0.7);
+          border-left: 1.5px solid rgba(99, 102, 241, 0.7);
         }
         .hero-futuristic__hud-corner--tr {
-          top: 14px; right: 14px;
-          border-top: 2px solid rgba(59, 130, 246, 0.6);
-          border-right: 2px solid rgba(59, 130, 246, 0.6);
+          top: 16px; right: 16px;
+          border-top: 1.5px solid rgba(99, 102, 241, 0.7);
+          border-right: 1.5px solid rgba(99, 102, 241, 0.7);
         }
         .hero-futuristic__hud-corner--bl {
-          bottom: 14px; left: 14px;
-          border-bottom: 2px solid rgba(59, 130, 246, 0.6);
-          border-left: 2px solid rgba(59, 130, 246, 0.6);
+          bottom: 16px; left: 16px;
+          border-bottom: 1.5px solid rgba(99, 102, 241, 0.7);
+          border-left: 1.5px solid rgba(99, 102, 241, 0.7);
         }
         .hero-futuristic__hud-corner--br {
-          bottom: 14px; right: 14px;
-          border-bottom: 2px solid rgba(59, 130, 246, 0.6);
-          border-right: 2px solid rgba(59, 130, 246, 0.6);
+          bottom: 16px; right: 16px;
+          border-bottom: 1.5px solid rgba(99, 102, 241, 0.7);
+          border-right: 1.5px solid rgba(99, 102, 241, 0.7);
         }
 
         /* Subtle bottom vignette - much lighter */
